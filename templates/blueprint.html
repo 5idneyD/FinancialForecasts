@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="keywords" content="accounting, basic accounting, accountant, simple accounting, accounting software"/>
+		<meta name="description" content="Accounting software that can handle all day-to-day activities of business accounting">
+		{% block meta %}
+		{% endblock %}
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous" media="none" onload="if(media!='all')media='all'"/>
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/styles.min.css')}}"/>
+		<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/favicon.ico')}}"
+				media="none" onload="if(media!='all')media='all'">
+		<title>Basic Accounting</title>
+
+		<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+		<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+		<!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+        <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+        {% if design %}
+        <style>
+			:root{
+				--dark: {{design.split(",")[0]}};
+				--light: {{design.split(",")[1]}};
+				--tableBorder: {{design.split(",")[2]}};
+			}
+		</style>
+        {% endif %}
+	</head>
+	<body>
+		{% if company %}
+		{% set space, company, email, username, session_key, page = request.path.split("/") %}
+		<a href="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}">
+		{% else %}
+		<a href="{{url_for('index')}}">
+		{% endif %}
+			<img src="{{url_for('static', filename='images/logo2.PNG')}}" alt="Basic Accounting Logo" 
+			style="float: left; position: fixed; margin-left: 10%; margin-top: 5%;" 
+			media="none" onload="if(media!='all')media='all'"/>
+		</a>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

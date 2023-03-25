@@ -1,0 +1,82 @@
+{% extends "blueprint.html" %} {% block body %}
+<div id="heading">
+	<h1><u>Bank Rec</u></h1>
+	<h2>{{username}}</h2>
+</div>
+<div class="flex-column"></div>
+<div id="main" class="container-fluid">
+	<div class="row">
+		<div id="nav" class="col-3 m-0 p-0"></div>
+		<div id="data" class="col-9">
+			<div class="container col-8">
+				<div class="row">
+					<div class="col">
+						<button type="button" onclick="invoicesTableShow()">Unpaid Invoices</button>
+					</div>
+					<div class="col">
+						<button type="button" onclick="recTableShow()">Current Rec</button>
+					</div>
+				</div>
+			</div>
+			<table name="unpaid_invoices" class="col-6">
+				<tr>
+					<th>Type</th>
+					<th><input type="name" id="unpaid_invoices_client_search" placeholder="Client" /></th>
+					<th><input type="name" id="unpaid_invoices_invoice_search" placeholder="Invoice No." /></th>
+					<th>Reference</th>
+					<th>Value</th>
+					<th>Include</th>
+				</tr>
+				{% for i in data %}
+				<tr>
+					<td>
+						<input
+							name="{{loop.index}}_transaction_type"
+							value="{{i.transaction_type}}"
+							class="bankRecInput" />
+					</td>
+					<td><input name="{{loop.index}}_client_code" value="{{i.client_code}}" class="bankRecInput" /></td>
+					<td>
+						<input
+							name="{{loop.index}}_transaction_number"
+							value="{{i.transaction_number}}"
+							class="bankRecInput" />
+					</td>
+					<td><input name="{{loop.index}}_description" value="{{i.description}}" class="bankRecInput" /></td>
+					<td><input name="{{loop.index}}_total_value" value="{{i.total_value}}" class="bankRecInput" /></td>
+					<td><input type="checkbox" onclick="addToRec(this)" /></td>
+				</tr>
+				{% endfor %}
+			</table>
+			<form method="post">
+				<div id="rec_sum">
+					<table class="col-3">
+						<tr>
+							<td>Total Value</td>
+							<td id="total_value">0</td>
+						</tr>
+						<tr>
+							<td>Bank Account Nominal Code</td>
+							<td><input type="invoice" name="nominal_account" minlength="5" maxlength="5" required></td>
+						</tr>
+					</table>
+					<button type="submit">Post Bank Rec</button>
+					<table name="current_rec">
+						<tr>
+							<th>Type</th>
+							<th>Client</th>
+							<th>Invoice No.</th>
+							<th>Reference</th>
+							<th>Value</th>
+							<th>Include</th>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/bankRec.js') }}"></script>
+{% endblock %}

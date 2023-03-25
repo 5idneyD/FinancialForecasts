@@ -1,0 +1,19 @@
+// pre-requisites
+npm i
+npm i -D @babel/core @babel/cli @babel/preset-env @babel/preset-react
+
+// ensure version is correct
+babel -V
+// if below version 7
+npm uninstall babel-cli -g
+npm uninstall babel-core -g
+// then
+npm install @babel/cli -g 
+npm install @babel/core -g
+
+
+// command to compile
+babel --presets @babel/preset-react <input path> -o <output path>
+
+
+// This outputs a js file

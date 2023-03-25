@@ -1,0 +1,46 @@
+{% extends "blueprint.html" %} {% block body %}
+		<div id="heading" class="conatiner">
+			<h1><u>{{company}}</u></h1>
+			<h2>Change Theme</h2>
+		</div>
+		<div class="flex-column"></div>
+		<div id="main" class="container-fluid">
+			<div class="row">
+				<div id="nav" class="col-3 m-0 p-0"></div>
+				<div id="data" class="col-9">
+					<form method="post">
+						<table>
+							<tr>
+								<td>Select Dark Colour</td>
+								<td><input type="name" name="dark" value="{{design.split(',')[0]}}" /></td>
+								<td><input type="color" id="darkScale" name="darkScale" value="{{design.split(',')[0]}}" /></td>
+							</tr>
+							<tr>
+								<td>Select Light Colour</td>
+								<td><input type="name" name="light" value="{{design.split(',')[1]}}" /></td>
+								<td><input type="color" id="lightScale" name="lightScale" value="{{design.split(',')[1]}}" /></td>
+							</tr>
+							<tr>
+								<td>Select Border Colour</td>
+								<td><input type="name" name="tableBorder" value="{{design.split(',')[2]}}" /></td>
+								<td><input type="color" id="borderScale" name="borderScale" value="{{design.split(',')[2]}}" /></td>
+							</tr>
+						</table>
+						<select class="adminLevelSelect" id="themeSelector">
+							<option value="" selected="selected" hidden>Select Pre-Built Theme</option>
+							<option value="default" name="default">Default</option>
+							<option value="retro" name="retro">Retro</option>
+							<option value="blackAndWhite" name="blackAndWhite">Black And White</option>
+						</select>
+						<br />
+						<button type="button" onclick="previewChange()">Preview</button>
+						<br />
+						<button type="submit">Change Theme</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/previewTheme.js') }}"></script>
+		{% endblock %}

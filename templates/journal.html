@@ -1,0 +1,26 @@
+{% extends "blueprint.html" %} 
+{% block meta %}
+		<meta id="references" data-references="{{next_journal_number}}" data-company="{{company}}" />
+{% endblock %}
+{% block body %}
+		<div id="heading">
+			<h1><u>{{company}}</u></h1>
+			<h2>New Journal</h2>
+		</div>
+		<div class="flex-column"></div>
+		<div id="main" class="container-fluid">
+			<div class="row">
+				<div id="nav" class="col-3 m-0 p-0"></div>
+				<div id="data" class="col-9">
+					<form method="post">
+						<div id="headTable" class="container"></div>
+						<div id="mainTable"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+		<script src="{{ url_for('static', filename='react/compiled/journal.js') }}"></script>
+		<!-- <script src="{{url_for('static', filename='js/defaultJournalNumber.js')}}"></script> -->
+{% endblock %}

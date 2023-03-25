@@ -1,0 +1,51 @@
+{% extends "blueprint.html" %} {% block body %}
+		<div id="heading" class="conatiner">
+			<h1><u>{{company}}</u></h1>
+			<h2>Add Budget</h2>
+		</div>
+		<div class="flex-column"></div>
+		<div id="main" class="container-fluid">
+			<div class="row">
+				<div id="nav" class="col-3 m-0 p-0"></div>
+				<div id="data" class="col-9">
+					<form method="post">
+						<div class="col-5">
+							<table>
+								<tr>
+									<td>Year</td>
+									<td>
+										<select name="year" class="invoice">
+											{% for i in range(2024, 2018, -1) %}
+											<option value="{{i}}">{{i}}</option>
+											{% endfor %}
+										</select>
+									</td>
+								</tr>
+							</table>
+							<button type="submit">Save Budget</button>
+						</div>
+						<div>
+							<table id="budgetTable">
+								<tr>
+									<th class="col">Nominal Code</th>
+									{% for i in range(1, 13) %}
+									<th class="col">{{i}}</th>
+									{% endfor %}
+								</tr>
+								{% for account in accounts %}
+								<tr>
+									<td>{{account.nominal}}</td>
+									{% for i in range(1, 13) %}
+									<td><input type="budget" name="{{account.nominal}}_{{i}}"/></td>
+									{% endfor %}
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+		{% endblock %}

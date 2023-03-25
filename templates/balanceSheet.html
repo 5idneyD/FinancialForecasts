@@ -1,0 +1,58 @@
+{% extends "blueprint.html" %} {% block body %}
+		<div id="heading" class="conatiner">
+			<h1><u>{{company}}</u></h1>
+			<h2>Balance Sheet</h2>
+		</div>
+		<div class="flex-column"></div>
+		<div id="main" class="container-fluid">
+			<div class="row">
+				<div id="nav" class="col-3 m-0 p-0"></div>
+				<div id="data" class="col-9">
+					<button type="button" id="downloadexcel" onclick="ExportToExcel('xlsx')">Download Report</button>
+					<table id="balanceSheet">
+						<tr>
+							<th>Nominal Code</th>
+							<th>Account Name</th>
+							<th>Debit</th>
+							<th>Credit</th>
+						</tr>
+
+						{% for key, value in data.items() %}
+						<tr id="{{value[2]}}" class="{{value[2]}} table_row">
+							<td>{{value[2]}}</td>
+							<td>{{value[3]}}</td>
+							{% if value[1]|float > 0.00 %}
+							<td>{{ value[1] }}</td>
+							<td></td>
+							{% elif value[1]|float < 0.00 %}
+							<td></td>
+							<td>{{ -value[1] }}</td>
+							{% else %}
+							<td></td>
+							<td></td>
+							{% endif %}
+						</tr>
+						{% endfor %}
+						<tr id="netAssets" class="summaryRow">
+							<td></td>
+							<td>Net Assets</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/balanceSheet.js') }}"></script>
+		<script>
+			function ExportToExcel(type, fn, dl) {
+				var elt = document.getElementById("balanceSheet");
+				var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+				return dl
+					? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
+					: XLSX.writeFile(wb, fn || "BalanceSheet." + (type || "xlsx"));
+			}
+		</script>
+{% endblock %}

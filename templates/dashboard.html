@@ -1,0 +1,59 @@
+{% extends "blueprint.html" %} 
+{% block meta %}
+{% endblock %}
+{% block body %}
+		<div id="heading">
+			<h1><u>{{company}}</u></h1>
+			<h2>{{username}}</h2>
+		</div>
+		<div class="flex-column"></div>
+		<div id="main" class="container-fluid">
+			<div class="row">
+				<div id="nav" class="col-3 m-0 p-0"></div>
+				<div id="data" class="col-9">
+					<div id="graph" class="col"></div>
+				</div>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+		<script defer src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+		<script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
+		<script defer type="text/javascript">
+			var figures = {{total_values|tojson|safe}}
+
+			var total = {
+				x: [],
+				y: [],
+				name: "Net Profit",
+				type: "scatter",
+				marker:{
+				color: "{{design.split(',')[0]|safe}}"
+				}
+			};
+
+			for (let i = 1; i <= 12; i++){
+				total.x.push(i);
+				total.y.push(figures[i])
+			}
+
+			// var trace2 = {
+			// 	x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+			// 	y: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+			// 	type: "scatter",
+			// };
+
+			// var data = [trace1, trace2];
+			var data = [total]
+				console.log("{{design.split(',')[1]|safe}}")
+
+			var layout = {
+				title: 'Current Year Performnce',
+				showlegend: true,
+				paper_bgcolor: "{{design.split(',')[1]|safe}}",
+				plot_bgcolor: "{{design.split(',')[1]|safe}}",
+
+				};
+
+			Plotly.newPlot("graph", data, layout);
+		</script>
+{% endblock %}

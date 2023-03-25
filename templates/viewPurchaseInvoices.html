@@ -1,0 +1,100 @@
+{% extends "blueprint.html" %} {% block body %}
+		<div id="heading">
+			<h1><u>{{company}}</u></h1>
+			<h2>Purchase Invoices</h2>
+		</div>
+		<div class="flex-column"></div>
+		<div id="main" class="container-fluid">
+			<div class="row">
+				<div id="nav" class="col-3 m-0 p-0"></div>
+				<div id="data" class="col-9">
+					<form method="post">
+						<table id="invoicesReport">
+							<tr>
+								<td>Supplier</td>
+								<td>
+									<select class="invoice" name="supplier_code">
+										<option value="*" selected hidden></option>
+										{% for supplier in suppliers %}
+										<option value="{{supplier}}">{{supplier}}</option>
+										{% endfor %}
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Invoice No.</td>
+								<td><input type="invoice" class="invoice" name="invoice_number" value="" /></td>
+							</tr>
+							<tr>
+								<td>Period</td>
+								<td>
+									<select name="selected_period" class="invoice">
+										<option value="*" selected hidden></option>
+										{% for i in range(1,13) %}
+										<option value="{{i}}">{{i}}</option>
+										{% endfor %}
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Year</td>
+								<td>
+									<select name="selected_year" class="invoice">
+										<option value="*" selected hidden></option>
+										{% for i in range(2018,2024) %}
+										<option value="{{i}}">{{i}}</option>
+										{% endfor %}
+									</select>
+								</td>
+							</tr>
+						</table>
+						<div class="col-5">
+							<button type="submit">Run Report</button><br>
+							<button type="button" id="downloadexcel" onclick="ExportToExcel('xlsx')">Download Report</button>
+						</div>
+					</form>
+					<table id="table">
+						<tr>
+							<th>Supplier Code</th>
+							<th>Invoice Number</th>
+							<th>Invoice Date</th>
+							<th>Invoice Description</th>
+							<th>Net Value</th>
+							<th>VAT Value</th>
+							<th>Total Value</th>
+							<th>Posted By</th>
+							<th>Posted On</th>
+							<th>Year</th>
+							<th>Period</th>
+						</tr>
+						{% for invoice in invoices %}
+						<tr>
+							<td>{{ invoice.client_code }}</td>
+							<td>{{ invoice.transaction_number }}</td>
+							<td>{{ invoice.date }}</td>
+							<td>{{ invoice.description }}</td>
+							<td>{{ invoice.net_value }}</td>
+							<td>{{ invoice.vat_value }}</td>
+							<td>{{ invoice.total_value }}</td>
+							<td>{{ invoice.posted_by }}</td>
+							<td>{{ invoice.posted_on }}</td>
+							<td>{{ invoice.accounting_year }}</td>
+							<td>{{ invoice.accounting_period }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+		<script>
+			function ExportToExcel(type, fn, dl) {
+				var elt = document.getElementById("table");
+				var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+				return dl
+					? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
+					: XLSX.writeFile(wb, fn || "PurchaseInvoices." + (type || "xlsx"));
+			}
+		</script>
+		{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "blueprint.html" %} {% block body %}
+<div id="heading">
+	<h1><u>Log In</u></h1>
+</div>
+<form id="form" method="post">
+	<div class="d-flex flex-column mt-5 min-vw-100">
+		<div class="d-flex flex-grow-1 justify-content-center align-items-center">
+			<div class="container w-50">
+				<div class="row">
+					<div class="col">
+						<input type="email" name="email" placeholder="email" aria-required="true" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<input type="password" name="password" placeholder="password" aria-required="true" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col mt-5">
+						<button type="submit" name="signinButton">Log-In</button><br />
+						<a href="{{url_for('forgotPassword')}}"><button type="button">Forgot Password</button></a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col mt-5">
+						<p>{{message}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+{% endblock %}

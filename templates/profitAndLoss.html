@@ -1,0 +1,97 @@
+{% extends "blueprint.html" %} 
+{% block meta %}
+		<meta id="references" data-period="{{accounting_period}}" data-year="{{accounting_year}}" />
+		{% endblock %}
+		{% block body %}
+		<div id="heading" class="conatiner">
+			<h1><u>{{company}}</u></h1>
+			<h3>Profit & Loss</h3>
+		</div>
+		<div class="flex-column"></div>
+		<div id="main" class="container-fluid">
+			<div class="row">
+				<div id="nav" class="col-3 m-0 p-0"></div>
+				<div id="data" class="col-9">
+					<form method="post">
+						<table id="pnlSettings">
+							<tr>
+								<td>Period</td>
+								<td>
+									<select name="selected_period" class="invoice">
+										<option value="{{accounting_period}}" selected hidden>
+											{{accounting_period}}
+										</option>
+										{% for i in range(1,13) %}
+										<option value="{{i}}">{{i}}</option>
+										{% endfor %}
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Year</td>
+								<td>
+									<select name="selected_year" class="invoice">
+										<option value="{{accounting_year}}" selected hidden>{{accounting_year}}</option>
+										{% for i in range(accounting_year|int-2,accounting_year|int+2) %}
+										<option value="{{i}}">{{i}}</option>
+										{% endfor %}
+									</select>
+								</td>
+							</tr>
+						</table>
+						<div class="col-5">
+							<button type="submit">Run P&L</button><br>
+							<button type="button" id="downloadexcel" onclick="ExportToExcel('xlsx')">Download Report</button>
+						</div>
+					</form>
+					
+					<table id="table">
+						<tr>
+							<th>Account</th>
+							<th>Current Actuals</th>
+							<th>Current Budget</th>
+							<th>Current Variance</th>
+							<th>YTD Actuals</th>
+							<th>YTD Budget</th>
+							<th>YTD Variance</th>
+						</tr>
+						{% for account, value in data.items() %} 
+						{% if value[2] < 20000 %}
+						<tr id="{{value[2]}}" class="{{value[2]}} table_row">
+							<td>{{account}}</td>
+							<td>{{value[0]}}</td>
+							<td>{{value[3]}}</td>
+							<td>{{value[0] - value[3]}}</td>
+							<td>{{value[1]}}</td>
+							<td>{{value[4]}}</td>
+							<td>{{value[1] - value[4]}}</td>
+						</tr>
+						{% else %}
+						<tr id="{{value[2]}}" class="{{value[2]}} table_row">
+							<td>{{account}}</td>
+							<td>{{value[0]}}</td>
+							<td>{{value[3]}}</td>
+							<td>{{value[3] - value[0]}}</td>
+							<td>{{value[1]}}</td>
+							<td>{{value[4]}}</td>
+							<td>{{value[4] - value[1]}}</td>
+						</tr>
+						{% endif %} 
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/pnl.js') }}"></script>
+		<script>
+			function ExportToExcel(type, fn, dl) {
+				var elt = document.getElementById("table");
+				var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+				return dl
+					? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
+					: XLSX.writeFile(wb, fn || "PnL." + (type || "xlsx"));
+			}
+		</script>
+		{% endblock %}

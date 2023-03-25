@@ -1,0 +1,19 @@
+{% extends "blueprint.html" %} {% block body %}
+		<div id="heading">
+			<h1><u>Basic Accounting</u></h1>
+			<h2>It's Accounting, Basically</h2>
+		</div>
+		<div id="main" class="container">
+			<div class="col text-align-center">
+				<h4>There has been an Error in your Url</h4>
+				<br />
+				<h4>{{error}}</h4>
+				<br />
+				<h4>Please Go Back To Your Previous Page</h4>
+				<br />
+				<h4>Or</h4>
+				<br />
+				<a href="{{ url_for('index') }}"><h4>Return To Our Home Page</h4></a>
+			</div>
+		</div>
+		{% endblock %}
