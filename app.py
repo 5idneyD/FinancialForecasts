@@ -12,7 +12,7 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 import random
 from dotenv import load_dotenv
-from generateInvoice import loadInvoiceTemplate
+from bin.generateInvoice import loadInvoiceTemplate
 from pyinvoice.models import Item
 from flask_cors import CORS
 
@@ -24,7 +24,7 @@ else:
     load_dotenv("./.env")
 
 
-app = Flask(__name__, static_folder="dist")
+app = Flask(__name__, static_folder="dist", template_folder="src/templates")
 CORS(app)
 
 # Current files path to create absolute path
