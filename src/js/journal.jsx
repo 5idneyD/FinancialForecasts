@@ -1,3 +1,7 @@
+import React from "react";
+import { ReactDOM } from "react";
+import * as ReactDOMClient from 'react-dom/client';
+
 var references = document.querySelector("#references").dataset.references;
 var new_number = Number(references);
 
@@ -147,4 +151,6 @@ function Journal() {
 	);
 }
 
-ReactDOM.render(<Journal />, document.querySelector("#headTable"));
+const container = document.getElementById('headTable');
+const root = ReactDOMClient.createRoot(container);
+root.render(<Journal />);

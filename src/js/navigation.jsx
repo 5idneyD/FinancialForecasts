@@ -1,3 +1,7 @@
+import React from "react";
+import { ReactDOM } from "react";
+import * as ReactDOMClient from 'react-dom/client';
+
 function App() {
 	return (
 		<ul>
@@ -30,4 +34,7 @@ function App() {
 	);
 }
 
-ReactDOM.render(<App />, document.querySelector("#nav"));
+
+const container = document.getElementById('nav');
+const root = ReactDOMClient.createRoot(container);
+root.render(<App />);

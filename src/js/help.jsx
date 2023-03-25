@@ -1,3 +1,7 @@
+import React from "react";
+import { ReactDOM } from "react";
+import * as ReactDOMClient from 'react-dom/client';
+
 function App() {
 	function toggle(id) {
 		var div = document.getElementById(id + "a");
@@ -27,7 +31,7 @@ function App() {
 					Go to the admin page (in 'Other') and, if you have permission, you will see an option to close the
 					current period.
 					<br />
-					If you don't see this option, you may not have permission to perform this task.
+					If you do not see this option, you may not have permission to perform this task.
 					<br />
 					Please contact somebody who does have permission.
 				</p>
@@ -76,4 +80,6 @@ function App() {
 	);
 }
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+const container = document.getElementById('root');
+const root = ReactDOMClient.createRoot(container);
+root.render(<App />);
