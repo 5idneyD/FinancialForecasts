@@ -3,11 +3,10 @@
 			<h1><u>{{company}}</u></h1>
 			<h2>Add Customer</h2>
 		</div>
-		<div class="flex-column"></div>
 		<div id="main" class="container-fluid">
-			<div class="row">
-				<div id="nav" class="col-3 m-0 p-0"></div>
-				<div id="data" class="col-9">
+
+				<div id="nav"></div>
+				<div id="data">
 					<form id="form" method="post">
 						<div class="row">
 							<div class="col">
@@ -71,7 +70,7 @@
 							</div>
 						</div>
 					</form>
-				</div>
+
 			</div>
 		</div>
 		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>

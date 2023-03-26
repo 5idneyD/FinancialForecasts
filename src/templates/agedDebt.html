@@ -3,33 +3,31 @@
 	<h1><u>{{company}}</u></h1>
 	<h2>Aged Debt</h2>
 </div>
-<div class="flex-column"></div>
+
 <div id="main" class="container-fluid">
-	<div class="row">
-		<div id="nav" class="col-3 m-0 p-0"></div>
-		<div id="data" class="col-9">
-			<div id="graph" class="col">
-				<table>
-					<tr>
-						<th>Client Code</th>
-						<th>0-30 Days</th>
-						<th>31-60 Days</th>
-						<th>61-90 Days</th>
-						<th>90-120 Days</th>
-						<th>121+ Days</th>
-					</tr>
-					{% for client, values in data.items() %}
-					<tr>
-						<td>{{client}}</td>
-						<td>{{values[0]}}</td>
-						<td>{{values[1]}}</td>
-						<td>{{values[2]}}</td>
-						<td>{{values[3]}}</td>
-						<td>{{values[4]}}</td>
-					</tr>
-					{% endfor %}
-				</table>
-			</div>
+	<div id="nav"></div>
+	<div id="data">
+		<div id="graph" class="col">
+			<table>
+				<tr>
+					<th>Client Code</th>
+					<th>0-30 Days</th>
+					<th>31-60 Days</th>
+					<th>61-90 Days</th>
+					<th>90-120 Days</th>
+					<th>121+ Days</th>
+				</tr>
+				{% for client, values in data.items() %}
+				<tr>
+					<td>{{client}}</td>
+					<td>{{values[0]}}</td>
+					<td>{{values[1]}}</td>
+					<td>{{values[2]}}</td>
+					<td>{{values[3]}}</td>
+					<td>{{values[4]}}</td>
+				</tr>
+				{% endfor %}
+			</table>
 		</div>
 	</div>
 </div>

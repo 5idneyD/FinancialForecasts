@@ -23,7 +23,7 @@ if load_dotenv("./.env") == False:
 else:
     load_dotenv("./.env")
 
-
+# Initialise app and add CORS config
 app = Flask(__name__, static_folder="dist", template_folder="src/templates")
 CORS(app)
 

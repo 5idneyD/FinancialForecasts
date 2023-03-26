@@ -24,7 +24,7 @@
         <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
         {% if design %}
         <style>
-			:root{
+			root{
 				--dark: {{design.split(",")[0]}};
 				--light: {{design.split(",")[1]}};
 				--tableBorder: {{design.split(",")[2]}};
@@ -33,7 +33,7 @@
         {% endif %}
 	</head>
 	<body>
-		{% if company %}
+		<!-- {% if company %}
 		{% set space, company, email, username, session_key, page = request.path.split("/") %}
 		<a href="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}">
 		{% else %}
@@ -42,7 +42,7 @@
 			<img src="{{url_for('static', filename='images/logo2.PNG')}}" alt="Basic Accounting Logo" 
 			style="float: left; position: fixed; margin-left: 10%; margin-top: 5%;" 
 			media="none" onload="if(media!='all')media='all'"/>
-		</a>
+		</a> -->
         {% block body %}
         {% endblock %}
     </body>

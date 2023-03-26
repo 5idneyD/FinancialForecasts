@@ -1,43 +1,36 @@
 {% extends "blueprint.html" %} {% block body %}
-		<div id="heading">
-			<h1><u>{{company}}</u></h1>
-			<h2>Add Supplier</h2>
-		</div>
-		<div class="flex-column"></div>
-		<div id="main" class="container-fluid">
+<div id="heading">
+	<h1><u>{{company}}</u></h1>
+	<h2>Add Supplier</h2>
+</div>
+<div id="main" class="container-fluid">
+	<div id="nav"></div>
+	<div id="data">
+		<form id="form" method="post">
 			<div class="row">
-				<div id="nav" class="col-3 m-0 p-0"></div>
-				<div id="data" class="col-9">
-					<form id="form" method="post">
-						<div class="row">
-							<div class="col">
-								<input
-									type="name"
-									name="supplier_name"
-									placeholder="Supplier Name"
-									aria-required="true" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<input
-									type="name"
-									name="supplier_code"
-									placeholder="Supplier Code"
-									minlength="6"
-									maxlength="6"
-									aria-required="true" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col mt-5">
-								<button type="submit" name="addCustomerButton">Add Supplier</button>
-							</div>
-						</div>
-					</form>
+				<div class="col">
+					<input type="name" name="supplier_name" placeholder="Supplier Name" aria-required="true" />
 				</div>
 			</div>
-		</div>
-		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
-		{% endblock %}
+			<div class="row">
+				<div class="col">
+					<input
+						type="name"
+						name="supplier_code"
+						placeholder="Supplier Code"
+						minlength="6"
+						maxlength="6"
+						aria-required="true" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col mt-5">
+					<button type="submit" name="addCustomerButton">Add Supplier</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+{% endblock %}

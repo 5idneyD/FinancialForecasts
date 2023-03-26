@@ -14,8 +14,8 @@ var root = document.querySelector(":root");
 
 themeSelector.addEventListener("change", function () {
     if (themeSelector.value == "default") {
-        root.style.setProperty("--dark", "#111111");
-        root.style.setProperty("--light", "#B5E5CF");
+        root.style.setProperty("--dark", "#120929");
+        root.style.setProperty("--light", "#ecf0f3");
         root.style.setProperty("--tableBorder", "#65463E")
         darkInput.value = "#111111";
         lightInput.value = "#B5E5CF";

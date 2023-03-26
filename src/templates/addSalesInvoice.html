@@ -1,101 +1,96 @@
-{% extends "blueprint.html" %}
-{% block meta %}
+{% extends "blueprint.html" %} {% block meta %}
 <meta id="references" data-references="{{references}}" data-company="{{company}}" />
-{% endblock %}
-{% block body %}
-		<div id="heading">
-			<h1><u>{{company}}</u></h1>
-			<h2>Add Sales Invoice</h2>
-		</div>
-		<div class="flex-column"></div>
-		<div id="main" class="container-fluid">
-			<div class="row">
-				<div id="nav" class="col-3 m-0 p-0"></div>
-				<div id="data" class="col-9">
-					<form method="post">
-						<div class="container">
-							<div class="col-5">
-								<table id="headTable">
-									<tr>
-										<td>Invoice Number</td>
-										<td>
-											<input
-												type="invoice"
-												id="invoice_number"
-												name="invoice_number"
-												placeholder="Enter Invoice No." />
-										</td>
-									</tr>
-									<tr>
-										<td>Invoice Date</td>
-										<td><input type="date" name="invoice_date" placeholder="Select Date" /></td>
-									</tr>
-									<tr>
-										<td>Customer Code</td>
-										<td>
-											<select class="invoice" name="customer_code" title="">
-												<option selected hidden>Select</option>
-												{% for customer in customers %}
-												<option>{{customer.customer_code}}</option>
-												{% endfor %}
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td>VAT By Default</td>
-										<td>
-											<select class="invoice" id="vatSetting">
-												<option value="yes">Yes</option>
-												<option value="no">No</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td>Email Invoice to Customer</td>
-										<td>
-											<select class="invoice" name="emailSetting">
-												<option value="yes">Yes</option>
-												<option value="no">No</option>
-											</select>
-										</td>
-									</tr>
-								</table>
-								<button type="button" onclick="addInvoiceRow(); calculate()">Add Row</button>
-							</div>
-							<div class="col">
-								<div class="container">
-									<table name="data" data-rows="1" id="bodyTable">
-										<input id="number_of_rows" name="number_of_rows" value="data-rows" />
-										<tr>
-											<th>Row</th>
-											<th class="invoiceHeader">Nominal Code</th>
-											<th class="invoiceHeaderDescription">Description</th>
-											<th class="invoiceHeader">Net Value</th>
-											<th class="invoiceHeader">VAT</th>
-											<th class="invoiceHeader">Total Value</th>
-										</tr>
-										<tr class="invoiceRow">
-											<td>1</td>
-											<td><input type="text" name="1_nominal_code" /></td>
-											<td><input type="text" name="1_description" /></td>
-											<td><input type="text" name="1_net_value" class="net" /></td>
-											<td><input type="text" name="1_vat" class="vat" /></td>
-											<td><input type="text" name="1_total_value" class="tv" /></td>
-										</tr>
-									</table>
-									<button id="submitButton" type="submit">Submit</button>
-									<br>
-									{{message}}
-								</div>
-							</div>
-						</div>
-					</form>
+{% endblock %} {% block body %}
+<div id="heading">
+	<h1><u>{{company}}</u></h1>
+	<h2>Add Sales Invoice</h2>
+</div>
+<div id="main" class="container-fluid">
+	<div id="nav"></div>
+	<div id="data">
+		<form method="post">
+			<div class="container">
+				<div class="col-5">
+					<table id="headTable">
+						<tr>
+							<td>Invoice Number</td>
+							<td>
+								<input
+									type="invoice"
+									id="invoice_number"
+									name="invoice_number"
+									placeholder="Enter Invoice No." />
+							</td>
+						</tr>
+						<tr>
+							<td>Invoice Date</td>
+							<td><input type="date" name="invoice_date" placeholder="Select Date" /></td>
+						</tr>
+						<tr>
+							<td>Customer Code</td>
+							<td>
+								<select class="invoice" name="customer_code" title="">
+									<option selected hidden>Select</option>
+									{% for customer in customers %}
+									<option>{{customer.customer_code}}</option>
+									{% endfor %}
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>VAT By Default</td>
+							<td>
+								<select class="invoice" id="vatSetting">
+									<option value="yes">Yes</option>
+									<option value="no">No</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Email Invoice to Customer</td>
+							<td>
+								<select class="invoice" name="emailSetting">
+									<option value="yes">Yes</option>
+									<option value="no">No</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<button type="button" onclick="addInvoiceRow(); calculate()">Add Row</button>
+				</div>
+				<div class="col">
+					<div class="container">
+						<table name="data" data-rows="1" id="bodyTable">
+							<input id="number_of_rows" name="number_of_rows" value="data-rows" />
+							<tr>
+								<th>Row</th>
+								<th class="invoiceHeader">Nominal Code</th>
+								<th class="invoiceHeaderDescription">Description</th>
+								<th class="invoiceHeader">Net Value</th>
+								<th class="invoiceHeader">VAT</th>
+								<th class="invoiceHeader">Total Value</th>
+							</tr>
+							<tr class="invoiceRow">
+								<td>1</td>
+								<td><input type="text" name="1_nominal_code" /></td>
+								<td><input type="text" name="1_description" /></td>
+								<td><input type="text" name="1_net_value" class="net" /></td>
+								<td><input type="text" name="1_vat" class="vat" /></td>
+								<td><input type="text" name="1_total_value" class="tv" /></td>
+							</tr>
+						</table>
+						<button id="submitButton" type="submit">Submit</button>
+						<br />
+						{{message}}
+					</div>
 				</div>
 			</div>
-		</div>
-		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
-		<script src="{{url_for('static', filename='js/defaultSalesInvoiceNumber.js')}}"></script>
-		<script src="{{url_for('static', filename='js/totalValue.js')}}"></script>
-		{% endblock %}
+		</form>
+	</div>
+</div>
+<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+<script src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
+<script src="{{url_for('static', filename='js/defaultSalesInvoiceNumber.js')}}"></script>
+<script src="{{url_for('static', filename='js/totalValue.js')}}"></script>
+{% endblock %}

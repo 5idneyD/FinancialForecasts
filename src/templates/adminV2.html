@@ -8,12 +8,9 @@
 			<h1><u>{{company}}</u></h1>
 			<h2>Admin</h2>
 		</div>
-		<div class="flex-column"></div>
 		<div id="main" class="container-fluid">
-			<div class="row">
-				<div id="nav" class="col-3 m-0 p-0"></div>
-				<div id="data" class="col-9">
-
+				<div id="nav"></div>
+				<div id="data">
 					{% if admin==3 or admin=="3" %}
 					<form id="form" method="post">
 						<div class="container">
@@ -109,7 +106,7 @@
 					{% endif %}
 				</div>
 			</div>
-		</div>
+		
 		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 		<script type="text/javascript" src="{{url_for('static', filename='js/admin.js')}}"></script>
