@@ -6,6 +6,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<meta name="keywords" content="accounting, basic accounting, accountant, simple accounting, accounting software"/>
 		<meta name="description" content="Accounting software that can handle all day-to-day activities of business accounting">
+		
+
+		{% if company %}
+		{% set space, company, email, username, session_key, page = request.path.split("/") %}
+		<meta name="logo" id="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}">
+		{% else %}
+		<meta name="logo" id="{{url_for('index')}}">
+		{% endif %}
+		
 		{% block meta %}
 		{% endblock %}
 		<link
@@ -24,7 +33,7 @@
         <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
         {% if design %}
         <style>
-			root{
+			:root{
 				--dark: {{design.split(",")[0]}};
 				--light: {{design.split(",")[1]}};
 				--tableBorder: {{design.split(",")[2]}};
@@ -33,17 +42,16 @@
         {% endif %}
 	</head>
 	<body>
-		<!-- {% if company %}
-		{% set space, company, email, username, session_key, page = request.path.split("/") %}
-		<a href="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}">
-		{% else %}
-		<a href="{{url_for('index')}}">
-		{% endif %}
-			<img src="{{url_for('static', filename='images/logo2.PNG')}}" alt="Basic Accounting Logo" 
-			style="float: left; position: fixed; margin-left: 10%; margin-top: 5%;" 
-			media="none" onload="if(media!='all')media='all'"/>
-		</a> -->
+
         {% block body %}
         {% endblock %}
+
+		<script>
+		let meta = document.head.querySelector("meta[name='logo']").id;
+		let heading = document.querySelector("#heading");
+		let src = "{{url_for('static', filename='images/logo2.PNG')}}";
+		heading.innerHTML = heading.innerHTML + "<a href=" + meta + "><img src=" + src +" alt='Basic Accounting Logo'/></a>";
+
+		</script>
     </body>
 </html>

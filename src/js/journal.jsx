@@ -91,13 +91,13 @@ function Journal() {
 						<tr>
 							<td>Date</td>
 							<td>
-								<input type="date" name="journalDate"></input>
+								<input type="date" name="journalDate" required></input>
 							</td>
 						</tr>
 						<tr>
 							<td>Description</td>
 							<td>
-								<input type="journal" name="journalDescription" />
+								<input type="journal" name="journalDescription" required/>
 							</td>
 						</tr>
 						<tr>
