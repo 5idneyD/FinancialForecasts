@@ -216,7 +216,7 @@ th.invoiceHeaderDescription {
 
 @keyframes error {
     0% {
-        tranform: rotate(0deg);
+        transform: rotate(0deg);
     }
     25% {
         transform: rotate(1deg);
