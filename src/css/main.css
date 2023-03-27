@@ -304,3 +304,23 @@ div#colorSetter button{
     margin-top: 1vh;
     margin: auto;
 }
+
+form#form div {
+    display: grid;
+    grid-template-rows: auto auto auto auto auto ;
+    grid-template-columns: auto;
+
+}
+
+.loginItem {
+    text-align: center;
+}
+
+.loginItem input {
+    margin-top: 3%;
+}
+
+button[name="signinButton"] {
+    margin-right: auto;
+    margin-left: auto;
+}

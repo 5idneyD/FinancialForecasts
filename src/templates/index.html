@@ -1,66 +1,68 @@
-{% extends "blueprint.html" %}
-{% block meta %}
-<link rel="stylesheet" href="{{url_for('static', filename='styles/index.css')}}" media="none" onload="if(media!='all')media='all'" />
-{% endblock %}
-{% block body %}
-<div class="abc">
-	<div id="heading">
-		<div class="text-container">
-			<h1>Basic Accounting</h1>
+{% extends "blueprint.html" %} {% block meta %}
+<link
+	rel="stylesheet"
+	href="{{url_for('static', filename='styles/main.css')}}"
+	media="none"
+	onload="if(media!='all')media='all'" />
+{% endblock %} {% block body %}
+<div id="heading">
+	<h1>Basic Accounting</h1>
+	<h2>It's Accounting, Basically!</h2>
+</div>
+
+<div id="main">
+	<div id="nav">
+		<div id="navBar">
+			<div></div>
+			<a href="signup"><div class="navOption">Sign Up</div></a>
+			<a href="login"><div class="navOption">Log In</div></a>
+			<div></div>
 		</div>
-
-		<h3 class="typing-demo">It's Accounting, Basically</h3>
 	</div>
-
-	<div id="main" class="container">
-		<div class="col align-items-center">
-			<a href="login"><button name="loginButton">Log-In</button></a>
-			<br />
-			<a href="signup"><button name="signinButton">Sign-Up</button></a>
+	<div id="data" style="text-align: center;">
+		<div id="root">
+			<div>
+				<h3>
+					<br />
+					Hello and Welcome to our website
+					<br />
+					This is accounting software designed for anybody to use
+					<br />
+					Security is essential to us, which is why you will need to verify your email address when signing up
+					<br />
+					<span id="listHeader"
+						>If you would like to see a preview of our site, you can log in with the following
+						details:</span
+					>
+					<br />
+					Email: example@basicaccounting.co.uk
+					<br />
+					Password: p123
+					<br />
+					(We do not recommend this password for your real account)
+					<br />
+				</h3>
+				<h3 id="listHeader">Some of the features our software will offer you:</h3>
+				<ul class="align-items-center" id="list" style="list-style: none;">
+					<li>Post Invoices for Customers & Suppliers</li>
+					<li>Post Journals</li>
+					<li>Set up reversing journals</li>
+					<li>Email invoices out to customers as soon as they are posted in seconds</li>
+					<li>View your monthly and YTD P&L</li>
+					<li>Add a budget</li>
+					<li>Compare your P&L to your budget</li>
+					<li>View your up-to-date Balance Sheet</li>
+					<li>Download many different reports</li>
+					<li>Filter reports online by customer/supplier, period, year & nominal account</li>
+					<li>Add as many users as you need</li>
+					<li>Give different users different permissions</li>
+					<li>Personalise each users account with their own colours</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<br />
-<div id="root" class="container">
-	<div class="col align-items-center">
-		<h3>
-			<br />
-			Hello and Welcome to our website
-			<br />
-			This is accounting software designed for anybody to use
-			<br />
-			Security is essential to us, which is why you will need to verify your email address when signing up
-			<br/>
-			<span id="listHeader"
-				>If you would like to see a preview of our site, you can log in with the following details:</span
-			>
-			<br />
-			Email: example@basicaccounting.co.uk
-			<br />
-			Password: p123
-			<br />
-			(We do not recommend this password for your real account)
-			<br />
-		</h3>
-		<h3 id="listHeader">Some of the features our software will offer you:</h3>
-		<ul class="align-items-center" id="list">
-			<li>Post Invoices for Customers & Suppliers</li>
-			<li>Post Journals</li>
-			<li>Set up reversing journals</li>
-			<li>Email invoices out to customers as soon as they are posted in seconds</li>
-			<li>View your monthly and YTD P&L</li>
-			<li>Add a budget</li>
-			<li>Compare your P&L to your budget</li>
-			<li>View your up-to-date Balance Sheet</li>
-			<li>Download many different reports</li>
-			<li>Filter reports online by customer/supplier, period, year & nominal account</li>
-			<li>Add as many users as you need</li>
-			<li>Give different users different permissions</li>
-			<li>Personalise each users account with their own colours</li>
-		</ul>
-	</div>
-</div>
 <footer>Product of Basic Accounting<br />If you have any questions, please email sidney@basicaccounting.co.uk</footer>
 
 {% endblock %}
