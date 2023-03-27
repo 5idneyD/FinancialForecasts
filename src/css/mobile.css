@@ -31,7 +31,11 @@ body {
 
 #main {
     display: grid;
-    grid-template-columns: 20vw auto;
+    grid-template-columns: 33vw auto;
+}
+
+h3 {
+    font-size: smaller;
 }
 
 #nav {
@@ -51,7 +55,7 @@ body {
 
 .navOption {
     text-align: center;
-    min-width: 15vw;
+    min-width: 25vw;
     width: fit-content;
     min-height: 6.5vh;
     height: fit-content;
@@ -158,6 +162,10 @@ input[name="period"],
 input[name="year"] {
     display: none;
 }
+form {
+    margin-top: 12%;
+}
+
 
 form#form div.row div.col input {
     margin-top: 3%;
@@ -165,10 +173,20 @@ form#form div.row div.col input {
 
 table {
     border-collapse: collapse;
-    width: 80%;
-    margin: auto;
-    margin-top: 2%;
+    width: 50%;
+    margin-left: 5vw;
+    margin-top: 5%;
     color: var(--dark);
+}
+
+/* table#table tbody tr:has(td), table#table tbody tr:has(th) {
+    visibility: collapse;
+} */
+
+
+button#downloadexcel, button[type="submit"] {
+    margin-left: 11vw;
+    width: 26vw;
 }
 
 table#bodyTable tr td input {
@@ -186,11 +204,15 @@ table#budgetTable {
 }
 table#pnlSettings,
 table#invoicesReport {
-    width: 20%;
-    height: 10%;
-    margin: 0;
+    width: 30%;
+    height: 30%;
     margin-top: 2%;
-    margin-left: 10%;
+    margin-left: 5%;
+    margin-right: auto;
+}
+
+form:has(table#pnlSettings){
+    height: 20vh;
 }
 
 tr.trialBalance td,

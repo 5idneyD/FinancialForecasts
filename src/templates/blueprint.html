@@ -22,7 +22,10 @@
 			rel="stylesheet"
 			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 			crossorigin="anonymous" media="none" onload="if(media!='all')media='all'"/>
-		<link rel="stylesheet" href="{{url_for('static', filename='styles/main.min.css')}}"/>
+
+		<link rel="stylesheet" media="screen and (min-width: 601px)" href="{{url_for('static', filename='styles/main.min.css')}}" />
+		<link rel="stylesheet" media="screen and (max-width: 600px)" href="{{url_for('static', filename='styles/mobile.min.css')}}" />
+		<!-- <link rel="stylesheet" href="{{url_for('static', filename='styles/mobile.min.css')}}"/> -->
 		<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/favicon.ico')}}"
 				media="none" onload="if(media!='all')media='all'">
 		<title>Basic Accounting</title>
