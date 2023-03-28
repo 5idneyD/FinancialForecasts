@@ -1,4 +1,3 @@
-# Backend app for Basic Accounting
 from flask import Flask, render_template, request, redirect, url_for, session, Response, send_from_directory
 from flask_migrate import Migrate
 from passlib.hash import pbkdf2_sha256
