@@ -62,7 +62,7 @@ body {
     color: var(--dark);
     box-shadow: var(--shadow);
     border-radius: 15px;
-    padding-top: 2vh;
+    padding-top: 1.5vh;
 }
 
 .navOption:hover {
@@ -102,7 +102,10 @@ button {
     color: var(--light);
     border-color: var(--dark);
 }
-
+form[method="post"] button#submitButton {
+    margin: auto;
+    width: 60%;
+}
 button:hover {
     background: var(--light);
     color: var(--dark);

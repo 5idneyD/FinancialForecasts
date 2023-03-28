@@ -31,7 +31,9 @@ body {
 
 #main {
     display: grid;
-    grid-template-columns: 33vw auto;
+    grid-template-columns: auto;
+    grid-template-rows: 5vh auto;
+    max-width: 100%;
 }
 
 h3 {
@@ -39,34 +41,32 @@ h3 {
 }
 
 #nav {
-    min-height: 75vh;
-    height: fit-content;
     background-color: var(--light);
-    margin-left: -5%;
+    margin-left: 0%;
 }
 
 #navBar {
+    width: 100%;
+    max-width: 100vw;
     background-color: var(--light);
-    min-height: 75vh;
-    height: fit-content;
     display: grid;
-    grid-template-rows: 10vh auto auto auto auto;
+    grid-template-columns: 0vw auto auto auto auto;
+    grid-template-rows: 10vh;
 }
 
 .navOption {
     text-align: center;
-    min-width: 25vw;
-    width: fit-content;
-    min-height: 6.5vh;
+    min-width: 20vw;
+    min-height: 8vh;
     height: fit-content;
     align-items: center;
     margin-left: auto;
-    margin-right: auto;
     background: var(--light);
     color: var(--dark);
     box-shadow: var(--shadow);
     border-radius: 15px;
     padding-top: 2vh;
+    z-index: 3;
 }
 
 .navOption:hover {
@@ -164,11 +164,24 @@ input[name="year"] {
 }
 form {
     margin-top: 12%;
+    display: grid;
+    grid-template-columns: auto;
 }
-
 
 form#form div.row div.col input {
     margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
+}
+
+form#form div.row div.col input, form[method="post"] div.changePassword input,
+form[method="post"]  button{
+    max-width: none;
+    margin-top: 4%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
 }
 
 table {
@@ -179,11 +192,6 @@ table {
     color: var(--dark);
 }
 
-/* table#table tbody tr:has(td), table#table tbody tr:has(th) {
-    visibility: collapse;
-} */
-
-
 button#downloadexcel, button[type="submit"] {
     margin-left: 11vw;
     width: 26vw;
@@ -193,7 +201,6 @@ table#bodyTable tr td input {
     margin: auto;
     width: 100%;
     background: var(--light);
-
 }
 
 table#journalHead {
