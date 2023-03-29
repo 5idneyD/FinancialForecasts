@@ -2,13 +2,12 @@ document.addEventListener(
     "click",
     function (e) {
         try {
-            var menu = document.querySelector("#" + e.target.id);
+            let menu = document.querySelector("#" + e.target.id);
             var url = window.location.pathname;
             url = url.substring(0, url.lastIndexOf("/"));
 
             console.log(e.target.id);
             if (menu.dataset.expanded == "false") {
-                menu.style.height = "fit-content";
                 if (menu.id == "salesLedger") {
                     menu.insertAdjacentHTML(
                         "beforeend",
@@ -46,7 +45,6 @@ document.addEventListener(
                     );
                     menu.dataset.expanded = "true";
                 } else if (menu.id == "financials") {
-                    
                     menu.insertAdjacentHTML(
                         "beforeend",
                         "<br class=" +
@@ -93,7 +91,6 @@ document.addEventListener(
                     );
                     menu.dataset.expanded = "true";
                 } else {
-                    menu.style.height = "25vh";
                     menu.insertAdjacentHTML(
                         "beforeend",
                         "<br class=" +
@@ -124,9 +121,9 @@ document.addEventListener(
                 var options = document.querySelectorAll("." + e.target.id + "Option");
                 options.forEach((option) => {
                     option.remove();
-                    menu.dataset.expanded = "false";
-                    menu.style.height = "6.5vh";
-                });
+                })
+                menu.dataset.expanded = "false";
+
             }
         } catch {
 

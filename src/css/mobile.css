@@ -7,7 +7,7 @@
 
 img[alt="Basic Accounting Logo"] {
     margin-left: -75vw;
-    margin-top: -15vh;
+    margin-top: -12vh;
     height: 10vh;
 }
 
@@ -20,6 +20,7 @@ body {
 #heading {
     display: grid;
     grid-template-rows: auto auto;
+    grid-template-columns: auto;;
     background-color: var(--dark);
     text-align: center;
     color: var(--light);
@@ -27,6 +28,10 @@ body {
     box-shadow: var(--shadow);
     padding-top: 3%;
     padding-bottom: 1%;
+}
+
+div#heading h1 {
+    margin-top: auto;
 }
 
 #main {
@@ -55,18 +60,26 @@ h3 {
 }
 
 .navOption {
+    display: grid;
+    grid-template-rows: 8vh auto;
+    grid-template-columns: auto;
     text-align: center;
-    min-width: 20vw;
+    width: 20vw;
     min-height: 8vh;
     height: fit-content;
     align-items: center;
     margin-left: auto;
     background: var(--light);
     color: var(--dark);
-    box-shadow: var(--shadow);
-    border-radius: 15px;
-    padding-top: 2vh;
+    /* box-shadow: var(--shadow); */
+    /* border-radius: 15px; */
+    /* padding-top: 2vh; */
     z-index: 3;
+}
+
+.navOption a{
+    margin-top: 2%;
+    opacity: 1.0;
 }
 
 .navOption:hover {
@@ -80,6 +93,8 @@ a.menuOption {
 #data {
     height: 75vh;
     background-color: var(--light);
+    margin-top: 8%;
+    min-width: 80vw;
 }
 
 #graph, table {
@@ -186,10 +201,16 @@ form[method="post"]  button{
 
 table {
     border-collapse: collapse;
-    width: 50%;
-    margin-left: 5vw;
+    min-width: 80vw;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 5%;
     color: var(--dark);
+}
+
+table tbody tr:has(th) {
+    height: fit-content;
 }
 
 button#downloadexcel, button[type="submit"] {

@@ -1115,7 +1115,7 @@ def balanceSheet(company, email, username, session_key, theme):
         db.session.query(ChartOfAccounts)
         .filter(ChartOfAccounts.company == company)
         .filter(ChartOfAccounts.nominal >= 60000)
-    )
+    ).order_by(ChartOfAccounts.nominal)
 
     data = {}
 
