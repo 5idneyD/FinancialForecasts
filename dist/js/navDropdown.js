@@ -6,7 +6,38 @@ document.addEventListener(
             var url = window.location.pathname;
             url = url.substring(0, url.lastIndexOf("/"));
 
-            console.log(e.target.id);
+            // This section closes nav menu options when a different option is opened/selected
+            // navOptions selects all the menu option
+            // We then loop through the menu
+            // We ignore the option selected so we don't immediately close it when selected
+            // If the option wasn't selected, we get all it's id
+            // Using it's id, we loop through each option
+            // We call its children elements ch
+            // If it's children is longer than 0 (i.e. is expanded), we loop through the children
+            // Removing each child using a while loop
+            // i.e. remove element as index 0 until there is no child at 0 (i.e all gone)
+            // We then set the nav option as data-expanded false
+            let navOptions = document.querySelectorAll(".navOption");
+            navOptions.forEach(function(t){
+                if (t.id == menu.id){
+
+                } else {
+                    let options = document.querySelectorAll("#" + t.id);
+                    options.forEach(function(p){
+                        let ch = p.children;
+                        if (ch.length > 0){
+                            
+                            let q = 0
+                            while (q < ch.length){
+                                ch[q].remove()
+                                
+                            }
+                        }
+                        p.dataset.expanded = "false";
+                    })
+                }
+            })
+
             if (menu.dataset.expanded == "false") {
                 if (menu.id == "salesLedger") {
                     menu.insertAdjacentHTML(

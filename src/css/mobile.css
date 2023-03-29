@@ -65,7 +65,6 @@ h3 {
     grid-template-columns: auto;
     text-align: center;
     width: 20vw;
-    min-height: 8vh;
     height: fit-content;
     align-items: center;
     margin-left: auto;
@@ -77,9 +76,12 @@ h3 {
     z-index: 3;
 }
 
+.navOption[data-expanded="true"]{
+     box-shadow: var(--shadow);
+}
+
 .navOption a{
     margin-top: 2%;
-    opacity: 1.0;
 }
 
 .navOption:hover {
