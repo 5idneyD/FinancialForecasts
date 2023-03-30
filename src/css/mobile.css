@@ -17,7 +17,7 @@ body {
     background-color: var(--light);
 }
 
-div#root div:has(h3){
+div#root div:has(h3) {
     width: 80vw;
     text-align: center;
     margin-left: auto;
@@ -34,7 +34,7 @@ The logo is also positioned in the heading section*/
 #heading {
     display: grid;
     grid-template-rows: auto auto;
-    grid-template-columns: auto;;
+    grid-template-columns: auto;
     background-color: var(--dark);
     text-align: center;
     color: var(--light);
@@ -85,7 +85,8 @@ span.listHeader {
     grid-template-rows: 10vh;
 }
 
-a[href="login"] .navOption, a[href="signup"] .navOption{
+a[href="login"] .navOption,
+a[href="signup"] .navOption {
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -96,7 +97,6 @@ a[href="signup"] {
 a[href="login"] {
     grid-column: 4;
 }
-
 
 .navOption {
     display: grid;
@@ -115,11 +115,17 @@ a[href="login"] {
     z-index: 3;
 }
 
-.navOption[data-expanded="true"]{
-     box-shadow: var(--shadow);
+/* The financials option needs to be slightly wider as names are longer
+e.g. Trial Balance */
+div#financials {
+    width: 25vw;
 }
 
-.navOption a{
+.navOption[data-expanded="true"] {
+    box-shadow: var(--shadow);
+}
+
+.navOption a {
     margin-top: 2%;
 }
 
@@ -138,7 +144,8 @@ a.menuOption {
     min-width: 80vw;
 }
 
-#graph, table {
+#graph,
+table {
     margin-top: 2%;
     box-shadow: var(--shadow);
 }
@@ -231,8 +238,9 @@ form#form div.row div.col input {
     width: 40vw;
 }
 
-form#form div.row div.col input, form[method="post"] div.changePassword input,
-form[method="post"]  button{
+form#form div.row div.col input,
+form[method="post"] div.changePassword input,
+form[method="post"] button {
     max-width: none;
     margin-top: 4%;
     margin-left: auto;
@@ -254,10 +262,49 @@ table tbody tr:has(th) {
     height: fit-content;
 }
 
-button#downloadexcel, button[type="submit"] {
-    margin-left: 11vw;
-    width: 26vw;
+/* --------------------------------------------------------------------------------- */
+/* Buttons used to run reports (i.e. change data) and download reports to excel
+On most user pages */
+button#downloadexcel,
+button[type="submit"],
+.invoiceReportButtons {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 35vw;
+    margin-top: 1vh;
 }
+/* --------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------- */
+/* This is the table that shows sales and purchase invoices */
+/* As space is limited on mobile, I am hiding all columns, then un-hiding only the columns I want visible */
+table#table tbody {
+    width: fit-content;
+    max-width: 90vw;
+}
+
+table#table td,
+table#table th {
+    display: none;
+}
+
+table#table tbody td:nth-child(1),
+table#table tbody td:nth-child(2),
+table#table tbody td:nth-child(3),
+table#table tbody td:nth-child(4),
+table#table tbody td:nth-child(7),
+table#table tbody th:nth-child(1),
+table#table tbody th:nth-child(2),
+table#table tbody th:nth-child(3),
+table#table tbody th:nth-child(4),
+table#table tbody th:nth-child(7) {
+    display: inline-block;
+    height: fit-content;
+    width: 20vw;
+    text-align: center;
+    /* width: fit-content; */
+}
+/* ---------------------------------------------------------------------------------- */
 
 table#bodyTable tr td input {
     margin: auto;
@@ -276,11 +323,11 @@ table#invoicesReport {
     width: 30%;
     height: 30%;
     margin-top: 2%;
-    margin-left: 5%;
+    margin-left: auto;
     margin-right: auto;
 }
 
-form:has(table#pnlSettings){
+form:has(table#pnlSettings) {
     height: 20vh;
 }
 
@@ -304,7 +351,6 @@ th.invoiceHeader {
 th.invoiceHeaderDescription {
     width: 44%;
 }
-
 
 @keyframes error {
     0% {
@@ -361,7 +407,6 @@ div.changePassword {
     display: none;
 }
 
-
 /* The footer is only on the index page */
 footer {
     background-color: var(--dark);
@@ -390,26 +435,25 @@ table[name="unpaid_invoices"] {
     text-align: center;
 }
 
-div#colorSetter{
+div#colorSetter {
     display: grid;
     grid-template-rows: auto auto auto;
     grid-template-columns: auto;
     align-items: center;
     margin: auto;
 }
-div#colorSetter select{
+div#colorSetter select {
     margin-top: 5vh;
 }
-div#colorSetter button{
+div#colorSetter button {
     margin-top: 1vh;
     margin: auto;
 }
 
 form#form div {
     display: grid;
-    grid-template-rows: auto auto auto auto auto ;
+    grid-template-rows: auto auto auto auto auto;
     grid-template-columns: auto;
-
 }
 
 .loginItem {
