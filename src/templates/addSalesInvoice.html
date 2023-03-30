@@ -9,8 +9,8 @@
 	<div id="nav"></div>
 	<div id="data">
 		<form method="post">
-			<div class="container">
-				<div class="col-5">
+			<div>
+				<div>
 					<table id="headTable">
 						<tr>
 							<td>Invoice Number</td>
@@ -56,10 +56,10 @@
 							</td>
 						</tr>
 					</table>
-					<button type="button" onclick="addInvoiceRow(); calculate()">Add Row</button>
+					<button type="button" onclick="addInvoiceRow(); calculate()" id="addInvoiceRow">Add Row</button>
 				</div>
-				<div class="col">
-					<div class="container">
+				<div>
+					<div>
 						<table name="data" data-rows="1" id="bodyTable">
 							<input id="number_of_rows" name="number_of_rows" value="data-rows" />
 							<tr>
@@ -79,7 +79,7 @@
 								<td><input type="text" name="1_total_value" class="tv" /></td>
 							</tr>
 						</table>
-						<button id="submitButton" type="submit">Submit</button>
+						<button id="submitInvoice" type="submit">Submit</button>
 						<br />
 						{{message}}
 					</div>

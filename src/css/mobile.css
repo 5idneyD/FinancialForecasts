@@ -273,11 +273,18 @@ button[type="submit"],
     min-width: 35vw;
     margin-top: 1vh;
 }
+
+/* Adding the below as the above buttons css not working on add invoice forms */
+button#addInvoiceRow, button[type="submit"]#submitInvoice {
+    width: 40vw;
+    margin-left: 30vw;
+}
 /* --------------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------------- */
 /* This is the table that shows sales and purchase invoices */
 /* As space is limited on mobile, I am hiding all columns, then un-hiding only the columns I want visible */
+/* This only applies to mobile css */
 table#table tbody {
     width: fit-content;
     max-width: 90vw;
