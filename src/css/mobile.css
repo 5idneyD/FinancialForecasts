@@ -1,22 +1,36 @@
-:root {
-    --dark: #804f37;
-    --light: #d1d1d1;
-    --tableBorder: #65463e;
-    --shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1, inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
-}
+/* Importing css that is shared between the desktop and mobile css designs, such as colours */
+@import "styles.css";
 
+/* The logo is slightly smaller in the mobile design, as there is less room on the screen
+Otherwise, it would be taking up too much screen and attention
+It is also positioned a little higher so there is more width for the title */
 img[alt="Basic Accounting Logo"] {
     margin-left: -75vw;
-    margin-top: -12vh;
-    height: 10vh;
+    margin-top: -23vh;
+    height: 7vh;
 }
 
+/* Splits the screen into 2 sections/rows, header and main content */
 body {
     display: grid;
-    grid-template-rows: 25vh auto;
+    grid-template-rows: 20vh auto;
     background-color: var(--light);
 }
 
+div#root div:has(h3){
+    width: 80vw;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#root div h3 {
+    line-height: 2rem;
+    font-size: medium;
+}
+
+/* The heading contains the title (e.g. Basic Accounting, P&L, Dashboard etc) and the username, so 2 rows required 
+The logo is also positioned in the heading section*/
 #heading {
     display: grid;
     grid-template-rows: auto auto;
@@ -26,7 +40,7 @@ body {
     color: var(--light);
     width: 100vw;
     box-shadow: var(--shadow);
-    padding-top: 3%;
+    padding-top: 7%;
     padding-bottom: 1%;
 }
 
@@ -45,6 +59,18 @@ h3 {
     font-size: smaller;
 }
 
+span.listHeader {
+    display: inline-block;
+    margin-top: 10%;
+    background-color: var(--dark);
+    color: var(--light);
+    width: 100vw;
+    z-index: 5;
+    margin-left: -10vw;
+    margin-bottom: 8%;
+    padding: 10%;
+}
+
 #nav {
     background-color: var(--light);
     margin-left: 0%;
@@ -59,12 +85,25 @@ h3 {
     grid-template-rows: 10vh;
 }
 
+a[href="login"] .navOption, a[href="signup"] .navOption{
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+a[href="signup"] {
+    grid-column: 3;
+}
+a[href="login"] {
+    grid-column: 4;
+}
+
+
 .navOption {
     display: grid;
     grid-template-rows: 8vh auto;
     grid-template-columns: auto;
     text-align: center;
-    width: 20vw;
+    width: 22vw;
     height: fit-content;
     align-items: center;
     margin-left: auto;
@@ -322,11 +361,20 @@ div.changePassword {
     display: none;
 }
 
+
+/* The footer is only on the index page */
 footer {
     background-color: var(--dark);
     color: var(--light);
     text-align: center;
     padding: 5vh;
+    margin-top: 110%;
+}
+
+/* This is the list of features on the index page */
+ul#list {
+    display: inline-block;
+    line-height: 2em;
 }
 
 .bankRecInput {

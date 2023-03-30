@@ -1,9 +1,6 @@
-:root {
-    --dark: #804f37;
-    --light: #d1d1d1;
-    --tableBorder: #65463e;
-    --shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1, inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
-}
+/* Importing css that is shared between the desktop and mobile css designs, such as colours */
+@import "styles.css";
+
 
 img[alt="Basic Accounting Logo"] {
     margin-left: -75vw;
@@ -15,6 +12,18 @@ body {
     display: grid;
     grid-template-rows: 25vh auto;
     background-color: var(--light);
+}
+
+div#root div:has(h3){
+    width: 40vw;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#root div h3 {
+    line-height: 2rem;
+    font-size: medium;
 }
 
 #heading {

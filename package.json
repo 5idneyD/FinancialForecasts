@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "config": {
-    "jsx": "src/js/navigation.jsx src/js/help.jsx src/js/journal.jsx",
+    "jsx": "src/js/navigation.jsx src/js/help.jsx src/js/journal.jsx src/js/indexList.jsx",
     "css": "src/css/main.css src/css/mobile.css"
   },
   "scripts": {

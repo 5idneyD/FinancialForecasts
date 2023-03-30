@@ -1,5 +1,4 @@
-{% extends "blueprint.html" %} {% block meta %}
-{% endblock %} {% block body %}
+{% extends "blueprint.html" %} {% block meta %} {% endblock %} {% block body %}
 <div id="heading">
 	<h1>Basic Accounting</h1>
 	<h2>It's Accounting, Basically!</h2>
@@ -14,50 +13,34 @@
 			<div></div>
 		</div>
 	</div>
-	<div id="data" style="text-align: center;">
+	<div id="data" style="text-align: center">
 		<div id="root">
 			<div>
 				<h3>
 					<br />
-					Hello and Welcome to our website
+					Welcome to Basic Accounting!
 					<br />
 					This is accounting software designed for anybody to use
 					<br />
-					Security is essential to us, which is why you will need to verify your email address when signing up
-					<br />
-					<span id="listHeader"
-						>If you would like to see a preview of our site, you can log in with the following
-						details:</span
-					>
-					<br />
-					Email: example@basicaccounting.co.uk
-					<br />
-					Password: p123
-					<br />
-					(We do not recommend this password for your real account)
+					<span class="listHeader"
+						>If you would like to see a preview of our site, you can log in with the following details:
+						<br />
+						Email: example@basicaccounting.co.uk
+						<br />
+						Password: p123
+						<br />
+						(We do not recommend this password for your real account)
+					</span>
 					<br />
 				</h3>
-				<h3 id="listHeader">Some of the features our software will offer you:</h3>
-				<ul class="align-items-center" id="list" style="list-style: none;">
-					<li>Post Invoices for Customers & Suppliers</li>
-					<li>Post Journals</li>
-					<li>Set up reversing journals</li>
-					<li>Email invoices out to customers as soon as they are posted in seconds</li>
-					<li>View your monthly and YTD P&L</li>
-					<li>Add a budget</li>
-					<li>Compare your P&L to your budget</li>
-					<li>View your up-to-date Balance Sheet</li>
-					<li>Download many different reports</li>
-					<li>Filter reports online by customer/supplier, period, year & nominal account</li>
-					<li>Add as many users as you need</li>
-					<li>Give different users different permissions</li>
-					<li>Personalise each users account with their own colours</li>
-				</ul>
+				<h3 class="listHeader">Some of the features our software will offer you:</h3>
+				<div id="list">
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
 <footer>Product of Basic Accounting<br />If you have any questions, please email sidney@basicaccounting.co.uk</footer>
-
+<script src="{{ url_for('static', filename='react/compiled/indexList.js') }}"></script>
 {% endblock %}
