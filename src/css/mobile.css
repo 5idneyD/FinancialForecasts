@@ -359,7 +359,7 @@ button#addClient {
 /* ---------------------------------------------------------------------------------- */
 /* Reformatting Trial Balance page for mobile */
 table#table tbody tr.trialBalance{
-    border-bottom: 1px solid var(--tableBorder);;
+    border-bottom: 1px solid var(--tableBorder);
     width: 20vw;
     min-height: 5vh;
     height: fit-content;
@@ -367,6 +367,36 @@ table#table tbody tr.trialBalance{
 }
 /* ---------------------------------------------------------------------------------- */
 
+
+/* ---------------------------------------------------------------------------------- */
+/* Reformatting Balance Sheet page for mobile */
+table#balanceSheet tbody{
+    width: 85vw;
+    padding: 1%;
+    display: table;
+}
+
+table#balanceSheet tbody tr:has(th) :nth-child(1),
+table#balanceSheet tbody tr:has(th) :nth-child(3)
+table#balanceSheet tbody tr:has(th) :nth-child(4){
+    width: 10vw;
+}
+
+table#balanceSheet tbody tr:has(th) :nth-child(2){
+    width: 40vw;
+}
+
+table#balanceSheet tbody tr {
+    border-bottom: 1px solid var(--tableBorder);
+    text-align: center;
+}
+
+button[type="button"]#downloadexcel{
+    width: 35vw;
+    margin-left: 30vw;
+}
+
+/* ---------------------------------------------------------------------------------- */
 
 table#bodyTable tr td input {
     margin: auto;
