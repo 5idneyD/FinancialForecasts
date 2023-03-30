@@ -9,10 +9,10 @@
 		<div class="">
 			<a
 				href="{{ url_for('addCustomer', company=company, email=email, username=username, session_key=session_key) }}"
-				><button>Add Customer</button></a
+				><button id="addClient">Add Customer</button></a
 			>
 			<div>
-				<table>
+				<table id="customers">
 					<tr>
 						<th>Name</th>
 						<th>Code</th>

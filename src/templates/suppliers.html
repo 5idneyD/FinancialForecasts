@@ -9,13 +9,13 @@
 		<div class="container col align-items-center">
 			<a
 				href="{{ url_for('addSupplier', company=company, email=email, username=username, session_key=session_key) }}"
-				><button>Add Supplier</button></a
+				><button id="addClient">Add Supplier</button></a
 			>
 			<div>
-				<table>
+				<table id="suppliers">
 					<tr>
-						<th>Supplier Name</th>
-						<th>Supplier Code</th>
+						<th>Name</th>
+						<th>Code</th>
 					</tr>
 					{% for supplier in suppliers %}
 					<tr>

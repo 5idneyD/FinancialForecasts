@@ -275,7 +275,8 @@ button[type="submit"],
 }
 
 /* Adding the below as the above buttons css not working on add invoice forms */
-button#addInvoiceRow, button[type="submit"]#submitInvoice {
+button#addInvoiceRow,
+button[type="submit"]#submitInvoice {
     width: 40vw;
     margin-left: 30vw;
 }
@@ -311,6 +312,43 @@ table#table tbody th:nth-child(7) {
     text-align: center;
     /* width: fit-content; */
 }
+/* ---------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------- */
+/* Minimising the View Customers & View Suppliers tables for mobile
+This is due to limited screen, so to many un-important columns make it difficult to read
+Using same method as above */
+table:is(#customers, #suppliers) tbody {
+    width: fit-content;
+    max-width: 90vw;
+}
+
+table:is(#customers, #suppliers) :is(th, td) {
+    display: none;
+}
+
+table:is(#customers, #suppliers) tbody td:nth-child(1),
+table:is(#customers, #suppliers) tbody td:nth-child(2),
+table:is(#customers) tbody td:nth-child(5),
+table:is(#customers, #suppliers) tbody th:nth-child(1),
+table:is(#customers, #suppliers) tbody th:nth-child(2),
+table:is(#customers) tbody th:nth-child(5){
+    display: inline-block;
+    height: fit-content;
+    width: 30vw;
+    text-align: center;
+}
+
+/* Need to assign suppliers width seperately as 1 less column */
+table#suppliers :is(th, td){
+    width: 40vw !important;
+}
+
+button#addClient {
+    width: 30vw;
+    margin-left: 35%;
+}
+
 /* ---------------------------------------------------------------------------------- */
 
 table#bodyTable tr td input {
