@@ -336,7 +336,7 @@ table:is(#customers, #suppliers) tbody td:nth-child(2),
 table:is(#customers) tbody td:nth-child(5),
 table:is(#customers, #suppliers) tbody th:nth-child(1),
 table:is(#customers, #suppliers) tbody th:nth-child(2),
-table:is(#customers) tbody th:nth-child(5){
+table:is(#customers) tbody th:nth-child(5) {
     display: inline-block;
     height: fit-content;
     width: 30vw;
@@ -344,7 +344,7 @@ table:is(#customers) tbody th:nth-child(5){
 }
 
 /* Need to assign suppliers width seperately as 1 less column */
-table#suppliers :is(th, td){
+table#suppliers :is(th, td) {
     width: 40vw !important;
 }
 
@@ -355,10 +355,9 @@ button#addClient {
 
 /* ---------------------------------------------------------------------------------- */
 
-
 /* ---------------------------------------------------------------------------------- */
 /* Reformatting Trial Balance page for mobile */
-table#table tbody tr.trialBalance{
+table#table tbody tr.trialBalance {
     border-bottom: 1px solid var(--tableBorder);
     width: 20vw;
     min-height: 5vh;
@@ -367,31 +366,38 @@ table#table tbody tr.trialBalance{
 }
 /* ---------------------------------------------------------------------------------- */
 
-
 /* ---------------------------------------------------------------------------------- */
 /* Reformatting Balance Sheet page for mobile */
-table#balanceSheet tbody{
-    width: 85vw;
-    padding: 1%;
-    display: table;
+table#bSheetTable {
+    width: 90vw;
+}
+div.chakra-table {
+    width: 90vw;
 }
 
-table#balanceSheet tbody tr:has(th) :nth-child(1),
-table#balanceSheet tbody tr:has(th) :nth-child(3)
-table#balanceSheet tbody tr:has(th) :nth-child(4){
-    width: 10vw;
+table#bSheetTable thead {
+    height: 5vh;
 }
 
-table#balanceSheet tbody tr:has(th) :nth-child(2){
-    width: 40vw;
+table#bSheetTable thead tr th {
+    width: 22vw;
+    text-align: center;
+    height: fit-content;
 }
 
-table#balanceSheet tbody tr {
+table#bSheetTable tbody tr {
     border-bottom: 1px solid var(--tableBorder);
     text-align: center;
+    height: fit-content;
+    min-height: 5vh;
 }
 
-button[type="button"]#downloadexcel{
+table#bSheetTable tbody tr td{
+    width: 10vw;
+    height: fit-content;
+}
+
+button[type="button"]#downloadexcel {
     width: 35vw;
     margin-left: 30vw;
 }
@@ -422,7 +428,6 @@ table#invoicesReport {
 form:has(table#pnlSettings) {
     height: 20vh;
 }
-
 
 table#journalTable td {
     border: 1px solid var(--tableBorder);

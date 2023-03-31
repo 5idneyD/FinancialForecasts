@@ -7,40 +7,15 @@
 	<div id="nav"></div>
 	<div id="data">
 		<button type="button" id="downloadexcel" onclick="ExportToExcel('xlsx')">Download Report</button>
-		<table id="balanceSheet">
-			<tr>
-				<th>Nominal Code</th>
-				<th>Account Name</th>
-				<th>Debit</th>
-				<th>Credit</th>
-			</tr>
-
-			{% for key, value in data.items() %}
-			<tr id="{{value[2]}}" class="{{value[2]}} table_row">
-				<td>{{value[2]}}</td>
-				<td>{{value[3]}}</td>
-				{% if value[1]|float > 0.00 %}
-				<td>{{ value[1] }}</td>
-				<td></td>
-				{% elif value[1]|float < 0.00 %}
-				<td></td>
-				<td>{{ -value[1] }}</td>
-				{% else %}
-				<td></td>
-				<td></td>
-				{% endif %}
-			</tr>
-			{% endfor %}
-			<tr id="netAssets" class="summaryRow">
-				<td></td>
-				<td>Net Assets</td>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
+		<div id="balanceSheet">
+		</div>
 	</div>
 </div>
+<script>
+	window.bsData = {{data|tojson}}
+</script>
 <script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
+<script src="{{ url_for('static', filename='react/compiled/mobileBalanceSheetTable.js') }}"></script>
 <script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script src="{{ url_for('static', filename='js/balanceSheet.js') }}"></script>
 <script>

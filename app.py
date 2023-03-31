@@ -1115,7 +1115,7 @@ def balanceSheet(company, email, username, session_key, theme):
         db.session.query(ChartOfAccounts)
         .filter(ChartOfAccounts.company == company)
         .filter(ChartOfAccounts.nominal >= 60000)
-    ).order_by(ChartOfAccounts.nominal)
+    ).order_by(ChartOfAccounts.nominal).all()
 
     data = {}
 
@@ -1136,7 +1136,7 @@ def balanceSheet(company, email, username, session_key, theme):
                 pass
             ytd_balance += transaction.net_value
 
-        data[account.account_name] = [monthly_balance, ytd_balance, account.nominal, account.account_name]
+        data[account.nominal] = [monthly_balance, ytd_balance, account.nominal, account.account_name]
     return render_template("balanceSheet.html", company=company, data=data, design=theme)
 
 
