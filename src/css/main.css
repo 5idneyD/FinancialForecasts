@@ -336,3 +336,24 @@ button[name="signinButton"] {
     margin-right: auto;
     margin-left: auto;
 }
+
+
+/* ---------------------------------------------------------------------------------- */
+/* Help Page re-design for desktop */
+
+div.helpHead {
+    margin-top: 5vh;
+    width: 45vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+
+div.helpBody {
+    width: 35vw;
+    padding: 2vh 5vw 2vh 5vw;
+    text-align: center;
+}
+/* ---------------------------------------------------------------------------------- */

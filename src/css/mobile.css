@@ -162,7 +162,7 @@ a:hover {
 
 button {
     margin-top: 2%;
-    min-width: 10vw;
+    min-width: 30vw;
     width: fit-content;
     background: var(--dark);
     color: var(--light);
@@ -496,6 +496,63 @@ table:is(#batchedJournals) tbody tr th{
 
 /* ---------------------------------------------------------------------------------- */
 
+
+
+
+/* ---------------------------------------------------------------------------------- */
+/* Reformatting change password for mobile */
+
+div.changePassword.row {
+    width: 50vw;
+    align-items: center;
+}
+/* ---------------------------------------------------------------------------------- */
+
+
+
+
+/* ---------------------------------------------------------------------------------- */
+/* Admin Form */
+#adminForm {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw;
+}
+
+#adminForm div {
+    justify-items: center;
+}
+
+#adminForm div button{
+    width: 35vw;
+}
+
+select.adminLevelSelect{
+    width: 40vw;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------------------- */
+/* Help Page re-design for mobile */
+
+div.helpHead, div.helpBody {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+div.helpHead {
+    border: 0;
+}
+
+div.helpBody {
+    width: 75vw;
+    padding: 5vw;
+}
+/* ---------------------------------------------------------------------------------- */
 table#bodyTable tr td input {
     margin: auto;
     width: 100%;
@@ -656,4 +713,6 @@ button[name="signinButton"] {
     margin-right: auto;
     margin-left: auto;
     width: 35vw;
+    height: 3vh;
+    padding-top: 0;
 }

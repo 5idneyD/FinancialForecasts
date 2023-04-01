@@ -28,7 +28,6 @@ esbuild.context({
   sourcemap: false,
   outdir: "dist/js",
   plugins: [],
-  treeShaking: true,
   minify: true,
 }).then(context => {
   if (process.argv.includes("--watch")) {
