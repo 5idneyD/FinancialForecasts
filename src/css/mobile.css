@@ -430,6 +430,17 @@ table.pnl tbody tr th, table.pnl tbody tr td{
 
 /* ---------------------------------------------------------------------------------- */
 
+/* ---------------------------------------------------------------------------------- */
+/* Redesigning the "Post A Journal" Page for mobile */
+/* Lots of elements */
+div:has(table#journalHead) button {
+    width: 35vw;
+    margin-left: 29vw;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+
 table#bodyTable tr td input {
     margin: auto;
     width: 100%;

@@ -55,7 +55,8 @@ window.onload = function () {
 
 
 	var netAssetsRow = document.querySelector("#netAssets");
-	var netAssets = assetsTotal + liabilitiesTotal;
+	var netAssets = Number(assetsTotal) + Number(liabilitiesTotal);
+
 	if (netAssets < 0) {
 		netAssetsRow.children[3].innerText = -netAssets;
 	} else {

@@ -78,7 +78,7 @@ function Journal() {
 
 	return (
 		<>
-			<div className="col-4">
+			<div>
 				{/* Table Head */}
 				<table className="" id="journalHead">
 					<tbody>
@@ -129,9 +129,9 @@ function Journal() {
 					Post Journal
 				</button>
 			</div>
-			<div className="col">
+			<div>
 				{/* Table Body */}
-				<table className="col">
+				<table>
 					<thead>
 						<tr>
 							<th>Row</th>
