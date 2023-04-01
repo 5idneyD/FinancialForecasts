@@ -397,9 +397,35 @@ table#bSheetTable tbody tr td{
     height: fit-content;
 }
 
-button[type="button"]#downloadexcel {
-    width: 35vw;
-    margin-left: 30vw;
+
+/* ---------------------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------------------- */
+/* Re-designing the P&L for mobile */
+table#table.pnl tbody tr :nth-child(7){
+    display: none;
+}
+table#table.pnl tbody tr :nth-child(5){
+    display: inline-block;
+    height: fit-content;
+    width: 19vw;
+    text-align: center;
+}
+
+table.pnl {
+    width: 95vw;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+table.pnl tbody tr {
+    width: 100%;
+}
+
+table.pnl tbody tr th, table.pnl tbody tr td{
+    width: 19vw !important;
+    text-align: center;
 }
 
 /* ---------------------------------------------------------------------------------- */

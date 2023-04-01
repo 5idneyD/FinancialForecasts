@@ -47,17 +47,17 @@ els.forEach(function (el, index) {
     if (els[index].classList[0][0] == "1" && els[index + 1].classList[0][0] == "2") {
         el.insertAdjacentHTML(
             "afterend",
-            "<tr class='summaryRow'><td>Total Revenue</td><td>" + revenueTotalP + "</td><td>" + revenueTotalM + "</td><td></td><td>" + revenueBudgetTotalP + "</td><td>" + revenueBudgetTotalM + "</td></tr>",
+            "<tr class='summaryRow'><td>Total Revenue</td><td>" + revenueTotalP + "</td><td>" + revenueTotalM + "</td><td>" + (revenueTotalP - revenueTotalM) + "</td><td>" + revenueBudgetTotalP + "</td><td>" + revenueBudgetTotalM + "</td><td>" + (revenueBudgetTotalP - revenueBudgetTotalM) + "</td></tr>",
         );
     } else if (els[index].classList[0][0] == "2" && els[index + 1].classList[0][0] == "3") {
         el.insertAdjacentHTML(
             "afterend",
-            "<tr class='summaryRow'><td>Gross Profit</td><td>" + (revenueTotalP - directCostsTotalP) + "</td><td>" + (revenueTotalM - directCostsTotalM) + "</td><td></td><td>" + (revenueBudgetTotalP - directCostsBudgetTotalP) + "</td><td>" + (revenueBudgetTotalM - directCostsBudgetTotalM) + "</td></tr>",
+            "<tr class='summaryRow'><td>Gross Profit</td><td>" + (revenueTotalP - directCostsTotalP) + "</td><td>" + (revenueTotalM - directCostsTotalM) + "</td><td>" + ((revenueTotalP - directCostsTotalP) - (revenueTotalM - directCostsTotalM)) + "</td><td>" + (revenueBudgetTotalP - directCostsBudgetTotalP) + "</td><td>" + (revenueBudgetTotalM - directCostsBudgetTotalM) + "</td><td>" + ((revenueBudgetTotalP - directCostsBudgetTotalP) - (revenueBudgetTotalM - directCostsBudgetTotalM)) + "</td></tr>",
         );
     } else if (els[index].classList[0][0] == "3" && !els[index + 1]) {
         el.insertAdjacentHTML(
             "afterend",
-            "<tr class='summaryRow'><td>Net Profit</td><td>" + (revenueTotalP - directCostsTotalP - overheadsTotalP) + "</td><td>" + (revenueTotalM - directCostsTotalM - overheadsTotalM) + "</td><td></td><td>" + (revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP) + "</td><td>" + (revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM) + "</td></tr>",
+            "<tr class='summaryRow'><td>Net Profit</td><td>" + (revenueTotalP - directCostsTotalP - overheadsTotalP) + "</td><td>" + (revenueTotalM - directCostsTotalM - overheadsTotalM) + "</td><td>" + ((revenueTotalP - directCostsTotalP - overheadsTotalP) - (revenueTotalM - directCostsTotalM - overheadsTotalM)) + "</td><td>" + (revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP) + "</td><td>" + (revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM) + "</td><td>" + ((revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP)-(revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM)) + "</td></tr>",
         );
     }
 }
@@ -68,7 +68,7 @@ els.forEach(function (el, index) {
 var els = document.getElementById("table").getElementsByTagName("td");
 
 for (var i = 1; i < els.length; i++) {
-    // Test if the fomratting will cause error,
+    // Test if the formatting will cause error,
     // If so, pass
     // else, format
     if (Number(els[i].innerText).toLocaleString("en") == "NaN") {
