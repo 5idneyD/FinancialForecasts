@@ -281,8 +281,8 @@ button[type="submit"],
 /* Adding the below as the above buttons css not working on add invoice forms */
 button#addInvoiceRow,
 button[type="submit"]#submitInvoice {
-    width: 40vw;
-    margin-left: 30vw;
+    width: 35vw;
+    margin-left: 33vw;
 }
 /* --------------------------------------------------------------------------------- */
 
@@ -403,6 +403,7 @@ table#bSheetTable tbody tr td{
 
 /* ---------------------------------------------------------------------------------- */
 /* Re-designing the P&L for mobile */
+/* Not showing all columns on mobile. Only showing essentials */
 table#table.pnl tbody tr :nth-child(7){
     display: none;
 }
@@ -440,6 +441,60 @@ div:has(table#journalHead) button {
 
 /* ---------------------------------------------------------------------------------- */
 
+
+/* ---------------------------------------------------------------------------------- */
+/* Re-designing the nominal transactions */
+/* Reducing the number of columns visible as too many on mobile */
+
+table:is(#nominalTransactions) {
+    width: 95vw;
+    margin-left:0
+}
+
+table:is(#nominalTransactions) :is(th, td) {
+    display: none;
+}
+
+table:is(#nominalTransactions) tbody td:nth-child(1),
+table:is(#nominalTransactions) tbody td:nth-child(2),
+table:is(#nominalTransactions) tbody td:nth-child(4),
+table:is(#nominalTransactions) tbody td:nth-child(5),
+table:is(#nominalTransactions) tbody td:nth-child(7),
+table:is(#nominalTransactions) tbody th:nth-child(1),
+table:is(#nominalTransactions) tbody th:nth-child(2),
+table:is(#nominalTransactions) tbody th:nth-child(4),
+table:is(#nominalTransactions) tbody th:nth-child(5),
+table:is(#nominalTransactions) tbody th:nth-child(7) {
+    display: inline-block;
+    height: fit-content;
+    width: 19vw;
+    text-align: center;
+}
+/* ---------------------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------------------- */
+/* Batched page page re-sizing for mobile */
+/* aligning columns and buttons */
+
+button#batchedJournalButton {
+    margin-left: 33vw;
+}
+
+table:is(#batchedJournals){
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table:is(#batchedJournals) tbody tr{
+    text-align: center;
+}
+table:is(#batchedJournals) tbody tr th{
+    min-width: 19vw;
+}
+
+/* ---------------------------------------------------------------------------------- */
 
 table#bodyTable tr td input {
     margin: auto;
@@ -600,4 +655,5 @@ form#form div {
 button[name="signinButton"] {
     margin-right: auto;
     margin-left: auto;
+    width: 35vw;
 }
