@@ -1,1 +1,2 @@
-*.jsx linguist-language:JavaScript
+* linguist-detectable
+Notes/* linguist-vendored
