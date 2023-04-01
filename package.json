@@ -4,17 +4,26 @@
   "description": "",
   "private": true,
   "config": {
-    "jsx": "src/js/navigation.jsx src/js/help.jsx src/js/journal.jsx src/js/indexList.jsx src/js/mobileBalanceSheetTable.jsx",
+    "jsx": "src/jsx/navigation.jsx src/jsx/help.jsx src/jsx/journal.jsx src/jsx/indexList.jsx src/jsx/mobileBalanceSheetTable.jsx",
     "css": "src/css/main.css src/css/mobile.css"
+  },
+  "directories.man": {
+    "js": "./src/js",
+    "jsx:": "./src/jsx",
+    "css": "./src/css",
+    "html": "./src/templates"
   },
   "scripts": {
     "serve": "python app.py",
     "css": "esbuild %npm_package_config_css% --bundle --outdir=dist/styles/ --minify --tree-shaking=true",
     "css:watch": "esbuild %npm_package_config_css% --bundle --outdir=dist/styles/ --entry-names=[name].min --minify --tree-shaking=true --watch",
-    "build": "npm run jsx & css",
-    "dev": "npm-run-all --parallel jsx:watch css:watch serve",
+    "build": "npm run jsx & npm run css & node es.js",
+    "dev": "npm-run-all --parallel jsx:watch css:watch js:watch serve",
+    "js": "node es.js",
+    "js:watch": "node es.js --watch",
     "jsx": "esbuild %npm_package_config_jsx% --bundle --outdir=dist/react/compiled/ --loader:.js=jsx --drop:debugger --tree-shaking=true --minify",
-    "jsx:watch": "esbuild %npm_package_config_jsx% --bundle --outdir=dist/react/compiled/ --loader:.js=jsx --drop:debugger --tree-shaking=true --minify --watch"
+    "jsx:watch": "esbuild %npm_package_config_jsx% --bundle --outdir=dist/react/compiled/ --loader:.js=jsx --drop:debugger --tree-shaking=true --minify --watch",
+    "new": "esbuild 'src/js/*.js' --outdir=dist/new"
   },
   "keywords": [],
   "author": "5idneyD",
@@ -38,7 +47,11 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "resolve-glob": "^1.0.0",
     "style-loader": "^3.3.2",
     "webpack": "^5.76.2"
+  },
+  "devDependencies": {
+    "esbuild-plugin-import-glob": "^0.1.1"
   }
 }
