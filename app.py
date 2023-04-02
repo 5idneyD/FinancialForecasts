@@ -1442,6 +1442,15 @@ def agedDebt(company, email, username, session_key, theme):
 
     return render_template("agedDebt.html", company=company, design=theme, data=data)
 
+# When logging out, the user is redirected to the index page
+# This is via the logout page where the session for this user is deleted
+@app.route("/<company>/<email>/<username>/<session_key>/logout", methods=["POST", "GET"])
+@login_required
+def logout(company, email, username, session_key, theme):
+    del session[email]
+    return redirect(url_for("index"))
 
+
+debug = os.getenv("DEBUG")
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=debug)

@@ -147,7 +147,11 @@ document.addEventListener(
                             e.target.id +
                             "Option><a class='menuOption " +
                             e.target.id +
-                            "Option' href='" + url + "/help'>Help</a>",
+                            "Option' href='" + url + "/help'>Help</a><br class=" +
+                            e.target.id +
+                            "Option><a class='menuOption " +
+                            e.target.id +
+                            "Option' href='" + url + "/logout'>Log Out</a>",
                         );
                         menu.dataset.expanded = "true";
                     }
