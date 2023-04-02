@@ -59,18 +59,9 @@ h3 {
     font-size: smaller;
 }
 
-span.listHeader {
-    display: inline-block;
-    margin-top: 10%;
-    background-color: var(--dark);
-    color: var(--light);
-    width: 100vw;
-    z-index: 5;
-    margin-left: -10vw;
-    margin-bottom: 8%;
-    padding: 10%;
-}
 
+/* --------------------------------------------------------------------------------- */
+/* Nav bar which is on all pages */
 #nav {
     background-color: var(--light);
     margin-left: 0%;
@@ -136,6 +127,8 @@ div#financials {
 a.menuOption {
     line-height: 2em;
 }
+/* --------------------------------------------------------------------------------- */
+
 
 #data {
     height: 75vh;
@@ -260,6 +253,51 @@ table {
 table tbody tr:has(th) {
     height: fit-content;
 }
+
+
+/* --------------------------------------------------------------------------------- */
+/* Index page re-design for mobile */
+div#data div#root:has(h3) {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+span.listHeader {
+    display: inline-block;
+    margin-top: 10%;
+    background-color: var(--light);
+    color: var(--dark);
+    width: 100vw;
+    z-index: 5;
+    margin-left: -10vw;
+    margin-bottom: 8%;
+    padding: 10%;
+}
+
+
+/* This is the list of features on the index page */
+ul#list {
+    display: inline-block;
+    line-height: 2em;
+}
+
+
+/* The footer is only on the index page */
+footer {
+    background-color: var(--light);
+    color: var(--dark);
+    text-align: center;
+    width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5vh;
+    z-index: 5;
+}
+
+
+
+/* --------------------------------------------------------------------------------- */
+
 
 /* --------------------------------------------------------------------------------- */
 /* Buttons used to run reports (i.e. change data) and download reports to excel
@@ -652,21 +690,6 @@ div.changePassword {
     display: none;
 }
 
-/* The footer is only on the index page */
-footer {
-    background-color: var(--dark);
-    color: var(--light);
-    text-align: center;
-    padding: 5vh;
-    margin-top: 110%;
-}
-
-/* This is the list of features on the index page */
-ul#list {
-    display: inline-block;
-    line-height: 2em;
-}
-
 .bankRecInput {
     background-color: var(--light);
     color: var(--dark);
@@ -713,6 +736,4 @@ button[name="signinButton"] {
     margin-right: auto;
     margin-left: auto;
     width: 35vw;
-    height: 3vh;
-    padding-top: 0;
 }

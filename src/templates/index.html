@@ -6,7 +6,7 @@
 
 <div id="main">
 	<div id="nav">
-		<div id="navBar">
+		<div id="navBar" class="index">
 			<div></div>
 			<a href="signup"><div class="navOption">Sign Up</div></a>
 			<a href="login"><div class="navOption">Log In</div></a>
@@ -34,13 +34,14 @@
 					<br />
 				</h3>
 				<h3 class="listHeader">Some of the features our software will offer you:</h3>
-				<div id="list">
-				</div>
+				<div id="list"></div>
 			</div>
+			<footer>
+				Product of Basic Accounting<br />If you have any questions, please email sidney@basicaccounting.co.uk
+			</footer>
 		</div>
 	</div>
 </div>
 
-<footer>Product of Basic Accounting<br />If you have any questions, please email sidney@basicaccounting.co.uk</footer>
 <script src="{{ url_for('static', filename='react/compiled/indexList.js') }}"></script>
 {% endblock %}

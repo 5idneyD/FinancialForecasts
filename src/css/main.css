@@ -286,7 +286,10 @@ footer {
     background-color: var(--dark);
     color: var(--light);
     text-align: center;
+    width: 100vw;
+    margin-left: -20vw;
     padding: 5vh;
+    z-index: 5;
 }
 
 .bankRecInput {
