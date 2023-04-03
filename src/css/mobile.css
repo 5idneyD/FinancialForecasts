@@ -737,3 +737,7 @@ button[name="signinButton"] {
     margin-left: auto;
     width: 35vw;
 }
+
+.error {
+    text-align: center;
+}

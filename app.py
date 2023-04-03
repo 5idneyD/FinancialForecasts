@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, Response, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, session, Response, abort
 from flask_migrate import Migrate
 from passlib.hash import pbkdf2_sha256
 import os
@@ -171,7 +171,10 @@ def before_request():
     # Do not respond to requests with wp- (it's a bot looking for wordpress sites)
     if "wp-" in request.path:
         print("Bot intruder")
-        return Response(status=204)
+        return redirect(url_for("index"))
+
+    # if request.remote_addr == "":
+    #     abort(403)
 
 
 # Wrapper for login required
