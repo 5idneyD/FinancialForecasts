@@ -391,7 +391,8 @@ def resetPassword():
 @app.route("/<company>/<email>/<username>/<session_key>/admin", methods=["POST", "GET"])
 @login_required
 def admin(company, email, username, session_key, theme):
-    company_data = Companies.query.filter_by(company=company).first()
+    company_data = Companies.query.filter(Companies.company==company).first()
+    current_users = Users.query.filter(Users.company==company).all()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
     permission_level = Users.query.filter_by(company=company, email=email).first().admin
@@ -403,7 +404,7 @@ def admin(company, email, username, session_key, theme):
             new_password = request.form["password"]
             admin_permission = "1"
             admin_permission = request.form["adminLevel"]
-            print(admin_permission)
+            
             new_user = Users(
                 company=company, username=new_name, email=new_email, password=new_password, admin=admin_permission
             )
