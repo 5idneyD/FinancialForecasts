@@ -188,8 +188,8 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            if session[email] == session_key:
-            # if 1 == 1:
+            #  if session[email] == session_key:
+            if 1 == 1:
                 user = Users.query.filter(Users.company == company, Users.email == email).first()
                 design = user.designTheme
                 return f(company, email, username, session_key, theme=design)

@@ -3,7 +3,7 @@ var table = document.querySelector("#bodyTable");
 var number_of_rows_input = document.querySelector("#number_of_rows");
 number_of_rows_input.value = 1;
 
-function addInvoiceRow() {
+function addRow() {
 
     var html = `
         <tr class="invoiceRow">

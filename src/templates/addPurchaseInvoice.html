@@ -42,7 +42,7 @@
 							</td>
 						</tr>
 					</table>
-					<button type="button" onclick="addInvoiceRow()" id="addInvoiceRow">Add Row</button>
+					<button type="button" onclick="addRow()" id="addInvoiceRow">Add Row</button>
 				</div>
 				<div>
 					<div>
@@ -76,5 +76,5 @@
 <script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
 <script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
-<script></script>
+<script>console.log(addInvoiceRow)</script>
 {% endblock %}

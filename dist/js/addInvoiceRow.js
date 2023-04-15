@@ -1,4 +1,4 @@
-var row_number=2,table=document.querySelector("#bodyTable"),number_of_rows_input=document.querySelector("#number_of_rows");number_of_rows_input.value=1;function addInvoiceRow(){var t=`
+var row_number=2,table=document.querySelector("#bodyTable"),number_of_rows_input=document.querySelector("#number_of_rows");number_of_rows_input.value=1;function addRow(){var t=`
         <tr class="invoiceRow">
             <td>`+row_number+`
             <td><input type="text" name='`+row_number+`_nominal_code'></td>
