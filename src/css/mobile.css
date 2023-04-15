@@ -569,6 +569,24 @@ select.adminLevelSelect{
     width: 40vw;
 }
 
+div#adminSection {
+    margin-top: 2%;
+    align-items: center;
+}
+
+div#adminSection div{
+    margin-top: 3%;
+    align-items: center;
+}
+
+div#adminSection div * {
+    width: 35vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
 /* ---------------------------------------------------------------------------------- */
 
 

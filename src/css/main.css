@@ -43,6 +43,8 @@ div#root div h3 {
     grid-template-columns: 20vw auto;
 }
 
+/* ------------------------------------------------------------------- */
+/* Navigation section on left of screen for desktop */
 #nav {
     min-height: 75vh;
     height: fit-content;
@@ -70,7 +72,7 @@ div#root div h3 {
     background: var(--light);
     color: var(--dark);
     box-shadow: var(--shadow);
-    border-radius: 15px;
+    border-radius: 30px;
     padding-top: 1.5vh;
 }
 
@@ -82,14 +84,18 @@ a.menuOption {
     line-height: 2em;
 }
 
+/* ------------------------------------------------------------------- */
+
 #data {
     height: 75vh;
     background-color: var(--light);
 }
 
+/* Graphs or tables should have border */
 #graph, table {
     margin-top: 2%;
     box-shadow: var(--shadow);
+    text-align: center;
 }
 
 a {
@@ -203,12 +209,14 @@ table#invoicesReport {
     margin: 0;
     margin-top: 2%;
     margin-left: 10%;
+    text-align: center;
 }
 
 tr.trialBalance td,
 tr.trialBalance th,
 table#journalTable td {
     border: 1px solid var(--tableBorder);
+    text-align: center;
 }
 
 td {
@@ -359,4 +367,44 @@ div.helpBody {
     padding: 2vh 5vw 2vh 5vw;
     text-align: center;
 }
+/* ---------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------- */
+/* Admin Form */
+#adminForm {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 0vw auto auto auto auto auto !important;
+    column-gap: auto;
+    width: 80%;
+    margin-left: 10%;
+}
+
+#adminForm div {
+    margin-top: 2vh;
+    width: 11vw !important;
+}
+
+#adminForm div button{
+    width: 100% !important;
+    margin-left: 0;
+}
+
+select.adminLevelSelect{
+    width: 40vw;
+}
+
+div#adminSection div{
+    margin-top: 2%;
+    align-items: center;
+}
+
+div#adminSection div * {
+    width: 25vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
 /* ---------------------------------------------------------------------------------- */

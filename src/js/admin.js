@@ -14,9 +14,9 @@ function changeForm() {
                 div.innerHTML = removeUser;
             } else if (option == "chartOfAccounts") {
                 div.innerHTML = chartOfAccounts;
-            } else if (option=="closePeriod") {
+            } else if (option == "closePeriod") {
                 div.innerHTML = closePeriod
-            } else{
+            } else {
                 div.innerHTML = invoiceDetails;
             }
         }
@@ -24,25 +24,25 @@ function changeForm() {
 }
 
 var addUser = `
-<div class="d-flex flex-grow-1 justify-content-center align-items-center">
-        <div class="container w-50">
-            <div class="row">
-                <div class="col">
+<div>
+        <div id="adminSection">
+            <div>
+                <div>
                     <input type="name" name="name" placeholder="name" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                     <input type="email" name="email" placeholder="email" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                     <input type="password" name="password" placeholder="password" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                     <select name="adminLevel" class="adminLevelSelect">
                     <option>Select Permission Level</option>
                         <option value="1">Basic</option>
@@ -51,8 +51,8 @@ var addUser = `
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col mt-5">
+            <div>
+                <div>
                     <button type="submit" name="addUserForm">Add User</button>
                 </div>
             </div>
@@ -61,20 +61,20 @@ var addUser = `
 
 var removeUser =
     `
-<div class="d-flex flex-grow-1 justify-content-center align-items-center">
-        <div class="container w-50">
-            <div class="row">
-                <div class="col">
+<div>
+        <div id="adminSection">
+            <div>
+                <div>
                     <input type="email" name="email" placeholder="user's email" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                     <input type="password" name="password" placeholder="admin password" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col mt-5">
+            <div>
+                <div>
                     <button type="submit" name="removeUserForm">Remove User</button>
                 </div>
             </div>
@@ -82,20 +82,20 @@ var removeUser =
 `;
 var closePeriod =
     `
-<div class="d-flex flex-grow-1 justify-content-center align-items-center">
-        <div class="container w-50">
-            <div class="row">
-                <div class="col">
+<div>
+        <div id="adminSection">
+            <div>
+                <div>
                     <p>Current Year: ` + accounting_year + `</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                 <p>Current Period: ` + accounting_period + `</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col mt-5">
+            <div>
+                <div>
                     <button type="submit" name="closePeriodForm">Close Period</button>
                 </div>
             </div>
@@ -107,20 +107,20 @@ var closePeriod =
 
 var chartOfAccounts =
     `
-<div class="d-flex flex-grow-1 justify-content-center align-items-center">
-        <div class="container w-50">
-            <div class="row">
-                <div class="col">
+<div>
+        <div id="adminSection">
+            <div>
+                <div>
                     <input type="name" name="nominal" placeholder="Nominal Code" minlength='5' maxlength='5' aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                     <input type="name" name="accountName" placeholder="Account Name" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col mt-5">
+            <div>
+                <div>
                     <button type="submit" name="addNominalForm">Add Nominal Account</button>
                     <div>
                         <ol>
@@ -140,20 +140,20 @@ var chartOfAccounts =
 
 var invoiceDetails =
     `
-<div class="d-flex flex-grow-1 justify-content-center align-items-center">
-        <div class="container w-50">
-            <div class="row">
-                <div class="col">
+<div>
+        <div id="adminSection">
+            <div>
+                <div>
                     <input type="name" name="vat_number" placeholder="VAT Number" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                     <input type="email" name="email" placeholder="Email To Include" aria-required="true"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col mt-5">
+            <div>
+                <div>
                     <button type="submit" name="invoiceDetailsForm">Submit</button>
                 </div>
             </div>

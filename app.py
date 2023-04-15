@@ -172,6 +172,10 @@ def before_request():
     if "wp-" in request.path:
         print("Bot intruder")
         return redirect(url_for("index"))
+    # Do not allow route access to any url with .env in it
+    if ".env" in request.path:
+        print("Trying to access .env")
+        return redirect(url_for("index"))
 
     # if request.remote_addr == "":
     #     abort(403)
@@ -201,7 +205,6 @@ def login_required(f):
 # Homepage, indexed
 @app.route("/")
 def index():
-    db.session.commit()
     return render_template("index.html")
 
 
@@ -248,10 +251,10 @@ def signup():
         # Login details are in .env
         # The verification code is saved in db
         # If the email address has already been sent a verification email, overwrite with new code in db and re-send
-        if Users.query.filter_by(email=email).first() is None:
+        if Users.query.filter(Users.email==email).first() is None:
             verification_code = "".join([str(random.randint(1, 9)) for number in range(6)])
             new_code = PasswordReset(email=email, code=verification_code)
-            current = PasswordReset.query.filter_by(email=email).first()
+            current = PasswordReset.query.filter(Users.email==email).first()
             if current is None:
                 db.session.add(new_code)
             else:
@@ -301,7 +304,7 @@ def verifyAccount():
         accounting_period = request.form["accounting_period"]
         verification_code = request.form["verification_code"]
         # find the code the user was emailed
-        required_code = PasswordReset.query.filter_by(email=company_email).first()
+        required_code = PasswordReset.query.filter(PasswordReset.email==company_email).first()
         if verification_code == required_code.code:
             new_company = Companies(
                 company=company_name,
