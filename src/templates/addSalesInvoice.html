@@ -90,7 +90,7 @@
 </div>
 <script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
 <script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
-<script src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
-<script src="{{url_for('static', filename='js/defaultSalesInvoiceNumber.js')}}"></script>
-<script src="{{url_for('static', filename='js/totalValue.js')}}"></script>
+<script defer src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
+<script defer src="{{url_for('static', filename='js/defaultSalesInvoiceNumber.js')}}"></script>
+<script defer src="{{url_for('static', filename='js/totalValue.js')}}"></script>
 {% endblock %}

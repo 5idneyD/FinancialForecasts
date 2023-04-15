@@ -155,9 +155,9 @@ with app.app_context():
 # Most common error is url doesn't exist
 # Or if database connection fails
 # usually caused by re-starting database on PythonAnywhere and not giving time
-@app.errorhandler(Exception)
-def not_found(e):
-    return render_template("error.html", error=e)
+# @app.errorhandler(Exception)
+# def not_found(e):
+#     return render_template("error.html", error=e)
 
 
 # refresh session on each request
@@ -167,6 +167,9 @@ def before_request():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=30)
     session.modified = True
+
+    print(dt.datetime.now().strftime("%d-%b-%Y %I:%M %p"),
+          request.base_url, "\t", request.remote_addr)
 
     # Do not respond to requests with wp- (it's a bot looking for wordpress sites)
     if "wp-" in request.path:
@@ -190,7 +193,8 @@ def login_required(f):
         try:
             #  if session[email] == session_key:
             if 1 == 1:
-                user = Users.query.filter(Users.company == company, Users.email == email).first()
+                user = Users.query.filter(
+                    Users.company == company, Users.email == email).first()
                 design = user.designTheme
                 return f(company, email, username, session_key, theme=design)
             else:
@@ -251,10 +255,11 @@ def signup():
         # Login details are in .env
         # The verification code is saved in db
         # If the email address has already been sent a verification email, overwrite with new code in db and re-send
-        if Users.query.filter(Users.email==email).first() is None:
-            verification_code = "".join([str(random.randint(1, 9)) for number in range(6)])
+        if Users.query.filter(Users.email == email).first() is None:
+            verification_code = "".join(
+                [str(random.randint(1, 9)) for number in range(6)])
             new_code = PasswordReset(email=email, code=verification_code)
-            current = PasswordReset.query.filter(Users.email==email).first()
+            current = PasswordReset.query.filter(Users.email == email).first()
             if current is None:
                 db.session.add(new_code)
             else:
@@ -304,7 +309,8 @@ def verifyAccount():
         accounting_period = request.form["accounting_period"]
         verification_code = request.form["verification_code"]
         # find the code the user was emailed
-        required_code = PasswordReset.query.filter(PasswordReset.email==company_email).first()
+        required_code = PasswordReset.query.filter(
+            PasswordReset.email == company_email).first()
         if verification_code == required_code.code:
             new_company = Companies(
                 company=company_name,
@@ -320,6 +326,31 @@ def verifyAccount():
             db.session.add(new_admin)
             # remove verification code from db so company account cannot be re-created
             db.session.delete(required_code)
+
+            # Add default nominal accounts
+            default_bank_account = ChartOfAccounts(
+                company=company_name,
+                nominal=60000,
+                account_name="Bank Account",
+                balance=0.00
+            )
+            default_cash_account = ChartOfAccounts(
+                company=company_name,
+                nominal=60010,
+                account_name="Cash",
+                balance=0.00
+            )
+            default_vat_account = ChartOfAccounts(
+                company=company_name,
+                nominal=60005,
+                account_name="VAT Balance",
+                balance=0.00
+            )
+
+            db.session.add(default_bank_account)
+            db.session.add(default_vat_account)
+            db.session.add(default_cash_account)
+
             db.session.commit()
             session[company_email] = os.urandom(12).hex()
             return redirect(
@@ -375,10 +406,11 @@ def resetPassword():
         email = request.form["email"]
         code = request.form["code"]
         password = request.form["password"]
-        criteria = PasswordReset.query.filter(PasswordReset.email==email).first()
+        criteria = PasswordReset.query.filter(
+            PasswordReset.email == email).first()
 
         if code == criteria.code:
-            user = Users.query.filter(Users.email==email).first()
+            user = Users.query.filter(Users.email == email).first()
             user.password = pbkdf2_sha256.hash(password)
             db.session.delete(criteria)
             db.session.commit()
@@ -394,11 +426,12 @@ def resetPassword():
 @app.route("/<company>/<email>/<username>/<session_key>/admin", methods=["POST", "GET"])
 @login_required
 def admin(company, email, username, session_key, theme):
-    company_data = Companies.query.filter(Companies.company==company).first()
-    current_users = Users.query.filter(Users.company==company).all()
+    company_data = Companies.query.filter(Companies.company == company).first()
+    current_users = Users.query.filter(Users.company == company).all()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
-    permission_level = Users.query.filter_by(company=company, email=email).first().admin
+    permission_level = Users.query.filter_by(
+        company=company, email=email).first().admin
 
     if request.method == "POST" and email != "example@basicaccounting.co.uk":
         if "addUserForm" in request.form:
@@ -407,7 +440,7 @@ def admin(company, email, username, session_key, theme):
             new_password = request.form["password"]
             admin_permission = "1"
             admin_permission = request.form["adminLevel"]
-            
+
             new_user = Users(
                 company=company, username=new_name, email=new_email, password=new_password, admin=admin_permission
             )
@@ -428,14 +461,16 @@ def admin(company, email, username, session_key, theme):
                 )
                 == 0
             ):
-                new_nominal = ChartOfAccounts(company=company, nominal=nominal, account_name=account_name)
+                new_nominal = ChartOfAccounts(
+                    company=company, nominal=nominal, account_name=account_name)
                 db.session.add(new_nominal)
                 db.session.commit()
             else:
                 pass
         elif "removeUserForm" in request.form:
             user_email = request.form["email"]
-            user = Users.query.filter_by(email=user_email, company=company).first()
+            user = Users.query.filter_by(
+                email=user_email, company=company).first()
             db.session.delete(user)
             db.session.commit()
 
@@ -540,7 +575,8 @@ def dashboard(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/chartOfAccounts", methods=["POST", "GET"])
 @login_required
 def chartOfAccounts(company, email, username, session_key, theme):
-    accounts = ChartOfAccounts.query.filter_by(company=company).order_by(ChartOfAccounts.nominal).all()
+    accounts = ChartOfAccounts.query.filter_by(
+        company=company).order_by(ChartOfAccounts.nominal).all()
     return render_template(
         "chartOfAccounts.html",
         company=company,
@@ -557,7 +593,8 @@ def chartOfAccounts(company, email, username, session_key, theme):
 # The query ignores journals
 # Can specifiy just 1 client to save time if needed
 def customerBalances(company, client="%%"):
-    customers = Customers.query.filter(Customers.company == company, Customers.customer_code.ilike(client)).all()
+    customers = Customers.query.filter(
+        Customers.company == company, Customers.customer_code.ilike(client)).all()
     balances = {}
     for i in customers:
         balances[i.customer_code] = 0.00
@@ -652,7 +689,8 @@ def addSupplier(company, email, username, session_key, theme):
     if request.method == "POST":
         supplier_name = request.form["supplier_name"]
         supplier_code = request.form["supplier_code"]
-        supplier = Suppliers(company=company, supplier_name=supplier_name, supplier_code=supplier_code)
+        supplier = Suppliers(
+            company=company, supplier_name=supplier_name, supplier_code=supplier_code)
         db.session.add(supplier)
         db.session.commit()
 
@@ -668,7 +706,8 @@ def addSalesInvoice(company, email, username, session_key, theme):
     # Query data to set up form
     # such as customer codes and accounting year/period, VAT number
     customers = Customers.query.filter_by(company=company).all()
-    invoices = NominalTransactions.query.filter_by(company=company, transaction_type="sales_invoice").all()
+    invoices = NominalTransactions.query.filter_by(
+        company=company, transaction_type="sales_invoice").all()
     company_data = Companies.query.filter_by(company=company).first()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
@@ -690,7 +729,8 @@ def addSalesInvoice(company, email, username, session_key, theme):
         invoice_number = request.form["invoice_number"]
         invoice_date = request.form["invoice_date"]
         customer_code = request.form["customer_code"]
-        customer = Customers.query.filter_by(company=company, customer_code=customer_code).first()
+        customer = Customers.query.filter_by(
+            company=company, customer_code=customer_code).first()
         customer_name = customer.customer_name
         customer_email = customer.customer_email
         # Find the number of rows on the invoice so we use the correct for loop range
@@ -742,8 +782,19 @@ def addSalesInvoice(company, email, username, session_key, theme):
             db.session.add(new_nominal_transaction)
 
             # Update the nominal accounts balance in db (for trial balance data)
-            account = ChartOfAccounts.query.filter_by(company=company, nominal=nominal_code).first()
+            account = ChartOfAccounts.query.filter_by(
+                company=company, nominal=nominal_code).first()
             account.balance = account.balance - float(net_value)
+
+            # Now add the vat balance to the VAT nominal code
+            vat_account = ChartOfAccounts.query.filter_by(
+                company=company, nominal=60005).first()
+            vat_account.balance = float(vat_account.balance) - float(vat)
+
+            # Now add the total balance to the outstanding cash account
+            cash_account = ChartOfAccounts.query.filter(
+                ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
+            cash_account.balance = float(cash_account.balance) + float(total_value)
 
             # Add invoice row to pdf file
             invoiceTemplate.add_item(Item(row, description, 1, total_value))
@@ -799,7 +850,8 @@ def addSalesInvoice(company, email, username, session_key, theme):
             with open(f"invoice {invoice_number}.pdf", "rb") as opened:
                 openedfile = opened.read()
             attachedfile = MIMEApplication(openedfile, _subtype="pdf")
-            attachedfile.add_header("content-disposition", "attachment", filename=f"invoice {invoice_number}.pdf")
+            attachedfile.add_header(
+                "content-disposition", "attachment", filename=f"invoice {invoice_number}.pdf")
             message.attach(attachedfile)
 
             mail_server = os.getenv("MAIL_SERVER")
@@ -884,8 +936,20 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
             )
 
             db.session.add(new_nominal_transaction)
-            account = ChartOfAccounts.query.filter_by(company=company, nominal=nominal_code).first()
-            account.balance = account.balance + float(net_value)
+            account = ChartOfAccounts.query.filter_by(
+                company=company, nominal=int(nominal_code)).first()
+            account.balance = float(account.balance) + float(net_value)
+            
+            # Now add the vat balance to the vat account
+            vat_account = ChartOfAccounts.query.filter_by(
+                company=company, nominal=60005).first()
+            vat_account.balance = vat_account.balance + float(vat)
+            
+            # Now add the total balance to the outstanding cash account
+            cash_account = ChartOfAccounts.query.filter(
+                ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
+            cash_account.balance = float(cash_account.balance) - float(total_value)
+
         db.session.commit()
 
     return render_template(
@@ -902,7 +966,8 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/viewSalesInvoices", methods=["POST", "GET"])
 @login_required
 def viewSalesInvoices(company, email, username, session_key, theme):
-    invoices = NominalTransactions.query.filter_by(company=company, transaction_type="sales_invoice").all()
+    invoices = NominalTransactions.query.filter_by(
+        company=company, transaction_type="sales_invoice").all()
     customers = []
     for invoice in invoices:
         customers.append(invoice.client_code)
@@ -914,13 +979,17 @@ def viewSalesInvoices(company, email, username, session_key, theme):
         selected_period = request.form["selected_period"]
         selected_year = request.form["selected_year"]
         if customer_code != "*":
-            invoices = [invoice for invoice in invoices if invoice.client_code == customer_code]
+            invoices = [
+                invoice for invoice in invoices if invoice.client_code == customer_code]
         if invoice_number != "":
-            invoices = [invoice for invoice in invoices if invoice.transaction_number == int(invoice_number)]
+            invoices = [invoice for invoice in invoices if invoice.transaction_number == int(
+                invoice_number)]
         if selected_period != "*":
-            invoices = [invoice for invoice in invoices if invoice.accounting_period == selected_period]
+            invoices = [
+                invoice for invoice in invoices if invoice.accounting_period == selected_period]
         if selected_year != "*":
-            invoices = [invoice for invoice in invoices if invoice.accounting_year == selected_year]
+            invoices = [
+                invoice for invoice in invoices if invoice.accounting_year == selected_year]
 
         return render_template(
             "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme
@@ -934,7 +1003,8 @@ def viewSalesInvoices(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/viewPurchaseInvoices", methods=["POST", "GET"])
 @login_required
 def viewPurchaseInvoices(company, email, username, session_key, theme):
-    invoices = NominalTransactions.query.filter_by(company=company, transaction_type="purchase_invoice").all()
+    invoices = NominalTransactions.query.filter_by(
+        company=company, transaction_type="purchase_invoice").all()
 
     suppliers = []
     for invoice in invoices:
@@ -948,13 +1018,17 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
         selected_period = request.form["selected_period"]
         selected_year = request.form["selected_year"]
         if supplier_code != "*":
-            invoices = [invoice for invoice in invoices if invoice.client_code == supplier_code]
+            invoices = [
+                invoice for invoice in invoices if invoice.client_code == supplier_code]
         if invoice_number != "":
-            invoices = [invoice for invoice in invoices if invoice.transaction_number == int(invoice_number)]
+            invoices = [invoice for invoice in invoices if invoice.transaction_number == int(
+                invoice_number)]
         if selected_period != "*":
-            invoices = [invoice for invoice in invoices if invoice.accounting_period == selected_period]
+            invoices = [
+                invoice for invoice in invoices if invoice.accounting_period == selected_period]
         if selected_year != "*":
-            invoices = [invoice for invoice in invoices if invoice.accounting_year == selected_year]
+            invoices = [
+                invoice for invoice in invoices if invoice.accounting_year == selected_year]
 
         return render_template(
             "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme
@@ -968,7 +1042,8 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/journal", methods=["POST", "GET"])
 @login_required
 def journal(company, email, username, session_key, theme):
-    journals = NominalTransactions.query.filter_by(company=company, transaction_type="journal").all()
+    journals = NominalTransactions.query.filter_by(
+        company=company, transaction_type="journal").all()
     references = []
     for journal in journals:
         references.append(int(journal.reference.split("_")[-1]))
@@ -1031,7 +1106,8 @@ def journal(company, email, username, session_key, theme):
 
                 db.session.add(new_nominal_transaction)
 
-                account = ChartOfAccounts.query.filter_by(company=company, nominal=nominal_code).first()
+                account = ChartOfAccounts.query.filter_by(
+                    company=company, nominal=nominal_code).first()
                 account.balance += debit
                 account.balance -= credit
 
@@ -1085,7 +1161,8 @@ def changePassword(company, email, username, session_key, theme):
                     design=theme,
                 )
             else:
-                user = Users.query.filter_by(company=company, email=user_email).first()
+                user = Users.query.filter_by(
+                    company=company, email=user_email).first()
                 if pbkdf2_sha256.verify(old_password, user.password):
                     user.password = pbkdf2_sha256.hash(new_password)
                     db.session.commit()
@@ -1107,14 +1184,16 @@ def changePassword(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/trialBalance", methods=["POST", "GET"])
 @login_required
 def trialBalance(company, email, username, session_key, theme):
-    accounts = ChartOfAccounts.query.filter_by(company=company).order_by(ChartOfAccounts.nominal).all()
+    accounts = ChartOfAccounts.query.filter_by(
+        company=company).order_by(ChartOfAccounts.nominal).all()
     return render_template("trialBalance.html", company=company, accounts=accounts, design=theme)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/balanceSheet", methods=["POST", "GET"])
 @login_required
 def balanceSheet(company, email, username, session_key, theme):
-    company_data = db.session.query(Companies).filter(Companies.company == company).first()
+    company_data = db.session.query(Companies).filter(
+        Companies.company == company).first()
     current_year = company_data.accounting_year
     current_period = company_data.accounting_period
 
@@ -1143,14 +1222,16 @@ def balanceSheet(company, email, username, session_key, theme):
                 pass
             ytd_balance += transaction.net_value
 
-        data[account.nominal] = [monthly_balance, ytd_balance, account.nominal, account.account_name]
+        data[account.nominal] = [monthly_balance, ytd_balance,
+                                 account.nominal, account.account_name]
     return render_template("balanceSheet.html", company=company, data=data, design=theme)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/profitAndLoss", methods=["POST", "GET"])
 @login_required
 def profitAndLoss(company, email, username, session_key, theme):
-    company_data = db.session.query(Companies).filter(Companies.company == company).first()
+    company_data = db.session.query(Companies).filter(
+        Companies.company == company).first()
     current_year = company_data.accounting_year
     current_period = company_data.accounting_period
 
@@ -1207,12 +1288,12 @@ def profitAndLoss(company, email, username, session_key, theme):
         else:
             budget_value = 0
 
-
         # if budget:
         #     budget_value = budget.value
         # else:
         #     budget_value = 0
-        data[account.account_name] = [monthly_balance, ytd_balance, account.nominal, budget_value, ytd_budget]
+        data[account.account_name] = [monthly_balance,
+                                      ytd_balance, account.nominal, budget_value, ytd_budget]
 
     return render_template(
         "profitAndLoss.html",
@@ -1240,13 +1321,15 @@ def nominalTransactions(company, email, username, session_key, theme):
                 transaction for transaction in transactions if transaction.transaction_type == transaction_type
             ]
         if selected_year != "all":
-            transactions = [transaction for transaction in transactions if transaction.accounting_year == selected_year]
+            transactions = [
+                transaction for transaction in transactions if transaction.accounting_year == selected_year]
         if selected_period != "all":
             transactions = [
                 transaction for transaction in transactions if transaction.accounting_period == selected_period
             ]
         if client_code != "":
-            transactions = [transaction for transaction in transactions if transaction.client_code == client_code]
+            transactions = [
+                transaction for transaction in transactions if transaction.client_code == client_code]
         return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
     return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
 
@@ -1254,10 +1337,12 @@ def nominalTransactions(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/batchedJournals", methods=["POST", "GET"])
 @login_required
 def batchedJournals(company, email, username, session_key, theme):
-    journals = NominalTransactions.query.filter_by(company=company, transaction_type="journal", to_post=1).all()
+    journals = NominalTransactions.query.filter_by(
+        company=company, transaction_type="journal", to_post=1).all()
 
     if request.method == "POST":
-        company_data = db.session.query(Companies).filter(Companies.company == company).first()
+        company_data = db.session.query(Companies).filter(
+            Companies.company == company).first()
         current_year = company_data.accounting_year
         current_period = company_data.accounting_period
 
@@ -1270,7 +1355,8 @@ def batchedJournals(company, email, username, session_key, theme):
             journal.accounting_year = current_year
         db.session.commit()
 
-        journals = NominalTransactions.query.filter_by(company=company, transaction_type="journal", to_post=1).all()
+        journals = NominalTransactions.query.filter_by(
+            company=company, transaction_type="journal", to_post=1).all()
 
         return render_template("batchedJournals.html", company=company, journals=journals, design=theme)
 
@@ -1313,14 +1399,16 @@ def budget(company, email, username, sesion_key, theme):
                 period = cell[6:]
                 value = value if value != "" else 0.00
                 if (
-                    Budgets.query.filter_by(company=company, year=year, period=period, nominal_code=nominal).first()
+                    Budgets.query.filter_by(
+                        company=company, year=year, period=period, nominal_code=nominal).first()
                     is not None
                 ):
                     Budgets.query.filter_by(
                         company=company, year=year, period=period, nominal_code=nominal
                     ).first().value = value
                 else:
-                    data = Budgets(company=company, year=year, nominal_code=nominal, period=period, value=value)
+                    data = Budgets(company=company, year=year,
+                                   nominal_code=nominal, period=period, value=value)
                     db.session.add(data)
 
         db.session.commit()
@@ -1346,11 +1434,16 @@ def bankRec(company, email, username, session_key, theme):
     company_data = Companies.query.filter_by(company=company).first()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
+    
 
     if request.method == "POST":
         form = request.form
         nominal = form["nominal_account"]
         number_of_rows = len(data)
+        
+        bank_account = ChartOfAccounts.query.filter(ChartOfAccounts.company==company, ChartOfAccounts.nominal==60000).first()
+        cash_account = ChartOfAccounts.query.filter(ChartOfAccounts.company==company, ChartOfAccounts.nominal==60010).first()
+        
         for i in range(1, number_of_rows + 1):
             try:
                 transaction_type = form[f"{i}_transaction_type"]
@@ -1358,8 +1451,6 @@ def bankRec(company, email, username, session_key, theme):
                 transaction_number = form[f"{i}_transaction_number"]
                 description = form[f"{i}_description"]
                 total_value = form[f"{i}_total_value"]
-
-                print(transaction_number, transaction_type, client_code, description)
 
                 actual_invoice = NominalTransactions.query.filter_by(
                     company=company,
@@ -1392,6 +1483,12 @@ def bankRec(company, email, username, session_key, theme):
 
                 db.session.add(new_nominal_transaction)
 
+
+                # Reduce balance of outstanding cash (The Cash GL)
+                # and increase balance of bank account
+                bank_account.balance = bank_account.balance - float(total_value)
+                cash_account.balance = cash_account.balance + float(total_value)
+                db.session.commit()
             # Row not included in bank rec
             except Exception as e:
                 pass
@@ -1448,6 +1545,7 @@ def agedDebt(company, email, username, session_key, theme):
             data[i.client_code][4] += i.net_value
 
     return render_template("agedDebt.html", company=company, design=theme, data=data)
+
 
 # When logging out, the user is redirected to the index page
 # This is via the logout page where the session for this user is deleted

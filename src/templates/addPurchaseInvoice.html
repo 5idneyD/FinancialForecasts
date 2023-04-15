@@ -75,6 +75,6 @@
 </div>
 <script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
 <script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
-<script src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
-<script>console.log(addInvoiceRow)</script>
+<script defer src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
+
 {% endblock %}
