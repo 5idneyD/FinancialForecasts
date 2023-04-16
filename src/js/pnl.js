@@ -44,22 +44,30 @@ els.forEach(function (el) {
 });
 
 els.forEach(function (el, index) {
-    if (els[index].classList[0][0] == "1" && els[index + 1].classList[0][0] == "2") {
+
+    // If this row starts with 1 and the next row does not (i.e. is the last revenue row), add total revenue
+    if (els[index].classList[0][0] == "1" && els[index + 1].classList[0][0] != "1") {
         el.insertAdjacentHTML(
             "afterend",
             "<tr class='summaryRow'><td>Total Revenue</td><td>" + revenueTotalP + "</td><td>" + revenueTotalM + "</td><td>" + (revenueTotalP - revenueTotalM) + "</td><td>" + revenueBudgetTotalP + "</td><td>" + revenueBudgetTotalM + "</td><td>" + (revenueBudgetTotalP - revenueBudgetTotalM) + "</td></tr>",
         );
-    } else if (els[index].classList[0][0] == "2" && els[index + 1].classList[0][0] == "3") {
+    }
+    // If this is the last row, add net profit
+    if (!els[index + 1]) {
+        el.insertAdjacentHTML(
+            "afterend",
+            "<tr class='summaryRow'><td>Net Profit</td><td>" + (revenueTotalP - directCostsTotalP - overheadsTotalP) + "</td><td>" + (revenueTotalM - directCostsTotalM - overheadsTotalM) + "</td><td>" + ((revenueTotalP - directCostsTotalP - overheadsTotalP) - (revenueTotalM - directCostsTotalM - overheadsTotalM)) + "</td><td>" + (revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP) + "</td><td>" + (revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM) + "</td><td>" + ((revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP) - (revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM)) + "</td></tr>",
+        );
+    }
+    // If this row starts with 2 and the next row starts with 3, add gross profit
+    // If there are no rows starting with 3, gross profit is left out and goes straight to net profit
+    if (els[index].classList[0][0] == "2" && els[index + 1].classList[0][0] == "3") {
         el.insertAdjacentHTML(
             "afterend",
             "<tr class='summaryRow'><td>Gross Profit</td><td>" + (revenueTotalP - directCostsTotalP) + "</td><td>" + (revenueTotalM - directCostsTotalM) + "</td><td>" + ((revenueTotalP - directCostsTotalP) - (revenueTotalM - directCostsTotalM)) + "</td><td>" + (revenueBudgetTotalP - directCostsBudgetTotalP) + "</td><td>" + (revenueBudgetTotalM - directCostsBudgetTotalM) + "</td><td>" + ((revenueBudgetTotalP - directCostsBudgetTotalP) - (revenueBudgetTotalM - directCostsBudgetTotalM)) + "</td></tr>",
         );
-    } else if (els[index].classList[0][0] == "3" && !els[index + 1]) {
-        el.insertAdjacentHTML(
-            "afterend",
-            "<tr class='summaryRow'><td>Net Profit</td><td>" + (revenueTotalP - directCostsTotalP - overheadsTotalP) + "</td><td>" + (revenueTotalM - directCostsTotalM - overheadsTotalM) + "</td><td>" + ((revenueTotalP - directCostsTotalP - overheadsTotalP) - (revenueTotalM - directCostsTotalM - overheadsTotalM)) + "</td><td>" + (revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP) + "</td><td>" + (revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM) + "</td><td>" + ((revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP)-(revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM)) + "</td></tr>",
-        );
     }
+
 }
 );
 
