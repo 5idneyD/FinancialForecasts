@@ -10,7 +10,7 @@ function addRow() {
             <td>` + row_number + `
             <td><input type="text" name='` + row_number + `_nominal_code'></td>
             <td><input type="text" name='` + row_number + `_description'></td>
-            <td><input type="text" name='` + row_number + `_net_value' class='net'></td>
+            <td><input type="text" name='` + row_number + `_net_value' class='net'  onchange="calculate()"></td>
             <td><input type="text" name='` + row_number + `_vat' class='vat'></td>
             <td><input type="text" name='` + row_number + `_total_value' class='tv'></td>
         </tr>

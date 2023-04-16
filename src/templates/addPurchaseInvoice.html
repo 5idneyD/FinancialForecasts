@@ -35,9 +35,9 @@
 						<tr>
 							<td>VAT By Default</td>
 							<td>
-								<select class="invoice">
-									<option>Yes</option>
-									<option>No</option>
+								<select class="invoice" id="vatSetting">
+									<option value="yes">Yes</option>
+									<option value="no">No</option>
 								</select>
 							</td>
 						</tr>
@@ -60,9 +60,9 @@
 								<td>1</td>
 								<td><input type="text" name="1_nominal_code" /></td>
 								<td><input type="text" name="1_description" /></td>
-								<td><input type="text" name="1_net_value" /></td>
-								<td><input type="text" name="1_vat" /></td>
-								<td><input type="text" name="1_total_value" /></td>
+								<td><input type="text" name="1_net_value" class="net"/></td>
+								<td><input type="text" name="1_vat" class="vat"/></td>
+								<td><input type="text" name="1_total_value" class="tv"/></td>
 							</tr>
 						</table>
 
@@ -76,5 +76,6 @@
 <script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
 <script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script defer src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
+<script defer src="{{url_for('static', filename='js/totalValue.js')}}"></script>
 
 {% endblock %}

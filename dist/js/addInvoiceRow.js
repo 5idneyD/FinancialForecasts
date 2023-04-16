@@ -3,7 +3,7 @@ var row_number=2,table=document.querySelector("#bodyTable"),number_of_rows_input
             <td>`+row_number+`
             <td><input type="text" name='`+row_number+`_nominal_code'></td>
             <td><input type="text" name='`+row_number+`_description'></td>
-            <td><input type="text" name='`+row_number+`_net_value' class='net'></td>
+            <td><input type="text" name='`+row_number+`_net_value' class='net'  onchange="calculate()"></td>
             <td><input type="text" name='`+row_number+`_vat' class='vat'></td>
             <td><input type="text" name='`+row_number+`_total_value' class='tv'></td>
         </tr>
