@@ -155,9 +155,9 @@ with app.app_context():
 # Most common error is url doesn't exist
 # Or if database connection fails
 # usually caused by re-starting database on PythonAnywhere and not giving time
-# @app.errorhandler(Exception)
-# def not_found(e):
-#     return render_template("error.html", error=e)
+@app.errorhandler(Exception)
+def not_found(e):
+    return render_template("error.html", error=e)
 
 
 # refresh session on each request
@@ -191,8 +191,8 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            #  if session[email] == session_key:
-            if 1 == 1:
+            if session[email] == session_key:
+            # if 1 == 1:
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
@@ -273,7 +273,7 @@ def signup():
             sender = os.getenv("EMAIL_SENDER")
             password = os.getenv("EMAIL_PASSWORD")
             mail.login(sender, password)
-            recipient = "sldriscoll@btinternet.com"
+            recipient = email
             subject = "Basic Accounting Verification Code"
             msg_text = f"""
             Hello,\nThank you for being interested in signing up to Basic Accounting!\n
