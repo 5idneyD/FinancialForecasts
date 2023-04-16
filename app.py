@@ -273,7 +273,7 @@ def signup():
             sender = os.getenv("EMAIL_SENDER")
             password = os.getenv("EMAIL_PASSWORD")
             mail.login(sender, password)
-            recipient = email
+            recipient = "sldriscoll@btinternet.com"
             subject = "Basic Accounting Verification Code"
             msg_text = f"""
             Hello,\nThank you for being interested in signing up to Basic Accounting!\n
@@ -1486,8 +1486,13 @@ def bankRec(company, email, username, session_key, theme):
 
                 # Reduce balance of outstanding cash (The Cash GL)
                 # and increase balance of bank account
-                bank_account.balance = bank_account.balance - float(total_value)
-                cash_account.balance = cash_account.balance + float(total_value)
+                # Treat sales & purchase invoices in opposite ways
+                if "sales" in transaction_type:
+                    bank_account.balance = bank_account.balance + float(total_value)
+                    cash_account.balance = cash_account.balance - float(total_value)
+                else:
+                    bank_account.balance = bank_account.balance - float(total_value)
+                    cash_account.balance = cash_account.balance + float(total_value)
                 db.session.commit()
             # Row not included in bank rec
             except Exception as e:
