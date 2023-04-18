@@ -76,6 +76,35 @@ function App() {
 					We are working on a new feature to make updating admin levels easier
 				</p>
 			</div>
+			<div id="fith" onClick={(e) => toggle(e.target.id)} className="helpHead">
+				How to do a bank reconciliation
+			</div>
+			<div id="fitha" className="helpBody">
+				<p>
+					Bank reconciliations is the process of ensuring the correct amounts of money have been paid and recieved,<br />
+					and to assign each new payment in your bank account with the outstanding payments in your accounting software
+					<br />
+					To complete this task using Basic Accounting, you will need to have a bank statement from your bank available
+					<br />
+					You need to go through each row on the bank statement, and search for the outstanding payment in the Bank Rec report on Basic Accounting
+					<br />
+					Once you have found the outstanding payment, you need to tick the checkbox, and this payment will be moved to the bank rec form
+					<br />
+					Once all payments on the bank statement have been ticked off on the bank rec repirt, you will need to submit the report
+					<br />
+					If you cannot find a payment that has been received on yopur bank statement (in your bank) on the bank rec report, this means the invoice has not been registered,
+					<br />
+					or, the invoice has already been paid, and this is a duplicate payment
+					<br />
+					If there are invoices on the bank rec report that are not on the bank statement, this means the invoices have not yet been paid.
+					<br />
+					Using Basic Accounting's Bank Rec reports, you can search the outstanding payments by using our client code filter, or the invoice number filter, or both!
+					<br />
+					You can see a list of the currently ticked off invoices by going to the "Current Rec" tab
+					<br />
+					Once you are happy with the current reconciliation, you can click on "Post Bank Rec", and the reonciliation will be saved
+				</p>
+			</div>
 		</div>
 	);
 }

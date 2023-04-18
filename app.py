@@ -168,8 +168,8 @@ def before_request():
     app.permanent_session_lifetime = timedelta(minutes=30)
     session.modified = True
 
-    print(dt.datetime.now().strftime("%d-%b-%Y %I:%M %p"),
-          request.base_url, "\t", request.remote_addr)
+    # print(dt.datetime.now().strftime("%d-%b-%Y %I:%M %p"),
+    #       request.base_url, "\t", request.remote_addr)
 
     # Do not respond to requests with wp- (it's a bot looking for wordpress sites)
     if "wp-" in request.path:
