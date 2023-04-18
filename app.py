@@ -1560,6 +1560,13 @@ def logout(company, email, username, session_key, theme):
     del session[email]
     return redirect(url_for("index"))
 
+# Cash flow statement
+@app.route("/<company>/<email>/<username>/<session_key>/cashFlow")
+@login_required
+def cashFlow(company, email, username, sesion_key, theme):
+    
+    return render_template("cashFlow.html", company=company)
+
 
 debug = os.getenv("DEBUG")
 if __name__ == "__main__":
