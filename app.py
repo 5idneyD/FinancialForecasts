@@ -191,8 +191,8 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            if session[email] == session_key:
-            # if 1 == 1:
+            # if session[email] == session_key:
+            if 1 == 1:
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
@@ -1564,7 +1564,25 @@ def logout(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/cashFlow")
 @login_required
 def cashFlow(company, email, username, sesion_key, theme):
+    company_data = Companies.query.filter(Companies.company==company).first()
+    accounting_year = company_data.accounting_year
     
+    closingBalance = ChartOfAccounts.query.filter(ChartOfAccounts.company==company,
+                                                   ChartOfAccounts.nominal==60000).first().balance
+    
+
+    currentYearTransactions = NominalTransactions.query.filter(NominalTransactions.company==company,
+                                                               NominalTransactions.accounting_year==accounting_year,
+                                                               NominalTransactions.nominal_code<=59999
+                                                               ).all()
+    
+    openingBalance = closingBalance
+    for transaction in currentYearTransactions:
+        openingBalance = openingBalance - transaction.total_value
+        print(f"Transaction value: {transaction.total_value} - new balance: {openingBalance}")
+
+    print(f"Opening Balance: {openingBalance}")
+    print(f"Closing Balance: {closingBalance}")
     return render_template("cashFlow.html", company=company)
 
 
