@@ -1566,9 +1566,8 @@ def logout(company, email, username, session_key, theme):
     del session[email]
     return redirect(url_for("index"))
 
+
 # Cash flow statement
-
-
 @app.route("/<company>/<email>/<username>/<session_key>/cashFlow")
 @login_required
 def cashFlow(company, email, username, sesion_key, theme):
@@ -1584,7 +1583,7 @@ def cashFlow(company, email, username, sesion_key, theme):
 
     currentYearTransactions = NominalTransactions.query.filter(NominalTransactions.company == company,
                                                                NominalTransactions.accounting_year == accounting_year,
-                                                               NominalTransactions.nominal_code <= 59999
+                                                               NominalTransactions.nominal_code == 60000
                                                                ).all()
 
     openingBalance = closingBalance
@@ -1594,7 +1593,7 @@ def cashFlow(company, email, username, sesion_key, theme):
         print(
             f"Transaction value: {transaction.total_value} - new balance: {openingBalance}")
 
-    return render_template("cashFlow.html", company=company, openingBalance=openingBalance, closingBalance=closingBalance)
+    return render_template("cashFlow.html", company=company, design=theme, openingBalance=openingBalance, closingBalance=closingBalance)
 
 
 debug = os.getenv("DEBUG")
