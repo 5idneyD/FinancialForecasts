@@ -794,7 +794,8 @@ def addSalesInvoice(company, email, username, session_key, theme):
             # Now add the total balance to the outstanding cash account
             cash_account = ChartOfAccounts.query.filter(
                 ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
-            cash_account.balance = float(cash_account.balance) + float(total_value)
+            cash_account.balance = float(
+                cash_account.balance) + float(total_value)
 
             # Add invoice row to pdf file
             invoiceTemplate.add_item(Item(row, description, 1, total_value))
@@ -939,16 +940,17 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
             account = ChartOfAccounts.query.filter_by(
                 company=company, nominal=int(nominal_code)).first()
             account.balance = float(account.balance) + float(net_value)
-            
+
             # Now add the vat balance to the vat account
             vat_account = ChartOfAccounts.query.filter_by(
                 company=company, nominal=60005).first()
             vat_account.balance = vat_account.balance + float(vat)
-            
+
             # Now add the total balance to the outstanding cash account
             cash_account = ChartOfAccounts.query.filter(
                 ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
-            cash_account.balance = float(cash_account.balance) - float(total_value)
+            cash_account.balance = float(
+                cash_account.balance) - float(total_value)
 
         db.session.commit()
 
@@ -1434,16 +1436,17 @@ def bankRec(company, email, username, session_key, theme):
     company_data = Companies.query.filter_by(company=company).first()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
-    
 
     if request.method == "POST":
         form = request.form
         nominal = form["nominal_account"]
         number_of_rows = len(data)
-        
-        bank_account = ChartOfAccounts.query.filter(ChartOfAccounts.company==company, ChartOfAccounts.nominal==60000).first()
-        cash_account = ChartOfAccounts.query.filter(ChartOfAccounts.company==company, ChartOfAccounts.nominal==60010).first()
-        
+
+        bank_account = ChartOfAccounts.query.filter(
+            ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60000).first()
+        cash_account = ChartOfAccounts.query.filter(
+            ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
+
         for i in range(1, number_of_rows + 1):
             try:
                 transaction_type = form[f"{i}_transaction_type"]
@@ -1483,16 +1486,19 @@ def bankRec(company, email, username, session_key, theme):
 
                 db.session.add(new_nominal_transaction)
 
-
                 # Reduce balance of outstanding cash (The Cash GL)
                 # and increase balance of bank account
                 # Treat sales & purchase invoices in opposite ways
                 if "sales" in transaction_type:
-                    bank_account.balance = bank_account.balance + float(total_value)
-                    cash_account.balance = cash_account.balance - float(total_value)
+                    bank_account.balance = bank_account.balance + \
+                        float(total_value)
+                    cash_account.balance = cash_account.balance - \
+                        float(total_value)
                 else:
-                    bank_account.balance = bank_account.balance - float(total_value)
-                    cash_account.balance = cash_account.balance + float(total_value)
+                    bank_account.balance = bank_account.balance - \
+                        float(total_value)
+                    cash_account.balance = cash_account.balance + \
+                        float(total_value)
                 db.session.commit()
             # Row not included in bank rec
             except Exception as e:
@@ -1561,29 +1567,34 @@ def logout(company, email, username, session_key, theme):
     return redirect(url_for("index"))
 
 # Cash flow statement
+
+
 @app.route("/<company>/<email>/<username>/<session_key>/cashFlow")
 @login_required
 def cashFlow(company, email, username, sesion_key, theme):
-    company_data = Companies.query.filter(Companies.company==company).first()
+    # Find this company's current accounting year to use later
+    company_data = Companies.query.filter(Companies.company == company).first()
     accounting_year = company_data.accounting_year
-    
-    closingBalance = ChartOfAccounts.query.filter(ChartOfAccounts.company==company,
-                                                   ChartOfAccounts.nominal==60000).first().balance
-    
 
-    currentYearTransactions = NominalTransactions.query.filter(NominalTransactions.company==company,
-                                                               NominalTransactions.accounting_year==accounting_year,
-                                                               NominalTransactions.nominal_code<=59999
+    # Find the company's current bank account balance
+    # We will minus this year's bank transactions from their current bank balance
+    # This will be to calculate this years cash flow as well as their opening balance
+    closingBalance = ChartOfAccounts.query.filter(ChartOfAccounts.company == company,
+                                                  ChartOfAccounts.nominal == 60000).first().balance
+
+    currentYearTransactions = NominalTransactions.query.filter(NominalTransactions.company == company,
+                                                               NominalTransactions.accounting_year == accounting_year,
+                                                               NominalTransactions.nominal_code <= 59999
                                                                ).all()
-    
+
     openingBalance = closingBalance
+    # Loop through this years tarnsactions and minus them from the closing balance
     for transaction in currentYearTransactions:
         openingBalance = openingBalance - transaction.total_value
-        print(f"Transaction value: {transaction.total_value} - new balance: {openingBalance}")
+        print(
+            f"Transaction value: {transaction.total_value} - new balance: {openingBalance}")
 
-    print(f"Opening Balance: {openingBalance}")
-    print(f"Closing Balance: {closingBalance}")
-    return render_template("cashFlow.html", company=company)
+    return render_template("cashFlow.html", company=company, openingBalance=openingBalance, closingBalance=closingBalance)
 
 
 debug = os.getenv("DEBUG")

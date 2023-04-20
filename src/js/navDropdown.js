@@ -121,7 +121,11 @@ document.addEventListener(
                             e.target.id +
                             "Option><a class='menuOption " +
                             e.target.id +
-                            "Option' href='" + url + "/agedDebt'>Aged Debt</a>"
+                            "Option' href='" + url + "/agedDebt'>Aged Debt</a><br class=" +
+                            e.target.id +
+                            "Option><a class='menuOption " +
+                            e.target.id +
+                            "Option' href='" + url + "/cashFlow'>Cash Flow</a>"
                         );
                         menu.dataset.expanded = "true";
                     } else {

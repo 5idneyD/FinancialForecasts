@@ -6,7 +6,11 @@
 <div id="main" class="container-fluid">
 	<div id="nav"></div>
 	<div id="data">
-		<div></div>
+		<div>
+			<p>Opening Balance: {{openingBalance}}</p>
+			<br>
+			<p>Closing Balance: {{closingBalance}}</p>
+		</div>
 	</div>
 </div>
 <script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>

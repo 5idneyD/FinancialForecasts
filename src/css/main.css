@@ -58,6 +58,7 @@ div#root div h3 {
     height: fit-content;
     display: grid;
     grid-template-rows: 10vh auto auto auto auto;
+    row-gap: 5vh;
 }
 
 .navOption {
