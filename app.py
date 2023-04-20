@@ -433,6 +433,8 @@ def admin(company, email, username, session_key, theme):
     permission_level = Users.query.filter_by(
         company=company, email=email).first().admin
 
+    message = ""
+
     if request.method == "POST" and email != "example@basicaccounting.co.uk":
         if "addUserForm" in request.form:
             new_name = request.form["name"]
@@ -466,7 +468,7 @@ def admin(company, email, username, session_key, theme):
                 db.session.add(new_nominal)
                 db.session.commit()
             else:
-                pass
+                message = "This Nominal Account already exists, please use a different Nominal Code"
         elif "removeUserForm" in request.form:
             user_email = request.form["email"]
             user = Users.query.filter_by(
@@ -517,6 +519,7 @@ def admin(company, email, username, session_key, theme):
         accounting_year=accounting_year,
         accounting_period=accounting_period,
         design=theme,
+        message=message
     )
 
 

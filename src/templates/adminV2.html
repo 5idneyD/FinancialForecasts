@@ -3,7 +3,7 @@
 <meta name="data" accounting_year="{{accounting_year}}" accounting_period="{{accounting_period}}"/>
 {% endblock %}
 {% block body %}
-	<body onload="changeForm()">
+	<body>
 		<div id="heading">
 			<h1><u>{{company}}</u></h1>
 			<h2>Admin</h2>
@@ -22,7 +22,7 @@
 										id="addUserButton"
 										class="adminButton"
 										data-selected="1"
-										onclick="clicked(event.srcElement.id); changeForm()">
+										onclick="clicked(event.srcElement.id);">
 										Add User
 									</button>
 								</div>
@@ -32,7 +32,7 @@
 										id="chartOfAccountsButton"
 										class="adminButton"
 										data-selected="0"
-										onclick="clicked(event.srcElement.id); changeForm()">
+										onclick="clicked(event.srcElement.id);">
 										Chart Of Accounts
 									</button>
 								</div>
@@ -42,7 +42,7 @@
 										id="removeUserButton"
 										class="adminButton"
 										data-selected="0"
-										onclick="clicked(event.srcElement.id); changeForm()">
+										onclick="clicked(event.srcElement.id);">
 										Delete User
 									</button>
 								</div>
@@ -52,7 +52,7 @@
 										id="closePeriodButton"
 										class="adminButton"
 										data-selected="0"
-										onclick="clicked(event.srcElement.id); changeForm()">
+										onclick="clicked(event.srcElement.id);">
 										Close Period
 									</button>
 								</div>
@@ -62,7 +62,7 @@
 										id="invoiceDetailsButton"
 										class="adminButton"
 										data-selected="0"
-										onclick="clicked(event.srcElement.id); changeForm()">
+										onclick="clicked(event.srcElement.id);">
 										Invoice Details
 									</button>
 								</div>
@@ -82,7 +82,7 @@
 										id="chartOfAccountsButton"
 										class="adminButton"
 										data-selected="1"
-										onclick="clicked(event.srcElement.id); changeForm()">
+										onclick="clicked(event.srcElement.id);">
 										Chart Of Accounts
 									</button>
 								</div>
@@ -92,7 +92,7 @@
 										id="closePeriodButton"
 										class="adminButton"
 										data-selected="0"
-										onclick="clicked(event.srcElement.id); changeForm()">
+										onclick="clicked(event.srcElement.id);">
 										Close Period
 									</button>
 								</div>
@@ -100,6 +100,7 @@
 							</div>
 						</div>
 						<div id="body"></div>
+						<p>{{message}}</p>
 					</form>
 					{% else %}
 					<h3>You do not have Admin Permissions</h3>
@@ -109,6 +110,6 @@
 		
 		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='js/admin.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='react/compiled/admin.js')}}"></script>
 		<script type="text/javascript" src="{{url_for('static', filename='js/adminButtons.js')}}"></script>
 		{% endblock %}

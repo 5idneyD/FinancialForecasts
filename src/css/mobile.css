@@ -586,6 +586,15 @@ div#adminSection div * {
     text-align: center;
 }
 
+/* Create nominal account part of admin - don't show bullet points */
+/* Still has default padding & margin without bullet points, so these are corrected */
+div#nominalGuide ul li {
+    list-style-type: none;
+}
+div#nominalGuide ul{
+    margin: 0;
+    padding: 0;
+}
 
 /* ---------------------------------------------------------------------------------- */
 

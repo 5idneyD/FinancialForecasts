@@ -26,7 +26,6 @@ function clicked(buttonId) {
             element.style.color = light;
         } else {
             element.style.backgroundColor = "rgba(20, 20, 20, 0.4)";
-
         }
      });
 }
