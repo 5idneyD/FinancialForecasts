@@ -58,6 +58,7 @@ div#root div h3 {
     height: fit-content;
     display: grid;
     grid-template-rows: 10vh auto auto auto auto;
+    /* Always keeps this gap between rows */
     row-gap: 5vh;
 }
 
@@ -120,7 +121,9 @@ button {
 }
 form[method="post"] button#submitButton {
     margin: auto;
-    width: 60%;
+    width: 10vw;
+    margin-left: 10vw;
+    margin-top: 2%;
 }
 button:hover {
     background: var(--light);

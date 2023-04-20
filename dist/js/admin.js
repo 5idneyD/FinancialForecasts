@@ -89,15 +89,16 @@ var div=document.querySelector("#body");buttons=document.querySelectorAll(".admi
             <div>
                 <div>
                     <button type="submit" name="addNominalForm">Add Nominal Account</button>
-                    <div>
-                        <ol>
+                    <div id="nominalGuide">
+                        <ul>
                         <li><b>Nominal Code Guide</b></li>
                         <li>Revenue: 1</li>
                         <li>Direct Costs: 2</li>
                         <li>Overheads: 3</li>
+                        <li>Financing: 4</li>
                         <li>Assets: 6</li>
                         <li>Liabilities: 7</li>
-                        </ol>
+                        </ul>
                     </div>
                 </div>
             </div>
