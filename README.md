@@ -43,7 +43,7 @@ I hope for it to become a professionally used application that anyone can access
 ## To Do Before release
 - Format Bank Rec sheet ✔️
 - Cannot create duplicate nominal accounts ✔️
-- <strike>Default Nominal Accounts (e.g. bank account)</strike>
+- Default Nominal Accounts (e.g. bank account) ✔️
 - Download Balance Sheet ✔️
 - Add YTD budget & Variance ✔️
 - Add Aged Debt Page ✔️
