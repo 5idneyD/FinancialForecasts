@@ -6,16 +6,82 @@
 <div id="main">
 	<div id="nav"></div>
 	<div id="data">
-		<div>
+		<!-- <div>
 			<p>Opening Balance: {{openingBalance}}</p>
 			<br>
 			<p>Closing Balance: {{closingBalance}}</p>
 			<p>Operating Activities: {{operating_activities}}</p>
 			<p>Financing Activities: {{financing_activities}}</p>
 			<p>Investing Activities: {{investing_activities}}</p>
-		</div>
+		</div> -->
+		<div id="myDiv"></div>
 	</div>
 </div>
 <script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
 <script defer src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+<script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
+<script defer type="text/javascript">
+	let bodyStyles = window.getComputedStyle(document.body)
+	let light = bodyStyles.getPropertyValue('--light');
+	let dark = bodyStyles.getPropertyValue('--dark');
+	var data = [
+        {
+            name: "Cash Flow",
+            type: "waterfall",
+            orientation: "v",
+            measure: [
+                "total",
+                "relative",
+                "relative",
+                "relative",
+                "total"
+            ],
+            x: [
+                "Opening Balance",
+                "Operating Activities",
+                "Investing Activities",
+                "Financing Activities",
+                "Closing Balance"
+            ],
+            textposition: "outside",
+            text: [
+                {{openingBalance|safe}},
+                {{operating_activities|safe}},
+                {{investing_activities|safe}},
+                {{financing_activities|safe}},
+                {{closingBalance|safe}}
+            ],          
+            y: [
+			parseFloat({{openingBalance|safe}}),
+			parseFloat({{operating_activities|safe}}),
+			parseFloat({{investing_activities|safe}}),
+			parseFloat({{financing_activities|safe}}),
+            parseFloat({{closingBalance|safe}}),
+            ],
+            connector: {
+              line: {
+                color: dark
+              }
+            },
+        }
+    ];
+ layout = {
+        title: {
+            text: "Cash Flow {{accounting_year|safe}}"
+        },
+        xaxis: {
+            type: "category",
+			title: "Cash Flow Division"
+        },
+        yaxis: {
+            type: "linear",
+			title: "£"
+        },
+        autosize: true,
+        showlegend: true,
+		plot_bgcolor: light,
+		paper_bgcolor: light
+    };
+Plotly.newPlot('myDiv', data, layout);
+</script>
 {% endblock %}

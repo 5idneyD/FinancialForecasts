@@ -1636,7 +1636,8 @@ def cashFlow(company, email, username, sesion_key, theme):
         
 
     return render_template("cashFlow.html", company=company, design=theme, openingBalance=openingBalance, closingBalance=closingBalance,
-                           operating_activities=operating_activities, financing_activities=financing_activities, investing_activities=investing_activities)
+                           operating_activities=operating_activities, financing_activities=financing_activities, investing_activities=investing_activities,
+                           accounting_year=accounting_year)
 
 
 debug = os.getenv("DEBUG")
