@@ -35,7 +35,8 @@ export default function RemoveUser() {
 								<li>Revenue: 1</li>
 								<li>Direct Costs: 2</li>
 								<li>Overheads: 3</li>
-								<li>Financing: 4</li>
+								<li>Investing (e.g. Depreciation): 4</li>
+								<li>Financing (e.g. Tax, Interest): 5</li>
 								<li>Assets: 6</li>
 								<li>Liabilities: 7</li>
 							</ul>

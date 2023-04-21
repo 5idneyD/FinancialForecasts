@@ -1607,26 +1607,39 @@ def cashFlow(company, email, username, sesion_key, theme):
     
     openingBalance = closingBalance
     operating_activities = 0
-    investing_activies = 0
+    investing_activities = 0
     financing_activities = 0
     # Start with current balance, loop through this years tarnsactions and minus them from the closing balance
     for transaction in currentYearTransactions:
         
+        # Investing activities go into 4**** nominal codes
+        # e.g. Depreciation, Amortization
+        # Put this in to investing activies
         if 50000 > transaction.nominal_code >= 40000:
+            print(transaction.nominal_code, transaction.net_value)
+            investing_activities -= transaction.net_value
+            openingBalance += transaction.net_value
 
+        # Financing activities go into 5**** nominal codes
+        # e.g. tax, interest
+        # Put this in to financing activies    
+        elif 60000 > transaction.nominal_code >= 50000:
             financing_activities -= transaction.net_value
-            openingBalance = openingBalance + transaction.net_value
+            openingBalance += transaction.net_value
+        
+        # If the transaction is revenue, add it to operating activies, minus it from closing balance 
         elif transaction.nominal_code < 20000:
-            print(transaction.net_value)
             operating_activities += transaction.net_value
             openingBalance = openingBalance - transaction.net_value
+            
+        # If the transaction is a cost (but not financing), minus it from operating activies, add it to closing balance
         elif transaction.nominal_code < 40000:
             operating_activities -= transaction.net_value
             openingBalance = openingBalance + transaction.net_value
         
 
     return render_template("cashFlow.html", company=company, design=theme, openingBalance=openingBalance, closingBalance=closingBalance,
-                           operating_activities=operating_activities, financing_activities=financing_activities)
+                           operating_activities=operating_activities, financing_activities=financing_activities, investing_activities=investing_activities)
 
 
 debug = os.getenv("DEBUG")
