@@ -440,11 +440,12 @@ def admin(company, email, username, session_key, theme):
             new_name = request.form["name"]
             new_email = request.form["email"]
             new_password = request.form["password"]
+            password = pbkdf2_sha256.hash(new_password)
             admin_permission = "1"
             admin_permission = request.form["adminLevel"]
 
             new_user = Users(
-                company=company, username=new_name, email=new_email, password=new_password, admin=admin_permission
+                company=company, username=new_name, email=new_email, password=password, admin=admin_permission
             )
             db.session.add(new_user)
             db.session.commit()
@@ -1581,22 +1582,51 @@ def cashFlow(company, email, username, sesion_key, theme):
     # Find the company's current bank account balance
     # We will minus this year's bank transactions from their current bank balance
     # This will be to calculate this years cash flow as well as their opening balance
-    closingBalance = ChartOfAccounts.query.filter(ChartOfAccounts.company == company,
-                                                  ChartOfAccounts.nominal == 60000).first().balance
+    closingBalanceTransactions = ChartOfAccounts.query.filter(ChartOfAccounts.company == company,
+                                                  ChartOfAccounts.nominal >= 60000).all()
 
+    closingBalance = 0
+    for transaction in closingBalanceTransactions:
+        # print(transaction.nominal, transaction.balance)
+        closingBalance += transaction.balance
+
+    # print(closingBalance)
+    # Collect all nominal transactions of this company that have hit the P&L this year
+    # Not including journals
     currentYearTransactions = NominalTransactions.query.filter(NominalTransactions.company == company,
                                                                NominalTransactions.accounting_year == accounting_year,
-                                                               NominalTransactions.nominal_code == 60000
+                                                               NominalTransactions.nominal_code < 60000
                                                                ).all()
 
+    
+    # Cash Flow statements are made up of 3 sections:
+    # Operating Activities
+    # Investing Activities
+    # Financing Activities
+    # TODO: I need to split all the nominal transactions for this year, gathered above, into the 3 sections
+    
     openingBalance = closingBalance
-    # Loop through this years tarnsactions and minus them from the closing balance
+    operating_activities = 0
+    investing_activies = 0
+    financing_activities = 0
+    # Start with current balance, loop through this years tarnsactions and minus them from the closing balance
     for transaction in currentYearTransactions:
-        openingBalance = openingBalance - transaction.total_value
-        print(
-            f"Transaction value: {transaction.total_value} - new balance: {openingBalance}")
+        
+        if 50000 > transaction.nominal_code >= 40000:
 
-    return render_template("cashFlow.html", company=company, design=theme, openingBalance=openingBalance, closingBalance=closingBalance)
+            financing_activities -= transaction.net_value
+            openingBalance = openingBalance + transaction.net_value
+        elif transaction.nominal_code < 20000:
+            print(transaction.net_value)
+            operating_activities += transaction.net_value
+            openingBalance = openingBalance - transaction.net_value
+        elif transaction.nominal_code < 40000:
+            operating_activities -= transaction.net_value
+            openingBalance = openingBalance + transaction.net_value
+        
+
+    return render_template("cashFlow.html", company=company, design=theme, openingBalance=openingBalance, closingBalance=closingBalance,
+                           operating_activities=operating_activities, financing_activities=financing_activities)
 
 
 debug = os.getenv("DEBUG")

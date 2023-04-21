@@ -1,7 +1,9 @@
 import React from "react";
 import { ReactDOM } from "react";
+import { Alert } from "@chakra-ui/react";
 
 export default function RemoveUser(props) {
+
 	return (
 		<div>
 			<div id="adminSection">
