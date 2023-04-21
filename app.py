@@ -1580,19 +1580,17 @@ def cashFlow(company, email, username, sesion_key, theme):
     accounting_year = company_data.accounting_year
 
     # Find the company's current bank account balance
-    # We will minus this year's bank transactions from their current bank balance
+    # We will minus this year's transactions from their current bank balance
     # This will be to calculate this years cash flow as well as their opening balance
-    closingBalanceTransactions = ChartOfAccounts.query.filter(ChartOfAccounts.company == company,
+    # Calculate the closing balance by adding all bsheet accounts balances together
+    closingBalanceAccounts = ChartOfAccounts.query.filter(ChartOfAccounts.company == company,
                                                   ChartOfAccounts.nominal >= 60000).all()
-
     closingBalance = 0
-    for transaction in closingBalanceTransactions:
-        # print(transaction.nominal, transaction.balance)
+    for transaction in closingBalanceAccounts:
         closingBalance += transaction.balance
 
-    # print(closingBalance)
     # Collect all nominal transactions of this company that have hit the P&L this year
-    # Not including journals
+    # Including journals
     currentYearTransactions = NominalTransactions.query.filter(NominalTransactions.company == company,
                                                                NominalTransactions.accounting_year == accounting_year,
                                                                NominalTransactions.nominal_code < 60000
@@ -1603,7 +1601,6 @@ def cashFlow(company, email, username, sesion_key, theme):
     # Operating Activities
     # Investing Activities
     # Financing Activities
-    # TODO: I need to split all the nominal transactions for this year, gathered above, into the 3 sections
     
     openingBalance = closingBalance
     operating_activities = 0
