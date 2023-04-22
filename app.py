@@ -1610,15 +1610,14 @@ def cashFlow(company, email, username, sesion_key, theme):
     for transaction in currentYearTransactions:
         
         # Investing activities go into 4**** nominal codes
-        # e.g. Depreciation, Amortization
+        # e.g. Purchase of property, sale of securities, re-purchase of securities
         # Put this in to investing activies
         if 50000 > transaction.nominal_code >= 40000:
-            print(transaction.nominal_code, transaction.net_value)
             investing_activities -= transaction.net_value
             openingBalance += transaction.net_value
 
         # Financing activities go into 5**** nominal codes
-        # e.g. tax, interest
+        # e.g. tax, interest, depreciation, amortisation
         # Put this in to financing activies    
         elif 60000 > transaction.nominal_code >= 50000:
             financing_activities -= transaction.net_value
