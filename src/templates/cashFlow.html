@@ -80,7 +80,9 @@
         autosize: true,
         showlegend: true,
 		plot_bgcolor: light,
-		paper_bgcolor: light
+		paper_bgcolor: light,
+        height: window.getComputedStyle(document.querySelector("#data")).getPropertyValue("height").replace("px", "")
+        
     };
 Plotly.newPlot('myDiv', data, layout);
 </script>
