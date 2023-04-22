@@ -45,7 +45,7 @@ els.forEach(function (el) {
 		overheadsBudgetTotalM += Number(el.children[5].innerText);
 	}
 	// If nominal code starts with 4 (i.e. financing)
-	else if (el.classList[0][0] == "4") {
+	else if (el.classList[0][0] == "4" || el.classList[0][0] == "5") {
 		ebitTotalP += Number(el.children[1].innerText);
 		ebitTotalM += Number(el.children[2].innerText);
 		ebitBudgetTotalP += Number(el.children[4].innerText);
