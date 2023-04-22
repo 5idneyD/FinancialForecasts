@@ -422,3 +422,8 @@ div#nominalGuide ul{
     margin: 0;
     padding: 0;
 }
+
+/* Hover over the info icons to get detailed info about each nominal guide option */
+.infoIcon {
+    width: 2vw !important;
+}
