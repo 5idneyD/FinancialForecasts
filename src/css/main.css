@@ -427,3 +427,11 @@ div#nominalGuide ul{
 .infoIcon {
     width: 2vw !important;
 }
+
+/* This is the logo in the top left corner of the screen */
+img[alt='New Ceiling Logo'] {
+    width: 20vw;
+    height: 20vh;
+    margin-left: -70vw;
+    margin-top: -15vh;
+}

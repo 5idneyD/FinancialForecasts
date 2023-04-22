@@ -337,7 +337,7 @@ def verifyAccount():
             default_cash_account = ChartOfAccounts(
                 company=company_name,
                 nominal=60010,
-                account_name="Cash",
+                account_name="Outstanding Cash",
                 balance=0.00
             )
             default_vat_account = ChartOfAccounts(

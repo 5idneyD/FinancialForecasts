@@ -4,10 +4,11 @@
 /* The logo is slightly smaller in the mobile design, as there is less room on the screen
 Otherwise, it would be taking up too much screen and attention
 It is also positioned a little higher so there is more width for the title */
-img[alt="Basic Accounting Logo"] {
-    margin-left: -75vw;
-    margin-top: -23vh;
-    height: 7vh;
+img[alt="New Ceiling Logo"] {
+    margin-left: -70vw;
+    margin-top: -15vh;
+    height: 10vh;
+    width: 30vw;
 }
 
 /* Splits the screen into 2 sections/rows, header and main content */

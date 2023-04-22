@@ -38,8 +38,8 @@
 			rel="stylesheet"
 			media="screen and (max-width: 600px)"
 			href="{{url_for('static', filename='styles/mobile.min.css')}}" />
-		<link defer rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/favicon.ico')}}" />
-		<title>Basic Accounting</title>
+		<link defer rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/nc_favicon.ico')}}" />
+		<title>New Ceiling</title>
 
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 		{% if design %}
@@ -53,14 +53,16 @@
 		{% endif %}
 	</head>
 	<body>
+		
 		{% block body %} {% endblock %}
 
 		<script defer>
+			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
 			let heading = document.querySelector("#heading");
-			let src = "{{url_for('static', filename='images/logo2.PNG')}}";
+			let src = "{{url_for('static', filename='images/abc.png')}}";
 			heading.innerHTML =
-				heading.innerHTML + "<a href=" + meta + "><img src=" + src + " alt='Basic Accounting Logo'/></a>";
+				heading.innerHTML + "<a href=" + meta + "><img src=" + src + " alt='New Ceiling Logo'/></a>";
 		</script>
 	</body>
 </html>
