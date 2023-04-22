@@ -38,7 +38,8 @@
 			rel="stylesheet"
 			media="screen and (max-width: 600px)"
 			href="{{url_for('static', filename='styles/mobile.min.css')}}" />
-		<link defer rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/nc_favicon.ico')}}" />
+		<link rel="shortcut icon" href="{{url_for('static', filename='images/new ceiling favicon.png')}}" type="image/x-icon" />
+		<link rel="icon" href="{{url_for('static', filename='images/new ceiling favicon.png')}}" type="image/x-icon" />
 		<title>New Ceiling</title>
 
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
@@ -53,7 +54,6 @@
 		{% endif %}
 	</head>
 	<body>
-		
 		{% block body %} {% endblock %}
 
 		<script defer>
