@@ -429,9 +429,9 @@ div#nominalGuide ul{
 }
 
 /* This is the logo in the top left corner of the screen */
-img[alt='New Ceiling Logo'] {
-    width: 20vw;
-    height: 20vh;
+img[alt='No Variance Logo'] {
+    width: 12vw;
+    height: 18vh;
     margin-left: -70vw;
     margin-top: -15vh;
 }

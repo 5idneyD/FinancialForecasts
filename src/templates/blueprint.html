@@ -38,9 +38,8 @@
 			rel="stylesheet"
 			media="screen and (max-width: 600px)"
 			href="{{url_for('static', filename='styles/mobile.min.css')}}" />
-		<link rel="shortcut icon" href="{{url_for('static', filename='images/new ceiling favicon.png')}}" type="image/x-icon" />
-		<link rel="icon" href="{{url_for('static', filename='images/new ceiling favicon.png')}}" type="image/x-icon" />
-		<title>New Ceiling</title>
+		<link rel="icon" href="{{url_for('static', filename='images/favicon-nv.ico')}}" type="image/x-icon" />
+		<title>No Variance</title>
 
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 		{% if design %}
@@ -55,14 +54,25 @@
 	</head>
 	<body>
 		{% block body %} {% endblock %}
-
 		<script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
 			let heading = document.querySelector("#heading");
-			let src = "{{url_for('static', filename='images/abc.png')}}";
+
+			function logoResize(x) {
+				if (x.matches) {
+					let src = "{{url_for('static', filename='images/nv.png')}}";
+					return src
+				} else {
+					let src = "{{url_for('static', filename='images/no_variance.png')}}";
+					return src
+				}
+				
+			}
+			let x = window.matchMedia("(max-width: 600px)");
+			let img = logoResize(x);
 			heading.innerHTML =
-				heading.innerHTML + "<a href=" + meta + "><img src=" + src + " alt='New Ceiling Logo'/></a>";
+				heading.innerHTML + "<a href=" + meta + "><img src=" + img + " alt='No Variance Logo'/></a>";
 		</script>
 	</body>
 </html>

@@ -4,11 +4,11 @@
 /* The logo is slightly smaller in the mobile design, as there is less room on the screen
 Otherwise, it would be taking up too much screen and attention
 It is also positioned a little higher so there is more width for the title */
-img[alt="New Ceiling Logo"] {
+img[alt="No Variance Logo"] {
     margin-left: -70vw;
-    margin-top: -15vh;
+    margin-top: -18vh;
     height: 10vh;
-    width: 30vw;
+    width: 25vw;
 }
 
 /* Splits the screen into 2 sections/rows, header and main content */
