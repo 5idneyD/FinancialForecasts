@@ -31,7 +31,7 @@ div#root div h3 {
     grid-template-rows: auto auto;
     background-color: var(--dark);
     text-align: center;
-    color: var(--light);
+    color: #c5b25b;
     width: 100vw;
     box-shadow: var(--shadow);
     padding-top: 3%;
@@ -392,6 +392,9 @@ div.helpBody {
 #adminForm div button{
     width: 100% !important;
     margin-left: 0;
+    /* box-shadow: var(--shadow); */
+    border-radius: 30px;
+
 }
 
 select.adminLevelSelect{

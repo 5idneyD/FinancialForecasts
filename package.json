@@ -4,8 +4,8 @@
   "description": "",
   "private": true,
   "config": {
-    "jsx": "src/jsx/navigation.jsx src/jsx/help.jsx src/jsx/journal.jsx src/jsx/indexList.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx",
-    "css": "src/css/main.css src/css/mobile.css"
+    "jsx": "src/jsx/navigation.jsx src/jsx/help.jsx src/jsx/journal.jsx src/jsx/indexList.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx src/jsx/home.jsx",
+    "css": "src/css/main.css src/css/mobile.css src/css/index.css"
   },
   "directories.man": {
     "js": "./src/js",

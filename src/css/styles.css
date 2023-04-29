@@ -5,7 +5,7 @@
 
 :root {
     --dark: #081526;
-    --light: #baffc5;
+    --light: #bcebe3;
     --tableBorder: #65463e;
-    --shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1, inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+    --shadow: -3px -3px 7px var(--dark), 3px 3px 5px #ceced1, inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
 }
