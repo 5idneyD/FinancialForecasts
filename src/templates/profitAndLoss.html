@@ -1,5 +1,6 @@
 {% extends "blueprint.html" %} {% block meta %}
 <meta id="references" data-period="{{accounting_period}}" data-year="{{accounting_year}}" />
+<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 {% endblock %} {% block body %}
 <div id="heading" class="conatiner">
 	<h1><u>{{company}}</u></h1>

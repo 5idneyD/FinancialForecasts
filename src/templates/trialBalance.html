@@ -1,4 +1,8 @@
-{% extends "blueprint.html" %} {% block body %}
+{% extends "blueprint.html" %}
+{% block meta %} 
+<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+{% endblock %}
+{% block body %}
 <div id="heading">
 	<h1><u>{{company}}</u></h1>
 	<h2>Trial Balance</h2>
