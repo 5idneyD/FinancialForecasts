@@ -15,7 +15,8 @@ html {
 Smaller parts of the page are styled below */
 #first {
     margin-top: -5vh;
-    height: 105vh;
+    min-height: 105vh;
+    height: fit-content;
     background: var(--brown);
     display: grid;
     grid-template-rows: 30vh 20vh 35vh;
@@ -24,7 +25,8 @@ Smaller parts of the page are styled below */
 }
 
 #second {
-    height: 80vh;
+    min-height: 80vh;
+    height: fit-content;
     width: 100vw;
     margin-left: 0;
 }
@@ -45,14 +47,16 @@ img[alt='building'] {
 }
 
 #fourth {
-    height: 80vh;
+    min-height: 80vh;
+    height: fit-content;
     background: var(--brown);
     width: 100vw;
     margin-left: 0;
 }
 
 #fifth {
-    height: 30vh;
+    min-height: 30vh;
+    height: fit-content;
     width: 100vw;
     margin-left: 0;
 }
@@ -88,6 +92,11 @@ img[alt='building'] {
     font-size: 3em;
     font-weight: 100;
 }
+
+#title-container{
+    height:fit-content;
+}
+
 
 #aboutUs :is(h3, p) {
     margin-left: 20%;
@@ -136,7 +145,7 @@ h2, h3 {
     margin: auto;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto;
 }
 
 div.navbar-option {
@@ -151,29 +160,33 @@ div.navbar-option {
 
 
 /* Our Services / third section of index page */
+
 div#third h3 {
-    width: 60vw;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10vh;
 }
 
 div#services {
+    width: 100vw;
     display: grid;
     grid-template-columns: 60vw;
     grid-template-rows: auto;
+    align-items: center;
+    justify-content: center;
 }
 
 div.service {
     display: grid;
     grid-template-columns: 15vw 45vw;
-    width: 100%;
-    margin-left: 20vw;
+    width: 60vw;
     margin-top: 5vw;
     text-align: center;
     line-height: 3rem;
     padding-top: 8vh;
-    border-top: 2px solid var(--brown)
+    border-top: 2px solid var(--brown);
+
 }
 
 div.service#first-service {
@@ -188,7 +201,7 @@ div.service#first-service {
 /* The is the fourth section, giving login details for an exmaple */
 
 div#fourth h3 {
-    width: 60vw;
+    width: 40vw;
     margin-left: auto;
     margin-right: auto;
     height: 10%;
@@ -219,6 +232,9 @@ div#fifth h3 {
     margin-right: auto;
     color: var(--dark);
     font-weight: lighter;
+}
+
+div#fifth h3:first-child {
     padding-top: 10vh;
 }
 
