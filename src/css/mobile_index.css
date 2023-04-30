@@ -83,13 +83,7 @@ img[alt='building'] {
     width: 70%;
 }
 
-#first p {
-    color: var(--gold);
-    width: 70%;
-    margin: auto;
-    margin-top: 8%;
-    font-size: larger;
-}
+
 
 #first h1 {
     color: var(--light);
@@ -102,7 +96,7 @@ img[alt='building'] {
 }
 
 #title-container :nth-child(2) {
-    padding-bottom: 20vh;
+    font-size: xx-large;
 }
 
 
@@ -125,6 +119,7 @@ h2, h3 {
     font-weight: 100;
 }
 
+/* This is the navbar and logo at the top */
 #heading {
     height: 25vh;
     margin-top: 4vh;
@@ -135,41 +130,24 @@ h2, h3 {
 
 #heading img[alt='No Variance Logo']{
     height: 20vh;
-    width: 10vw;
+    width: 20vw;
     margin-left: 12vw;
     margin-top: 2vh;
 }
 
-#mobile-navbar-container {
-    display: none !important;
+#navbar-container {
+    display: none;
 }
 
-#heading #navbar-container {
+#heading #mobile-navbar-container {
     width: 75vw;
     margin: auto;
-    margin-top: 10vh;
     height: 100%;
 }
 
-#navbar {
-    width: 65%;
-    height: 30%;
-    margin: auto;
-    display: grid;
-    grid-template-rows: auto;
-    grid-auto-columns: 8vw;
-}
+a.menu-option p {
+    color: red;
 
-div.navbar-option {
-    border: 0.8px solid var(--light);
-    grid-area: 1 / auto;
-    min-width: fit-content;
-}
-
-#navbar-container #navbar .navbar-option p {
-    font-size: medium;
-    text-align: center;
-    color: var(--light) !important;
 }
 
 

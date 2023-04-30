@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static', filename='styles/index.min.css')}}">
-    <title>Document</title>
-</head>
-<body>
-    <div id="root"></div>
-    <script>
-        window.logoPath = "{{url_for('static', filename='images/no_variance.png')}}"
-        window.buildingPath = "{{url_for('static', filename='images/building.png')}}"
-    </script>
-    <script src="{{ url_for('static', filename='react/compiled/home.js')}}"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			media="screen and (min-width: 601px)"
+			href="{{url_for('static', filename='styles/index.min.css')}}" />
+		<link
+			rel="stylesheet"
+			media="screen and (max-width: 600px)"
+			href="{{url_for('static', filename='styles/mobile_index.min.css')}}" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			window.logoPath = "{{url_for('static', filename='images/no_variance.png')}}";
+
+            function logoResize(x) {
+				if (x.matches) {
+					let src = "{{url_for('static', filename='images/nv.png')}}";
+					return src
+				} else {
+					let src = "{{url_for('static', filename='images/no_variance.png')}}";
+					return src
+				}
+				
+			}
+			let x = window.matchMedia("(max-width: 600px)");
+			window.logoPath = logoResize(x);
+
+            
+			window.buildingPath = "{{url_for('static', filename='images/building.png')}}";
+		</script>
+		<script src="{{ url_for('static', filename='react/compiled/home.js')}}"></script>
+	</body>
 </html>
