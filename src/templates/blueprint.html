@@ -22,18 +22,12 @@
 		{% else %}
 		<meta name="logo" id="{{url_for('index')}}" />
 		{% endif %} {% block meta %} {% endblock %}
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-			crossorigin="anonymous"
-			media="none"
-			onload="if(media!='all')media='all'" />
+		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 
 		<link
 			rel="stylesheet"
 			media="screen and (min-width: 601px)"
-			href="{{url_for('static', filename='styles/main.min.css')}}" />
+			href="{{url_for('static', filename='styles/index.min.css')}}" />
 		<link
 			rel="stylesheet"
 			media="screen and (max-width: 600px)"
@@ -57,7 +51,7 @@
 		<script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
-			let heading = document.querySelector("#heading");
+			let heading = document.querySelector("#logo");
 
 			function logoResize(x) {
 				if (x.matches) {

@@ -2,13 +2,17 @@
     --gold: rgb(230, 183, 122);
     --brown: #272624;
     --light: #ffffff;
-    font-family: 'Lora', serif;
     margin-left: -8px;
     overflow-x: hidden;
+
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lora', serif !important;
 }
 
 /* These are all the main sections/divisions of the index page
@@ -97,6 +101,10 @@ img[alt='building'] {
     height:fit-content;
 }
 
+#title-container :nth-child(2) {
+    padding-bottom: 20vh;
+}
+
 
 #aboutUs :is(h3, p) {
     margin-left: 20%;
@@ -145,11 +153,13 @@ h2, h3 {
     margin: auto;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-auto-columns: 8vw;
 }
 
 div.navbar-option {
     border: 0.8px solid var(--light);
+    grid-area: 1 / auto;
+    min-width: fit-content;
 }
 
 #navbar-container #navbar .navbar-option p {
@@ -253,4 +263,56 @@ button#goToTopButton {
     background-color: var(--brown);
     color: var(--gold);
     cursor: pointer;
+}
+
+/* ------------------------------------- */
+/* This is for the login page */
+
+#loginHeading {
+    margin: 0;
+    width: 110vw;
+    background-color: var(--brown);
+    color: var(--gold);
+    text-align: center;
+    display: grid;
+    grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
+    grid-template-rows: 25vh;
+}
+
+#loginHeading h1 {
+    grid-column: 3;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+}
+
+#logo {
+    grid-column: 1;
+}
+
+#logo img {
+    height: 17vh;
+    width: 12vw;
+    margin-top: 4vh;
+    margin-left: 5vw;
+}
+
+#loginForm {
+    display: grid;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
+    grid-template-columns: 40vw;
+    grid-template-rows: 8vh 8vh 8vh 8vh 8vh;
+    margin-top: 5vh;
+}
+
+.loginItem {
+    text-align: center;
+}
+
+.loginItem * {
+    width: 15vw;
+    margin-top: 2vw
 }
