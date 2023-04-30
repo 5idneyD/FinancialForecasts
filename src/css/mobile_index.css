@@ -92,6 +92,12 @@ img[alt='building'] {
     font-weight: 100;
 }
 
+p#title {
+    color: var(--gold);
+    margin-left: 15vw;
+    padding-bottom: 2vh;
+}
+
 #title-container{
     height:fit-content;
 }
@@ -240,7 +246,8 @@ button#goToTopButton {
     position: fixed;
     bottom: 5vh;
     width: 10vw;
-    height: 5vh;
+    height: fit-content;
+    padding: 10px 0 10px 0;
     margin-left: 87vw;
     border-radius: 30px;
     border-color: var(--gold);
