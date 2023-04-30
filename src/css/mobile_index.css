@@ -73,6 +73,7 @@ img[alt='building'] {
     margin-left: auto;
     margin-right: auto;
     margin-top: -20vh;
+    margin-bottom: 5vh;
     display: grid;
     grid-template-rows: 20vh auto;
 }
@@ -163,7 +164,7 @@ div#third h3 {
 div#services {
     width: 100vw;
     display: grid;
-    grid-template-columns: 60vw;
+    grid-template-columns: 80vw;
     grid-template-rows: auto;
     align-items: center;
     justify-content: center;
@@ -171,8 +172,9 @@ div#services {
 
 div.service {
     display: grid;
-    grid-template-columns: 15vw 45vw;
-    width: 60vw;
+    grid-template-columns: 80vw;
+    grid-template-rows: 10vh auto;
+    width: 80vw;
     margin-top: 5vw;
     text-align: center;
     line-height: 3rem;
