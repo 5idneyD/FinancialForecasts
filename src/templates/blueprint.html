@@ -27,15 +27,14 @@
 		<link
 			rel="stylesheet"
 			media="screen and (min-width: 601px)"
-			href="{{url_for('static', filename='styles/index.min.css')}}" />
+			href="{{url_for('static', filename='styles/main.min.css')}}" />
 		<link
 			rel="stylesheet"
 			media="screen and (max-width: 600px)"
 			href="{{url_for('static', filename='styles/mobile.min.css')}}" />
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
-
-		<!-- <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script> -->
+		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 		{% if design %}
 		<style>
 			:root{
@@ -51,7 +50,7 @@
 		<script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
-			let heading = document.querySelector("#logo");
+			let heading = document.querySelector("#heading");
 
 			function logoResize(x) {
 				if (x.matches) {

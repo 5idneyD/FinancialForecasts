@@ -89,7 +89,7 @@ a.menuOption {
 /* ------------------------------------------------------------------- */
 
 #data {
-    height: 75vh;
+    height: 100vh;
     background-color: var(--light);
 }
 
@@ -98,6 +98,7 @@ a.menuOption {
     margin-top: 2%;
     box-shadow: var(--shadow);
     text-align: center;
+    margin-bottom: 2vh;
 }
 
 a {
