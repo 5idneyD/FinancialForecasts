@@ -1,3 +1,4 @@
+# testing webhooks
 from flask import Flask, render_template, request, redirect, url_for, session, Response, abort
 from flask_migrate import Migrate
 from passlib.hash import pbkdf2_sha256
@@ -216,8 +217,7 @@ def update_server():
             username = os.getenv("GITHUB_USERNAME")
             password = os.getenv("GITHUB_PASSWORD")
             remote = f"https://{username}:{password}@github.com/5idneyD/SimpleAccounting.git"
-            repo = git.Repo("/home/SLD/SimpleAccounting")
-            repo.remotes.origin.pull()
+            git.Repo.clone_from(remote, "/home/SLD/SimpleAccounting")
             print("Have pulled git origin")
             return "Git origin pulled", 200
         except Exception as e:
@@ -232,7 +232,7 @@ def update_server():
 # Homepage, indexed
 @app.route("/")
 def index():
-    print("returning very old index file")
+    print("returning old index file")
     return render_template("index.html")
 
 
