@@ -4,4 +4,4 @@ on: [push]
 jobs:
   job1:
     steps:
-      run: "echo hello world"
+      run: echo "hello world"
