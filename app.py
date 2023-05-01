@@ -219,7 +219,7 @@ def update_server():
             print("Have pulled git origin")
             return "Git origin pulled", 200
         except Exception as e:
-            print(f"error in process of updating: {e}")
+            print(f"Error in process of updating: {e}")
             return "Error in process of updating"
     else:
         print("Wrong event type")
