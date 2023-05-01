@@ -2,4 +2,6 @@ name: pythonanywhere-deployment
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  run: "echo hello world"
+  job1:
+    steps:
+      run: "echo hello world"
