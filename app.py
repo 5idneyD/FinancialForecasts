@@ -213,13 +213,13 @@ def login_required(f):
 def update_server():
     if request.method == 'POST':
         try:
-            repo = git.Repo('SimpleAccounting')
-            origin = repo.remotes.origin
-            origin.pull()
-            print("server update via webhooks")
-            return 'Updated PythonAnywhere successfully', 200
+            repo = git.Repo("/home/SLD/SimpleAccounting")
+            o = repo.remotes.origin
+            o.pull()
+            print("Have pulled git origin")
+            return "Git origin pulled", 200
         except:
-            return "Error in process of updating"
+            return "Error in process of updating", 400
     else:
         return 'Wrong event type', 400
         
