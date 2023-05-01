@@ -224,7 +224,7 @@ def update_server():
             print(f"Error in process of updating: {e}")
             return "Error in process of updating"
     else:
-        print("Wrong event type")
+        print("Error: Wrong event type")
         return 'Wrong event type', 400
         
     
