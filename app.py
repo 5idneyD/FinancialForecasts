@@ -222,7 +222,7 @@ def update_server():
             print("error in process of updating")
             return "Error in process of updating"
     else:
-        print("wrong event type")
+        print("Wrong event type")
         return 'Wrong event type', 400
         
     
