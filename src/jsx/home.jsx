@@ -198,7 +198,7 @@ function App(props) {
 				</div>
 				<div id="fifth">
 					<h3>Email address: admin@novariance.com</h3>
-					<h3>Location: Surrey, England, United Kingdom</h3>
+					<h3>Location: England, United Kingdom</h3>
 				</div>
 			</div>
 		</ChakraProvider>
