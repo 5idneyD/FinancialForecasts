@@ -215,7 +215,9 @@ def update_server():
         try:
             repo = git.Repo("/home/SLD/SimpleAccounting")
             o = repo.remotes.origin
-            o.pull()
+            username = os.getenv("GITHUB_USERNAME")
+            password = os.getenv("GITHUB_PASSWORD")
+            o.pull(f"https://{username}:{password}@github.com/5idneyD/SimpleAccounting.git")
             print("Have pulled git origin")
             return "Git origin pulled", 200
         except Exception as e:
