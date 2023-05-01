@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 from bin.generateInvoice import loadInvoiceTemplate
 from pyinvoice.models import Item
 from flask_cors import CORS
+import git
 
 # PythonAnywhere and windows10 reference parent directories differently
 # If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere way
@@ -205,6 +206,23 @@ def login_required(f):
 
     return wrap
 
+
+# Tghis is a route that listens to github webhooks, and refreshed the pythonanywhere files
+# by pulling the master everytime the github repo is updated (i.e. has a new commit)
+@app.route("/update_server", methods=["GET", "POST"])
+def update_server():
+    if request.method == 'POST':
+        try:
+            repo = git.Repo('./SimpleAccounting')
+            origin = repo.remotes.origin
+            origin.pull()
+            return 'Updated PythonAnywhere successfully', 200
+        except:
+            return "Error in process of updating"
+    else:
+        return 'Wrong event type', 400
+        
+    
 
 # Homepage, indexed
 @app.route("/")
