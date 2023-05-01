@@ -3,6 +3,9 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
   one:
+    runs-on: ubuntu-latest
     steps:
-      - name: Log hello world
-      run: echo "hello world"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
