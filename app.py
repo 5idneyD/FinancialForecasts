@@ -216,6 +216,7 @@ def update_server():
             repo = git.Repo('./SimpleAccounting')
             origin = repo.remotes.origin
             origin.pull()
+            print("server update via webhooks")
             return 'Updated PythonAnywhere successfully', 200
         except:
             return "Error in process of updating"
