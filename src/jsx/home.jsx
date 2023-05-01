@@ -115,7 +115,8 @@ function App(props) {
 						</p>
 					</div>
 				</div>
-				<img src={props.buildingImg} alt="building" />
+				{/* <img src={props.buildingImg} alt="building" /> */}
+				<div className="parallax" style={{backgroundImage:  `url(${props.buildingImg})` }}></div>
 				<div id="third">
 					<h3>Our Services</h3>
 					<div id="services">

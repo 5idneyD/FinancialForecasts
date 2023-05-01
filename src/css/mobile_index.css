@@ -307,3 +307,20 @@ button#goToTopButton {
     width: 15vw;
     margin-top: 2vw
 }
+
+
+/* Parallax scrolling effect on building img */
+.parallax {
+    /* The image used */
+    /* The src is defined inline as I use jinja2 */
+    /* background-image: ; */
+  
+    /* Set a specific height */
+    min-height: 300px;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

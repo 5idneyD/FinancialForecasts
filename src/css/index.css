@@ -51,11 +51,12 @@ img[alt='building'] {
 }
 
 #fourth {
-    min-height: 80vh;
+    /* min-height: 80vh; */
     height: fit-content;
     background: var(--brown);
     width: 100vw;
     margin-left: 0;
+    padding-bottom: 10vh;
 }
 
 #fifth {
@@ -145,7 +146,7 @@ h2, h3 {
 }
 
 #heading #navbar-container {
-    width: 75vw;
+    width: 55vw;
     margin: auto;
     margin-top: 10vh;
     height: 100%;
@@ -161,7 +162,7 @@ h2, h3 {
 }
 
 div.navbar-option {
-    border: 0.8px solid var(--light);
+    /* border: 0.8px solid var(--light); */
     grid-area: 1 / auto;
     min-width: fit-content;
 }
@@ -320,3 +321,19 @@ button#goToTopButton {
     width: 15vw;
     margin-top: 2vw
 }
+
+/* Parallax scrolling effect on building img */
+.parallax {
+    /* The image used */
+    /* The src is defined inline as I use jinja2 */
+    /* background-image: ; */
+  
+    /* Set a specific height */
+    min-height: 500px;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
