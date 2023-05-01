@@ -213,11 +213,10 @@ def login_required(f):
 def update_server():
     if request.method == 'POST':
         try:
-            repo = git.Repo("/home/SLD/SimpleAccounting")
-            o = repo.remotes.origin
             username = os.getenv("GITHUB_USERNAME")
             password = os.getenv("GITHUB_PASSWORD")
-            o.pull(f"https://{username}:{password}@github.com/5idneyD/SimpleAccounting.git")
+            remote = f"https://{username}:{password}@github.com/5idneyD/SimpleAccounting.git"
+            git.Repo.clone_from(remote, "/home/SLD/SimpleAccounting")
             print("Have pulled git origin")
             return "Git origin pulled", 200
         except Exception as e:
