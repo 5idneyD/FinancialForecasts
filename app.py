@@ -219,8 +219,10 @@ def update_server():
             print("Have pulled git origin")
             return "Git origin pulled", 200
         except:
-            return "Error in process of updating", 400
+            print("error in process of updating")
+            return "Error in process of updating"
     else:
+        print("wrong event type")
         return 'Wrong event type', 400
         
     
