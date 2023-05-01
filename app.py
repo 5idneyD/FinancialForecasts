@@ -213,7 +213,7 @@ def login_required(f):
 def update_server():
     if request.method == 'POST':
         try:
-            repo = git.Repo('./SimpleAccounting')
+            repo = git.Repo('SimpleAccounting')
             origin = repo.remotes.origin
             origin.pull()
             print("server update via webhooks")
