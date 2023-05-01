@@ -232,8 +232,8 @@ def update_server():
 # Homepage, indexed
 @app.route("/")
 def index():
-    print("returning new index file")
-    return render_template("home.html")
+    print("returning very old index file")
+    return render_template("index.html")
 
 
 # Login Page
