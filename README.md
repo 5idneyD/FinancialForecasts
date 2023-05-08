@@ -1,4 +1,4 @@
-# SimpleAccounting
+# NoVariance.com
 
 I'm making my own accounting app that is usable for small businesses and sole traders.
 
