@@ -166,6 +166,12 @@ def not_found(e):
 # If 30 mins between requests, logout of session
 @app.before_request
 def before_request():
+
+    user = Users.query.filter_by(
+            company="Example Ltd", email="example@basicaccounting.co.uk").first()
+    user.password = pbkdf2_sha256.hash("p123")
+    db.session.commit()
+
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=30)
     session.modified = True
@@ -224,8 +230,8 @@ def update_server():
     else:
         print("Error: Wrong event type")
         return 'Wrong event type', 400
-        
-    
+
+
 
 # Homepage, indexed
 @app.route("/")
@@ -737,9 +743,9 @@ def addSalesInvoice(company, email, username, session_key, theme):
     vat_number = company_data.vat_number
     invoice_email = company_data.invoice_email
 
-    
+
     if request.method == "POST":
-        
+
         # Query all pre-existing sales_invoices for this company
         # Append the reference to references list
         # If the reference list is empty, append 0
@@ -753,7 +759,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
             references.append(0)
 
         invoice_number = references[-1] + 1
-        
+
         # Read header form input
         # See what customer this invoice is for and gather that customer's data from db
         invoice_date = request.form["invoice_date"]
@@ -1619,19 +1625,19 @@ def cashFlow(company, email, username, sesion_key, theme):
                                                                NominalTransactions.nominal_code < 60000
                                                                ).all()
 
-    
+
     # Cash Flow statements are made up of 3 sections:
     # Operating Activities
     # Investing Activities
     # Financing Activities
-    
+
     openingBalance = closingBalance
     operating_activities = 0
     investing_activities = 0
     financing_activities = 0
     # Start with current balance, loop through this years tarnsactions and minus them from the closing balance
     for transaction in currentYearTransactions:
-        
+
         # Investing activities go into 4**** nominal codes
         # e.g. Purchase of property, sale of securities, re-purchase of securities
         # Put this in to investing activies
@@ -1641,21 +1647,21 @@ def cashFlow(company, email, username, sesion_key, theme):
 
         # Financing activities go into 5**** nominal codes
         # e.g. tax, interest, depreciation, amortisation
-        # Put this in to financing activies    
+        # Put this in to financing activies
         elif 60000 > transaction.nominal_code >= 50000:
             financing_activities -= transaction.net_value
             openingBalance += transaction.net_value
-        
-        # If the transaction is revenue, add it to operating activies, minus it from closing balance 
+
+        # If the transaction is revenue, add it to operating activies, minus it from closing balance
         elif transaction.nominal_code < 20000:
             operating_activities += transaction.net_value
             openingBalance = openingBalance - transaction.net_value
-            
+
         # If the transaction is a cost (but not financing), minus it from operating activies, add it to closing balance
         elif transaction.nominal_code < 40000:
             operating_activities -= transaction.net_value
             openingBalance = openingBalance + transaction.net_value
-        
+
 
     return render_template("cashFlow.html", company=company, design=theme, openingBalance=openingBalance, closingBalance=closingBalance,
                            operating_activities=operating_activities, financing_activities=financing_activities, investing_activities=investing_activities,
