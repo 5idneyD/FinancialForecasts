@@ -731,27 +731,31 @@ def addSalesInvoice(company, email, username, session_key, theme):
     # Query data to set up form
     # such as customer codes and accounting year/period, VAT number
     customers = Customers.query.filter_by(company=company).all()
-    invoices = NominalTransactions.query.filter_by(
-        company=company, transaction_type="sales_invoice").all()
     company_data = Companies.query.filter_by(company=company).first()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
     vat_number = company_data.vat_number
     invoice_email = company_data.invoice_email
 
-    # Query all pre-existing sales_invoices for this company
-    # Append the reference to references list
-    # This will be passed through to js, which calculates the next available invoice number
-    references = []
-    for invoice in invoices:
-        references.append(str(invoice.reference))
-    if len(references) == 0:
-        references.append("_0")
-
+    
     if request.method == "POST":
+        
+        # Query all pre-existing sales_invoices for this company
+        # Append the reference to references list
+        # If the reference list is empty, append 0
+        # The invoice number will be the last reference + 1
+        invoices = NominalTransactions.query.filter_by(
+            company=company, transaction_type="sales_invoice").all()
+        references = []
+        for invoice in invoices:
+            references.append(int(str(invoice.reference).replace(company, "")))
+        if len(references) == 0:
+            references.append(0)
+
+        invoice_number = references[-1] + 1
+        
         # Read header form input
         # See what customer this invoice is for and gather that customer's data from db
-        invoice_number = request.form["invoice_number"]
         invoice_date = request.form["invoice_date"]
         customer_code = request.form["customer_code"]
         customer = Customers.query.filter_by(
@@ -900,7 +904,6 @@ def addSalesInvoice(company, email, username, session_key, theme):
             username=username,
             session_key=session_key,
             customers=customers,
-            references=references,
             design=theme,
             message="",
         )
@@ -911,7 +914,6 @@ def addSalesInvoice(company, email, username, session_key, theme):
         username=username,
         session_key=session_key,
         customers=customers,
-        references=references,
         design=theme,
         message="",
     )
