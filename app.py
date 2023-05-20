@@ -856,7 +856,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
             f"Email: {invoice_email}<br/>Please don't hesitate to contact us with any questions <br/> This invoice was generated automatically by No Variance"
         )
         invoiceTemplate.finish()
-        if request.form["emailSetting"] == "yes":
+        if request.form["emailSetting"] == "yes" and email != "example@basicaccounting.com":
             sender = os.getenv("EMAIL_SENDER")
             password = os.getenv("EMAIL_PASSWORD")
 
