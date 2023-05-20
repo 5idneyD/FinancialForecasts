@@ -5,11 +5,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta
-		name="keywords"
-		content="accounting, basic accounting, accountant, simple accounting, accounting software, no variance, variance accounting" />
-	<meta
-		name="description"
-		content="Accounting software that can handle all day-to-day activities of business accounting" />
+			name="keywords"
+			content="accounting, basic accounting, accountant, simple accounting, accounting software, no variance, variance accounting" />
+		<meta
+			name="description"
+			content="Accounting software that can handle all day-to-day activities of business accounting" />
 		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
 		<link
 			rel="stylesheet"
@@ -19,28 +19,38 @@
 			rel="stylesheet"
 			media="screen and (max-width: 600px)"
 			href="{{url_for('static', filename='styles/mobile_index.min.css')}}" />
-        <link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
+		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11185407443"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "AW-11185407443");
+		</script>
 	</head>
 	<body>
 		<div id="root"></div>
 		<script>
 			window.logoPath = "{{url_for('static', filename='images/no_variance.png')}}";
 
-            function logoResize(x) {
+			function logoResize(x) {
 				if (x.matches) {
 					let src = "{{url_for('static', filename='images/nv.png')}}";
-					return src
+					return src;
 				} else {
 					let src = "{{url_for('static', filename='images/no_variance.png')}}";
-					return src
+					return src;
 				}
-				
 			}
 			let x = window.matchMedia("(max-width: 600px)");
 			window.logoPath = logoResize(x);
 
-            
 			window.buildingPath = "{{url_for('static', filename='images/building.png')}}";
 		</script>
 		<script src="{{ url_for('static', filename='react/compiled/home.js')}}"></script>
