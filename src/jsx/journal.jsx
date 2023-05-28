@@ -85,7 +85,7 @@ function Journal() {
 						<tr>
 							<td>Journal Number</td>
 							<td>
-								<input type="journal" name="journalNumber" defaultValue={journalNumber} readOnly></input>
+								<input type="journal" name="journalNumber" defaultValue="Next" readOnly></input>
 							</td>
 						</tr>
 						<tr>

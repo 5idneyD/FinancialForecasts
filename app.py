@@ -159,18 +159,24 @@ with app.app_context():
 # usually caused by re-starting database on PythonAnywhere and not giving time
 @app.errorhandler(Exception)
 def not_found(e):
-    return render_template("error.html", error=e)
-
+    # return render_template("error.html", error=e)
+    pass
 
 # refresh session on each request
 # If 30 mins between requests, logout of session
 @app.before_request
 def before_request():
 
-    user = Users.query.filter_by(
-            company="Example Ltd", email="example@basicaccounting.co.uk").first()
-    user.password = pbkdf2_sha256.hash("p123")
-    db.session.commit()
+    # Reset password for example account on web
+    try:
+        user = Users.query.filter_by(
+                company="Example Ltd", email="example@basicaccounting.co.uk").first()
+        user.password = pbkdf2_sha256.hash("p123")
+        db.session.commit()
+    # Unless example account doesn't exist (i.e. in dev mode, not production)
+    except:
+        
+        pass
 
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=30)
@@ -1077,18 +1083,10 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/journal", methods=["POST", "GET"])
 @login_required
 def journal(company, email, username, session_key, theme):
-    journals = NominalTransactions.query.filter_by(
-        company=company, transaction_type="journal").all()
-    references = []
-    for journal in journals:
-        references.append(int(journal.reference.split("_")[-1]))
-        next_journal_number = max(references) + 1
-    if len(references) == 0:
-        next_journal_number = 1
+    
 
     if request.method == "POST":
         journal_date = str(request.form["journalDate"])
-        journal_number = str(request.form["journalNumber"])
         journal_description = request.form["journalDescription"]
         to_reverse = request.form["to_reverse"]
         debitTotal = request.form["debitTotal"]
@@ -1097,6 +1095,18 @@ def journal(company, email, username, session_key, theme):
         company_data = Companies.query.filter_by(company=company).first()
         accounting_year = company_data.accounting_year
         accounting_period = company_data.accounting_period
+        
+        # Calcul;ate the next jounral number by loopingthrough all journals, and adding 1 to the last
+        journals = NominalTransactions.query.filter_by(
+        company=company, transaction_type="journal").all()
+        references = []
+        for journal in journals:
+            references.append(int(journal.reference.split("_")[-1]))
+            next_journal_number = max(references) + 1
+        if len(references) == 0:
+            next_journal_number = 1
+        
+        journal_number = str(next_journal_number)
         journal_reference = "journal_" + journal_number
 
         for i in range(1, int(number_of_rows) + 1):
@@ -1169,11 +1179,10 @@ def journal(company, email, username, session_key, theme):
                     db.session.add(batched_transaction)
 
         db.session.commit()
-        next_journal_number += 1
 
-        return render_template("journal.html", company=company, next_journal_number=next_journal_number, design=theme)
+        return render_template("journal.html", company=company, design=theme)
 
-    return render_template("journal.html", company=company, next_journal_number=next_journal_number, design=theme)
+    return render_template("journal.html", company=company, design=theme)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/changePassword", methods=["POST", "GET"])
