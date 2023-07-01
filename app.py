@@ -19,7 +19,7 @@ from flask_cors import CORS
 import git
 
 # PythonAnywhere and windows10 reference parent directories differently
-# If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere way
+# If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere route
 if load_dotenv("./.env") == False:
     load_dotenv("../.env")
 else:
