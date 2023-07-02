@@ -1,55 +1,80 @@
-{% extends "blueprint.html" %} {% block meta %} {% endblock %} {% block body %}
-<div id="heading">
-	<h1><u>{{company}}</u></h1>
-	<h2>{{username}}</h2>
-</div>
-<div id="main" class="container-fluid">
-	<div id="nav"></div>
-	<div id="data">
-		<div id="graph"></div>
-	</div>
-</div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script defer src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
-<script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
+		<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+		<link
+			rel="stylesheet"
+			media="screen and (min-width: 601px)"
+			href="{{url_for('static', filename='styles/new-main.min.css')}}" />
+		<link
+			rel="stylesheet"
+			media="screen and (max-width: 600px)"
+			href="{{url_for('static', filename='styles/mobile.min.css')}}" />
+		<title>No Variance</title>
+	</head>
+	<body>
+		<div id="heading" class="">
+			<div id="heading-top">
+				<div id="logo">No Variance</div>
+				<div id="nav">
+					<div class="nav-option">Home</div>
+					<div class="nav-option">Settings</div>
+					<div class="nav-option">Log Out</div>
+				</div>
+			</div>
+			<div id="heading-bottom">
+				<div id="user">
+					<b>{{username}}</b><br />
+					{{company}}
+				</div>
+				<div class="box">Sales</div>
+				<div class="box">Purchase</div>
+				<div class="box">Financial</div>
+				<div class="box">Other</div>
+			</div>
+		</div>
+		<div id="body">
+			<div id="first" class="body-node">
+				Net Profit
+			</div>
+			<div id="second" class="body-node">
+			</div>
+			<div id="third" class="body-node">
+
+			</div>
+		</div>
 <script defer type="text/javascript">
-	let figures = {{total_values|tojson|safe}}
-	let bodyStyles = window.getComputedStyle(document.body)
-	let light = bodyStyles.getPropertyValue('--light');
-	let dark = bodyStyles.getPropertyValue('--dark');
-	var total = {
-		x: [],
-		y: [],
-		name: "Net Profit",
-		type: "scatter",
-		marker:{
-		color: dark
-		}
-	};
+			let figures = {{total_values|tojson|safe}}
+			let bodyStyles = window.getComputedStyle(document.body)
+			let light = bodyStyles.getPropertyValue('--light');
+			let dark = bodyStyles.getPropertyValue('--dark');
 
-	for (let i = 1; i <= 12; i++){
-		total.x.push(i);
-		total.y.push(figures[i])
-	}
 
-	// var trace2 = {
-	// 	x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-	// 	y: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-	// 	type: "scatter",
-	// };
+			let x = [];
+			let y = [];
 
-	// var data = [trace1, trace2];
-	var data = [total]
-	// console.log(light)
+			for (let i = 1; i <= 12; i++){
+				x.push(i);
+				y.push(figures[i])
+			}
 
-	var layout = {
-		title: 'Current Year Performnce',
-		showlegend: true,
-		paper_bgcolor: light,
-		plot_bgcolor: light,
+			new Chartist.Line("#first", {
+				labels: x,
+				series: [
+				y
 
-		};
-
-	Plotly.newPlot("graph", data, layout);
-</script>
-{% endblock %}
+				]
+			},{
+				low: 0,
+				showArea: true,
+				showPoint: false,
+				fullWidth: false
+			}
+			)
+			
+		</script>
+	</body>
+</html>
