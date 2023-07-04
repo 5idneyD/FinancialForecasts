@@ -41,15 +41,41 @@
 					<b>{{username}}</b><br />
 					{{company}}
 				</div>
-				<div class="box">Sales</div>
-				<div class="box">Purchase</div>
-				<div class="box">Financial</div>
-				<div class="box">Other</div>
+				<div class="box sales">Sales</div>
+				<div class="box purchase">Purchase</div>
+				<div class="box financial">Financial</div>
+				<div class="box other">Other</div>
+				<div class="sub-menu sales">
+					<ul>
+						<li>Add Sales Invoice</li>
+						<li>View Sales Invoices</li>
+						<li>View Customers</li>
+					</ul>
+				</div>
+				<div class="sub-menu purchase">
+					<ul>
+						<li>Add Sales Invoice</li>
+						<li>View Sales Invoices</li>
+						<li>View Customers</li>
+					</ul>
+				</div>
+				<div class="sub-menu financial">
+					<ul>
+						<li>Add Sales Invoice</li>
+						<li>View Sales Invoices</li>
+						<li>View Customers</li>
+					</ul>
+				</div>
+				<div class="sub-menu other">
+					<ul>
+						<li>Add Sales Invoice</li>
+						<li>View Sales Invoices</li>
+						<li>View Customers</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<div id="body">
-			{% block body %} {% endblock %}
-		</div>
+		<div id="body">{% block body %} {% endblock %}</div>
 		<script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
@@ -68,6 +94,36 @@
 			let img = logoResize(x);
 			heading.innerHTML =
 				heading.innerHTML + "<a href=" + meta + "><img src=" + img + " alt='No Variance Logo'/></a>";
+		</script>
+
+		<script>
+			// This is for nav settings
+			let navOptions = document.querySelectorAll(".box");
+
+			navOptions.forEach(function (e) {
+				e.setAttribute("enlarged", "false");
+				e.addEventListener("click", function () {
+					if (e.getAttribute("enlarged") == "true") {
+						// e.style.width = "80%";
+						// e.style.height = "80%";
+						e.setAttribute("enlarged", "false");
+						let option = e.classList[1];
+						let subMenu = document.querySelector(".sub-menu."+option);
+						subMenu.style.display = "none";
+					} else {
+						// e.style.width = "100%";
+						// e.style.height = "100%";
+						e.setAttribute("enlarged", "true");
+
+						// Display submenu of option selected
+						let option = e.classList[1];
+						let subMenu = document.querySelector(".sub-menu."+option);
+						subMenu.style.display = "inline-flex";
+					}
+
+
+				});
+			});
 		</script>
 	</body>
 </html>
