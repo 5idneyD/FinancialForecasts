@@ -104,15 +104,11 @@
 				e.setAttribute("enlarged", "false");
 				e.addEventListener("click", function () {
 					if (e.getAttribute("enlarged") == "true") {
-						// e.style.width = "80%";
-						// e.style.height = "80%";
 						e.setAttribute("enlarged", "false");
 						let option = e.classList[1];
 						let subMenu = document.querySelector(".sub-menu."+option);
 						subMenu.style.display = "none";
 					} else {
-						// e.style.width = "100%";
-						// e.style.height = "100%";
 						e.setAttribute("enlarged", "true");
 
 						// Display submenu of option selected

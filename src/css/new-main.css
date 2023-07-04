@@ -34,7 +34,7 @@
 #heading-bottom {
     display: grid;
     height: 60%;
-    grid-template-columns: 30vw auto auto auto auto;
+    grid-template-columns: 30vw repeat(4, 14vw);
     grid-template-rows: 100% auto;
     column-gap: 2vw;
     margin-right: 2vw;
@@ -63,17 +63,25 @@
     text-align: center;
     background-color: var(--light);
     border-radius: 30px;
+    border: 1px solid black;
     margin-top: 2vh;
     width: 70%;
+    margin-left: auto;
+    margin-right: auto;
     height: fit-content;
     z-index: 2;
     display: none;
 
 }
-
+.sub-menu ul {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
 .sub-menu ul li {
     list-style-type: none;
     line-height: 2rem;
+
 }
 
 .sub-menu.sales {
