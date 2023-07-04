@@ -10,11 +10,6 @@
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-			integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-			crossorigin="anonymous" />
 		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %}
 		<meta
 			name="logo"
@@ -22,31 +17,39 @@
 		{% else %}
 		<meta name="logo" id="{{url_for('index')}}" />
 		{% endif %} {% block meta %} {% endblock %}
-		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
 
-		<link
-			rel="stylesheet"
-			media="screen and (min-width: 601px)"
-			href="{{url_for('static', filename='styles/new-main.min.css')}}" />
-		<link
-			rel="stylesheet"
-			media="screen and (max-width: 600px)"
-			href="{{url_for('static', filename='styles/mobile.min.css')}}" />
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/new-main.min.css')}}" />
+
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-		{% if design %}
-		<style>
-			:root{
-				--dark: {{design.split(",")[0]}};
-				--light: {{design.split(",")[1]}};
-				--tableBorder: {{design.split(",")[2]}};
-			}
-		</style>
-		{% endif %}
+		{% if design %} {% endif %}
 	</head>
 	<body>
-		{% block body %} {% endblock %}
+		<div id="heading" class="">
+			<div id="heading-top">
+				<div id="logo">No Variance</div>
+				<div id="nav">
+					<div class="nav-option">Home</div>
+					<div class="nav-option">Settings</div>
+					<div class="nav-option">Log Out</div>
+				</div>
+			</div>
+			<div id="heading-bottom">
+				<div id="user">
+					<b>{{username}}</b><br />
+					{{company}}
+				</div>
+				<div class="box">Sales</div>
+				<div class="box">Purchase</div>
+				<div class="box">Financial</div>
+				<div class="box">Other</div>
+			</div>
+		</div>
+		<div id="body">
+			{% block body %} {% endblock %}
+		</div>
 		<script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
@@ -55,12 +58,11 @@
 			function logoResize(x) {
 				if (x.matches) {
 					let src = "{{url_for('static', filename='images/nv.png')}}";
-					return src
+					return src;
 				} else {
 					let src = "{{url_for('static', filename='images/no_variance.png')}}";
-					return src
+					return src;
 				}
-				
 			}
 			let x = window.matchMedia("(max-width: 600px)");
 			let img = logoResize(x);

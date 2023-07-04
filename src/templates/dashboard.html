@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% extends "blueprint.html" %} 
+{% block meta %} 
 		<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
 		<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-		<link
-			rel="stylesheet"
-			media="screen and (min-width: 601px)"
-			href="{{url_for('static', filename='styles/new-main.min.css')}}" />
-		<link
-			rel="stylesheet"
-			media="screen and (max-width: 600px)"
-			href="{{url_for('static', filename='styles/mobile.min.css')}}" />
-		<title>No Variance</title>
-	</head>
-	<body>
-		<div id="heading" class="">
-			<div id="heading-top">
-				<div id="logo">No Variance</div>
-				<div id="nav">
-					<div class="nav-option">Home</div>
-					<div class="nav-option">Settings</div>
-					<div class="nav-option">Log Out</div>
-				</div>
-			</div>
-			<div id="heading-bottom">
-				<div id="user">
-					<b>{{username}}</b><br />
-					{{company}}
-				</div>
-				<div class="box">Sales</div>
-				<div class="box">Purchase</div>
-				<div class="box">Financial</div>
-				<div class="box">Other</div>
-			</div>
-		</div>
-		<div id="body">
+{% endblock %}
+
+		{% block body %}
+
 			<div id="first" class="body-node">Net Profit</div>
 			<div id="second" class="body-node">
 				My To Do List
@@ -69,11 +38,7 @@
 					</ul>
 				</div>
 			</div>
-			<div id="third" class="body-node"></div>
-			<div id="fourth" class="body-node"></div>
-			<div id="fifth" class="body-node"></div>
-			<div id="sixth" class="body-node"></div>
-		</div>
+			
 		<script defer type="text/javascript">
 			let figures = {{total_values|tojson|safe}}
 			let bodyStyles = window.getComputedStyle(document.body)
@@ -103,5 +68,4 @@
 			}
 			)
 		</script>
-	</body>
-</html>
+{% endblock %}
