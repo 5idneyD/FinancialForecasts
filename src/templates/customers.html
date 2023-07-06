@@ -1,43 +1,34 @@
+{% set title = "Customers" %}
 {% extends "blueprint.html" %} {% block body %}
-<div id="heading">
-	<h1><u>{{company}}</u></h1>
-	<h2>Customers</h2>
+<div id="first" class="body-node" style="min-width: 5vw; width: 5vw;">
+	<a href="{{ url_for('addCustomer', company=company, email=email, username=username, session_key=session_key) }}"
+		>Add Customer</a
+	>
 </div>
-<div id="main">
-	<div id="nav"></div>
-	<div id="data">
-		<div class="">
-			<a
-				href="{{ url_for('addCustomer', company=company, email=email, username=username, session_key=session_key) }}"
-				><button id="addClient">Add Customer</button></a
-			>
-			<div>
-				<table id="customers">
-					<tr>
-						<th>Name</th>
-						<th>Code</th>
-						<th>Email</th>
-						<th>Address</th>
-						<th>Balance</th>
-						<th>Credit Limit</th>
-						<th>Payment Terms</th>
-					</tr>
-					{% for customer in customers %}
-					<tr>
-						<td>{{customer.customer_name}}</td>
-						<td>{{customer.customer_code}}</td>
-						<td>{{customer.customer_email}}</td>
-						<td class="customer_address">{{customer.customer_address}}</td>
-						<td>{{balances[customer.customer_code]}}</td>
-						<td>{{customer.customer_credit_limit}}</td>
-						<td>{{customer.customer_payment_terms}}</td>
-					</tr>
-					{% endfor %}
-				</table>
-			</div>
-		</div>
-	</div>
+
+<div id="second" class="body-node" style="width: 50vw">
+	<table id="customers">
+		<tr>
+			<th>Name</th>
+			<th>Code</th>
+			<th>Email</th>
+			<th>Address</th>
+			<th>Balance</th>
+			<th>Credit Limit</th>
+			<th>Payment Terms</th>
+		</tr>
+		{% for customer in customers %}
+		<tr>
+			<td>{{customer.customer_name}}</td>
+			<td>{{customer.customer_code}}</td>
+			<td>{{customer.customer_email}}</td>
+			<td class="customer_address">{{customer.customer_address}}</td>
+			<td>{{balances[customer.customer_code]}}</td>
+			<td>{{customer.customer_credit_limit}}</td>
+			<td>{{customer.customer_payment_terms}}</td>
+		</tr>
+		{% endfor %}
+	</table>
 </div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+
 {% endblock %}

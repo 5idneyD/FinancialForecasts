@@ -13,6 +13,7 @@
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
 		{% if company %} {% set space, company, email, username, session_key, page =
 		request.path.split("/") %}
+		{% set title="Dashboard" %}
 		<meta
 			name="logo"
 			id="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}" />
@@ -46,6 +47,8 @@
 				<div id="user">
 					<b>{{username}}</b><br />
 					{{company}}
+					<br>
+					{{title}}
 				</div>
 				<div class="box sales">Sales</div>
 				<div class="box purchase">Purchase</div>
@@ -62,7 +65,7 @@
 
 					<div class="sub-menu-option" data-href="/addPurchaseInvoice">Add Purchase Invoice</div>
 					<div class="sub-menu-option" data-href="/viewPurchaseInvoice">View Purchase Invoices</div>
-					<div class="sub-menu-option" data-href="/Suppliers">View Suppdivers</div>
+					<div class="sub-menu-option" data-href="/Suppliers">View Suppliers</div>
 
 				</div>
 				<div class="sub-menu financial">
