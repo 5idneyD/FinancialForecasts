@@ -3,42 +3,36 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<meta
 			name="keywords"
 			content="accounting, basic accounting, accountant, simple accounting, accounting software, no variance, variance accounting" />
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
-		{% if company %} {% set space, company, email, username, session_key, page =
-		request.path.split("/") %}
-		{% set title="Dashboard" %}
+		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %} {% set
+		title="Dashboard" %}
 		<meta
 			name="logo"
 			id="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}" />
 		{% else %}
 		<meta name="logo" id="{{url_for('index')}}" />
 		{% endif %} {% block meta %} {% endblock %}
-		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap"
-			rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
 
-		<link rel="stylesheet"
-			href="{{url_for('static', filename='styles/new-main.min.css')}}" />
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/new-main.min.css')}}" />
 
-		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}"
-			type="image/x-icon" />
+		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
-		<script defer type="text/javascript"
-			src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 		{% if design %} {% endif %}
 	</head>
 	<body>
-		<div id="heading" class>
+		<div id="heading" data-expanded="true">
 			<div id="heading-top">
-				<div id="logo">No Variance</div>
+				<div id="logo">No Variance <br />Accounting Software</div>
 				<div id="nav">
-					<div class="nav-option">Home</div>
+					<div class="nav-option" data-href="/dashboard">Dashboard</div>
 					<div class="nav-option">Settings</div>
 					<div class="nav-option">Log Out</div>
 				</div>
@@ -47,7 +41,7 @@
 				<div id="user">
 					<b>{{username}}</b><br />
 					{{company}}
-					<br>
+					<br />
 					{{title}}
 				</div>
 				<div class="box sales">Sales</div>
@@ -55,21 +49,16 @@
 				<div class="box financial">Financial</div>
 				<div class="box other">Other</div>
 				<div class="sub-menu sales">
-
 					<div class="sub-menu-option" data-href="/addSalesInvoice">Add Sales Invoice</div>
 					<div class="sub-menu-option" data-href="/viewSalesInvoice">View Sales Invoices</div>
 					<div class="sub-menu-option" data-href="/Customers">View Customers</div>
-
 				</div>
 				<div class="sub-menu purchase">
-
 					<div class="sub-menu-option" data-href="/addPurchaseInvoice">Add Purchase Invoice</div>
 					<div class="sub-menu-option" data-href="/viewPurchaseInvoice">View Purchase Invoices</div>
 					<div class="sub-menu-option" data-href="/Suppliers">View Suppliers</div>
-
 				</div>
 				<div class="sub-menu financial">
-
 					<div class="sub-menu-option" data-href="/chartOfAccounts">Chart Of Accounts</div>
 					<div class="sub-menu-option" data-href="/trialBalance">Trial Balance</div>
 					<div class="sub-menu-option" data-href="/balanceSheet">Balance Sheet</div>
@@ -81,21 +70,24 @@
 					<div class="sub-menu-option" data-href="/bankRec">Bank Rec</div>
 					<div class="sub-menu-option" data-href="/agedDebt">Aged Debt</div>
 					<div class="sub-menu-option" data-href="/cashFlow">Cash Flow</div>
-
 				</div>
 				<div class="sub-menu other">
-
 					<div class="sub-menu-option" data-href="/admin">Admin</div>
 					<div class="sub-menu-option" data-href="/changePassword">Change Password</div>
 					<div class="sub-menu-option" data-href="/changeTheme">Change Theme</div>
 					<div class="sub-menu-option" data-href="/dashboard">Dashboard</div>
 					<div class="sub-menu-option" data-href="/help">Help</div>
 					<div class="sub-menu-option" data-href="/logout">Log Out</div>
-
 				</div>
 			</div>
-			<div id="body">{% block body %} {% endblock %}</div>
-			<script defer>
+		</div>
+		<div id="toggle">
+			<div id="toggle-button">
+				&uarr;
+			</div>
+		</div>
+		<div id="body">{% block body %} {% endblock %}</div>
+		<script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
 			let heading = document.querySelector("#heading");
@@ -115,16 +107,15 @@
 				heading.innerHTML + "<a href=" + meta + "><img src=" + img + " alt='No Variance Logo'/></a>";
 		</script>
 
-			<script>
+		<script>
 			// This is for nav settings
 			let navOptions = document.querySelectorAll(".box");
 
 			navOptions.forEach(function (e) {
 				e.setAttribute("enlarged", "false");
 				e.addEventListener("click", function () {
-
 					let option = e.classList[1];
-					let subMenu = document.querySelector(".sub-menu."+option);
+					let subMenu = document.querySelector(".sub-menu." + option);
 
 					if (e.getAttribute("enlarged") == "true") {
 						e.setAttribute("enlarged", "false");
@@ -138,20 +129,17 @@
 						e.style.border = "2px solid purple";
 
 						// Close all other nav options
-						navOptions.forEach(function(q){
+						navOptions.forEach(function (q) {
 							let childOption = q.classList[1];
-							let childSubMenu = document.querySelector(".sub-menu."+childOption);
+							let childSubMenu = document.querySelector(".sub-menu." + childOption);
 
-							if (option == childOption){
-								
+							if (option == childOption) {
 							} else {
 								q.setAttribute("enlarged", "false");
 								childSubMenu.style.display = "none";
 								q.style.border = "none";
 							}
-
-						})
-
+						});
 					}
 				});
 			});
@@ -164,17 +152,40 @@
 			// option clicked on
 
 			let url = window.location.pathname;
-            url = url.substring(0, url.lastIndexOf("/"));
+			url = url.substring(0, url.lastIndexOf("/"));
 
 			let options = document.querySelectorAll(".sub-menu-option");
-			options.forEach(function(e){
-				e.addEventListener("click", function(){
+			options.forEach(function (e) {
+				e.addEventListener("click", function () {
 					let extension = e.dataset.href;
 					let newUrl = url + extension;
 					window.location.assign(newUrl);
-				})
-			})
-
+				});
+			});
 		</script>
-		</body>
-	</html>
+
+		<script>
+			// This script is for the toggle butto to minimize the menu
+			// The heading-top will still be visible, just the heading bottom
+			// will be minimized
+
+			let heading = document.querySelector("#heading");
+			let headingBottom = document.querySelector("#heading-bottom");
+			let toggle = document.querySelector("#toggle-button");
+
+			toggle.addEventListener("click", function () {
+				if (heading.dataset.expanded == "true") {
+					headingBottom.style.display = "none";
+					heading.className = "toggle-up";
+					toggle.innerHTML = "&darr;";
+					heading.dataset.expanded = "false";
+				} else {
+					headingBottom.style.display = "grid";
+					heading.className = "toggle-down";
+					toggle.innerHTML = "&uarr;";
+					heading.dataset.expanded = "true";
+				}
+			});
+		</script>
+	</body>
+</html>
