@@ -1,77 +1,27 @@
+{% set title = "Add Customer" %}
 {% extends "blueprint.html" %} {% block body %}
-<div id="heading">
-	<h1><u>{{company}}</u></h1>
-	<h2>Add Customer</h2>
-</div>
-<div id="main" class="container-fluid">
 
-	<div id="nav"></div>
-	<div id="data">
-		<form id="form" method="post">
-			<div class="row">
-				<div class="col">
-					<input
-						type="name"
-						name="customer_name"
-						placeholder="Customer Name"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<input
-						type="name"
-						name="customer_code"
-						placeholder="Customer Code"
-						minlength="6"
-						maxlength="6"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<input
-						type="email"
-						name="customer_email"
-						placeholder="Customer Email"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<input
-						type="name"
-						name="customer_address"
-						placeholder="Address"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<input
-						type="name"
-						name="customer_credit_limit"
-						placeholder="Credit Limit (£)"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<input
-						type="name"
-						name="customer_payment_terms"
-						placeholder="Payment Terms (days)"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col mt-5">
-					<button type="submit" name="addCustomerButton">Add Customer</button>
-				</div>
-			</div>
-		</form>
-	</div>
+<div class="body-node" id="first" style="height: fit-content">
+	<form id="form" method="post">
+		<input type="name" name="customer_name" placeholder="Customer Name" aria-required="true" />
+
+		<input
+			type="name"
+			name="customer_code"
+			placeholder="Customer Code"
+			minlength="6"
+			maxlength="6"
+			aria-required="true" />
+
+		<input type="email" name="customer_email" placeholder="Customer Email" aria-required="true" />
+
+		<input type="name" name="customer_address" placeholder="Address" aria-required="true" />
+
+		<input type="name" name="customer_credit_limit" placeholder="Credit Limit (£)" aria-required="true" />
+
+		<input type="name" name="customer_payment_terms" placeholder="Payment Terms (days)" aria-required="true" />
+
+		<button type="submit" name="addCustomerButton">Add Customer</button>
+	</form>
 </div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 {% endblock %}
