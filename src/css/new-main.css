@@ -2,11 +2,16 @@
 	/* --primary: #030518;
 	--second: #0c1027;
     --third: purple;
-    --fontColor: white;*/
-    --primary: #dedeea;
-	--second: #e8e8f3;
+    --fontColor: white;
+    --shadow: 20px 20px 60px #252e48,
+    -20px -20px 60px #252e48;
+     */
+    --primary: #e6e7ee;
+	--second: #2D4CC8;
     --third: purple;
     --fontColor: black;
+    --shadow:  20px 20px 60px #bebebe,
+    -20px -20px 60px #ffffff;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 * {
@@ -186,14 +191,10 @@ div#nav div.nav-option:hover {
 	width: 20vw;
 	height: 30vh;
 	margin-top: 5vh;
-    padding: 10px;
-  border-radius: 10px;
-box-shadow: 7px 7px 15px rgba(55, 84, 170, 0.15),
-    -7px -7px 20px rgba(255, 255, 255, 1),
-    inset 0px 0px 4px rgba(255, 255, 255, 0.2),
-    inset 7px 7px 15px rgba(55, 84, 170, 0),
-    inset -7px -7px 20px rgba(255, 255, 255, 0),
-    0px 0px 4px rgba(255, 255, 255, 0) !important;
+    border-radius: 50px;
+    background: var(--primary);
+    box-shadow: var(--shadow);
+
 }
 
 #first {

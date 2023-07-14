@@ -3,6 +3,8 @@ function previewChange() {
     root.style.setProperty("--second", document.querySelector("input[name='second']").value)
     root.style.setProperty("--third", document.querySelector("input[name='third']").value)
     root.style.setProperty("--fontColor", document.querySelector("input[name='text']").value)
+    root.style.setProperty("--shadow", "none");
+   
 }
 
 
@@ -18,6 +20,7 @@ themeSelector.addEventListener("change", function () {
         root.style.setProperty("--second", "#e8e8f3");
         root.style.setProperty("--third", "purple");
         root.style.setProperty("--fontColor", "black");
+        root.style.setProperty("--shadow", "20px 20px 60px #bebebe, -20px -20px 60px #ffffff");
         primaryInput.value = "#dedeea";
         secondInput.value = "#e8e8f3";
         thirdInput.value = "purple";
@@ -27,6 +30,7 @@ themeSelector.addEventListener("change", function () {
         root.style.setProperty("--second", "#0c1027");
         root.style.setProperty("--third", "purple");
         root.style.setProperty("--fontColor", "white");
+        root.style.setProperty("--shadow", "20px 20px 60px #252e48, -20px -20px 60px #252e48");
         primaryInput.value = "#030518";
         secondInput.value = "#0c1027";
         thirdInput.value = "purple";
