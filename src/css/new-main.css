@@ -425,7 +425,9 @@ table#settings tr {
     min-width: 40px;
     background-color: var(--second);
     border: 1px solid var(--fontColor);
-    color: var(--fontColor)
+    color: var(--fontColor);
+    border-radius: 30px;
+    text-align: center;
 }
 
 .settings-input {
