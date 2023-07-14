@@ -1411,17 +1411,20 @@ def batchedJournals(company, email, username, session_key, theme):
 @login_required
 def changeTheme(company, email, username, session_key, theme):
     user = Users.query.filter_by(company=company, email=email).first()
-    design = user.designTheme
+    print(user.designTheme)
+    theme = user.designTheme
 
     if request.method == "POST":
-        dark = request.form["dark"]
-        light = request.form["light"]
-        tableBorder = request.form["tableBorder"]
-        combined = ",".join([dark, light, tableBorder])
+        primary = request.form["primary"]
+        second = request.form["second"]
+        third = request.form["third"]
+        text = request.form["text"]
+        combined = ",".join([primary, second, third, text])
         user.designTheme = combined
         db.session.commit()
 
-        design = user.designTheme
+        theme = user.designTheme
+        print(theme)
         return render_template("changeTheme.html", company=company, design=combined)
 
     return render_template("changeTheme.html", company=company, design=theme)

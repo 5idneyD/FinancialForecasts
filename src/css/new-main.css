@@ -1,6 +1,10 @@
 :root {
-	--primary: #030518;
+	/* --primary: #030518;
 	--second: #0c1027;
+    --third: purple;
+    --fontColor: white;*/
+    --primary: #dedeea;
+	--second: #e8e8f3;
     --third: purple;
     --fontColor: black;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -44,6 +48,7 @@
 	height: 100%;
 	grid-template-columns: 50vw auto;
 	text-align: center;
+    padding: 10px;
 }
 
 #heading-top div {
@@ -181,6 +186,14 @@ div#nav div.nav-option:hover {
 	width: 20vw;
 	height: 30vh;
 	margin-top: 5vh;
+    padding: 10px;
+  border-radius: 10px;
+box-shadow: 7px 7px 15px rgba(55, 84, 170, 0.15),
+    -7px -7px 20px rgba(255, 255, 255, 1),
+    inset 0px 0px 4px rgba(255, 255, 255, 0.2),
+    inset 7px 7px 15px rgba(55, 84, 170, 0),
+    inset -7px -7px 20px rgba(255, 255, 255, 0),
+    0px 0px 4px rgba(255, 255, 255, 0) !important;
 }
 
 #first {
@@ -383,4 +396,29 @@ button#submitInvoice {
 
 button {
     cursor: pointer;
+}
+
+table#settings {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+table#settings tr {
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
+    margin-top: 1vh;
+}
+
+.settings-button,
+.settings-input {
+    margin-top: 2vh;
+    width: 10vw;
+    min-width: 40px;
+    background-color: var(--second);
+    border: 1px solid var(--fontColor);
+    color: var(--fontColor)
+}
+
+.settings-input {
+    margin-top: 0;
 }

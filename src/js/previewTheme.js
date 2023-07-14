@@ -1,69 +1,75 @@
 function previewChange() {
-    var root = document.querySelector(":root");
-    root.style.setProperty("--dark", document.querySelector("input[name='dark']").value)
-    root.style.setProperty("--light", document.querySelector("input[name='light']").value)
-    root.style.setProperty("--tableBorder", document.querySelector("input[name='tableBorder']").value)
+    root.style.setProperty("--primary", document.querySelector("input[name='primary']").value)
+    root.style.setProperty("--second", document.querySelector("input[name='second']").value)
+    root.style.setProperty("--third", document.querySelector("input[name='third']").value)
+    root.style.setProperty("--fontColor", document.querySelector("input[name='text']").value)
 }
 
 
 var themeSelector = document.querySelector("#themeSelector");
-var lightInput = document.querySelector("input[name='light']");
-var darkInput = document.querySelector("input[name='dark']");;
-var tableBorderInput = document.querySelector("input[name='tableBorder']");;
-var root = document.querySelector(":root");
+var primaryInput = document.querySelector("input[name='primary']");
+var secondInput = document.querySelector("input[name='second']");
+var thirdInput = document.querySelector("input[name='third']");
+var textInput = document.querySelector("input[name='text']");
 
 themeSelector.addEventListener("change", function () {
-    if (themeSelector.value == "default") {
-        root.style.setProperty("--dark", "#120929");
-        root.style.setProperty("--light", "#ecf0f3");
-        root.style.setProperty("--tableBorder", "#65463E")
-        darkInput.value = "#111111";
-        lightInput.value = "#B5E5CF";
-        tableBorderInput.value = "#65463E";
-    } else if (themeSelector.value == "retro") {
-        root.style.setProperty("--dark", "#3E424B");
-        root.style.setProperty("--light", "#B9BBB6");
-        root.style.setProperty("--tableBorder", "#65463E")
-        darkInput.value = "#3E424B";
-        lightInput.value = "#B9BBB6";
-        tableBorderInput.value = "#65463E";
-    } else if (themeSelector.value == "blackAndWhite") {
-        root.style.setProperty("--dark", "#000000");
-        root.style.setProperty("--light", "#ffffff");
-        root.style.setProperty("--tableBorder", "#65463E")
-        darkInput.value = "#000000";
-        lightInput.value = "#111111";
-        tableBorderInput.value = "#65463E";
-    }
+    if (themeSelector.value == "light") {
+        root.style.setProperty("--primary", "#dedeea");
+        root.style.setProperty("--second", "#e8e8f3");
+        root.style.setProperty("--third", "purple");
+        root.style.setProperty("--fontColor", "black");
+        primaryInput.value = "#dedeea";
+        secondInput.value = "#e8e8f3";
+        thirdInput.value = "purple";
+        textInput.value = "black";
+    } else if (themeSelector.value == "dark") {
+        root.style.setProperty("--primary", "#030518");
+        root.style.setProperty("--second", "#0c1027");
+        root.style.setProperty("--third", "purple");
+        root.style.setProperty("--fontColor", "white");
+        primaryInput.value = "#030518";
+        secondInput.value = "#0c1027";
+        thirdInput.value = "purple";
+        textInput.value = "white";
+    } 
 });
 
 
 /// The user can use a scale to change the colours as well as type in hex codes
 
-var lightScale = document.querySelector("#lightScale");
-var lightInput = document.querySelector("input[name='light']");
-var darkScale = document.querySelector("#darkScale");
-var darkInput = document.querySelector("input[name='dark']");
-var borderScale = document.querySelector("#borderScale");
-var borderInput = document.querySelector("input[name='tableBorder']");
+var primaryScale = document.querySelector("#primaryScale");
+var primaryInput = document.querySelector("input[name='primary']");
+var secondScale = document.querySelector("#secondScale");
+var secondInput = document.querySelector("input[name='second']");
+var thirdScale = document.querySelector("#thirdScale");
+var thirdInput = document.querySelector("input[name='third']");
+var textScale = document.querySelector("#textScale");
+var textInput = document.querySelector("input[name='text']");
 
 
-lightScale.addEventListener("change", function () {
-    lightInput.value = lightScale.value;
+
+primaryScale.addEventListener("change", function () {
+    primaryInput.value = primaryScale.value;
 })
-lightInput.addEventListener("change", function () {
-    lightScale.value = lightInput.value;
+primaryInput.addEventListener("change", function () {
+    primaryScale.value = primaryInput.value;
 })
-darkScale.addEventListener("change", function () {
-    darkInput.value = darkScale.value;
+secondScale.addEventListener("change", function () {
+    secondInput.value = secondScale.value;
 })
-darkInput.addEventListener("change", function () {
-    darkScale.value = darkInput.value;
+secondInput.addEventListener("change", function () {
+    secondScale.value = secondInput.value;
 })
-borderScale.addEventListener("change", function () {
-    borderInput.value = borderScale.value;
+thirdScale.addEventListener("change", function () {
+    thirdInput.value = thirdScale.value;
 })
-borderInput.addEventListener("change", function () {
-    borderScale.value = borderInput.value;
+thirdInput.addEventListener("change", function () {
+    thirdScale.value = thirdInput.value;
+})
+textScale.addEventListener("change", function () {
+    textInput.value = textScale.value;
+})
+textInput.addEventListener("change", function () {
+    textScale.value = textInput.value;
 })
 

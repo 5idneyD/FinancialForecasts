@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script>
+			// This script is to set the colours of the page
+			// We import the default colours at the top from css
+			// However, this script will read the users settings from the db
+			// and change the root colour variables
+			// The data is parsed through via jinja2 from the backend
+			// Placing this cript at the top as there is an unpleasent flash
+			// Between the deafult and these settings otherwise
+			let design = "{{design|safe}}".split(",")
+			let primary = design[0];
+			let second = design[1]
+			let third= design[2]
+			let text = design[3]
+
+			let root = document.querySelector(":root");
+			root.style.setProperty("--primary", primary);
+			root.style.setProperty("--second", second);
+			root.style.setProperty("--third", third);
+			root.style.setProperty("--fontColor", text);
+
+		</script>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
