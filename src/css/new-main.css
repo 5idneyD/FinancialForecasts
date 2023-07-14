@@ -335,21 +335,29 @@ div.invoice-head {
     grid-auto-rows: 5vh;
     grid-auto-flow: row;
     row-gap: 5vh;
+    color: var(--fontColor)
 }
 
 div.invoice-head div *,
 div.invoice-head button#addInvoiceRow {
     width: 80%;
     height: 1.5rem;
-    color: var(--primary);
+    color: var(--fontColor);
     border-radius: 30px;
     text-align: center;
+    border: none;
+}
+
+button:hover {
+    color: var(--second) !important;
+    background-color: var(--fontColor) !important;
 }
 
 div.invoice-head button#addInvoiceRow {
     background-color: var(--primary);
     border-radius: 30px;
     color: var(--fontColor);
+    border: 2px solid var(--fontColor);
     width: 10vw;
     height: 2rem;
     grid-column: 2;
