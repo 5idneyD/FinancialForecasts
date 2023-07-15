@@ -189,22 +189,16 @@ div#nav div.nav-option:hover {
 	color: var(--fontColor);
 	text-align: center;
 	width: 20vw;
-	height: 30vh;
+	min-height: 30vh;
 	margin-top: 5vh;
     border-radius: 50px;
     background: var(--primary);
     box-shadow: var(--shadow);
 
-}
-
-#first {
-	width: 40vw;
-	min-width: 400px;
-}
-
-#second {
+	height: fit-content;
 	min-width: 300px;
-	min-height: fit-content;
+	width: fit-content;
+
 }
 
 .ct-label,
@@ -336,12 +330,11 @@ div.invoice-head {
     grid-auto-flow: row;
     row-gap: 5vh;
     color: var(--fontColor);
-	width: 90%;
 	margin: 2vh auto 3vh auto;
+	width: 90%;
 }
 
-div.invoice-head div *,
-div.invoice-head button#addInvoiceRow {
+div.invoice-head div :not(button) {
     width: 80%;
     height: 1.5rem;
     color: var(--fontColor);
@@ -359,28 +352,18 @@ div.invoice-head div :is(input,select, select option) {
 button:hover {
     color: var(--second) !important;
     background-color: var(--fontColor) !important;
+	cursor: pointer;
 }
 
-div.invoice-head button#addInvoiceRow {
-    background-color: var(--primary);
-    border-radius: 30px;
-    color: var(--fontColor);
-    border: 2px solid var(--fontColor);
-    width: 10vw;
-    height: 2rem;
-    grid-column: 2;
-    margin-left: -30%;
-}
 
 div.invoice-body {
-    width: 100vw;
     display: grid;
     grid-auto-rows: 5vh;
     grid-auto-flow: row;
     height: fit-content;
     margin-left: auto;
     margin-right: auto;
-
+	width: 80vw;
 }
 
 #number_of_rows {
@@ -399,21 +382,35 @@ div.invoice-body {
     text-align: center;
     width: 80%;
     height: 1.4rem;
-    color: var(--primary);
+	background-color: var(--primary);
+    color: var(--fontColor)
 }
 
+button#addInvoiceRow,
 button.invoiceForm {
     background-color: var(--primary);
     border-radius: 30px;
     color: var(--fontColor);
-    width: 10vw;
+    border: 1px solid var(--fontColor);
+	padding-left: 5%;
+	padding-right: 5%;
+	width: 10vw;
     height: 2rem;
-    margin-top: 5vh;
+	min-width: fit-content;
+	text-align: center;
 }
 
-button {
-    cursor: pointer;
+button.invoiceForm {
+    margin-top: 5vh;
+	margin-left: 5vw;
 }
+
+button#addInvoiceRow {
+    height: 1.5rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 
 table#settings {
     width: 95%;

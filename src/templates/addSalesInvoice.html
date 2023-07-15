@@ -2,7 +2,7 @@
 <meta id="references" data-references="{{references}}" data-company="{{company}}" />
 {% endblock %} {% block body %}
 <form method="post">
-	<div class="body-node" id="first" style="height: fit-content; min-width: 300px; width: fit-content">
+	<div class="body-node" id="first">
 		<div class="invoice-head">
 			<div>Invoice Number</div>
 			<div>
@@ -43,11 +43,11 @@
 					<option value="no">No</option>
 				</select>
 			</div>
-
-			<button type="button" onclick="addRow(); calculate()" id="addInvoiceRow">Add Row</button>
 		</div>
+			<button type="button" onclick="addRow(); calculate()" id="addInvoiceRow">Add Row</button>
+		
 	</div>
-	<div class="body-node" id="second" style="width: 80vw; height: fit-content;">
+	<div class="body-node" id="second">
 		<div data-rows="1">
 			<input id="number_of_rows" name="number_of_rows" value="data-rows" />
 			<div class="invoice-body">
