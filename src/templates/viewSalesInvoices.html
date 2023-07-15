@@ -1,96 +1,84 @@
-{% extends "blueprint.html" %}
-{% block meta %} 
+{% set title="View Sales Invoices" %} {% extends "blueprint.html" %} {% block meta %}
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-{% endblock %}
-{% block body %}
-<div id="heading">
-	<h1><u>{{company}}</u></h1>
-	<h2>Sales Invoices</h2>
-</div>
-<div id="main">
-	<div id="nav"></div>
-	<div id="data">
-		<form method="post">
-			<table id="invoicesReport">
-				<tr>
-					<td>Customer</td>
-					<td>
-						<select class="invoice" name="customer_code">
-							<option value="*" selected hidden></option>
-							{% for customer in customers %}
-							<option value="{{customer}}">{{customer}}</option>
-							{% endfor %}
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Invoice No.</td>
-					<td><input name="invoice_number" type="invoice" class="invoice" value="" /></td>
-				</tr>
-				<tr>
-					<td>Period</td>
-					<td>
-						<select name="selected_period" class="invoice">
-							<option value="*" selected hidden></option>
-							{% for i in range(1,13) %}
-							<option value="{{i}}">{{i}}</option>
-							{% endfor %}
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Year</td>
-					<td>
-						<select name="selected_year" class="invoice">
-							<option value="*" selected hidden></option>
-							{% for i in range(2018,2024) %}
-							<option value="{{i}}">{{i}}</option>
-							{% endfor %}
-						</select>
-					</td>
-				</tr>
-			</table>
-			<div class="invoiceReportButtons">
-				<button type="submit">Run Report</button><br />
-				<button type="button" id="downloadexcel" onclick="ExportToExcel('xlsx')">Download Report</button>
+{% endblock %} {% block body %}
+<form method="post">
+	<div class="body-node" id="first" style="height: fit-content; min-width: 300px; width: fit-content">
+		<div class="invoice-head">
+			<div>Customer</div>
+			<div>
+				<select class="invoice" name="customer_code">
+					<option value="*" selected hidden></option>
+					{% for customer in customers %}
+					<option value="{{customer}}">{{customer}}</option>
+					{% endfor %}
+				</select>
 			</div>
-		</form>
-		<table id="table">
-			<tr>
-				<th>Customer Code</th>
-				<th>Invoice Number</th>
-				<th>Invoice Date</th>
-				<th>Invoice Description</th>
-				<th>Net Value</th>
-				<th>VAT Value</th>
-				<th>Total Value</th>
-				<th>Paid</th>
-				<th>Posted By</th>
-				<th>Posted On</th>
-				<th>Year</th>
-				<th>Period</th>
-			</tr>
-			{% for invoice in invoices %}
-			<tr>
-				<td>{{ invoice.client_code }}</td>
-				<td>{{ invoice.transaction_number }}</td>
-				<td>{{ invoice.date }}</td>
-				<td>{{ invoice.description }}</td>
-				<td>{{ invoice.net_value }}</td>
-				<td>{{ invoice.vat_value }}</td>
-				<td>{{ invoice.total_value }}</td>
-				<td>{{ invoice.is_paid }}</td>
-				<td>{{ invoice.posted_by }}</td>
-				<td>{{ invoice.posted_on }}</td>
-				<td>{{ invoice.accounting_year }}</td>
-				<td>{{ invoice.accounting_period }}</td>
-			</tr>
-			{% endfor %}
-		</table>
+
+			<div>Invoice No.</div>
+			<div><input name="invoice_number" type="invoice" class="invoice" value="" /></div>
+
+			<div>Period</div>
+			<div>
+				<select name="selected_period" class="invoice">
+					<option value="*" selected hidden></option>
+					{% for i in range(1,13) %}
+					<option value="{{i}}">{{i}}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div>Year</div>
+			<div>
+				<select name="selected_year" class="invoice">
+					<option value="*" selected hidden></option>
+					{% for i in range(2018,2024) %}
+					<option value="{{i}}">{{i}}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+
+		<button type="submit" class="invoiceForm">Run Report</button><br />
+		<button type="button" class="invoiceForm" id="downloadexcel" onclick="ExportToExcel('xlsx')">
+			Download Report
+		</button>
 	</div>
+</form>
+
+<div class="body-node" id="second" style="min-height: fit-content; min-width: 300px; width: fit-content">
+	<table id="table">
+		<tr>
+			<th>Customer Code</th>
+			<th>Invoice Number</th>
+			<th>Invoice Date</th>
+			<th>Invoice Description</th>
+			<th>Net Value</th>
+			<th>VAT Value</th>
+			<th>Total Value</th>
+			<th>Paid</th>
+			<th>Posted By</th>
+			<th>Posted On</th>
+			<th>Year</th>
+			<th>Period</th>
+		</tr>
+		{% for invoice in invoices %}
+		<tr>
+			<td>{{ invoice.client_code }}</td>
+			<td>{{ invoice.transaction_number }}</td>
+			<td>{{ invoice.date }}</td>
+			<td>{{ invoice.description }}</td>
+			<td>{{ invoice.net_value }}</td>
+			<td>{{ invoice.vat_value }}</td>
+			<td>{{ invoice.total_value }}</td>
+			<td>{{ invoice.is_paid }}</td>
+			<td>{{ invoice.posted_by }}</td>
+			<td>{{ invoice.posted_on }}</td>
+			<td>{{ invoice.accounting_year }}</td>
+			<td>{{ invoice.accounting_period }}</td>
+		</tr>
+		{% endfor %}
+	</table>
 </div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script>
 	function ExportToExcel(type, fn, dl) {
 		var elt = document.getElementById("table");

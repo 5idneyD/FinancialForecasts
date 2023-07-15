@@ -335,7 +335,9 @@ div.invoice-head {
     grid-auto-rows: 5vh;
     grid-auto-flow: row;
     row-gap: 5vh;
-    color: var(--fontColor)
+    color: var(--fontColor);
+	width: 90%;
+	margin: 2vh auto 3vh auto;
 }
 
 div.invoice-head div *,
@@ -346,6 +348,12 @@ div.invoice-head button#addInvoiceRow {
     border-radius: 30px;
     text-align: center;
     border: none;
+}
+
+div.invoice-head div :is(input,select, select option) {
+	color: black;
+	background-color: #dedeea;
+	border: 1px solid var(--fontColor)
 }
 
 button:hover {
@@ -394,7 +402,7 @@ div.invoice-body {
     color: var(--primary);
 }
 
-button#submitInvoice {
+button.invoiceForm {
     background-color: var(--primary);
     border-radius: 30px;
     color: var(--fontColor);
@@ -430,6 +438,6 @@ table#settings tr {
     text-align: center;
 }
 
-.settings-input {
-    margin-top: 0;
+::-webkit-calendar-picker-indicator {
+    color: var(--fontColor)
 }
