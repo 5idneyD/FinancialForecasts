@@ -2,7 +2,7 @@
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 {% endblock %} {% block body %}
 <form method="post">
-	<div class="body-node" id="first" style="height: fit-content; min-width: 300px; width: fit-content">
+	<div class="body-node" id="first">
 		<div class="invoice-head">
 			<div>Customer</div>
 			<div>
@@ -38,46 +38,61 @@
 			</div>
 		</div>
 
-		<button type="submit" class="invoiceForm" id="addInvoiceRow">Run Report</button><br />
+		<button type="submit" class="invoiceForm">Run Report</button><br />
 		<button type="button" class="invoiceForm" id="downloadexcel" onclick="ExportToExcel('xlsx')">
 			Download Report
 		</button>
 	</div>
 </form>
+<div class="body-node" id="second" style="width: 50vw"></div>
 
-<div class="body-node" id="second" style="min-height: fit-content; min-width: 300px; width: fit-content">
-	<table id="table">
-		<tr>
-			<th>Customer Code</th>
-			<th>Invoice Number</th>
-			<th>Invoice Date</th>
-			<th>Invoice Description</th>
-			<th>Net Value</th>
-			<th>VAT Value</th>
-			<th>Total Value</th>
-			<th>Paid</th>
-			<th>Posted By</th>
-			<th>Posted On</th>
-			<th>Year</th>
-			<th>Period</th>
-		</tr>
+<div class="body-node" id="third">
+	<div class="report">
+		<div>
+			<div>Customer Code</div>
+			<div>Invoice No.</div>
+			<div>Invoice Date</div>
+			<span class="wide">
+				<div>Invoice Description</div>
+			</span>
+			<div>Net Value</div>
+			<div>VAT</div>
+			<div>Total Value</div>
+			<div>Paid</div>
+
+			<span class="thin">
+				<div>Year</div>
+			</span>
+			<span class="thin">
+				<div>Period</div>
+			</span>
+			<div>Posted By</div>
+			<div>Posted On</div>
+		</div>
 		{% for invoice in invoices %}
-		<tr>
-			<td>{{ invoice.client_code }}</td>
-			<td>{{ invoice.transaction_number }}</td>
-			<td>{{ invoice.date }}</td>
-			<td>{{ invoice.description }}</td>
-			<td>{{ invoice.net_value }}</td>
-			<td>{{ invoice.vat_value }}</td>
-			<td>{{ invoice.total_value }}</td>
-			<td>{{ invoice.is_paid }}</td>
-			<td>{{ invoice.posted_by }}</td>
-			<td>{{ invoice.posted_on }}</td>
-			<td>{{ invoice.accounting_year }}</td>
-			<td>{{ invoice.accounting_period }}</td>
-		</tr>
+		<div>
+			<div>{{ invoice.client_code }}</div>
+			<div>{{ invoice.transaction_number }}</div>
+			<div>{{ invoice.date }}</div>
+			<span class="wide">
+				<div>{{ invoice.description }}</div>
+			</span>
+			<div>{{ invoice.net_value }}</div>
+			<div>{{ invoice.vat_value }}</div>
+			<div>{{ invoice.total_value }}</div>
+			<div>{{ invoice.is_paid }}</div>
+
+			<span class="thin">
+				<div>{{ invoice.accounting_year }}</div>
+			</span>
+			<span class="thin">
+				<div>{{ invoice.accounting_period }}</div>
+			</span>
+			<div>{{ invoice.posted_by }}</div>
+			<div>{{ invoice.posted_on }}</div>
+		</div>
 		{% endfor %}
-	</table>
+	</div>
 </div>
 <script>
 	function ExportToExcel(type, fn, dl) {

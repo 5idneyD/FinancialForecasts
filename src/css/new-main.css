@@ -309,19 +309,34 @@ form#form[method="post"] button:hover {
     cursor: pointer;
 }
 
-table.report {
-    display: flex;
-    flex-direction: column;
+div.report {
+    display: grid;
+    grid-auto-rows: auto;
+	width: 90vw;
 }
 
-table.report tr th {
-    min-width: 10vw;
-    width: fit-content;
+
+span.wide,
+span.wide div {
+	width: 17vw;}
+
+span.thin {
+	width: 6vw;
 }
 
-table.report tr td{
-    min-height: fit-content;
+div.report div {
+	display: grid;
+	grid-template-columns: repeat(12, 2fr);
+	grid-template-rows: min(8vh, min-content);
 }
+
+div.report div div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
 
 div.invoice-head {
     display: grid;
@@ -402,7 +417,7 @@ button.invoiceForm {
 
 button.invoiceForm {
     margin-top: 5vh;
-	margin-left: 5vw;
+	margin-left: 25%;
 }
 
 button#addInvoiceRow {
