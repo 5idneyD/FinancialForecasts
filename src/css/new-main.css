@@ -18,7 +18,7 @@
 	margin: 0;
 	padding: 0;
 	color: var(--fontColor);
-	font-size: large;
+    font-size : clamp(0.5rem, 2.5vw, 1.15rem);
 }
 
 @keyframes toggle-up {
@@ -309,32 +309,38 @@ form#form[method="post"] button:hover {
     cursor: pointer;
 }
 
-div.report {
+table.report {
     display: grid;
     grid-auto-rows: auto;
 	width: 90vw;
 }
 
 
-span.wide,
-span.wide div {
-	width: 17vw;}
+span.wide {
+	flex: 3;
+	align-items: stretch;
+}
 
 span.thin {
-	width: 6vw;
+	flex: 0.5;
+	align-items: stretch;
 }
 
-div.report div {
-	display: grid;
-	grid-template-columns: repeat(12, 2fr);
-	grid-template-rows: min(8vh, min-content);
+span:is(.wide, .thin) :is(th, td) {
+	height: 100%;
 }
 
-div.report div div {
+table.report tr {
+	display: flex;
+	flex-direction: row;
+}
+
+table.report tr :is(td, th) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	flex: 1;
 }
 
 
@@ -413,11 +419,13 @@ button.invoiceForm {
     height: 2rem;
 	min-width: fit-content;
 	text-align: center;
+
 }
 
 button.invoiceForm {
     margin-top: 5vh;
-	margin-left: 25%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 button#addInvoiceRow {

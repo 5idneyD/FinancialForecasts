@@ -47,56 +47,56 @@
 <div class="body-node" id="second" style="width: 50vw"></div>
 
 <div class="body-node" id="third">
-	<div class="report">
-		<div>
-			<div>Customer Code</div>
-			<div>Invoice No.</div>
-			<div>Invoice Date</div>
+	<table class="report" id="report">
+		<tr>
+			<th>Customer Code</th>
+			<th>Invoice No.</th>
+			<th>Invoice Date</th>
 			<span class="wide">
-				<div>Invoice Description</div>
+				<th>Invoice Description</th>
 			</span>
-			<div>Net Value</div>
-			<div>VAT</div>
-			<div>Total Value</div>
-			<div>Paid</div>
+			<th>Net Value</th>
+			<th>VAT</th>
+			<th>Total Value</th>
+			<th>Paid</th>
 
 			<span class="thin">
-				<div>Year</div>
+				<th>Year</th>
 			</span>
 			<span class="thin">
-				<div>Period</div>
+				<th>Period</th>
 			</span>
-			<div>Posted By</div>
-			<div>Posted On</div>
-		</div>
+			<th>Posted By</th>
+			<th>Posted On</th>
+		</tr>
 		{% for invoice in invoices %}
-		<div>
-			<div>{{ invoice.client_code }}</div>
-			<div>{{ invoice.transaction_number }}</div>
-			<div>{{ invoice.date }}</div>
+		<tr>
+			<td>{{ invoice.client_code }}</td>
+			<td>{{ invoice.transaction_number }}</td>
+			<td>{{ invoice.date }}</td>
 			<span class="wide">
-				<div>{{ invoice.description }}</div>
+				<td>{{ invoice.description }}</td>
 			</span>
-			<div>{{ invoice.net_value }}</div>
-			<div>{{ invoice.vat_value }}</div>
-			<div>{{ invoice.total_value }}</div>
-			<div>{{ invoice.is_paid }}</div>
+			<td>{{ invoice.net_value }}</td>
+			<td>{{ invoice.vat_value }}</td>
+			<td>{{ invoice.total_value }}</td>
+			<td>{{ invoice.is_paid }}</td>
 
 			<span class="thin">
-				<div>{{ invoice.accounting_year }}</div>
+				<td>{{ invoice.accounting_year }}</td>
 			</span>
 			<span class="thin">
-				<div>{{ invoice.accounting_period }}</div>
+				<td>{{ invoice.accounting_period }}</td>
 			</span>
-			<div>{{ invoice.posted_by }}</div>
-			<div>{{ invoice.posted_on }}</div>
-		</div>
+			<td>{{ invoice.posted_by }}</td>
+			<td>{{ invoice.posted_on }}</td>
+		</tr>
 		{% endfor %}
 	</div>
 </div>
 <script>
 	function ExportToExcel(type, fn, dl) {
-		var elt = document.getElementById("table");
+		var elt = document.getElementById("report")
 		var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
 		return dl
 			? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
