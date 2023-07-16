@@ -1,7 +1,18 @@
 {% set title = "Customers" %}
 {% extends "blueprint.html" %} {% block body %}
+<div id="first" class="body-node">
+	Filter Customers
+</div>
+<div id="second" class="body-node" style="min-width: 100px; width: 5vw; height: fit-content;">
+	<a href="{{ url_for('addCustomer', company=company, email=email, username=username, session_key=session_key) }}"
+		>Add Customer</a
+	>
+</div>
+<div id="third" class="body-node">
+	Top Customers
+</div>
 
-<div id="first" class="body-node" style="width: 80vw; min-height:30vh ; height: fit-content;">
+<div id="fourth" class="body-node">
 	<table class="report">
 		<tr>
 			<th>Name</th>
@@ -26,14 +37,5 @@
 	</table>
 </div>
 
-<div id="second" class="body-node" style="min-width: 100px; width: 5vw; height: fit-content;">
-	<a href="{{ url_for('addCustomer', company=company, email=email, username=username, session_key=session_key) }}"
-		>Add Customer</a
-	>
-</div>
-
-<div id="third" class="body-node">
-	Filter Customers
-</div>
 
 {% endblock %}

@@ -1,33 +1,25 @@
-{% extends "blueprint.html" %} {% block body %}
-<div id="heading">
-	<h1><u>{{company}}</u></h1>
-	<h2>Suppliers</h2>
+{% set title="Suppliers" %} {% extends "blueprint.html" %} {% block body %}
+
+<div id="first" class="body-node">Filter Suppliers</div>
+<div id="second" class="body-node" style="min-width: 100px; width: 5vw; height: fit-content">
+	<a href="{{ url_for('addSupplier', company=company, email=email, username=username, session_key=session_key) }}"
+		>Add Supplier</a
+	>
 </div>
-<div id="main" class="container-fluid">
-	<div id="nav"></div>
-	<div id="data">
-		<div class="container col align-items-center">
-			<a
-				href="{{ url_for('addSupplier', company=company, email=email, username=username, session_key=session_key) }}"
-				><button id="addClient">Add Supplier</button></a
-			>
-			<div>
-				<table id="suppliers">
-					<tr>
-						<th>Name</th>
-						<th>Code</th>
-					</tr>
-					{% for supplier in suppliers %}
-					<tr>
-						<td>{{supplier.supplier_name}}</td>
-						<td>{{supplier.supplier_code}}</td>
-					</tr>
-					{% endfor %}
-				</table>
-			</div>
-		</div>
-	</div>
+<div id="third" class="body-node">Top Suppliers</div>
+
+<div id="fourth" class="body-node">
+	<table class="report">
+		<tr>
+			<th>Name</th>
+			<th>Code</th>
+		</tr>
+		{% for supplier in suppliers %}
+		<tr>
+			<td>{{supplier.supplier_name}}</td>
+			<td>{{supplier.supplier_code}}</td>
+		</tr>
+		{% endfor %}
+	</table>
 </div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 {% endblock %}
