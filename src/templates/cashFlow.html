@@ -1,8 +1,4 @@
 {% extends "blueprint.html" %} {% block meta %} {% endblock %} {% block body %}
-<div id="heading">
-	<h1><u>{{company}}</u></h1>
-	<h2>Cash Flow</h2>
-</div>
 <div id="main">
 	<div id="nav"></div>
 	<div id="data">
@@ -16,9 +12,6 @@
 		</div> -->
 		<div id="myDiv"></div>
 	</div>
-</div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script defer src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
 <script defer type="text/javascript">
 	let bodyStyles = window.getComputedStyle(document.body)

@@ -3,13 +3,7 @@
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 {% endblock %}
 {% block body %}
-<div id="heading" class="conatiner">
-	<h1><u>{{company}}</u></h1>
-	<h2>Nominal Transactions</h2>
-</div>
 
-<div id="main" class="container-fluid">
-	<div id="nav"></div>
 	<div id="data">
 		<div>
 			<form method="post">
@@ -94,9 +88,6 @@
 			{% endfor %}
 		</table>
 	</div>
-</div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script>
 	function ExportToExcel(type, fn, dl) {
 		var elt = document.getElementById("table");

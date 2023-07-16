@@ -1,11 +1,8 @@
 {% extends "blueprint.html" %} {% block body %}
-<div id="heading">
-	<h1><u>Bank Rec</u></h1>
-	<h2>{{username}}</h2>
-</div>
-<div id="main" class="container-fluid">
 
-		<div id="nav"></div>
+
+
+
 		<div id="data">
 			<div class="container col-8">
 				<div class="row">
@@ -73,8 +70,6 @@
 				</div>
 			</form>
 		</div>
-</div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+
 <script defer src="{{ url_for('static', filename='js/bankRec.js') }}"></script>
 {% endblock %}

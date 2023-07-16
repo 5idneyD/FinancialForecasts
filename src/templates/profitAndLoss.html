@@ -2,12 +2,7 @@
 <meta id="references" data-period="{{accounting_period}}" data-year="{{accounting_year}}" />
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 {% endblock %} {% block body %}
-<div id="heading" class="conatiner">
-	<h1><u>{{company}}</u></h1>
-	<h2>Profit & Loss</h2>
-</div>
-<div id="main">
-	<div id="nav"></div>
+
 	<div id="data">
 		<form method="post">
 			<table id="pnlSettings">
@@ -73,9 +68,6 @@
 			{% endif %} {% endfor %}
 		</table>
 	</div>
-</div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script src="{{ url_for('static', filename='js/pnl.js') }}"></script>
 <script>
 	function ExportToExcel(type, fn, dl) {

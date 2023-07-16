@@ -1,16 +1,10 @@
 {% extends "blueprint.html" %} {% block body %}
-<div id="heading" class="conatiner">
-	<h1><u>{{company}}</u></h1>
-	<h2>Help Page</h2>
-</div>
+
 <div id="main">
-	<div id="nav"></div>
 	<div id="data">
 		<div id="root"></div>
 	</div>
 </div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/toggle.js') }}"></script>
 <script src="{{ url_for('static', filename='react/compiled/help.js') }}"></script>
 {% endblock %}
