@@ -1,18 +1,22 @@
 {% set title="Trial Balance" %} {% extends "blueprint.html" %} {% block meta %}
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 {% endblock %} {% block body %}
-<div id="first" class="body-node" style="width: 40vw">
-	<table id="table">
+<div id="first" class="body-node" style="width: 40vw; min-width: 500px;">
+	<table id="table" class="report" style="min-width: 500px; width: 40vw">
 		<tr class="trialBalance">
 			<th class="invoiceHeader">Nominal Code</th>
-			<th class="invoiceHeaderDescription">Account Name</th>
+			<span class="wide">
+				<th class="invoiceHeaderDescription">Account Name</th>
+			</span>
 			<th class="invoiceHeader">Debit</th>
 			<th class="invoiceHeader">Credit</th>
 		</tr>
 		{% for account in accounts %}
 		<tr class="trialBalance">
 			<td>{{ account.nominal }}</td>
-			<td>{{ account.account_name }}</td>
+			<span class="wide">
+				<td>{{ account.account_name }}</td>
+			</span>
 			{% if account.balance > 0.00 %}
 			<td>{{ account.balance }}</td>
 			<td></td>
@@ -26,10 +30,47 @@
 </div>
 
 <div class="body-node" id="second">
-	<button class="invoiceForm" id="runReport">Run Report</button>
-	<button type="button" id="downloadexcel" class="invoiceForm" onclick="ExportToExcel('xlsx')">
-		Download Report
-	</button>
+	<form method="POST">
+		<div class="invoice-head">
+			<div>Supplier</div>
+			<div>
+				<select class="invoice" name="supplier_code">
+					<option value="*" selected hidden></option>
+					{% for supplier in suppliers %}
+					<option value="{{supplier}}">{{supplier}}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div>Invoice No.</div>
+			<div><input type="invoice" class="invoice" name="invoice_number" value="" /></div>
+
+			<div>Period</div>
+			<div>
+				<select name="selected_period" class="invoice">
+					<option value="*" selected hidden></option>
+					{% for i in range(1,13) %}
+					<option value="{{i}}">{{i}}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div>Year</div>
+			<div>
+				<select name="selected_year" class="invoice">
+					<option value="*" selected hidden></option>
+					{% for i in range(2018,2024) %}
+					<option value="{{i}}">{{i}}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+
+		<button type="submit" class="invoiceForm">Run Report</button><br />
+		<button type="button" class="invoiceForm" id="downloadexcel" onclick="ExportToExcel('xlsx')">
+			Download Report
+		</button>
+	</form>
 </div>
 <script>
 	function ExportToExcel(type, fn, dl) {

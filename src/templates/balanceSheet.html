@@ -5,12 +5,53 @@
 {% block body %}
 
 
-	<div id="data">
-		<div id="buttons">
-			<button type="button" id="downloadexcel" onclick="ExportToExcel('xlsx')">Download Report</button>
+<div id="first" class="body-node" style="width: 40vw; min-width: 500px;">
+	<div id="balanceSheet" class="report" style="width: 40vw; min-width: 500px;"></div>
+</div>
+
+<div class="body-node" id="second">
+	<form method="POST">
+		<div class="invoice-head">
+			<div>Supplier</div>
+			<div>
+				<select class="invoice" name="supplier_code">
+					<option value="*" selected hidden></option>
+					{% for supplier in suppliers %}
+					<option value="{{supplier}}">{{supplier}}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div>Invoice No.</div>
+			<div><input type="invoice" class="invoice" name="invoice_number" value="" /></div>
+
+			<div>Period</div>
+			<div>
+				<select name="selected_period" class="invoice">
+					<option value="*" selected hidden></option>
+					{% for i in range(1,13) %}
+					<option value="{{i}}">{{i}}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div>Year</div>
+			<div>
+				<select name="selected_year" class="invoice">
+					<option value="*" selected hidden></option>
+					{% for i in range(2018,2024) %}
+					<option value="{{i}}">{{i}}</option>
+					{% endfor %}
+				</select>
+			</div>
 		</div>
-		<div id="balanceSheet"></div>
-	</div>
+
+		<button type="submit" class="invoiceForm">Run Report</button><br />
+		<button type="button" class="invoiceForm" id="downloadexcel" onclick="ExportToExcel('xlsx')">
+			Download Report
+		</button>
+	</form>
+</div>
 
 <script>
 	window.bsData = {{data|tojson}}

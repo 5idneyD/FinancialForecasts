@@ -7,9 +7,9 @@ function App(props) {
 	let keys = Object.keys(bsData);
 
 	return (
-		<TableContainer>
+
             
-			<Table id="bSheetTable" variant="simple">
+			<Table id="bSheetTable" className="report" variant="simple" style={{width: "40vw", minWidth: "500px"}}>
 				<Thead>
 					<Tr>
 						<Th>Nominal Code</Th>
@@ -51,7 +51,6 @@ function App(props) {
 					<Tr></Tr>
 				</Tfoot>
 			</Table>
-		</TableContainer>
 	);
 }
 
