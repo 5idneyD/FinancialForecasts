@@ -1,7 +1,7 @@
 {% extends "blueprint.html" %} {% block body %}
 
-	<div id="data">
-		<table>
+	<div class="body-node" id="first">
+		<table id="myTable">
 			<tr>
 				<th>Nominal Code</th>
 				<th>Account Name</th>
@@ -14,4 +14,59 @@
 			{% endfor %}
 		</table>
 	</div>
+<div class="body-node" id="second">
+	<b>Filter the Chart Of Accounts</b>
+	<br>
+	<input type="text" class="filterInput" id="myInputNominal" onkeyup="myFunctionNominal()" placeholder="Search nominal codes..">
+	<br>
+	<input type="text" class="filterInput" id="myInputName" onkeyup="myFunctionName()" placeholder="Search Account Names..">
+</div>
+	<script>
+		// This function will search through and filter the nominla codes
+		function myFunctionNominal() {
+		  // Declare variables
+		  var input, filter, table, tr, td, i, txtValue;
+		  input = document.getElementById("myInputNominal");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTable");
+		  tr = table.getElementsByTagName("tr");
+		
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+			  txtValue = td.textContent || td.innerText;
+			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			}
+		  }
+		}
+		</script>
+		<script>
+		// This function will search through and filter account names
+		function myFunctionName() {
+			// Declare variables
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInputName");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+		  
+			// Loop through all table rows, and hide those who don't match the search query
+			for (i = 0; i < tr.length; i++) {
+			  td = tr[i].getElementsByTagName("td")[1];
+			  if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				  tr[i].style.display = "";
+				} else {
+				  tr[i].style.display = "none";
+				}
+			  }
+			}
+		  }
+		  </script>
 {% endblock %}

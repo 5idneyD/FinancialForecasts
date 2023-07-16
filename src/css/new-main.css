@@ -198,7 +198,7 @@ div#nav div.nav-option:hover {
 	height: fit-content;
 	min-width: 300px;
 	width: fit-content;
-
+	align-items: center;
 }
 
 .ct-label,
@@ -460,4 +460,9 @@ table#settings tr {
 
 ::-webkit-calendar-picker-indicator {
     color: var(--fontColor)
+}
+
+input.filterInput {
+	margin-top: 5%;
+	color: black;
 }

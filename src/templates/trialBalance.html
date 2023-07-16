@@ -1,34 +1,36 @@
-{% extends "blueprint.html" %}
-{% block meta %} 
+{% set title="Trial Balance" %} {% extends "blueprint.html" %} {% block meta %}
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-{% endblock %}
-{% block body %}
-	<div id="data">
-		<div id="buttons">
-			<button type="button" id="downloadexcel" class="trialBalance" onclick="ExportToExcel('xlsx')">Download Report</button>
-		</div>
-		<table id="table">
-			<tr class="trialBalance">
-				<th class="invoiceHeader">Nominal Code</th>
-				<th class="invoiceHeaderDescription">Account Name</th>
-				<th class="invoiceHeader">Debit</th>
-				<th class="invoiceHeader">Credit</th>
-			</tr>
-			{% for account in accounts %}
-			<tr class="trialBalance">
-				<td>{{ account.nominal }}</td>
-				<td>{{ account.account_name }}</td>
-				{% if account.balance > 0.00 %}
-				<td>{{ account.balance }}</td>
-				<td></td>
-				{% else %}
-				<td></td>
-				<td>{{ -account.balance }}</td>
-				{% endif %}
-			</tr>
-			{% endfor %}
-		</table>
-	</div>
+{% endblock %} {% block body %}
+<div id="first" class="body-node" style="width: 40vw">
+	<table id="table">
+		<tr class="trialBalance">
+			<th class="invoiceHeader">Nominal Code</th>
+			<th class="invoiceHeaderDescription">Account Name</th>
+			<th class="invoiceHeader">Debit</th>
+			<th class="invoiceHeader">Credit</th>
+		</tr>
+		{% for account in accounts %}
+		<tr class="trialBalance">
+			<td>{{ account.nominal }}</td>
+			<td>{{ account.account_name }}</td>
+			{% if account.balance > 0.00 %}
+			<td>{{ account.balance }}</td>
+			<td></td>
+			{% else %}
+			<td></td>
+			<td>{{ -account.balance }}</td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+
+<div class="body-node" id="second">
+	<button class="invoiceForm" id="runReport">Run Report</button>
+	<button type="button" id="downloadexcel" class="invoiceForm" onclick="ExportToExcel('xlsx')">
+		Download Report
+	</button>
+</div>
 <script>
 	function ExportToExcel(type, fn, dl) {
 		var elt = document.getElementById("table");

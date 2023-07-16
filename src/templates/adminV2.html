@@ -1,115 +1,104 @@
-{% extends "blueprint.html" %} 
-{% block meta %}
-<meta name="data" accounting_year="{{accounting_year}}" accounting_period="{{accounting_period}}"/>
-{% endblock %}
-{% block body %}
-	<body>
-		<div id="heading">
-			<h1><u>{{company}}</u></h1>
-			<h2>Admin</h2>
-		</div>
-		<div id="main">
-				<div id="nav"></div>
-				<div id="data">
-					{% if admin==3 or admin=="3" %}
-					<form id="form" method="post" >
-						<div>
-							<div id="adminForm">
-								<div></div>
-								<div>
-									<button
-										type="button"
-										id="addUserButton"
-										class="adminButton"
-										data-selected="1"
-										onclick="clicked(event.srcElement.id);">
-										Add User
-									</button>
-								</div>
-								<div>
-									<button
-										type="button"
-										id="chartOfAccountsButton"
-										class="adminButton"
-										data-selected="0"
-										onclick="clicked(event.srcElement.id);">
-										Chart Of Accounts
-									</button>
-								</div>
-								<div>
-									<button
-										type="button"
-										id="removeUserButton"
-										class="adminButton"
-										data-selected="0"
-										onclick="clicked(event.srcElement.id);">
-										Delete User
-									</button>
-								</div>
-								<div>
-									<button
-										type="button"
-										id="closePeriodButton"
-										class="adminButton"
-										data-selected="0"
-										onclick="clicked(event.srcElement.id);">
-										Close Period
-									</button>
-								</div>
-								<div>
-									<button
-										type="button"
-										id="invoiceDetailsButton"
-										class="adminButton"
-										data-selected="0"
-										onclick="clicked(event.srcElement.id);">
-										Invoice Details
-									</button>
-								</div>
-								<div></div>
-							</div>
-						</div>
-						<div id="body"></div>
-					</form>
-					{% elif admin==2 or admin=="2" %}
-					<form id="form" method="post" id="adminForm">
-						<div>
-							<div id="adminForm">
-								<div></div>
-								<div>
-									<button
-										type="button"
-										id="chartOfAccountsButton"
-										class="adminButton"
-										data-selected="1"
-										onclick="clicked(event.srcElement.id);">
-										Chart Of Accounts
-									</button>
-								</div>
-								<div>
-									<button
-										type="button"
-										id="closePeriodButton"
-										class="adminButton"
-										data-selected="0"
-										onclick="clicked(event.srcElement.id);">
-										Close Period
-									</button>
-								</div>
-								<div></div>
-							</div>
-						</div>
-						<div id="body"></div>
-						<p>{{message}}</p>
-					</form>
-					{% else %}
-					<h3>You do not have Admin Permissions</h3>
-					{% endif %}
+{% extends "blueprint.html" %} {% block meta %}
+<meta name="data" accounting_year="{{accounting_year}}" accounting_period="{{accounting_period}}" />
+{% endblock %} {% block body %}
+<div id="main">
+	<div id="data">
+		{% if admin==3 or admin=="3" %}
+		<form id="form" method="post">
+			<div>
+				<div id="adminForm">
+					<div></div>
+					<div>
+						<button
+							type="button"
+							id="addUserButton"
+							class="adminButton"
+							data-selected="1"
+							onclick="clicked(event.srcElement.id);">
+							Add User
+						</button>
+					</div>
+					<div>
+						<button
+							type="button"
+							id="chartOfAccountsButton"
+							class="adminButton"
+							data-selected="0"
+							onclick="clicked(event.srcElement.id);">
+							Chart Of Accounts
+						</button>
+					</div>
+					<div>
+						<button
+							type="button"
+							id="removeUserButton"
+							class="adminButton"
+							data-selected="0"
+							onclick="clicked(event.srcElement.id);">
+							Delete User
+						</button>
+					</div>
+					<div>
+						<button
+							type="button"
+							id="closePeriodButton"
+							class="adminButton"
+							data-selected="0"
+							onclick="clicked(event.srcElement.id);">
+							Close Period
+						</button>
+					</div>
+					<div>
+						<button
+							type="button"
+							id="invoiceDetailsButton"
+							class="adminButton"
+							data-selected="0"
+							onclick="clicked(event.srcElement.id);">
+							Invoice Details
+						</button>
+					</div>
+					<div></div>
 				</div>
 			</div>
-		
-		<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='react/compiled/admin.js')}}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='js/adminButtons.js')}}"></script>
-		{% endblock %}
+			<div id="body"></div>
+		</form>
+		{% elif admin==2 or admin=="2" %}
+		<form id="form" method="post" id="adminForm">
+			<div>
+				<div id="adminForm">
+					<div></div>
+					<div>
+						<button
+							type="button"
+							id="chartOfAccountsButton"
+							class="adminButton"
+							data-selected="1"
+							onclick="clicked(event.srcElement.id);">
+							Chart Of Accounts
+						</button>
+					</div>
+					<div>
+						<button
+							type="button"
+							id="closePeriodButton"
+							class="adminButton"
+							data-selected="0"
+							onclick="clicked(event.srcElement.id);">
+							Close Period
+						</button>
+					</div>
+					<div></div>
+				</div>
+			</div>
+			<div id="body"></div>
+			<p>{{message}}</p>
+		</form>
+		{% else %}
+		<h3>You do not have Admin Permissions</h3>
+		{% endif %}
+	</div>
+	<script type="text/javascript" src="{{url_for('static', filename='react/compiled/admin.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/adminButtons.js')}}"></script>
+	{% endblock %}
+</div>
