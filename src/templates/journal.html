@@ -1,16 +1,11 @@
-{% extends "blueprint.html" %} {% block meta %}
+{% set title="Post A Journal" %} {% extends "blueprint.html" %} {% block meta %}
 <meta id="references" data-references="{{next_journal_number}}" data-company="{{company}}" />
 {% endblock %} {% block body %}
 
+<form method="post">
+		<div id="root"></div>
+</form>
 
-<div id="main">
-	<div id="data">
-		<form method="post">
-			<div id="headTable" class="container"></div>
-			<div id="mainTable"></div>
-		</form>
-	</div>
-</div>
 <script src="{{ url_for('static', filename='react/compiled/journal.js') }}"></script>
 <!-- <script src="{{url_for('static', filename='js/defaultJournalNumber.js')}}"></script> -->
 {% endblock %}

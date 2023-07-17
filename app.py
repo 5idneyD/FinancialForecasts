@@ -1357,8 +1357,11 @@ def nominalTransactions(company, email, username, session_key, theme):
     if request.method == "POST":
         transaction_type = request.form["type"]
         client_code = request.form["client_code"]
+        nominal_code = request.form["nominal_code"]
         selected_year = request.form["year"]
         selected_period = request.form["period"]
+        
+        print(nominal_code)
 
         if transaction_type != "all":
             transactions = [
@@ -1374,6 +1377,13 @@ def nominalTransactions(company, email, username, session_key, theme):
         if client_code != "":
             transactions = [
                 transaction for transaction in transactions if transaction.client_code == client_code]
+        
+        if nominal_code != "":
+             
+             transactions = [
+                transaction for transaction in transactions if transaction.nominal_code == int(nominal_code)]
+        
+        
         return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
     return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
 

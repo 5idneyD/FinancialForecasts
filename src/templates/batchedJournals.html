@@ -1,28 +1,28 @@
-{% extends "blueprint.html" %} {% block body %}
+{% set title="Batched Invoices" %} {% extends "blueprint.html" %} {% block body %}
 
-				<div id="data">
-					<form method="post">
-							<div id="buttons">
-								<button id="batchedJournalButton" type="submit">Post Reversals</button>
-							</div>
-						<table id="batchedJournals">
-							<tr>
-								<th>Nominal Code</th>
-								<th>Period</th>
-								<th>Description</th>
-								<th>Debit</th>
-								<th>Credit</th>
-							</tr>
-							{% for journal in journals %}
-							<tr>
-								<td>{{journal.nominal_code}}</td>
-								<td>{{journal.accounting_period}}</td>
-								<td>{{journal.description}}</td>
-								<td>{{journal.debit}}</td>
-								<td>{{journal.credit}}</td>
-							</tr>
-							{% endfor %}
-						</table>
-					</form>
-			</div>
-		{% endblock %}
+<div class="body-node" id="first">
+	<form method="post">
+
+		<table class="report">
+			<tr>
+				<th>Nominal Code</th>
+				<th>Period</th>
+				<th>Description</th>
+				<th>Debit</th>
+				<th>Credit</th>
+			</tr>
+			{% for journal in journals %}
+			<tr>
+				<td>{{journal.nominal_code}}</td>
+				<td>{{journal.accounting_period}}</td>
+				<td>{{journal.description}}</td>
+				<td>{{journal.debit}}</td>
+				<td>{{journal.credit}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<button class="invoiceForm" type="submit">Post Reversals</button>
+
+	</form>
+</div>
+{% endblock %}
