@@ -34,12 +34,12 @@ function App() {
 	});
 
     return (
-        <div>
-            <p>{returned}</p>
-        </div>
+        <>
+            {returned}
+        </>
     )
 }
 
-const container = document.getElementById("body");
-const root = ReactDOMClient.createRoot(container);
-root.render(<App />);
+const container = document.getElementById("adminBody");
+const adminRoot = ReactDOMClient.createRoot(container);
+adminRoot.render(<App />);

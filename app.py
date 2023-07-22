@@ -143,7 +143,7 @@ class Budgets(db.Model):
 
 
 class PasswordReset(db.Model):
-    id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     email = db.Column(db.String(40))
     code = db.Column(db.String(6))
 
@@ -289,6 +289,7 @@ def signup():
         # The verification code is saved in db
         # If the email address has already been sent a verification email, overwrite with new code in db and re-send
         if Users.query.filter(Users.email == email).first() is None:
+            print("does not exist")
             verification_code = "".join(
                 [str(random.randint(1, 9)) for number in range(6)])
             new_code = PasswordReset(email=email, code=verification_code)
@@ -323,6 +324,7 @@ def signup():
 
             return redirect(url_for("verifyAccount", email=email))
         else:
+            print("exists")
             return render_template("signup.html", message="This email address already exists, please Login")
 
     return render_template("signup.html")
@@ -527,7 +529,7 @@ def admin(company, email, username, session_key, theme):
             accounting_year = company_data.accounting_year
             accounting_period = company_data.accounting_period
             return render_template(
-                "adminV2.html",
+                "admin.html",
                 company=company,
                 email=email,
                 admin=permission_level,
@@ -546,7 +548,7 @@ def admin(company, email, username, session_key, theme):
             pass
 
     return render_template(
-        "adminV2.html",
+        "admin.html",
         company=company,
         email=email,
         admin=permission_level,

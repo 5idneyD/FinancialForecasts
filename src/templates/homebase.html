@@ -62,5 +62,47 @@
 				heading.innerHTML + "<a href=" + meta + "><img src=" + img + " alt='No Variance Logo'/></a>";
 		</script> -->
 
+		<script>
+			// This is to turn all the nav options in the submenu into link buttons
+			// Each option has the link ending as a data strribute called href
+			// This will just find the current page url and replace the ending with the
+			// option clicked on
+
+			let url = window.location.pathname;
+			url = url.substring(0, url.lastIndexOf("/"));
+
+			let options = document.querySelectorAll(".nav-option");
+			options.forEach(function (e) {
+				e.addEventListener("click", function () {
+					let extension = e.dataset.href;
+					let newUrl = url + extension;
+					window.location.assign(newUrl);
+				});
+			});
+		</script>
+
+		<script>
+			// This script is for the toggle button to minimize the menu
+			// The heading-top will still be visible, just the heading bottom
+			// will be minimized
+
+			let heading = document.querySelector("#heading");
+			let headingBottom = document.querySelector("#heading-bottom");
+			let toggle = document.querySelector("#toggle-button");
+
+			toggle.addEventListener("click", function () {
+				if (heading.dataset.expanded == "true") {
+					headingBottom.style.display = "none";
+					heading.className = "toggle-up";
+					toggle.innerHTML = "&darr;";
+					heading.dataset.expanded = "false";
+				} else {
+					headingBottom.style.display = "grid";
+					heading.className = "toggle-down";
+					toggle.innerHTML = "&uarr;";
+					heading.dataset.expanded = "true";
+				}
+			});
+		</script>
 	</body>
 </html>

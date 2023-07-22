@@ -481,15 +481,14 @@ button[name="signinButton"] {
 }
 .userLogo #userHead {
 	position: sticky;
-	width: 2.8vw;
-	height: 4vh;
+	width: 3vw;
+	height: 4.2vh;
 	border: 2px solid var(--fontColor);
 	padding: 0px;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 1vh auto 0 auto;
 	z-index: 10;
 	background-color: var(--second);
 }
@@ -498,10 +497,39 @@ button[name="signinButton"] {
 	position: sticky;
 	border: 2px solid var(--fontColor);
 	height: 5vh;
-	width: 4vw;
+	width: 4.5vw;
 	border-radius: 150px 150px 0 0;
 	-moz-border-radius:150px 150px 0 0;
 	-webkit-border-radius: 150px 150px 0 0;
 	background-color: var(--second);
-	margin: -1vh auto 0 auto;
+	margin: -1.75vh auto 0 auto;
+}
+
+.adminForm div button{
+	margin-top: 0;
+	margin-top: 3vh;
+}
+
+.adminBody {
+	display: grid;
+	grid-template-columns: auto;
+	height: 30vh;
+	grid-auto-rows: auto;
+	row-gap: 3vh;
+	height: fit-content;
+	
+}
+
+.adminBody div *{
+
+	border-radius: 30px;
+	background-color: var(--primary);
+	color: var(--fontColor);
+	height: 2rem;
+	width: 10vw;
+	text-align: center;
+	min-width: fit-content;
+	padding-right: 5%;
+	padding-left: 5%;
+
 }

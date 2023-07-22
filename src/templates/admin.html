@@ -1,0 +1,102 @@
+{% set title="Admin" %} {% extends "blueprint.html" %} {% block meta %}
+<meta name="data" accounting_year="{{accounting_year}}" accounting_period="{{accounting_period}}" />
+{% endblock %} {% block body %} {% if admin==3 or admin=="3" %}
+
+<div class="body-node adminForm" id="first" style="width: 30vw">
+	<div>
+		<button
+			class="invoiceForm"
+			type="button"
+			id="addUserButton"
+			class="adminButton"
+			data-selected="1"
+			onclick="clicked(event.srcElement.id);">
+			Add User
+		</button>
+	</div>
+
+	<div>
+		<button
+			class="invoiceForm"
+			type="button"
+			id="chartOfAccountsButton"
+			class="adminButton"
+			data-selected="0"
+			onclick="clicked(event.srcElement.id);">
+			Chart Of Accounts
+		</button>
+	</div>
+	<div>
+		<button
+			class="invoiceForm"
+			type="button"
+			id="removeUserButton"
+			class="adminButton"
+			data-selected="0"
+			onclick="clicked(event.srcElement.id);">
+			Delete User
+		</button>
+	</div>
+	<div>
+		<button
+			class="invoiceForm"
+			type="button"
+			id="closePeriodButton"
+			class="adminButton"
+			data-selected="0"
+			onclick="clicked(event.srcElement.id);">
+			Close Period
+		</button>
+	</div>
+	<div>
+		<button
+			class="invoiceForm"
+			type="button"
+			id="invoiceDetailsButton"
+			class="adminButton"
+			data-selected="0"
+			onclick="clicked(event.srcElement.id);">
+			Invoice Details
+		</button>
+	</div>
+</div>
+<div id="adminBody" class="body-node" style="width: 30vw"></div>
+
+</form>
+{% elif admin==2 or admin=="2" %}
+
+<div class="body-node adminForm" id="first" style="width: 30vw">
+	<div>
+		<button
+			class="invoiceForm"
+			type="button"
+			id="chartOfAccountsButton"
+			class="adminButton"
+			data-selected="1"
+			onclick="clicked(event.srcElement.id);">
+			Chart Of Accounts
+		</button>
+	</div>
+
+	<div>
+		<button
+			class="invoiceForm"
+			type="button"
+			id="closePeriodButton"
+			class="adminButton"
+			data-selected="0"
+			onclick="clicked(event.srcElement.id);">
+			Close Period
+		</button>
+	</div>
+</div>
+<form method="post">
+		<div id="adminBody" class="body-node" style="width: 30vw"></div>
+</form>
+{% else %}
+<h3>You do not have Admin Permissions</h3>
+{% endif %}
+
+<script type="text/javascript" src="{{url_for('static', filename='react/compiled/admin.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/adminButtons.js')}}"></script>
+{% endblock %}
