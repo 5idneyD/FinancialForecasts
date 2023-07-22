@@ -4,7 +4,6 @@ function previewChange() {
     root.style.setProperty("--third", document.querySelector("input[name='third']").value)
     root.style.setProperty("--fontColor", document.querySelector("input[name='text']").value)
     root.style.setProperty("--shadow", "none");
-   
 }
 
 

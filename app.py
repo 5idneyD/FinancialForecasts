@@ -1361,7 +1361,7 @@ def nominalTransactions(company, email, username, session_key, theme):
         selected_year = request.form["year"]
         selected_period = request.form["period"]
         
-        print(nominal_code)
+        
 
         if transaction_type != "all":
             transactions = [
