@@ -49,11 +49,16 @@ I hope for it to become a professionally used application that anyone can access
 - Add Aged Debt Page ✔️
 - Default Sales Invoice number not appearing ✔️
 
+  ## New Features Added
+  - Cash Flow Report
+  - New UI (in progress)
+  - Only using Vanilla CSS, screw Bootstrap and TailwindCSS
+
 ## Tech Stack Being Used:
 - SQLAlchemy  <strike>(SQLite3)</strike>   (MySQL) 
 - Flask
 
 -  <strike>Vue.Js</strike>   Vanilla Js & React.JS
 
-- Bootstrap 5
+- <strike>Bootstrap 5</strike> Vanilla CSS
 - Python 3.11
