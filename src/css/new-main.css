@@ -533,3 +533,18 @@ button[name="signinButton"] {
 	padding-left: 5%;
 
 }
+
+.body-node:has(.helpHead){
+	width: 40vw;
+}
+
+.helpHead {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.helpBody {
+	margin-top: 5vh;
+	padding-left: 7%;
+	padding-right: 7%;
+}
