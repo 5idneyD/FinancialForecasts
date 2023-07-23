@@ -1,37 +1,20 @@
-{% extends "blueprint.html" %} {% block body %}
-<div id="heading">
-	<h1><u>{{company}}</u></h1>
-	<h2>Add Supplier</h2>
-</div>
-<div id="main" class="container-fluid">
-	<div id="nav"></div>
-	<div id="data">
-		<form id="form" method="post">
-			<div class="row">
-				<div class="col">
-					<input type="name" name="supplier_name" placeholder="Supplier Name"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<input
-						type="name"
-						name="supplier_code"
-						placeholder="Supplier Code"
-						minlength="6"
-						maxlength="6"
-						aria-required="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col mt-5">
-					<button type="submit" name="addCustomerButton">Add Supplier</button>
-				</div>
-			</div>
-		</form>
+{% set title="Add Supplier" %} {% extends "blueprint.html" %} {% block body %}
+
+<form id="form" method="post">
+	<div class="body-node addClient" id="first" style="height: fit-content">
+		<input type="name" name="supplier_name" placeholder="Supplier Name" required="true" />
+		<input
+			type="name"
+			name="supplier_code"
+			placeholder="Supplier Code"
+			minlength="6"
+			maxlength="6"
+			required="true" />
+
+		<input type="email" name="supplier_email" placeholder="Supplier Email" required="true" />
+
+		<input type="name" name="supplier_address" placeholder="Address" required="true" />
+		<button type="submit">Add Supplier</button>
 	</div>
-</div>
-<script src="{{ url_for('static', filename='react/compiled/navigation.js') }}"></script>
-<script src="{{ url_for('static', filename='js/navDropdown.js') }}"></script>
+</form>
 {% endblock %}

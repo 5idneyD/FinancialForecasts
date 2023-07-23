@@ -548,3 +548,21 @@ button[name="signinButton"] {
 	padding-left: 7%;
 	padding-right: 7%;
 }
+
+.addClient {
+	display: grid;
+	grid-template-columns: auto;
+	grid-auto-rows: 5vh;
+	row-gap: 3vh;
+	width: fit-content;
+	min-width: 300px;
+	margin-top: -10vh;
+}
+
+.addClient :is(input, button) {
+	margin-left: auto;
+	margin-right: auto;
+	width: fit-content;
+	min-width: 200px;
+	font-size: 0.8rem;
+}

@@ -1,27 +1,24 @@
-{% set title = "Add Customer" %}
-{% extends "blueprint.html" %} {% block body %}
-
-<div class="body-node" id="first" style="height: fit-content">
-	<form id="form" method="post">
-		<input type="name" name="customer_name" placeholder="Customer Name" aria-required="true" />
-
+{% set title = "Add Customer" %} {% extends "blueprint.html" %} {% block body %}
+<form id="form" method="post">
+	<div class="body-node addClient" id="first" style="height: fit-content">
+		<input type="name" name="customer_name" placeholder="Customer Name" required="true" />
 		<input
 			type="name"
 			name="customer_code"
 			placeholder="Customer Code"
 			minlength="6"
 			maxlength="6"
-			aria-required="true" />
+			required="true" />
 
-		<input type="email" name="customer_email" placeholder="Customer Email" aria-required="true" />
+		<input type="email" name="customer_email" placeholder="Customer Email" required="true" />
 
-		<input type="name" name="customer_address" placeholder="Address" aria-required="true" />
+		<input type="name" name="customer_address" placeholder="Address" required="true" />
 
-		<input type="name" name="customer_credit_limit" placeholder="Credit Limit (£)" aria-required="true" />
+		<input type="name" name="customer_credit_limit" placeholder="Credit Limit (£)" required="true" />
 
-		<input type="name" name="customer_payment_terms" placeholder="Payment Terms (days)" aria-required="true" />
+		<input type="name" name="customer_payment_terms" placeholder="Payment Terms (days)" required="true" />
 
-		<button type="submit" name="addCustomerButton">Add Customer</button>
-	</form>
-</div>
+		<button type="submit">Add Customer</button>
+	</div>
+</form>
 {% endblock %}
