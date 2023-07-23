@@ -12,6 +12,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 import random
+import string
 from dotenv import load_dotenv
 from bin.generateInvoice import loadInvoiceTemplate
 from pyinvoice.models import Item
@@ -474,11 +475,50 @@ def admin(company, email, username, session_key, theme):
         if "addUserForm" in request.form:
             new_name = request.form["name"]
             new_email = request.form["email"]
-            new_password = request.form["password"]
+            
+            # Generating random inintial password
+            # User will change password when logged in
+            new_password = "".join(random.choice(string.ascii_lowercase+string.digits) for i in range(10))
             password = pbkdf2_sha256.hash(new_password)
+            
+            # By default givin admin level 1
+            # This is the lowest
             admin_permission = "1"
             admin_permission = request.form["adminLevel"]
-
+            
+            # Sending an email to the new address used
+            # Assigning a random password at the start
+            # instead of the admin user giving one
+            # This is for security reasons
+            mail_server = os.getenv("MAIL_SERVER")
+            mail_port = os.getenv("MAIL_PORT")
+            mail = smtplib.SMTP_SSL(mail_server, mail_port)
+            sender = os.getenv("EMAIL_SENDER")
+            password = os.getenv("EMAIL_PASSWORD")
+            mail.login(sender, password)
+            recipient = new_email
+            subject = "No Variance - New User"
+            msg_text = f"""
+            Hello,
+            You are being sent this email as this email address has recently been added to {company}'s No Variance account.
+            
+            To confirm your account, you will need to log in with the following details:
+            email address: {recipient}
+            password: {new_password}
+            
+            Please note this password is encrypted, and nobody knows this password other than yourself.
+            Once you have logged in, please go to the Change password page (found under the 'Other' tab) and re-set your password.
+            
+            Please do not share your password. We will never ask for your password.
+            
+            Kind regards,
+            
+            No Variance Accounting Software
+            
+            """
+            msg = f"From: {sender}\r\nTo: {recipient}\r\nsubject: {subject}\r\n{msg_text}\r\n"
+            mail.sendmail(sender, recipient, msg)
+            mail.quit()
             new_user = Users(
                 company=company, username=new_name, email=new_email, password=password, admin=admin_permission
             )

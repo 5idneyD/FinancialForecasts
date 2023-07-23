@@ -1,29 +1,24 @@
 import React from "react";
 import { ReactDOM } from "react";
 
-
 export default function RemoveUser() {
 	return (
-		<div>
-			<div id="adminSection">
+		<form method="post">
+			<div className="adminBody">
 				<div>
-					<div>
-						<input type="email" name="email" placeholder="user's email" aria-required="true" />
-					</div>
+					<input type="email" name="email" placeholder="user's email" required="true" />
 				</div>
+
 				<div>
-					<div>
-						<input type="password" name="password" placeholder="admin password" aria-required="true" />
-					</div>
+					<input type="password" name="password" placeholder="admin password" required="true" />
 				</div>
+
 				<div>
-					<div>
-						<button type="submit" name="removeUserForm">
-							Remove User
-						</button>
-					</div>
+					<button type="submit" name="removeUserForm">
+						Remove User
+					</button>
 				</div>
 			</div>
-		</div>
+		</form>
 	);
 }

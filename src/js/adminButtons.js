@@ -13,11 +13,5 @@ function clicked(buttonId) {
         } else {
             element.dataset.selected = "0";
         }
-        if (element.id == buttonId) {
-            element.style.backgroundColor = dark;
-            element.style.color = light;
-        } else {
-            element.style.backgroundColor = "rgba(20, 20, 20, 0.4)";
-        }
      });
 }

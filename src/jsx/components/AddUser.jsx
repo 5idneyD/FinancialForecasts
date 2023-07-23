@@ -3,7 +3,8 @@ import { ReactDOM } from "react";
 
 export default function AddUser() {
 	return (
-		<div className="adminBody">
+		<form method="post">
+			<div className="adminBody">
 				<div>
 					<input type="text" name="name" placeholder="name" required="true" />
 				</div>
@@ -11,11 +12,6 @@ export default function AddUser() {
 				<div>
 					<input type="email" name="email" placeholder="email" required="true" />
 				</div>
-
-				<div>
-					<input type="password" name="password" placeholder="password" required="true" />
-				</div>
-
 				<div>
 					<select name="adminLevel" class="adminLevelSelect">
 						<option>Select Permission Level</option>
@@ -29,7 +25,8 @@ export default function AddUser() {
 					<button type="submit" name="addUserForm">
 						Add User
 					</button>
-                </div>
-		</div>
+				</div>
+			</div>
+		</form>
 	);
 }

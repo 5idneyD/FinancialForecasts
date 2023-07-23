@@ -3,26 +3,22 @@ import { ReactDOM } from "react";
 
 export default function RemoveUser() {
 	return (
-		<div>
-			<div id="adminSection">
+		<form method="post">
+			<div className="adminBody">
 				<div>
-					<div>
-						<input type="name" name="vat_number" placeholder="VAT Number" aria-required="true" />
-					</div>
+					<input type="name" name="vat_number" placeholder="VAT Number" required="true" />
 				</div>
+
 				<div>
-					<div>
-						<input type="email" name="email" placeholder="Email To Include" aria-required="true" />
-					</div>
+					<input type="email" name="email" placeholder="Email To Include" required="true" />
 				</div>
+
 				<div>
-					<div>
-						<button type="submit" name="invoiceDetailsForm">
-							Submit
-						</button>
-					</div>
+					<button type="submit" name="invoiceDetailsForm">
+						Submit
+					</button>
 				</div>
 			</div>
-		</div>
+		</form>
 	);
 }

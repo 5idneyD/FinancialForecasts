@@ -5,29 +5,26 @@ import { Alert } from "@chakra-ui/react";
 export default function RemoveUser(props) {
 
 	return (
-		<div>
-			<div id="adminSection">
-				<div>
+		<form method="post">
+			<div className="adminBody">
 					<div>
-						<p>Current Year: {props.year}</p>
+						Current Year: {props.year}
 					</div>
-				</div>
-				<div>
+			
 					<div>
-						<p>Current Period: {props.period}</p>
+						Current Period: {props.period}
 					</div>
-				</div>
-				<div>
+			
 					<div>
 						<button type="submit" name="closePeriodForm">
 							Close Period
 						</button>
 					</div>
-				</div>
+			
 
-				<input type="name" name="period" value="` + accounting_period + `" />
-				<input type="name" name="year" value="` + accounting_year + `" />
+				<input type="name" name="period" value="` + accounting_period + `" style={{display: "none"}}/>
+				<input type="name" name="year" value="` + accounting_year + `" style={{display: "none"}}/>
 			</div>
-		</div>
+		</form>
 	);
 }
