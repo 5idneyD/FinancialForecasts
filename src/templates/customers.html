@@ -11,7 +11,7 @@
 </div>
 <div id="third" class="body-node">
 	Top Customers
-	<div id="top-customers"></div>
+	<div id="top-clients"></div>
 	<div id="legend">
 		Paid <div id="legend-0"></div>
 		Un-Paid <div id="legend-1"></div>
@@ -42,7 +42,8 @@
 		{% endfor %}
 	</table>
 </div>
-<script defer type="text/javascript">
+
+ <script defer type="text/javascript">
 
 		let customers = {{total_sales|tojson|safe}};
 	console.log(customers)
@@ -59,7 +60,7 @@
 
 		console.log(paid)
 
-		new Chartist.Bar("#top-customers", {
+		new Chartist.Bar("#top-clients", {
 			labels: x,
 			series: [paid, unpaid]
 		},
@@ -78,5 +79,6 @@
 		  });
 		}
 	})
-</script>
+</script> 
+
 {% endblock %}

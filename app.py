@@ -647,7 +647,6 @@ def dashboard(company, email, username, session_key, theme):
         total_values=data,
     )
 
-
 # Shows user all of their nominal accounts in a sorted order
 # They can create new accounts on the admin page
 # Once an account is created, it cannot be deleted
@@ -755,13 +754,46 @@ def addCustomer(company, email, username, session_key, theme):
     )
 
 
+def supplierBalances(company, client="%%"):
+    suppliers = Suppliers.query.filter(
+    Suppliers.company == company, Suppliers.supplier_code.ilike(client)).all()
+    balances = {}
+    total_sales = {}
+    for i in suppliers:
+        balances[i.supplier_code] = 0.00
+        total_sales[i.supplier_code] = [0.00, 0.00, 0.00]
+
+    transactions = NominalTransactions.query.filter(
+        NominalTransactions.company == company,
+        NominalTransactions.client_code.ilike(client),
+        NominalTransactions.transaction_type != "Journal",
+        NominalTransactions.client_code.in_(set(balances.keys())),
+    ).all()
+
+    for i in transactions:
+        if i.is_paid == "False":
+            balances[i.client_code] += float(i.total_value)
+            total_sales[i.client_code][1] += float(i.total_value)
+        else:
+            total_sales[i.client_code][0] += float(i.total_value)
+        total_sales[i.client_code][2] += float(i.total_value)
+
+    return suppliers, balances, total_sales
+
+
 # List of each company's suppliers
 # Might create personal function to access and query the list more easily
 # e.g. Only select <x> supplier if requested
 @app.route("/<company>/<email>/<username>/<session_key>/Suppliers", methods=["POST", "GET"])
 @login_required
 def suppliers(company, email, username, session_key, theme):
-    suppliers = Suppliers.query.filter_by(company=company).all()
+
+    suppliers, balances, total_sales = supplierBalances(company)
+    
+    # Sort and only render top 3 suppliers
+    total_sales = sorted(total_sales.items(), key=lambda x : x[1], reverse=True)[:3]
+   
+   
     return render_template(
         "suppliers.html",
         company=company,
@@ -769,7 +801,8 @@ def suppliers(company, email, username, session_key, theme):
         username=username,
         session_key=session_key,
         suppliers=suppliers,
-        design=theme,
+        total_sales=total_sales,
+        design=theme
     )
 
 

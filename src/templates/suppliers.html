@@ -1,4 +1,11 @@
-{% set title="Suppliers" %} {% extends "blueprint.html" %} {% block body %}
+{% set title="Suppliers" %} {% extends "blueprint.html" %} 
+{% block meta %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.min.js"></script>
+
+{% endblock %}
+
+{% block body %}
 
 <div id="first" class="body-node">Filter Suppliers</div>
 <div id="second" class="body-node" style="min-width: 100px; width: 5vw; height: fit-content">
@@ -6,7 +13,16 @@
 		>Add Supplier</a
 	>
 </div>
-<div id="third" class="body-node">Top Suppliers</div>
+<div id="third" class="body-node">
+	Top Suppliers
+	<div id="top-clients"></div>
+	<div id="legend">
+		Paid
+		<div id="legend-0"></div>
+		Un-Paid
+		<div id="legend-1"></div>
+	</div>
+</div>
 
 <div id="fourth" class="body-node">
 	<table class="report">
@@ -22,4 +38,44 @@
 		{% endfor %}
 	</table>
 </div>
+
+<script defer type="text/javascript">
+
+	let customers = {{total_sales|tojson|safe}};
+	console.log(customers)
+	let x = [];
+	let y = [];
+	let paid = []
+	let unpaid = []
+
+	for (let i = 0; i < customers.length; i++){
+		x.push(customers[i][0]);
+		paid.push(customers[i][1][0]);
+		unpaid.push(customers[i][1][1])
+	};
+
+	console.log("unpaid", unpaid)
+
+	new Chartist.Bar("#top-clients", {
+		labels: x,
+		series: [paid, unpaid]
+	},
+	{ 
+	stackBars: true,
+	height: "25vh",
+	axisY: {
+	  labelInterpolationFnc: function(value) {
+		return (value / 1000) + 'k';
+	  }
+	}
+  }).on('draw', function(data) {
+	if(data.type === 'bar') {
+	  data.element.attr({
+		style: 'stroke-width: 30px'
+	  });
+	}
+})
+</script> 
+
+
 {% endblock %}
