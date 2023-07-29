@@ -29,11 +29,15 @@
 		<tr>
 			<th>Name</th>
 			<th>Code</th>
+			<th>Address</th>
+			<th>Email</th>
 		</tr>
 		{% for supplier in suppliers %}
 		<tr>
 			<td>{{supplier.supplier_name}}</td>
 			<td>{{supplier.supplier_code}}</td>
+			<td>{{supplier.supplier_address}}</td>
+			<td>{{supplier.supplier_email}}</td>
 		</tr>
 		{% endfor %}
 	</table>
@@ -53,8 +57,6 @@
 		paid.push(customers[i][1][0]);
 		unpaid.push(customers[i][1][1])
 	};
-
-	console.log("unpaid", unpaid)
 
 	new Chartist.Bar("#top-clients", {
 		labels: x,

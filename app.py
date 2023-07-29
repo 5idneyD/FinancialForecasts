@@ -108,6 +108,8 @@ class Suppliers(db.Model):
     company = db.Column(db.String(40))
     supplier_name = db.Column(db.String(40))
     supplier_code = db.Column(db.String(6))
+    supplier_email = db.Column(db.String(40))
+    supplier_address = db.Column(db.String(100))
 
 
 class NominalTransactions(db.Model):
@@ -815,8 +817,12 @@ def addSupplier(company, email, username, session_key, theme):
     if request.method == "POST":
         supplier_name = request.form["supplier_name"]
         supplier_code = request.form["supplier_code"]
+        supplier_email = request.form["supplier_email"]
+        supplier_address = request.form["supplier_address"]
+            
         supplier = Suppliers(
-            company=company, supplier_name=supplier_name, supplier_code=supplier_code)
+            company=company, supplier_name=supplier_name, supplier_code=supplier_code,
+            supplier_email=supplier_email, supplier_address=supplier_address)
         db.session.add(supplier)
         db.session.commit()
 
