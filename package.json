@@ -41,6 +41,7 @@
     "@mdi/react": "^1.6.1",
     "@mui/icons-material": "^5.11.16",
     "babel-loader": "^9.1.2",
+    "chartist-plugin-legend": "^0.6.2",
     "chokidar": "^3.5.3",
     "concurrently": "^7.6.0",
     "css-loader": "^6.7.3",

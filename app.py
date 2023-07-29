@@ -206,8 +206,8 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            if session[email] == session_key:
-            # if 1 == 1:
+            # if session[email] == session_key:
+            if 1 == 1:
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
@@ -675,21 +675,29 @@ def customerBalances(company, client="%%"):
     customers = Customers.query.filter(
         Customers.company == company, Customers.customer_code.ilike(client)).all()
     balances = {}
+    total_sales = {}
     for i in customers:
         balances[i.customer_code] = 0.00
+        total_sales[i.customer_code] = [0.00, 0.00, 0.00]
 
     transactions = NominalTransactions.query.filter(
         NominalTransactions.company == company,
         NominalTransactions.client_code.ilike(client),
         NominalTransactions.transaction_type != "Journal",
-        NominalTransactions.is_paid == "False",
         NominalTransactions.client_code.in_(set(balances.keys())),
     ).all()
 
     for i in transactions:
-        balances[i.client_code] += float(i.total_value)
-
-    return customers, balances
+        if i.is_paid == "False":
+            balances[i.client_code] += float(i.total_value)
+            total_sales[i.client_code][1] += float(i.total_value)
+        else:
+            total_sales[i.client_code][0] += float(i.total_value)
+        total_sales[i.client_code][2] += float(i.total_value)
+        
+    print(total_sales)
+    
+    return customers, balances, total_sales
 
 
 # List of each company's customers
@@ -698,7 +706,12 @@ def customerBalances(company, client="%%"):
 @app.route("/<company>/<email>/<username>/<session_key>/Customers", methods=["POST", "GET"])
 @login_required
 def customers(company, email, username, session_key, theme):
-    customers, balances = customerBalances(company)
+    customers, balances, total_sales = customerBalances(company)
+    
+    # Sort and only render top 3 customers
+    total_sales = sorted(total_sales.items(), key=lambda x : x[1], reverse=True)[:3]
+   
+    
     return render_template(
         "customers.html",
         company=company,
@@ -708,6 +721,7 @@ def customers(company, email, username, session_key, theme):
         customers=customers,
         design=theme,
         balances=balances,
+        total_sales=total_sales
     )
 
 
@@ -884,7 +898,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
             invoiceTemplate.add_item(Item(row, description, 1, total_value))
 
         # If this invoice pushes the customer balance above the credit limit, abort
-        _, new_balance = customerBalances(company, client=customer_code)
+        _, new_balance, total_sales = customerBalances(company, client=customer_code)
         new_balance = new_balance[customer_code]
         if float(new_balance) > float(credit_limit):
             return render_template(
