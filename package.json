@@ -5,7 +5,7 @@
   "private": true,
   "config": {
     "jsx": "src/jsx/navigation.jsx src/jsx/help.jsx src/jsx/journal.jsx src/jsx/indexList.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx src/jsx/home.jsx",
-    "css": "src/css/new-main.css src/css/mobile.css src/css/index.css src/css/mobile_index.css"
+    "css": "src/css/new-main.css src/css/index.css src/css/mobile_index.css"
   },
   "directories.man": {
     "js": "./src/js",

@@ -3,7 +3,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.min.js"></script>
 
 {% endblock %} {% block body %}
-<div id="first" class="body-node">Filter Customers</div>
+<div id="first" class="body-node">
+	<b>Filter</b>
+	<br>
+	<input type="text" class="filterInput" id="myInputName" onkeyup="myFunctionName()" placeholder="Search Account Names...">
+<br>
+	<input type="text" class="filterInput" id="myInputNominal" onkeyup="myFunctionNominal()" placeholder="Search Nominal Codes...">
+
+</div>
+
+
 <div id="second" class="body-node" style="min-width: 100px; width: 5vw; height: fit-content">
 	<a href="{{ url_for('addCustomer', company=company, email=email, username=username, session_key=session_key) }}"
 		>Add Customer</a
@@ -80,5 +89,58 @@
 		}
 	})
 </script> 
+
+
+<script>
+	// This function will search through and filter the nominla codes
+	function myFunctionNominal() {
+	  // Declare variables
+	  let input, filter, table, tr, td, i, txtValue;
+	  input = document.getElementById("myInputNominal");
+	  filter = input.value.toUpperCase();
+	  table = document.querySelector(".report");
+	  tr = table.getElementsByTagName("tr");
+	
+	  // Loop through all table rows, and hide those who don't match the search query
+	  for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[0];
+		if (td) {
+		  txtValue = td.textContent || td.innerText;
+		  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			tr[i].style.display = "";
+		  } else {
+			tr[i].style.display = "none";
+		  }
+		}
+	  }
+	}
+
+
+		// This function will search through and filter account names
+		function myFunctionName() {
+			// Declare variables
+			let input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInputName");
+			filter = input.value.toUpperCase();
+			table = document.querySelector(".report")
+			tr = table.getElementsByTagName("tr");
+		  
+			// Loop through all table rows, and hide those who don't match the search query
+			for (i = 0; i < tr.length; i++) {
+			  td = tr[i].getElementsByTagName("td")[1];
+			  if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				  tr[i].style.display = "";
+				} else {
+				  tr[i].style.display = "none";
+				}
+			  }
+			}
+		  }
+	</script>
+
+
+
 
 {% endblock %}
