@@ -25,14 +25,14 @@ themeSelector.addEventListener("change", function () {
         thirdInput.value = "purple";
         textInput.value = "black";
     } else if (themeSelector.value == "dark") {
-        root.style.setProperty("--primary", "#030518");
-        root.style.setProperty("--second", "#0c1027");
-        root.style.setProperty("--third", "purple");
+        root.style.setProperty("--primary", "#232323");
+        root.style.setProperty("--second", "#363636");
+        root.style.setProperty("--third", "#fae018");
         root.style.setProperty("--fontColor", "white");
-        root.style.setProperty("--shadow", "20px 20px 60px #252e48, -20px -20px 60px #252e48");
-        primaryInput.value = "#030518";
-        secondInput.value = "#0c1027";
-        thirdInput.value = "purple";
+        root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323");
+        primaryInput.value = "#232323";
+        secondInput.value = "#363636";
+        thirdInput.value = "#fae018";
         textInput.value = "white";
     } 
 });
