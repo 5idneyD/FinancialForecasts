@@ -685,6 +685,7 @@ def customerBalances(company, client="%%"):
         NominalTransactions.company == company,
         NominalTransactions.client_code.ilike(client),
         NominalTransactions.transaction_type != "Journal",
+        NominalTransactions.transaction_type != "payment",
         NominalTransactions.client_code.in_(set(balances.keys())),
     ).all()
 
@@ -769,6 +770,7 @@ def supplierBalances(company, client="%%"):
         NominalTransactions.company == company,
         NominalTransactions.client_code.ilike(client),
         NominalTransactions.transaction_type != "Journal",
+        NominalTransactions.transaction_type != "payment",
         NominalTransactions.client_code.in_(set(balances.keys())),
     ).all()
 
