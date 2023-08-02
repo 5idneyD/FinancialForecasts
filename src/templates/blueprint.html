@@ -226,5 +226,20 @@
 				}
 			});
 		</script>
+		<!-- <script defer>
+			// This script converts all zeros in tables to a dash for display reasons
+			let cells = document.querySelectorAll("td");
+			
+			cells.forEach(function(cell){
+				const cellValue = cell.innerHTML;
+				let newVal = Intl.NumberFormat("en-US").format(cell.innerHTML);
+				if (newVal == "NaN") {
+
+				} else {
+					cell.innerHTML = newVal;
+				}
+			})
+				
+		</script> -->
 	</body>
 </html>

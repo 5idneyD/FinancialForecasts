@@ -341,6 +341,14 @@ table.report tr :is(td, th) {
 	flex: 1;
 }
 
+table.report tr :is(td) {
+	margin-top: 3vh;
+}
+
+tr.summaryRow {
+	font-weight: bold;
+}
+
 div.invoice-head {
 	display: grid;
 	grid-template-columns: auto auto;

@@ -555,8 +555,11 @@ def admin(company, email, username, session_key, theme):
             db.session.commit()
 
         elif "closePeriodForm" in request.form:
+
             current_period = request.form["period"]
             current_year = request.form["year"]
+            print("current period", current_period)
+            print("current year", current_year)
             if current_period == "12":
                 new_period = "1"
                 new_year = str(int(current_year) + 1)

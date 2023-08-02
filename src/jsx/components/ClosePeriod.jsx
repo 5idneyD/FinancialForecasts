@@ -22,8 +22,8 @@ export default function RemoveUser(props) {
 					</div>
 			
 
-				<input type="name" name="period" value="` + accounting_period + `" style={{display: "none"}}/>
-				<input type="name" name="year" value="` + accounting_year + `" style={{display: "none"}}/>
+				<input type="name" name="period" value={props.period} style={{display: "none"}}/>
+				<input type="name" name="year" value={props.year} style={{display: "none"}}/>
 			</div>
 		</form>
 	);

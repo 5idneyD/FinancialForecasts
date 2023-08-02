@@ -12,8 +12,8 @@ function App() {
 	
     const [returned, setReturned] = useState(<AddUser/>)
 
-	const accounting_year = document.querySelector("meta[name='data']").getAttribute("accounting_year");
-	const accounting_period = document.querySelector("meta[name='data']").getAttribute("accounting_period");
+	const accounting_year_close = document.querySelector("meta[name='data']").getAttribute("accounting_year");
+	const accounting_period_close = document.querySelector("meta[name='data']").getAttribute("accounting_period");
 
 
 	let buttons = document.querySelectorAll(".adminButton");
@@ -28,7 +28,7 @@ function App() {
             } else if (e.id == "invoiceDetailsButton"){
                 setReturned(<InvoiceDetails/>)
             } else if (e.id == "closePeriodButton"){
-                setReturned(<ClosePeriod year={accounting_year} period={accounting_period}/>)
+                setReturned(<ClosePeriod year={accounting_year_close} period={accounting_period_close}/>)
             }
 		});
 	});
