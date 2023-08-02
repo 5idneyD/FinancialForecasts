@@ -1,7 +1,8 @@
 // adding binder so that script only executes after the entie page has loaded
 // This is to give the react code time to craete the table before adding more rows
+// Removed binder as no longer needed
+// was window.onload(){}
 
-window.onload = function () {
 	var els = document.querySelectorAll(".table_row");
 	var assetsTotal = 0;
 	var liabilitiesTotal = 0;
@@ -63,4 +64,3 @@ window.onload = function () {
 		netAssetsRow.children[2].innerText = netAssets;
 	}
 
-}

@@ -9,11 +9,11 @@
 			// The data is parsed through via jinja2 from the backend
 			// Placing this cript at the top as there is an unpleasent flash
 			// Between the deafult and these settings otherwise
-			let design = "{{design|safe}}".split(",")
+			let design = "{{design|safe}}".split(",");
 			let primary = design[0];
-			let second = design[1]
-			let third= design[2]
-			let text = design[3]
+			let second = design[1];
+			let third = design[2];
+			let text = design[3];
 
 			let root = document.querySelector(":root");
 			root.style.setProperty("--primary", primary);
@@ -24,15 +24,13 @@
 			// If the theme is set to "light", add a certain shadow
 			// The the theme is set to "dark", add a another shadow
 			// Else set no shadow
-			if (primary == "#dedeea"){
-				root.style.setProperty("--shadow", 
-				"20px 20px 60px #bebebe, -20px -20px 60px #ffffff")
-			} else if (primary == "#232323"){
-				root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323")
+			if (primary == "#dedeea") {
+				root.style.setProperty("--shadow", "20px 20px 60px #bebebe, -20px -20px 60px #ffffff");
+			} else if (primary == "#232323") {
+				root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323");
 			} else {
-				root.style.setProperty("--shadow", "none")
+				root.style.setProperty("--shadow", "none");
 			}
-
 		</script>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -43,7 +41,7 @@
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
-		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %} 
+		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %}
 		<meta
 			name="logo"
 			id="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}" />
@@ -74,11 +72,7 @@
 					<b>{{username}}</b><br />
 					{{company}}
 					<br />
-					{% if title is defined %}
-					{{title}}
-					{% else %}
-					Dashboard
-					{% endif %}
+					{% if title is defined %} {{title}} {% else %} Dashboard {% endif %}
 				</div>
 				<div class="box sales">Sales</div>
 				<div class="box purchase">Purchase</div>
@@ -118,14 +112,10 @@
 			</div>
 		</div>
 		<div id="toggle">
-			<div id="toggle-button">
-				&uarr;
-			</div>
+			<div id="toggle-button">&uarr;</div>
 		</div>
 		<div id="body">{% block body %} {% endblock %}</div>
-		<footer style="background-color: var(--light); color: white">
-		
-		</footer>
+		<footer style="background-color: var(--light); color: white"></footer>
 		<!-- <script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			let meta = document.head.querySelector("meta[name='logo']").id;
@@ -165,7 +155,7 @@
 
 						// Display submenu of option selected
 						subMenu.style.display = "grid";
-						e.style.border = "2px solid "+third;
+						e.style.border = "2px solid " + third;
 
 						// Close all other nav options
 						navOptions.forEach(function (q) {
@@ -226,20 +216,16 @@
 				}
 			});
 		</script>
-		<!-- <script defer>
+		<script defer>
 			// This script converts all zeros in tables to a dash for display reasons
 			let cells = document.querySelectorAll("td");
-			
-			cells.forEach(function(cell){
-				const cellValue = cell.innerHTML;
-				let newVal = Intl.NumberFormat("en-US").format(cell.innerHTML);
-				if (newVal == "NaN") {
 
-				} else {
-					cell.innerHTML = newVal;
+			cells.forEach(function (cell) {
+				const cellValue = cell.innerHTML;
+				if (cellValue == 0) {
+					cell.innerHTML = "-";
 				}
-			})
-				
-		</script> -->
+			});
+		</script>
 	</body>
 </html>
