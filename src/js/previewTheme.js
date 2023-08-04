@@ -27,12 +27,12 @@ themeSelector.addEventListener("change", function () {
     } else if (themeSelector.value == "dark") {
         root.style.setProperty("--primary", "#232323");
         root.style.setProperty("--second", "#363636");
-        root.style.setProperty("--third", "#fae018");
+        root.style.setProperty("--third", "#66c0f4");
         root.style.setProperty("--fontColor", "white");
         root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323");
         primaryInput.value = "#232323";
         secondInput.value = "#363636";
-        thirdInput.value = "#fae018";
+        thirdInput.value = "#66c0f4";
         textInput.value = "white";
     } 
 });

@@ -189,7 +189,7 @@ def before_request():
     #       request.base_url, "\t", request.remote_addr)
 
     # Do not respond to requests with wp- (it's a bot looking for wordpress sites)
-    if "wp-" in request.path:
+    if "wp-" in request.path or ".php" in request.path:
         print("Bot intruder")
         return redirect(url_for("index"))
     # Do not allow route access to any url with .env in it
@@ -1792,4 +1792,4 @@ def cashFlow(company, email, username, sesion_key, theme):
 
 debug = os.getenv("DEBUG")
 if __name__ == "__main__":
-    app.run(debug=debug)
+    app.run(host="0.0.0.0", debug=debug)

@@ -1,42 +1,37 @@
-{% extends "blueprint.html" %} {% block body %}
+{% set title="Add Budget" %} {% extends "blueprint.html" %} {% block body %}
 
-		<div id="main" class="container-fluid">
-				<div id="data">
-					<form method="post">
-						<div class="col-5">
-							<table>
-								<tr>
-									<td>Year</td>
-									<td>
-										<select name="year" class="invoice">
-											{% for i in range(2024, 2018, -1) %}
-											<option value="{{i}}">{{i}}</option>
-											{% endfor %}
-										</select>
-									</td>
-								</tr>
-							</table>
-							<button type="submit">Save Budget</button>
-						</div>
-						<div>
-							<table id="budgetTable">
-								<tr>
-									<th class="col">Nominal Code</th>
-									{% for i in range(1, 13) %}
-									<th class="col">{{i}}</th>
-									{% endfor %}
-								</tr>
-								{% for account in accounts %}
-								<tr>
-									<td>{{account.nominal}}</td>
-									{% for i in range(1, 13) %}
-									<td><input type="budget" name="{{account.nominal}}_{{i}}"/></td>
-									{% endfor %}
-								</tr>
-								{% endfor %}
-							</table>
-						</div>
-					</form>
-			</div>
+<div class="body-node" id="first">
+	<div class="invoice-head">
+		<div>Year</div>
+		<div>
+			<select name="year" class="invoice">
+				{% for i in range(2024, 2018, -1) %}
+				<option value="{{i}}">{{i}}</option>
+				{% endfor %}
+			</select>
 		</div>
-		{% endblock %}
+	</div>
+	<button type="button" class="invoiceForm">Upload Excel</button>
+	<button type="submit" id="submitInvoice" class="invoiceForm">Save Budget</button>
+</div>
+<div class="body-node" id="second" style="width: 90vw">
+	<form method="post">
+		<div id="budgetTable">
+			<div class="budgetRow">
+				<div>Nominal Code</div>
+				{% for i in range(1, 13) %}
+				<div>{{i}}</div>
+				{% endfor %}
+			</div>
+			{% for account in accounts %}
+			<div class="budgetRow">
+				{{account.nominal}} {% for i in range(1, 13) %}
+				<input type="text" name="{{account.nominal}}_{{i}}" />
+				{% endfor %}
+			</div>
+			{% endfor %}
+		</div>
+	</form>
+</div>
+
+{% endblock %}
