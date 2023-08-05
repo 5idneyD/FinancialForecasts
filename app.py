@@ -212,8 +212,8 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            # if session[email] == session_key:
-            if 1 == 1:
+            if session[email] == session_key:
+            # if 1 == 1:
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
@@ -1549,7 +1549,6 @@ def budget(company, email, username, sesion_key, theme):
     uploadedData = {}
     if request.method == "POST":
         if request.files:
-            print("Here")
             file = request.files["file"]
             uploadedData = pd.read_excel(file, index_col=0)
 
@@ -1559,7 +1558,6 @@ def budget(company, email, username, sesion_key, theme):
             uploadedData = d
             return render_template("budget.html", company=company, accounts=accounts, design=theme, data=uploadedData)
         else:
-            print("There")
             year = request.form["year"]
             for cell, value in request.form.items():
                 if cell == "year":

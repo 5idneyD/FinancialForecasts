@@ -3,17 +3,19 @@
 
 {% endblock %}{% block body %}
 <div class="body-node" id="first">
-	<div>
+	<form method="post" enctype="multipart/form-data">
+		<div>
 			<input
 				type="file"
 				name="file"
-				id="uploadFile"
+		
 				value="uploadFile"
 				accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
 			<br>
 				<button type="submit" class="invoiceForm">Upload Excel File</button>
-		</form>
-	</div>
+		
+		</div>
+	</form>
 </div>
 
 <div class="body-node" id="second">
