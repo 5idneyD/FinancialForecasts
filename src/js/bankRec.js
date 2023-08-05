@@ -34,7 +34,6 @@ function sumTotal(){
     let total = 0.00;
     for (let i=1;i<recTable.rows.length; i++){
         let val = parseFloat(recTable.rows[i].childNodes[9].childNodes[0].value);
-        console.log(recTable.rows[i].childNodes[1].childNodes[0].value);
         if (recTable.rows[i].childNodes[1].children[0].value == "sales_invoice"){
         total += val;
         } else {

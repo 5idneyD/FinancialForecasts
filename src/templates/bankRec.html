@@ -1,75 +1,67 @@
 {% extends "blueprint.html" %} {% block body %}
 
-
-
-
-		<div id="data">
-			<div class="container col-8">
-				<div class="row">
-					<div class="col">
-						<button type="button" onclick="invoicesTableShow()">Unpaid Invoices</button>
-					</div>
-					<div class="col">
-						<button type="button" onclick="recTableShow()">Current Rec</button>
-					</div>
-				</div>
-			</div>
-			<table name="unpaid_invoices" class="col-6">
-				<tr>
-					<th>Type</th>
-					<th><input type="name" id="unpaid_invoices_client_search" placeholder="Client" /></th>
-					<th><input type="name" id="unpaid_invoices_invoice_search" placeholder="Invoice No." /></th>
-					<th>Reference</th>
-					<th>Value</th>
-					<th>Include</th>
-				</tr>
-				{% for i in data %}
-				<tr>
-					<td>
-						<input
-							name="{{loop.index}}_transaction_type"
-							value="{{i.transaction_type}}"
-							class="bankRecInput" />
-					</td>
-					<td><input name="{{loop.index}}_client_code" value="{{i.client_code}}" class="bankRecInput" /></td>
-					<td>
-						<input
-							name="{{loop.index}}_transaction_number"
-							value="{{i.transaction_number}}"
-							class="bankRecInput" />
-					</td>
-					<td><input name="{{loop.index}}_description" value="{{i.description}}" class="bankRecInput" /></td>
-					<td><input name="{{loop.index}}_total_value" value="{{i.total_value}}" class="bankRecInput" /></td>
-					<td><input type="checkbox" onclick="addToRec(this)" /></td>
-				</tr>
-				{% endfor %}
-			</table>
-			<form method="post">
-				<div id="rec_sum">
-					<table class="col-3">
-						<tr>
-							<td>Total Value</td>
-							<td id="total_value">0</td>
-						</tr>
-						<tr>
-							<td>Bank Account Nominal Code</td>
-							<td><input type="invoice" name="nominal_account" minlength="5" maxlength="5" required></td>
-						</tr>
-					</table>
-					<button type="submit">Post Bank Rec</button>
-					<table name="current_rec">
-						<tr>
-							<th>Type</th>
-							<th>Client</th>
-							<th>Invoice No.</th>
-							<th>Reference</th>
-							<th>Value</th>
-							<th>Include</th>
-						</tr>
-					</table>
-				</div>
-			</form>
+<div class="body-node" id="first">
+	<div>
+		<div>
+			<button type="button" class="invoiceForm" onclick="invoicesTableShow()">Unpaid Invoices</button>
 		</div>
-
+		<div class="col">
+			<button type="button" class="invoiceForm" onclick="recTableShow()">Current Rec</button>
+		</div>
+	</div>
+</div>
+<div class="body-node" id="second">
+<table name="unpaid_invoices">
+	<tr>
+		<th>Type</th>
+		<th><input type="text" class="bankRecInput" id="unpaid_invoices_client_search" placeholder="Client" /></th>
+		<th><input type="text" class="bankRecInput" id="unpaid_invoices_invoice_search" placeholder="Invoice No." /></th>
+		<th>Reference</th>
+		<th>Value</th>
+		<th>Include</th>
+	</tr>
+	{% for i in data %}
+	<tr>
+		<td>
+			<input class="bankRecValue" name="{{loop.index}}_transaction_type" value="{{i.transaction_type}}" readonly />
+		</td>
+		<td><input class="bankRecValue" name="{{loop.index}}_client_code" value="{{i.client_code}}" readonly /></td>
+		<td>
+			<input class="bankRecValue" name="{{loop.index}}_transaction_number" value="{{i.transaction_number}}"  readonly/>
+		</td>
+		<td><input class="bankRecValue" name="{{loop.index}}_description" value="{{i.description}}" readonly /></td>
+		<td><input class="bankRecValue" name="{{loop.index}}_total_value" value="{{i.total_value}}" readonly /></td>
+		<td><input type="checkbox" id="{{loop.index}}_checkbox" onclick="addToRec(this)" />
+			<label for="{{loop.index}}_checkbox" class="checkbox"></label>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<form method="post">
+	<div id="rec_sum">
+		<table>
+			<tr>
+				<td>Total Value</td>
+				<td id="total_value">0</td>
+			</tr>
+			<tr>
+				<td>Bank Account Nominal Code</td>
+				<td><input type="invoice" name="nominal_account" minlength="5" maxlength="5" required /></td>
+			</tr>
+		</table>
+		<button type="submit">Post Bank Rec</button>
+		<table name="current_rec">
+			<tr>
+				<th>Type</th>
+				<th>Client</th>
+				<th>Invoice No.</th>
+				<th>Reference</th>
+				<th>Value</th>
+				<th>Include</th>
+			</tr>
+		</table>
+	</div>
+</form>
+</div>
 <script defer src="{{ url_for('static', filename='js/bankRec.js') }}"></script>
 {% endblock %}

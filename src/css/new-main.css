@@ -636,3 +636,47 @@ input[type="file"] {
 input[type="file"]:hover {
 	cursor: pointer;
 }
+
+
+table[name="unpaid_invoices"]  {
+	width: 90vw;
+}
+
+table[name="unpaid_invoices"] tr :is(td, td input){
+	min-height: 6vh;
+	height: fit-content;
+}
+
+input[type="text"].bankRecInput {
+	background-color: var(--primary);
+	color: var(--fontColor);
+	text-align: center;
+	border: 1px solid var(--fontColor);
+}
+
+input.bankRecValue {
+	background-color: var(--primary);
+	color: var(--fontColor);
+	border: 0px;
+	text-align: center;
+}
+
+input[type="checkbox"] {
+	visibility: hidden;
+}
+input[type="checkbox"] + label:before {
+	border: 0.25px solid var(--fontColor);
+	content: "\00a0";
+	display: inline-block;
+	font: 16px/1em sans-serif;
+	height: 22px;
+	width: 22px;
+	vertical-align: top;
+	margin: 0.9rem 1.25em 0 0;
+	padding: 0;
+}
+
+input[type="checkbox"]:hover {
+	cursor: pointer;
+	background-color: grey;
+}
