@@ -17,23 +17,23 @@ themeSelector.addEventListener("change", function () {
     if (themeSelector.value == "light") {
         root.style.setProperty("--primary", "#dedeea");
         root.style.setProperty("--second", "#e8e8f3");
-        root.style.setProperty("--third", "purple");
-        root.style.setProperty("--fontColor", "black");
+        root.style.setProperty("--third", "#bf66e5");
+        root.style.setProperty("--fontColor", "#000000");
         root.style.setProperty("--shadow", "20px 20px 60px #bebebe, -20px -20px 60px #ffffff");
         primaryInput.value = "#dedeea";
         secondInput.value = "#e8e8f3";
-        thirdInput.value = "purple";
-        textInput.value = "black";
+        thirdInput.value = "#bf66e5";
+        textInput.value = "#000000";
     } else if (themeSelector.value == "dark") {
         root.style.setProperty("--primary", "#232323");
         root.style.setProperty("--second", "#363636");
         root.style.setProperty("--third", "#66c0f4");
-        root.style.setProperty("--fontColor", "white");
+        root.style.setProperty("--fontColor", "#ffffff");
         root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323");
         primaryInput.value = "#232323";
         secondInput.value = "#363636";
         thirdInput.value = "#66c0f4";
-        textInput.value = "white";
+        textInput.value = "#ffffff";
     } 
 });
 
