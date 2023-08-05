@@ -613,3 +613,23 @@ div#legend div#legend-1 {
 	border: 1px solid var(--fontColor);
 	font-weight: 400
 }
+
+input[type="file"]::file-selector-button {
+	display: none;
+}
+
+input[type="file"] {
+	background-color: var(--primary);
+	border-radius: 30px;
+	color: var(--fontColor);
+	border: 1px solid var(--fontColor);
+	padding-left: 5%;
+	padding-right: 5%;
+	min-width: 10vw;
+	width: 45%;
+	height: 2rem;
+	text-align: center;
+}
+input[type="file"]:hover {
+	cursor: pointer;
+}

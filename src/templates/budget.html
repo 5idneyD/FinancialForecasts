@@ -1,6 +1,23 @@
-{% set title="Add Budget" %} {% extends "blueprint.html" %} {% block body %}
+{% set title="Add Budget" %} {% extends "blueprint.html" %} {%block meta %}
+<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
+{% endblock %}{% block body %}
 <div class="body-node" id="first">
+	<div>
+			<input
+				type="file"
+				name="file"
+				id="uploadFile"
+				value="uploadFile"
+				accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+			<br>
+				<button type="submit" class="invoiceForm">Upload Excel File</button>
+		</form>
+	</div>
+</div>
+
+<div class="body-node" id="second">
+	<form method="post">
 	<div class="invoice-head">
 		<div>Year</div>
 		<div>
@@ -11,11 +28,10 @@
 			</select>
 		</div>
 	</div>
-	<button type="button" class="invoiceForm">Upload Excel</button>
 	<button type="submit" id="submitInvoice" class="invoiceForm">Save Budget</button>
 </div>
-<div class="body-node" id="second" style="width: 90vw">
-	<form method="post">
+
+<div class="body-node" id="third" style="width: 90vw">
 		<div id="budgetTable">
 			<div class="budgetRow">
 				<div>Nominal Code</div>
@@ -25,8 +41,13 @@
 			</div>
 			{% for account in accounts %}
 			<div class="budgetRow">
-				{{account.nominal}} {% for i in range(1, 13) %}
-				<input type="text" name="{{account.nominal}}_{{i}}" />
+				{{account.nominal}} 
+				{% for i in range(1, 13) %} 
+					{% if account.nominal in data %}
+						<input type="text" name="{{account.nominal}}_{{i}}" value="{{data[account.nominal][i-1]}}" />
+					{% else %}
+						<input type="text" name="{{account.nominal}}_{{i}}" />
+					{% endif %} 
 				{% endfor %}
 			</div>
 			{% endfor %}

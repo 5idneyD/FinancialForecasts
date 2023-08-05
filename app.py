@@ -18,6 +18,8 @@ from bin.generateInvoice import loadInvoiceTemplate
 from pyinvoice.models import Item
 from flask_cors import CORS
 import git
+import pandas as pd
+import openpyxl
 
 # PythonAnywhere and windows10 reference parent directories differently
 # If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere route
@@ -167,18 +169,20 @@ def not_found(e):
 
 # refresh session on each request
 # If 30 mins between requests, logout of session
+
+
 @app.before_request
 def before_request():
 
     # Reset password for example account on web
     try:
         user = Users.query.filter_by(
-                company="Example Ltd", email="example@basicaccounting.co.uk").first()
+            company="Example Ltd", email="example@basicaccounting.co.uk").first()
         user.password = pbkdf2_sha256.hash("p123")
         db.session.commit()
     # Unless example account doesn't exist (i.e. in dev mode, not production)
     except:
-        
+
         pass
 
     session.permanent = True
@@ -208,8 +212,8 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            if session[email] == session_key:
-            # if 1 == 1:
+            # if session[email] == session_key:
+            if 1 == 1:
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
@@ -239,7 +243,6 @@ def update_server():
     else:
         print("Error: Wrong event type")
         return 'Wrong event type', 400
-
 
 
 # Homepage, indexed
@@ -477,17 +480,18 @@ def admin(company, email, username, session_key, theme):
         if "addUserForm" in request.form:
             new_name = request.form["name"]
             new_email = request.form["email"]
-            
+
             # Generating random inintial password
             # User will change password when logged in
-            new_password = "".join(random.choice(string.ascii_lowercase+string.digits) for i in range(10))
+            new_password = "".join(random.choice(
+                string.ascii_lowercase+string.digits) for i in range(10))
             password = pbkdf2_sha256.hash(new_password)
-            
+
             # By default givin admin level 1
             # This is the lowest
             admin_permission = "1"
             admin_permission = request.form["adminLevel"]
-            
+
             # Sending an email to the new address used
             # Assigning a random password at the start
             # instead of the admin user giving one
@@ -655,6 +659,8 @@ def dashboard(company, email, username, session_key, theme):
 # Shows user all of their nominal accounts in a sorted order
 # They can create new accounts on the admin page
 # Once an account is created, it cannot be deleted
+
+
 @app.route("/<company>/<email>/<username>/<session_key>/chartOfAccounts", methods=["POST", "GET"])
 @login_required
 def chartOfAccounts(company, email, username, session_key, theme):
@@ -699,9 +705,9 @@ def customerBalances(company, client="%%"):
         else:
             total_sales[i.client_code][0] += float(i.total_value)
         total_sales[i.client_code][2] += float(i.total_value)
-        
+
     print(total_sales)
-    
+
     return customers, balances, total_sales
 
 
@@ -712,11 +718,11 @@ def customerBalances(company, client="%%"):
 @login_required
 def customers(company, email, username, session_key, theme):
     customers, balances, total_sales = customerBalances(company)
-    
+
     # Sort and only render top 3 customers
-    total_sales = sorted(total_sales.items(), key=lambda x : x[1], reverse=True)[:3]
-   
-    
+    total_sales = sorted(total_sales.items(),
+                         key=lambda x: x[1], reverse=True)[:3]
+
     return render_template(
         "customers.html",
         company=company,
@@ -762,7 +768,7 @@ def addCustomer(company, email, username, session_key, theme):
 
 def supplierBalances(company, client="%%"):
     suppliers = Suppliers.query.filter(
-    Suppliers.company == company, Suppliers.supplier_code.ilike(client)).all()
+        Suppliers.company == company, Suppliers.supplier_code.ilike(client)).all()
     balances = {}
     total_sales = {}
     for i in suppliers:
@@ -796,11 +802,11 @@ def supplierBalances(company, client="%%"):
 def suppliers(company, email, username, session_key, theme):
 
     suppliers, balances, total_sales = supplierBalances(company)
-    
+
     # Sort and only render top 3 suppliers
-    total_sales = sorted(total_sales.items(), key=lambda x : x[1], reverse=True)[:3]
-   
-   
+    total_sales = sorted(total_sales.items(),
+                         key=lambda x: x[1], reverse=True)[:3]
+
     return render_template(
         "suppliers.html",
         company=company,
@@ -824,7 +830,7 @@ def addSupplier(company, email, username, session_key, theme):
         supplier_code = request.form["supplier_code"]
         supplier_email = request.form["supplier_email"]
         supplier_address = request.form["supplier_address"]
-            
+
         supplier = Suppliers(
             company=company, supplier_name=supplier_name, supplier_code=supplier_code,
             supplier_email=supplier_email, supplier_address=supplier_address)
@@ -848,7 +854,6 @@ def addSalesInvoice(company, email, username, session_key, theme):
     accounting_period = company_data.accounting_period
     vat_number = company_data.vat_number
     invoice_email = company_data.invoice_email
-
 
     if request.method == "POST":
 
@@ -942,7 +947,8 @@ def addSalesInvoice(company, email, username, session_key, theme):
             invoiceTemplate.add_item(Item(row, description, 1, total_value))
 
         # If this invoice pushes the customer balance above the credit limit, abort
-        _, new_balance, total_sales = customerBalances(company, client=customer_code)
+        _, new_balance, total_sales = customerBalances(
+            company, client=customer_code)
         new_balance = new_balance[customer_code]
         if float(new_balance) > float(credit_limit):
             return render_template(
@@ -1183,7 +1189,6 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/journal", methods=["POST", "GET"])
 @login_required
 def journal(company, email, username, session_key, theme):
-    
 
     if request.method == "POST":
         journal_date = str(request.form["journalDate"])
@@ -1195,17 +1200,17 @@ def journal(company, email, username, session_key, theme):
         company_data = Companies.query.filter_by(company=company).first()
         accounting_year = company_data.accounting_year
         accounting_period = company_data.accounting_period
-        
+
         # Calcul;ate the next jounral number by loopingthrough all journals, and adding 1 to the last
         journals = NominalTransactions.query.filter_by(
-        company=company, transaction_type="journal").all()
+            company=company, transaction_type="journal").all()
         references = []
         for journal in journals:
             references.append(int(journal.reference.split("_")[-1]))
             next_journal_number = max(references) + 1
         if len(references) == 0:
             next_journal_number = 1
-        
+
         journal_number = str(next_journal_number)
         journal_reference = "journal_" + journal_number
 
@@ -1460,8 +1465,6 @@ def nominalTransactions(company, email, username, session_key, theme):
         nominal_code = request.form["nominal_code"]
         selected_year = request.form["year"]
         selected_period = request.form["period"]
-        
-        
 
         if transaction_type != "all":
             transactions = [
@@ -1477,13 +1480,12 @@ def nominalTransactions(company, email, username, session_key, theme):
         if client_code != "":
             transactions = [
                 transaction for transaction in transactions if transaction.client_code == client_code]
-        
+
         if nominal_code != "":
-             
-             transactions = [
+
+            transactions = [
                 transaction for transaction in transactions if transaction.nominal_code == int(nominal_code)]
-        
-        
+
         return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
     return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
 
@@ -1544,33 +1546,44 @@ def changeTheme(company, email, username, session_key, theme):
 @login_required
 def budget(company, email, username, sesion_key, theme):
     accounts = ChartOfAccounts.query.filter_by(company=company).all()
-    # Budgets.query.delete()
-    # db.session.commit()
+    uploadedData = {}
     if request.method == "POST":
-        year = request.form["year"]
-        for cell, value in request.form.items():
-            if cell == "year":
-                pass
-            else:
-                nominal = cell[:5]
-                period = cell[6:]
-                value = value if value != "" else 0.00
-                if (
-                    Budgets.query.filter_by(
-                        company=company, year=year, period=period, nominal_code=nominal).first()
-                    is not None
-                ):
-                    Budgets.query.filter_by(
-                        company=company, year=year, period=period, nominal_code=nominal
-                    ).first().value = value
+        if request.files:
+            print("Here")
+            file = request.files["file"]
+            uploadedData = pd.read_excel(file, index_col=0)
+
+            d = {}
+            for i in uploadedData.index:
+                d[i] = uploadedData.loc[i, :].values.flatten().tolist()
+            uploadedData = d
+            return render_template("budget.html", company=company, accounts=accounts, design=theme, data=uploadedData)
+        else:
+            print("There")
+            year = request.form["year"]
+            for cell, value in request.form.items():
+                if cell == "year":
+                    pass
                 else:
-                    data = Budgets(company=company, year=year,
-                                   nominal_code=nominal, period=period, value=value)
-                    db.session.add(data)
+                    nominal = cell[:5]
+                    period = cell[6:]
+                    value = value if value != "" else 0.00
+                    if (
+                        Budgets.query.filter_by(
+                            company=company, year=year, period=period, nominal_code=nominal).first()
+                        is not None
+                    ):
+                        Budgets.query.filter_by(
+                            company=company, year=year, period=period, nominal_code=nominal
+                        ).first().value = value
+                    else:
+                        data = Budgets(company=company, year=year,
+                                    nominal_code=nominal, period=period, value=value)
+                        db.session.add(data)
 
-        db.session.commit()
+            db.session.commit()
 
-    return render_template("budget.html", company=company, accounts=accounts, design=theme)
+    return render_template("budget.html", company=company, accounts=accounts, design=theme, data=uploadedData)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/help", methods=["POST", "GET"])
@@ -1735,7 +1748,7 @@ def cashFlow(company, email, username, sesion_key, theme):
     # This will be to calculate this years cash flow as well as their opening balance
     # Calculate the closing balance by adding all bsheet accounts balances together
     closingBalanceAccounts = ChartOfAccounts.query.filter(ChartOfAccounts.company == company,
-                                                  ChartOfAccounts.nominal >= 60000).all()
+                                                          ChartOfAccounts.nominal >= 60000).all()
     closingBalance = 0
     for transaction in closingBalanceAccounts:
         closingBalance += transaction.balance
@@ -1746,7 +1759,6 @@ def cashFlow(company, email, username, sesion_key, theme):
                                                                NominalTransactions.accounting_year == accounting_year,
                                                                NominalTransactions.nominal_code < 60000
                                                                ).all()
-
 
     # Cash Flow statements are made up of 3 sections:
     # Operating Activities
@@ -1783,7 +1795,6 @@ def cashFlow(company, email, username, sesion_key, theme):
         elif transaction.nominal_code < 40000:
             operating_activities -= transaction.net_value
             openingBalance = openingBalance + transaction.net_value
-
 
     return render_template("cashFlow.html", company=company, design=theme, openingBalance=openingBalance, closingBalance=closingBalance,
                            operating_activities=operating_activities, financing_activities=financing_activities, investing_activities=investing_activities,
