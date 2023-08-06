@@ -1598,7 +1598,13 @@ def bankRec(company, email, username, session_key, theme):
         NominalTransactions.is_paid == "False",
         NominalTransactions.transaction_type != "journal",
     ).all()
-
+    
+    # convert data to dict
+    d = {}
+    row=0
+    for i in data:
+        d[row] = [i.id, i.transaction_type, i.client_code, i.transaction_number, i.description, i.total_value]
+        row += 1
     company_data = Companies.query.filter_by(company=company).first()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
@@ -1679,7 +1685,7 @@ def bankRec(company, email, username, session_key, theme):
         ).all()
         return render_template("bankRec.html", company=company, design=theme, data=data)
 
-    return render_template("bankRec.html", company=company, design=theme, data=data)
+    return render_template("bankRec.html", company=company, design=theme, data=d)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/agedDebt", methods=["POST", "GET"])
