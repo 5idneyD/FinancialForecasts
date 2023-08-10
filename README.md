@@ -1,4 +1,5 @@
 # NoVariance.com
+Click [Here](www.novariance.com) to Visit Our Home Page!
 
 I'm making my own accounting app that is usable for small businesses and sole traders.
 
@@ -53,6 +54,9 @@ I hope for it to become a professionally used application that anyone can access
   - Cash Flow Report
   - New UI (in progress)
   - Only using Vanilla CSS, screw Bootstrap and TailwindCSS
+  - Top Customers
+  - Top Suppliers
+  - To Do List (In progress)
 
 ## Tech Stack Being Used:
 - SQLAlchemy  <strike>(SQLite3)</strike>   (MySQL) 
