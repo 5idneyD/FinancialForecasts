@@ -1,5 +1,5 @@
 # NoVariance.com
-Click [Here](www.novariance.com) to Visit Our Home Page!
+Click [Here](https://www.novariance.com) to Visit Our Home Page!
 
 I'm making my own accounting app that is usable for small businesses and sole traders.
 
