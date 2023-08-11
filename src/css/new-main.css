@@ -637,7 +637,8 @@ input[type="file"]:hover {
 	cursor: pointer;
 }
 
-div#bankRecTable {
+div#bankRecTable,
+div#newBankRecTable {
 	display: grid;
 	margin-left: 0;
 	width: 100%;
