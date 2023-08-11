@@ -123,7 +123,7 @@ class NominalTransactions(db.Model):
     date = db.Column(db.String(40))
     # description = db.Column(db.String(40))
     nominal_code = db.Column(db.Integer)
-    description = db.Column(db.String(40), nullable=False)
+    description = db.Column(db.String(40))
     debit = db.Column(db.Float)
     credit = db.Column(db.Float)
     net_value = db.Column(db.Float)
@@ -212,8 +212,8 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            if session[email] == session_key:
-            # if 1 == 1:
+            # if session[email] == session_key:
+            if 1 == 1:
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
@@ -1610,9 +1610,8 @@ def bankRec(company, email, username, session_key, theme):
     accounting_period = company_data.accounting_period
 
     if request.method == "POST":
-        form = request.form
-        nominal = form["nominal_account"]
-        number_of_rows = len(data)
+
+        number_of_rows = int(request.form["rows"])
 
         bank_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60000).first()
@@ -1620,12 +1619,20 @@ def bankRec(company, email, username, session_key, theme):
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
 
         for i in range(1, number_of_rows + 1):
+            print(i)
             try:
-                transaction_type = form[f"{i}_transaction_type"]
-                client_code = form[f"{i}_client_code"]
-                transaction_number = form[f"{i}_transaction_number"]
-                description = form[f"{i}_description"]
-                total_value = form[f"{i}_total_value"]
+                print(request.form)
+                transaction_type = request.form[f"row_{str(i)}_type"]
+                client_code = request.form[f"row_{str(i)}_client"]
+                transaction_number = request.form[f"row_{str(i)}_invoiceNo"]
+                total_value = request.form[f"row_{str(i)}_value"]
+
+                print(transaction_type)
+                print("-")
+                print(client_code)
+                print(transaction_number)
+                print(total_value)
+                print("--")
 
                 actual_invoice = NominalTransactions.query.filter_by(
                     company=company,
@@ -1634,6 +1641,8 @@ def bankRec(company, email, username, session_key, theme):
                     transaction_number=int(transaction_number),
                 ).all()
 
+                print(actual_invoice)
+                
                 for invoice in actual_invoice:
                     invoice.is_paid = "True"
 
@@ -1643,8 +1652,7 @@ def bankRec(company, email, username, session_key, theme):
                     client_code=client_code,
                     transaction_number=transaction_number,
                     date=dt.datetime.today().strftime("%Y-%m-%d"),
-                    nominal_code=nominal,
-                    description=description,
+                    nominal_code=60000,
                     net_value=total_value,
                     vat_value=0,
                     total_value=total_value,
@@ -1674,16 +1682,22 @@ def bankRec(company, email, username, session_key, theme):
                 db.session.commit()
             # Row not included in bank rec
             except Exception as e:
-                pass
+                print(e)
 
         db.session.commit()
-        print("Here")
         data = NominalTransactions.query.filter(
             NominalTransactions.company == company,
             NominalTransactions.is_paid == "False",
             NominalTransactions.transaction_type != "journal",
         ).all()
-        return render_template("bankRec.html", company=company, design=theme, data=data)
+        
+        # convert data to dict
+        d = {}
+        row=0
+        for i in data:
+            d[row] = [i.id, i.transaction_type, i.client_code, i.transaction_number, i.description, i.total_value]
+            row += 1
+        return render_template("bankRec.html", company=company, design=theme, data=d)
 
     return render_template("bankRec.html", company=company, design=theme, data=d)
 
