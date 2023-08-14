@@ -454,13 +454,18 @@ div#colorSetter *:not(br){
 
 .settings-button,
 .settings-input {
-	width: 10vw;
+	width: 12vw;
+	height: 2rem;
 	min-width: 40px;
 	background-color: var(--second);
 	border: 1px solid var(--fontColor);
 	color: var(--fontColor);
 	border-radius: 30px;
 	text-align: center;
+}
+
+.settings-button#themeSelector {
+	width: fit-content;
 }
 
 ::-webkit-calendar-picker-indicator {
