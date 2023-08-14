@@ -6,11 +6,11 @@
     --shadow: 20px 20px 60px #252e48,
     -20px -20px 60px #252e48;
      */
-	--primary: #dedeea;
-	--second: #e8e8f3;
-	--third: #bf66e5;
-	--fontColor: #000000;
-	--shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+	--primary: #232323;
+	--second: #363636;
+	--third: #66c0f4;
+	--fontColor: #ffffff;
+	--shadow: 20px 20px 60px #232323, -20px -20px 60px #232323;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 * {
@@ -691,3 +691,6 @@ div#newBankRecTable {
 	border-radius: 0px 45px 45px 0px;
 }
 
+table#nominalTransactions {
+	color: red
+}
