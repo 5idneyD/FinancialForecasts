@@ -3,56 +3,90 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<meta
 			name="keywords"
 			content="accounting, basic accounting, accountant, simple accounting, accounting software, no variance, variance accounting" />
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
+		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %}
+		<meta
+			name="logo"
+			id="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}" />
+		{% else %}
+		<meta name="logo" id="{{url_for('index')}}" />
+		{% endif %} {% block meta %} {% endblock %}
 		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
-		<link
-			rel="stylesheet"
-			media="screen and (min-width: 601px)"
-			href="{{url_for('static', filename='styles/index.min.css')}}" />
-		<link
-			rel="stylesheet"
-			media="screen and (max-width: 600px)"
-			href="{{url_for('static', filename='styles/mobile_index.min.css')}}" />
+
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/index.min.css')}}" />
+
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
-
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11185407443"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag("js", new Date());
-
-			gtag("config", "AW-11185407443");
-		</script>
+		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+		{% if design %} {% endif %}
 	</head>
 	<body>
-		<div id="root"></div>
-		<script>
-			window.logoPath = "{{url_for('static', filename='images/no_variance.png')}}";
+		<div id="heading" data-expanded="true">
+			<div id="heading-top">
+				<div id="logo">No Variance <br />Accounting Software</div>
+				<div id="nav">
+					<div class="nav-option" data-href="/">Home</div>
+					<div class="nav-option" data-href="/#aboutUs">About Us</div>
+					<div class="nav-option" data-href="/login">Log In</div>
+					<div class="nav-option" data-href="/signup">Sign Up</div>
+				</div>
+			</div>
+		</div>
+		<div id="body"></div>
+		<script defer>
+			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
+			//let meta = document.head.querySelector("meta[name='logo']").id;
+			//let heading = document.querySelector("#heading");
 
-			function logoResize(x) {
-				if (x.matches) {
-					let src = "{{url_for('static', filename='images/nv.png')}}";
-					return src;
-				} else {
-					let src = "{{url_for('static', filename='images/no_variance.png')}}";
-					return src;
-				}
-			}
-			let x = window.matchMedia("(max-width: 600px)");
-			window.logoPath = logoResize(x);
-
-			window.buildingPath = "{{url_for('static', filename='images/building.png')}}";
+			//function logoResize(x) {
+			//	if (x.matches) {
+			//		let src = "{{url_for('static', filename='images/nv.png')}}";
+			//		return src;
+			//	} else {
+			//		let src = "{{url_for('static', filename='images/no_variance.png')}}";
+			//		return src;
+			//	}
+			//}
+			//let x = window.matchMedia("(max-width: 600px)");
+			//let img = logoResize(x);
+			//heading.innerHTML =
+			//	heading.innerHTML + "<a href=" + meta + "><img src=" + img + " alt='No Variance Logo'/></a>";
 		</script>
-		<script src="{{ url_for('static', filename='react/compiled/home.js')}}"></script>
+		<script>
+			// This is to turn all the nav options in the submenu into link buttons
+			// Each option has the link ending as a data strribute called href
+			// This will just find the current page url and replace the ending with the
+			// option clicked on
+
+			let url = window.location.pathname;
+			url = url.substring(0, url.lastIndexOf("/"));
+
+			let options = document.querySelectorAll(".sub-menu-option, .nav-option");
+			options.forEach(function (e) {
+				e.addEventListener("click", function () {
+					let extension = e.dataset.href;
+					let newUrl = url + extension;
+					window.location.assign(newUrl);
+				});
+			});
+		</script>
+
+		<script defer>
+			// This script converts all zeros in tables to a dash for display reasons
+			let cells = document.querySelectorAll("td");
+
+			cells.forEach(function (cell) {
+				const cellValue = cell.innerHTML;
+				if (cellValue == 0) {
+					cell.innerHTML = "-";
+				}
+			});
+		</script>
 	</body>
 </html>

@@ -1,339 +1,64 @@
-:root {
-    --gold: rgb(230, 183, 122);
-    --brown: #272624;
-    --light: #ffffff;
-    margin-left: -8px;
-    overflow-x: hidden;
+@import "./new-main.css";
 
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Lora', serif !important;
-}
-
-/* These are all the main sections/divisions of the index page
-Smaller parts of the page are styled below */
-#first {
-    margin-top: -5vh;
-    min-height: 105vh;
-    height: fit-content;
-    background: var(--brown);
-    display: grid;
-    grid-template-rows: 30vh 20vh 35vh;
-    width: 100vw;
-    margin-left: 0;
-}
-
-#second {
-    min-height: 80vh;
-    height: fit-content;
-    width: 100vw;
-    margin-left: 0;
-}
-
-/* This is the image the building between the second and third sections */
-img[alt='building'] {
-    height: 100%;
-    width: 100vw;
-    margin-left: 0px;
-    object-fit: cover;
-}
-
-#third {
-    height: fit-content;
-    width: 100vw;
-    margin-left: 0;
-    padding-bottom: 10vh;
-}
-
-#fourth {
-    /* min-height: 80vh; */
-    height: fit-content;
-    background: var(--brown);
-    width: 100vw;
-    margin-left: 0;
-    padding-bottom: 10vh;
-}
-
-#fifth {
-    min-height: 30vh;
-    height: fit-content;
-    width: 100vw;
-    margin-left: 0;
-}
-
-#aboutUs {
-    width: 70vw;
-    min-height: 60vh;
-    height: fit-content;
-    border: 2px solid var(--gold);
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -20vh;
-    display: grid;
-    grid-template-rows: 20vh auto;
-}
-
-#first :is(h1, h2){
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-}
-
-#first p {
-    color: var(--gold);
-    width: 70%;
-    margin: auto;
-    margin-top: 8%;
-    font-size: larger;
-}
-
-#first h1 {
-    color: var(--light);
-    font-size: 3em;
-    font-weight: 100;
-}
-
-#title-container{
-    height:fit-content;
-}
-
-#title-container :nth-child(2) {
-    padding-bottom: 20vh;
-}
-
-
-#aboutUs :is(h3, p) {
-    margin-left: 20%;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 70%;
-    line-height: 3rem;
-    font-weight: 100;
-}
-
-h2, h3 {
-    color: var(--gold);
-}
-
-#aboutUs p {
-    color: var(--brown);
-    font-size: larger;
-    font-weight: 100;
-}
 
 #heading {
-    height: 25vh;
-    margin-top: 4vh;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 25% 75%;
-}
-
-#heading img[alt='No Variance Logo']{
-    height: 20vh;
-    width: 10vw;
-    margin-left: 12vw;
-    margin-top: 2vh;
-}
-
-#mobile-navbar-container {
-    display: none !important;
-}
-
-#heading #navbar-container {
-    width: 55vw;
-    margin: auto;
-    margin-top: 10vh;
-    height: 100%;
-}
-
-#navbar {
-    width: 65%;
-    height: 30%;
-    margin: auto;
-    display: grid;
-    grid-template-rows: auto;
-    grid-auto-columns: 8vw;
-}
-
-div.navbar-option {
-    /* border: 0.8px solid var(--light); */
-    grid-area: 1 / auto;
-    min-width: fit-content;
-}
-
-#navbar-container #navbar .navbar-option p {
-    font-size: medium;
-    text-align: center;
-    color: var(--light) !important;
-}
-
-
-/* Our Services / third section of index page */
-
-div#third h3 {
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10vh;
-}
-
-div#services {
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 60vw;
-    grid-template-rows: auto;
-    align-items: center;
-    justify-content: center;
-}
-
-div.service {
-    display: grid;
-    grid-template-columns: 15vw 45vw;
-    width: 60vw;
-    margin-top: 5vw;
-    text-align: center;
-    line-height: 3rem;
-    padding-top: 8vh;
-    border-top: 2px solid var(--brown);
-
-}
-
-div.service#first-service {
-    margin-top: 0;
-}
-
-.service-head, .service-content {
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-/* The is the fourth section, giving login details for an exmaple */
-
-div#fourth h3 {
-    width: 40vw;
-    margin-left: auto;
-    margin-right: auto;
-    height: 10%;
-    padding-top: 5vh;
-    color: var(--gold);
-    font-weight: lighter;
-}
-
-div#fourth h2 {
-    width: 70%;
-    height: 80%;
-    line-height: 3rem;
-    color: var(--light);
-    text-align: center;
-    font-weight: lighter;
-    margin: auto;
-}
-
-span.example {
-    display: block;
-    margin-top: 10vh;
-    color: var(--gold)
-}
-
-div#fifth h3 {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    color: var(--dark);
-    font-weight: lighter;
-}
-
-div#fifth h3:first-child {
-    padding-top: 10vh;
-}
-
-a {
-    text-decoration: none;
-}
-
-button#goToTopButton {
+	height: 17.5vh;
     position: fixed;
-    bottom: 5vh;
-    width: 10vw;
-    height: 5vh;
-    margin-left: 87vw;
-    border-radius: 30px;
-    border-color: var(--gold);
-    background-color: var(--brown);
-    color: var(--gold);
-    cursor: pointer;
+    top: 0px;
 }
 
-/* ------------------------------------- */
-/* This is for the login page */
-
-#loginHeading {
-    margin: 0;
-    width: 110vw;
-    background-color: var(--brown);
-    color: var(--gold);
-    text-align: center;
-    display: grid;
-    grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
-    grid-template-rows: 25vh;
+#heading-top {
+	display: grid;
+	height: 100%;
+	grid-template-columns: 50vw auto;
+	text-align: center;
+	padding: 10px;
 }
 
-#loginHeading h1 {
-    grid-column: 3;
-    margin-top: auto;
-    margin-bottom: auto;
-    text-align: center;
+#heading-top div {
+	height: 100%;
 }
 
-#logo {
-    grid-column: 1;
+div#nav {
+	grid-template-columns: repeat(4, auto);
 }
 
-#logo img {
-    height: 17vh;
-    width: 12vw;
-    margin-top: 4vh;
-    margin-left: 5vw;
+div.nav-option,
+div#logo {
+	min-width: 5vw;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.3s ease;
 }
 
-#loginForm {
-    display: grid;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40vw;
-    grid-template-columns: 40vw;
-    grid-template-rows: 8vh 8vh 8vh 8vh 8vh;
-    margin-top: 5vh;
+div#nav div.nav-option:hover {
+	height: 80%;
+	background-color: var(--second);
+	cursor: pointer;
 }
 
-.loginItem {
-    text-align: center;
+#body {
+	min-height: 100vh;
 }
 
-.loginItem * {
-    width: 15vw;
-    margin-top: 2vw
-}
+.body-node {
+	border-radius: 30px;
+	box-shadow: 1px 1px 1px var(--second), -1px -1px 1px rgba(255, 255, 255, 0.7),
+		inset 2px 2px 2px rgba(255, 255, 255, 0.7), inset -3px -3px 3px rgba(174, 174, 192, 0.25);
+	padding: 3%;
+	color: var(--fontColor);
+	text-align: center;
+	width: 20vw;
+	min-height: 30vh;
+	margin-top: 5vh;
+	border-radius: 50px;
+	background: var(--primary);
+	box-shadow: var(--shadow);
 
-/* Parallax scrolling effect on building img */
-.parallax {
-    /* The image used */
-    /* The src is defined inline as I use jinja2 */
-    /* background-image: ; */
-  
-    /* Set a specific height */
-    min-height: 500px;
-  
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+	height: fit-content;
+	min-width: 300px;
+	width: fit-content;
+	align-items: center;
+}

@@ -1418,6 +1418,7 @@ def profitAndLoss(company, email, username, session_key, theme):
                 pass
 
             if transaction.transaction_type == "journal" and account.nominal < 20000:
+                print(transaction)
                 ytd_balance -= transaction.net_value
             else:
                 ytd_balance += transaction.net_value
@@ -1437,12 +1438,9 @@ def profitAndLoss(company, email, username, session_key, theme):
         else:
             budget_value = 0
 
-        # if budget:
-        #     budget_value = budget.value
-        # else:
-        #     budget_value = 0
         data[account.account_name] = [monthly_balance,
-                                      ytd_balance, account.nominal, budget_value, ytd_budget]
+                                      ytd_balance, account.nominal,
+                                      budget_value, ytd_budget]
 
     return render_template(
         "profitAndLoss.html",

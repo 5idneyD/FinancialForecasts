@@ -9,7 +9,10 @@
 			// The data is parsed through via jinja2 from the backend
 			// Placing this cript at the top as there is an unpleasent flash
 			// Between the deafult and these settings otherwise
+
 			let design = "{{design|safe}}".split(",");
+			// If this isn't the home page
+			if (design != ''){
 			let primary = design[0];
 			let second = design[1];
 			let third = design[2];
@@ -31,6 +34,7 @@
 			} else {
 				root.style.setProperty("--shadow", "none");
 			}
+		};
 		</script>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
