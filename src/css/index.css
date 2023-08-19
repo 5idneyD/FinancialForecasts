@@ -1,9 +1,12 @@
 @import "./new-main.css";
 
+* {
+    font-weight: normal;
+}
 
 #heading {
 	height: 17.5vh;
-    position: fixed;
+    /* position: fixed; */
     top: 0px;
 }
 
@@ -20,45 +23,24 @@
 }
 
 div#nav {
-	grid-template-columns: repeat(4, auto);
-}
-
-div.nav-option,
-div#logo {
-	min-width: 5vw;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: all 0.3s ease;
-}
-
-div#nav div.nav-option:hover {
-	height: 80%;
-	background-color: var(--second);
-	cursor: pointer;
+	grid-template-columns: repeat(5, auto);
 }
 
 #body {
+    margin-top: -5vh;
 	min-height: 100vh;
+    display: grid;
+    width: 100vw;
+    grid-template-columns: auto auto;
 }
 
-.body-node {
-	border-radius: 30px;
-	box-shadow: 1px 1px 1px var(--second), -1px -1px 1px rgba(255, 255, 255, 0.7),
-		inset 2px 2px 2px rgba(255, 255, 255, 0.7), inset -3px -3px 3px rgba(174, 174, 192, 0.25);
-	padding: 3%;
-	color: var(--fontColor);
-	text-align: center;
-	width: 20vw;
-	min-height: 30vh;
-	margin-top: 5vh;
-	border-radius: 50px;
-	background: var(--primary);
-	box-shadow: var(--shadow);
+.headline {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
 
-	height: fit-content;
-	min-width: 300px;
-	width: fit-content;
-	align-items: center;
+div span.large-text h1 {
+    font-size: clamp(1rem,4vw,2.3rem);
 }

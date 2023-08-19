@@ -20,7 +20,8 @@ from flask_cors import CORS
 import git
 import pandas as pd
 import openpyxl
-
+import sys
+import traceback
 # PythonAnywhere and windows10 reference parent directories differently
 # If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere route
 if load_dotenv("./.env") == False:
@@ -212,17 +213,18 @@ def login_required(f):
     @wraps(f)
     def wrap(company, email, username, session_key):
         try:
-            # if session[email] == session_key:
-            if 1 == 1:
+            if os.getenv("DEV") == "True" or session[email] == session_key:
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
                 return f(company, email, username, session_key, theme=design)
             else:
                 return redirect(url_for("login"))
-        except KeyError as e:
+        except KeyError as exception:
+            # etype, value, tb = sys.exc_info()
+            # print(traceback.print_exception(etype, value, tb))
+            # print("error", exception)
             return redirect(url_for("login"))
-            # return e
 
     return wrap
 
