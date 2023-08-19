@@ -22,7 +22,15 @@
 		{% endif %} {% block meta %} {% endblock %}
 		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
 
-		<link rel="stylesheet" href="{{url_for('static', filename='styles/index.min.css')}}" />
+		<!-- Media Queries - If above 600px use desktop css - Else Use Mobile CSS -->
+		<link
+			rel="stylesheet"
+			media="screen and (min-width: 601px)"
+			href="{{url_for('static', filename='styles/index.min.css')}}" />
+		<link
+			rel="stylesheet"
+			media="screen and (max-width: 600px)"
+			href="{{url_for('static', filename='styles/mobile_index.min.css')}}" />
 
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
@@ -52,9 +60,11 @@
 					So You Can Know How Your Business Is Performing <br />
 					Anywhere In The World
 				</h3>
-				<br>
+				<br />
 				<span class="bright-button"
-					><a href="/signup" style="margin-right: 10vw; margin-top: -10vh;" class="signup-button"><button>Sign Up Now</button></a></span
+					><a href="/signup" style="margin-right: 10vw; margin-top: -10vh" class="signup-button"
+						><button>Sign Up Now</button></a
+					></span
 				>
 			</div>
 			<div>
@@ -70,7 +80,6 @@
 					<a href="#abilities">wide range of abilities and reports</a> to help make sure your business is
 					performing at its best.
 				</div>
-				<div class="action">Create Your Own Account Here</div>
 			</div>
 			<div id="aboutUs" class="actions">
 				<div class="action">
@@ -84,9 +93,8 @@
 					This software was built from scratch, using a wide range of modern technologies, to ensure we
 					provide an optimal performance that is secure and reliable, wherever you access it in the world.
 				</div>
-
 			</div>
-			<div class="actions" style="width: 30vw">
+			<div class="actions" id="whats-included">
 				<div class="action">
 					<span class="large-text"
 						><h1>See What's Included <br />First-Hand</h1></span
@@ -118,7 +126,9 @@
 					</div>
 				</div>
 				<br /><span class="bright-button"
-					><a href="/signup" style="margin-left: 15vw;" class="signup-button"><button>Sign Up Now</button></a></span
+					><a href="/signup" style="margin-left: 15vw" class="signup-button"
+						><button>Sign Up Now</button></a
+					></span
 				>
 			</div>
 			<div class="actions" id="abilities">

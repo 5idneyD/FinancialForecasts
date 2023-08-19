@@ -1,326 +1,200 @@
+@import "./new-main.css";
+
 :root {
-    --gold: rgb(230, 183, 122);
-    --brown: #272624;
-    --light: #ffffff;
-    margin-left: -8px;
-    overflow-x: hidden;
-
+    --third: #32fca7;
 }
 
-html {
-    scroll-behavior: smooth;
+* {
+    font-weight: normal;
+	font-size: clamp(1rem, 4vw, 2rem);
 }
 
-body {
-    font-family: 'Lora', serif !important;
+#heading {
+    height: 17.5vh;
+    /* position: fixed; */
+    top: 0px;
 }
 
-/* These are all the main sections/divisions of the index page
-Smaller parts of the page are styled below */
-#first {
-    margin-top: -5vh;
-    min-height: 105vh;
-    height: fit-content;
-    background: var(--brown);
+#heading-top {
     display: grid;
-    grid-template-rows: 30vh 20vh 35vh;
-    width: 100vw;
-    margin-left: 0;
-}
-
-#second {
-    min-height: 80vh;
-    height: fit-content;
-    width: 100vw;
-    margin-left: 0;
-}
-
-/* This is the image the building between the second and third sections */
-img[alt='building'] {
     height: 100%;
-    width: 100vw;
-    margin-left: 0px;
-    object-fit: cover;
+    grid-template-columns: 50vw auto;
+    text-align: center;
+    padding: 10px;
 }
 
-#third {
-    height: fit-content;
-    width: 100vw;
-    margin-left: 0;
-    padding-bottom: 10vh;
+#heading-top div {
+    height: 100%;
 }
 
-#fourth {
-    min-height: 80vh;
-    height: fit-content;
-    background: var(--brown);
-    width: 100vw;
-    margin-left: 0;
+div#nav {
+    grid-template-columns: repeat(5, auto);
 }
 
-#fifth {
-    min-height: 30vh;
-    height: fit-content;
-    width: 100vw;
-    margin-left: 0;
+.nav-option {
+    font-size: smaller;
 }
 
-#aboutUs {
-    width: 70vw;
+#body {
+    margin-top: -5vh;
+    min-height: 100vh;
+    width: 100vw;
+    grid-template-columns: 100vw;
+}
+
+.headline {
+    height: 50vh;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10vw;
+}
+
+.headline h3 {
+    width: 90vw;
+    margin-top: 3vh;
+}
+
+div span.xl-text h1 {
+    width: 100vw;
+    margin-top: 25vh;
+    font-size: clamp(2rem, 6vw, 3.1rem);
+}
+
+div span.large-text h1 {
+    margin-top: 3vh;
+    font-size: clamp(1.8rem, 4vw,2em);
+    text-align: center;
+    margin-left: auto;
+}
+
+img[alt="Calculator"] {
+    width: 100vw;
+    height: 82.5vh;
+}
+
+.empty {
+    width: 100vw;
+    /* border: 2px solid green; */
+    height: 60vh;
+
+}
+
+.actions {
     min-height: 60vh;
     height: fit-content;
-    border: 2px solid var(--gold);
-    margin-left: auto;
+    width: 100vw;
+    /* border: 2px solid red; */
+    text-align: center;
     margin-right: auto;
-    margin-top: -20vh;
-    margin-bottom: 5vh;
-    display: grid;
-    grid-template-rows: 20vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-#first :is(h1, h2){
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+.actions .action {
+    margin-top: 7vh;
+    width: 80vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    align-items: center;
+    text-align: center;
 }
 
-
-
-#first h1 {
-    color: var(--light);
-    font-size: 3em;
-    font-weight: 100;
+ul li {
+    margin-top: 3vh;
+    margin-left: 4vw;
 }
 
-p#title {
-    color: var(--gold);
-    margin-left: 15vw;
-    padding-bottom: 2vh;
-}
-
-#title-container{
-    height:fit-content;
-}
-
-#title-container :nth-child(2) {
-    font-size: xx-large;
+span.bright-button button {
+    height: fit-content;
+    padding: 3vh 5vw 3vh 5vw;
+    background-color: var(--third);
+    color: var(--primary);
+    border-radius: 30px;
 }
 
 
-#aboutUs :is(h3, p) {
-    margin-left: 20%;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 70%;
-    line-height: 3rem;
-    font-weight: 100;
+
+div:has(div.body-node.example) {
+    margin-top: -14vh;
 }
 
-h2, h3 {
-    color: var(--gold);
-}
-
-#aboutUs p {
-    color: var(--brown);
-    font-size: larger;
-    font-weight: 100;
-}
-
-/* This is the navbar and logo at the top */
-#heading {
-    height: 25vh;
-    margin-top: 4vh;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 25% 75%;
-}
-
-#heading img[alt='No Variance Logo']{
-    height: 20vh;
-    width: 20vw;
-    margin-left: 12vw;
-    margin-top: 2vh;
-}
-
-#navbar-container {
-    display: none;
-}
-
-#heading #mobile-navbar-container {
-    width: 75vw;
-    margin: auto;
-    height: 100%;
-}
-
-a.menu-option p {
-    color: red;
-
-}
-
-
-/* Our Services / third section of index page */
-
-div#third h3 {
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10vh;
-}
-
-div#services {
+div:has(.body-node.example) {
     width: 100vw;
     display: grid;
-    grid-template-columns: 80vw;
-    grid-template-rows: auto;
+    grid-template-columns: auto auto;
+    column-gap: 2vw;
     align-items: center;
-    justify-content: center;
 }
 
-div.service {
+.body-node.example {
+    min-width: 20vw;
+    width: 35vw;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
-    grid-template-columns: 80vw;
-    grid-template-rows: 10vh auto;
-    width: 80vw;
-    margin-top: 5vw;
-    text-align: center;
-    line-height: 3rem;
-    padding-top: 8vh;
-    border-top: 2px solid var(--brown);
-
+    grid-template-columns: 70%;
+    grid-template-rows: 2rem 2rem 2rem 2rem;;
+    row-gap: 3vh;
 }
 
-div.service#first-service {
-    margin-top: 0;
-}
-
-.service-head, .service-content {
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-/* The is the fourth section, giving login details for an exmaple */
-
-div#fourth h3 {
-    width: 40vw;
-    margin-left: auto;
-    margin-right: auto;
-    height: 10%;
-    padding-top: 5vh;
-    color: var(--gold);
-    font-weight: lighter;
-}
-
-div#fourth h2 {
-    width: 70%;
-    height: 80%;
-    line-height: 3rem;
-    color: var(--light);
-    text-align: center;
-    font-weight: lighter;
-    margin: auto;
-}
-
-span.example {
-    display: block;
-    margin-top: 10vh;
-    color: var(--gold)
-}
-
-div#fifth h3 {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    color: var(--dark);
-    font-weight: lighter;
-}
-
-div#fifth h3:first-child {
-    padding-top: 10vh;
-}
-
-a {
-    text-decoration: none;
-}
-
-button#goToTopButton {
-    position: fixed;
-    bottom: 5vh;
-    width: 10vw;
-    height: fit-content;
-    padding: 10px 0 10px 0;
-    margin-left: 87vw;
+div.example-row {
+    height: 2rem;
+    width: 100%;
+    margin-left: 6vw;
     border-radius: 30px;
-    border-color: var(--gold);
-    background-color: var(--brown);
-    color: var(--gold);
-    cursor: pointer;
+    background-color: rgba(201, 191, 191, 0.411);
 }
 
-/* ------------------------------------- */
-/* This is for the login page */
-
-#loginHeading {
-    margin: 0;
-    width: 110vw;
-    background-color: var(--brown);
-    color: var(--gold);
-    text-align: center;
-    display: grid;
-    grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
-    grid-template-rows: 25vh;
+.body-node.example div.example-row.text {
+    background-color: var(--primary)
 }
 
-#loginHeading h1 {
-    grid-column: 3;
-    margin-top: auto;
-    margin-bottom: auto;
-    text-align: center;
-}
-
-#logo {
-    grid-column: 1;
-}
-
-#logo img {
-    height: 17vh;
-    width: 12vw;
-    margin-top: 4vh;
-    margin-left: 5vw;
-}
-
-#loginForm {
-    display: grid;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40vw;
-    grid-template-columns: 40vw;
-    grid-template-rows: 8vh 8vh 8vh 8vh 8vh;
-    margin-top: 5vh;
-}
-
-.loginItem {
-    text-align: center;
-}
-
-.loginItem * {
-    width: 15vw;
-    margin-top: 2vw
+a.signup-button button{
+    width: fit-content;
+    padding: 1vh 5vw 1vh 5vw;
+    margin-top: 6vh;
+    margin-bottom: 15vh;
 }
 
 
-/* Parallax scrolling effect on building img */
-.parallax {
-    /* The image used */
-    /* The src is defined inline as I use jinja2 */
-    /* background-image: ; */
-  
-    /* Set a specific height */
-    min-height: 300px;
-  
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+
+
+
+@media screen and (max-width: 600px) {
+    div#body div:nth-of-type(1) {
+        order: 1;
+      }
+      
+      div#body div:nth-of-type(2) {
+        order: 2;
+      }
+      
+      div#body div:nth-of-type(3) {
+        order: 4;
+      }
+      
+      div#body div:nth-of-type(4) {
+        order: 3;
+      }
+            
+      div#body div:nth-of-type(5) {
+        order: 5;
+      }
+      
+      div#body div:nth-of-type(6) {
+        order: 7;
+      }
+      
+      div#body div:nth-of-type(7) {
+        order: 6;
+      }
+
+      div#body div:nth-of-type(8) {
+        order: 8;
+      }
   }
