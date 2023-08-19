@@ -1,46 +1,145 @@
 @import "./new-main.css";
 
+:root {
+    --third: #32fca7;
+}
+
 * {
     font-weight: normal;
 }
 
 #heading {
-	height: 17.5vh;
+    height: 17.5vh;
     /* position: fixed; */
     top: 0px;
 }
 
 #heading-top {
-	display: grid;
-	height: 100%;
-	grid-template-columns: 50vw auto;
-	text-align: center;
-	padding: 10px;
+    display: grid;
+    height: 100%;
+    grid-template-columns: 50vw auto;
+    text-align: center;
+    padding: 10px;
 }
 
 #heading-top div {
-	height: 100%;
+    height: 100%;
 }
 
 div#nav {
-	grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, auto);
 }
 
 #body {
     margin-top: -5vh;
-	min-height: 100vh;
-    display: grid;
+    min-height: 100vh;
     width: 100vw;
-    grid-template-columns: auto auto;
+    column-gap: 0;
+    grid-template-columns: 50vw 50vw;
 }
 
 .headline {
-    display:flex;
+    height: 50vh;
+    width: fit-content;
+    display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column
+    flex-direction: column;
+    margin-left: 10vw;
+}
+
+.headline h3 {
+    width: 50vw;
+    margin-top: 3vh;
+}
+
+div span.xl-text h1 {
+    width: 50vw;
+    margin-top: 25vh;
+    font-size: clamp(2rem, 6vw, 3.1rem);
 }
 
 div span.large-text h1 {
-    font-size: clamp(1rem,4vw,2.3rem);
+    width: 30vw;
+    margin-top: 3vh;
+    font-size: clamp(1.2rem, 3vw, 1.8em);
+}
+
+img[alt="Calculator"] {
+    width: 40vw;
+    height: 82.5vh;
+}
+
+.empty {
+    width: 48vw;
+    /* border: 2px solid green; */
+    height: 60vh;
+    margin-right: auto;
+}
+
+.actions {
+    min-height: 60vh;
+    height: fit-content;
+    width: 48vw;
+    /* border: 2px solid red; */
+    text-align: left;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.actions .action {
+    margin-top: 7vh;
+    width: 70%;
+}
+
+ul li {
+    margin-top: 3vh;
+    margin-left: 4vw;
+}
+
+span.bright-button button {
+    height: fit-content;
+    padding: 3vh 5vw 3vh 5vw;
+    background-color: var(--third);
+    color: var(--primary);
+    border-radius: 30px;
+}
+
+div:has(.body-node.example) {
+    margin-top: 15vh;
+    width: 48vw;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 5vw;
+}
+
+.body-node.example {
+    min-width: 20vw;
+    width: 20vw;
+    display: grid;
+    grid-template-columns: 70%;
+    grid-template-rows: 2rem 2rem 2rem 2rem;;
+    row-gap: 3vh;
+}
+
+div.example-row {
+    height: 2rem;
+    width: 100%;
+    margin-left: 3vw;
+    margin-top: 1vh;
+    border-radius: 30px;
+    background-color: rgba(201, 191, 191, 0.411);
+}
+
+.body-node.example div.example-row.text {
+    background-color: var(--primary)
+}
+
+a.signup-button button{
+    width: fit-content;
+    padding: 1vh 5vw 1vh 5vw;
+    margin-top: 15vh;
 }

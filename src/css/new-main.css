@@ -210,6 +210,10 @@ div#nav div.nav-option:hover {
 	color: var(--fontColor);
 }
 
+.ct-series-a .ct-area {
+    fill: var(--fontColor);
+}
+
 #to-do-list {
 	display: flex;
 	justify-content: center;

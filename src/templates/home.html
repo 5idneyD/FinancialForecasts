@@ -10,6 +10,9 @@
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
+		<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
 		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %}
 		<meta
 			name="logo"
@@ -23,7 +26,7 @@
 
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
-		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
 		{% if design %} {% endif %}
 	</head>
 	<body>
@@ -41,11 +44,103 @@
 		<br />
 		<div id="body">
 			<div class="headline">
-				<span class="large-text">
-					<h1>Cloud Based Accounting Software</h1>
+				<span class="xl-text">
+					<h1>Cloud Based <br />Accounting Software</h1>
 				</span>
 				<br />
-				<h3>Supplying A Wide-Range of Business Accounting Functions</h3>
+				<h3>
+					So You Can Know How Your Business Is Performing <br />
+					Anywhere In The World
+				</h3>
+				<br>
+				<span class="bright-button"
+					><a href="/signup" style="margin-right: 10vw; margin-top: -10vh;" class="signup-button"><button>Sign Up Now</button></a></span
+				>
+			</div>
+			<div>
+				<img src="{{url_for('static', filename='images/pexels-photo-8296991.jpeg')}}" alt="Calculator" />
+			</div>
+			<div class="empty" id="chart"></div>
+			<div class="actions">
+				<div class="action">
+					<span class="large-text"><h1>Manage and Review Your Accounts Online</h1></span>
+				</div>
+				<div class="action">
+					No Variance is an online platform that provides a
+					<a href="#abilities">wide range of abilities and reports</a> to help make sure your business is
+					performing at its best.
+				</div>
+				<div class="action">Create Your Own Account Here</div>
+			</div>
+			<div id="aboutUs" class="actions">
+				<div class="action">
+					<span class="large-text"><h1>About Us</h1></span>
+				</div>
+				<div class="action">
+					No Variance was built by accountants, for accountants, to make sure we included all fundemental
+					services required by a business to function cleanly.
+				</div>
+				<div class="action">
+					This software was built from scratch, using a wide range of modern technologies, to ensure we
+					provide an optimal performance that is secure and reliable, wherever you access it in the world.
+				</div>
+
+			</div>
+			<div class="actions" style="width: 30vw">
+				<div class="action">
+					<span class="large-text"
+						><h1>See What's Included <br />First-Hand</h1></span
+					>
+				</div>
+				<div class="action">
+					<span class="bright-button"
+						><a href="/login"
+							><button>Log-In With Our <br />Practice Account</button></a
+						></span
+					>
+				</div>
+				<div class="action">And Experience All The Benefits You'll Get By Joining No Variance</div>
+			</div>
+
+			<div class="empty">
+				<div>
+					<div class="body-node example">
+						<div class="example-row text">Sales Invoices</div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+					</div>
+					<div class="body-node example">
+						<div class="example-row text">Nominal Transactions</div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+					</div>
+				</div>
+				<br /><span class="bright-button"
+					><a href="/signup" style="margin-left: 15vw;" class="signup-button"><button>Sign Up Now</button></a></span
+				>
+			</div>
+			<div class="actions" id="abilities">
+				<div class="action">
+					<span class="large-text"><h1>What's Included?</h1></span>
+				</div>
+				<div class="action">
+					When you sign up to No Variance, you will have access to all of our features, immediately.
+				</div>
+				<div class="action">
+					<h4>These Include:</h4>
+					<ul>
+						<li>Posting Sales & Purchase Invoices</li>
+						<li>Posting Journals</li>
+						<li>An Automatic P&L</li>
+						<li>Balance Sheets and Trial Balances</li>
+						<li>Aged Debt & Cash Flow Reports</li>
+						<li>Uploading A Budget</li>
+						<li>Admin Control</li>
+						<li>And More...</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<script defer>
@@ -86,16 +181,29 @@
 			});
 		</script>
 
-		<script defer>
-			// This script converts all zeros in tables to a dash for display reasons
-			let cells = document.querySelectorAll("td");
+		<script>
+			// This script creates the demo graph on the home page
+			let bodyStyles = window.getComputedStyle(document.body);
+			let light = bodyStyles.getPropertyValue("--light");
+			let dark = bodyStyles.getPropertyValue("--dark");
 
-			cells.forEach(function (cell) {
-				const cellValue = cell.innerHTML;
-				if (cellValue == 0) {
-					cell.innerHTML = "-";
-				}
-			});
+			let x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+			let y = [400, 560, 470, 590, 580, 630, 520, 540, 480, 575, 630, 680, 710];
+
+			new Chartist.Line(
+				"#chart",
+				{
+					labels: x,
+					series: [y],
+				},
+				{
+					low: 300,
+
+					showArea: true,
+					showPoint: false,
+					fullWidth: false,
+				},
+			);
 		</script>
 	</body>
 </html>
