@@ -505,7 +505,8 @@ button[name="signinButton"] {
 .userLogo #userHead {
 	position: sticky;
 	width: 3vw;
-	height: 4.2vh;
+	min-width: 3.2rem;
+	height: 5vh;
 	border: 2px solid var(--fontColor);
 	padding: 0px;
 	border-radius: 50%;
@@ -519,8 +520,9 @@ button[name="signinButton"] {
 .userLogo #userBody {
 	position: sticky;
 	border: 2px solid var(--fontColor);
-	height: 5vh;
+	height: 5.7vh;
 	width: 4.5vw;
+	min-width: 3.2rem;
 	border-radius: 150px 150px 0 0;
 	-moz-border-radius:150px 150px 0 0;
 	-webkit-border-radius: 150px 150px 0 0;

@@ -101,11 +101,15 @@
 					>
 				</div>
 				<div class="action">
-					<span class="bright-button"
-						><a href="/login"
-							><button>Log-In With Our <br />Practice Account</button></a
-						></span
-					>
+					<form method="post" action="/login">
+						<input type="text" name="email" value="example@basicaccounting.co.uk" style="display: none"/>
+						<input type="text" name="password" value="p123" style="display: none"/>
+						<span class="bright-button"
+							><a>
+								<button type="submit">Log-In With Our <br />Practice Account</button></a
+							></span
+						>
+					</form>
 				</div>
 				<div class="action">And Experience All The Benefits You'll Get By Joining No Variance</div>
 			</div>
