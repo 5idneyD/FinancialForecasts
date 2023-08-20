@@ -77,7 +77,7 @@ class Users(db.Model):
     email = db.Column(db.String(40))
     password = db.Column(db.String(256))
     admin = db.Column(db.String(1))
-    designTheme = db.Column(db.String(30), default="#3D5B59,#B5E5CF,#65463E")
+    designTheme = db.Column(db.String(35), default="#3D5B59,#B5E5CF,#65463E")
 
     # Result of printing the class
     # e.g.
