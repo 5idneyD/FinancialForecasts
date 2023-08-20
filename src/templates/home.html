@@ -10,7 +10,14 @@
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
-		<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
+
+		<link
+			href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"
+			rel="preload"
+			as="style"
+			onload="this.onload=null;this.rel='stylesheet'" />
+		<noscript><link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" /></noscript>
+
 		<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
 		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %}
@@ -20,7 +27,13 @@
 		{% else %}
 		<meta name="logo" id="{{url_for('index')}}" />
 		{% endif %} {% block meta %} {% endblock %}
-		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+
+		<link
+			href="https://fonts.googleapis.com/css2?family=Lora&display=swap"
+			rel="preload"
+			as="style"
+			onload="this.onload=null;this.rel='stylesheet'" />
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora&display=swap" /></noscript>
 
 		<!-- Media Queries - If above 600px use desktop css - Else Use Mobile CSS -->
 		<link
