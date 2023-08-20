@@ -82,7 +82,8 @@
 	transition: all 0.2s ease;
 }
 
-.box:hover {
+.box:hover,
+.box:active {
 	width: 100%;
 	height: 80%;
 	cursor: pointer;
@@ -488,6 +489,7 @@ div.loginItem {
 	margin-top: 5%;
 	margin-left: auto;
 	margin-right: auto;
+	color: var(--primary);
 }
 
 button[name="signinButton"] {

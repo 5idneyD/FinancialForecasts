@@ -24,15 +24,37 @@
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+		<!-- Style for just mobile pages -->
+		<style media="screen and (max-width: 600px)">
+			* {
+				font-weight: normal;
+				font-size: clamp(1rem, 4vw, 2rem);
+			}
+			form#form[method="post"] input {
+				width: 60%;
+			}
+			form#form[method=post] button {
+				width: 50%;
+			}
+			.userLogo {
+				width: 12.5vw;
+			}
+		</style>
+
+		<!-- Style for all pages -->
+		<style>
+			form#form[method="post"] input {
+				color: var(--primary);
+			}
+		</style>
 		{% if design %} {% endif %}
 	</head>
 	<body>
 		<div id="heading" data-expanded="true" style="height: 17.5vh">
 			<div id="heading-top">
 				<div id="logo">No Variance <br />Accounting Software</div>
-				<div id="nav" style="grid-template-columns: repeat(5, auto)">
+				<div id="nav" style="grid-template-columns: repeat(4, auto)">
 					<div class="nav-option" data-href="/">Home</div>
-					<div class="nav-option" data-href="/">About Us</div>
 					<div class="nav-option" data-href="/login">Log In</div>
 					<div class="nav-option" data-href="/signup">Sign Up</div>
 				</div>

@@ -2,11 +2,12 @@
 
 :root {
     --third: #32fca7;
+    scroll-behavior: smooth;
 }
 
 * {
     font-weight: normal;
-	font-size: clamp(1rem, 4vw, 2rem);
+    font-size: clamp(1rem, 4vw, 2rem);
 }
 
 #heading {
@@ -28,7 +29,8 @@
 }
 
 div#nav {
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(4, auto);
+    z-index: 50;
 }
 
 .nav-option {
@@ -53,8 +55,9 @@ div#nav {
 }
 
 .headline h3 {
-    width: 90vw;
+    width: 100%;
     margin-top: 3vh;
+    left: 0px;
 }
 
 div span.xl-text h1 {
@@ -65,7 +68,7 @@ div span.xl-text h1 {
 
 div span.large-text h1 {
     margin-top: 3vh;
-    font-size: clamp(1.8rem, 4vw,2em);
+    font-size: clamp(1.8rem, 4vw, 2em);
     text-align: center;
     margin-left: auto;
 }
@@ -79,7 +82,7 @@ img[alt="Calculator"] {
     width: 100vw;
     /* border: 2px solid green; */
     height: 60vh;
-
+    grid-template-columns: auto;
 }
 
 .actions {
@@ -117,7 +120,10 @@ span.bright-button button {
     border-radius: 30px;
 }
 
-
+span.bright-button a button:not([type="submit"]) {
+    margin-left: -85vw;
+    margin-top: 15vh;
+}
 
 div:has(div.body-node.example) {
     margin-top: -14vh;
@@ -138,7 +144,7 @@ div:has(.body-node.example) {
     margin-right: auto;
     display: grid;
     grid-template-columns: 70%;
-    grid-template-rows: 2rem 2rem 2rem 2rem;;
+    grid-template-rows: 2rem 2rem 2rem 2rem;
     row-gap: 3vh;
 }
 
@@ -151,50 +157,46 @@ div.example-row {
 }
 
 .body-node.example div.example-row.text {
-    background-color: var(--primary)
+    background-color: var(--primary);
 }
 
-a.signup-button button{
+a.signup-button button {
     width: fit-content;
     padding: 1vh 5vw 1vh 5vw;
     margin-top: 6vh;
     margin-bottom: 15vh;
 }
 
-
-
-
-
 @media screen and (max-width: 600px) {
     div#body div:nth-of-type(1) {
         order: 1;
-      }
-      
-      div#body div:nth-of-type(2) {
-        order: 2;
-      }
-      
-      div#body div:nth-of-type(3) {
-        order: 4;
-      }
-      
-      div#body div:nth-of-type(4) {
-        order: 3;
-      }
-            
-      div#body div:nth-of-type(5) {
-        order: 5;
-      }
-      
-      div#body div:nth-of-type(6) {
-        order: 7;
-      }
-      
-      div#body div:nth-of-type(7) {
-        order: 6;
-      }
+    }
 
-      div#body div:nth-of-type(8) {
+    div#body div:nth-of-type(2) {
+        order: 2;
+    }
+
+    div#body div:nth-of-type(3) {
+        order: 4;
+    }
+
+    div#body div:nth-of-type(4) {
+        order: 3;
+    }
+
+    div#body div:nth-of-type(5) {
+        order: 5;
+    }
+
+    div#body div:nth-of-type(6) {
+        order: 7;
+    }
+
+    div#body div:nth-of-type(7) {
+        order: 6;
+    }
+
+    div#body div:nth-of-type(8) {
         order: 8;
-      }
-  }
+    }
+}
