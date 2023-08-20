@@ -1,3 +1,5 @@
+let root = document.querySelector(":root")
+
 function previewChange() {
     root.style.setProperty("--primary", document.querySelector("input[name='primary']").value)
     root.style.setProperty("--second", document.querySelector("input[name='second']").value)
