@@ -14,6 +14,7 @@
     top: 0px;
 }
 
+
 #heading-top {
     display: grid;
     height: 100%;
@@ -45,24 +46,28 @@ div#nav {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 3vh;
     margin-left: 10vw;
 }
 
 .headline h3 {
     width: 50vw;
     margin-top: 3vh;
+    font-family: 'Nunito', sans-serif;
 }
 
 div span.xl-text h1 {
     width: 50vw;
     margin-top: 25vh;
     font-size: clamp(2rem, 6vw, 3.1rem);
+    font-family: 'Nunito', sans-serif;
 }
 
 div span.large-text h1 {
     width: 30vw;
     margin-top: 3vh;
     font-size: clamp(1.2rem, 3vw, 1.8em);
+    font-family: 'Nunito', sans-serif;
 }
 
 img[alt="Calculator"] {
@@ -106,6 +111,10 @@ span.bright-button button {
     background-color: var(--third);
     color: var(--primary);
     border-radius: 30px;
+}
+
+span.bright-button button:onclick:hover {
+    background-color: red;;
 }
 
 div:has(.body-node.example) {

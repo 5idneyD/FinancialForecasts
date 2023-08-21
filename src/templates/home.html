@@ -36,6 +36,8 @@
 			onload="this.onload=null;this.rel='stylesheet'" />
 		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora&display=swap" /></noscript>
 
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols:wght@300&family=Nunito:wght@300&display=swap" rel="stylesheet">
+
 		<!-- Media Queries - If above 600px use desktop css - Else Use Mobile CSS -->
 		<link
 			rel="stylesheet"
@@ -52,7 +54,7 @@
 		{% if design %} {% endif %}
 	</head>
 	<body>
-		<div id="heading" data-expanded="true">
+		<div id="heading" data-expanded="true" style="height: 17.5vh">
 			<div id="heading-top">
 				<div id="logo">No Variance <br />Accounting Software</div>
 				<div id="nav">
@@ -118,7 +120,7 @@
 						<input type="text" name="email" value="example@basicaccounting.co.uk" style="display: none" />
 						<input type="text" name="password" value="p123" style="display: none" />
 						<span class="bright-button"
-							><a>
+							><a ontouchstart="">
 								<button type="submit">Log-In With Our <br />Practice Account</button></a
 							></span
 						>

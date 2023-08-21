@@ -125,6 +125,10 @@ span.bright-button a button:not([type="submit"]) {
     margin-top: 15vh;
 }
 
+span.bright-button button:hover{
+    font-weight: bold;
+}
+
 div:has(div.body-node.example) {
     margin-top: -14vh;
 }
