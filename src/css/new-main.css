@@ -236,15 +236,16 @@ div#nav div.nav-option:hover {
 
 li.to-do-item .bullet,
 li.to-do-item-add .bullet {
-	width: 58%;
-	height: 70%;
+	width: 1.5rem;
+	height: 1.5rem;
+	padding-bottom: 2%;
 	margin: auto;
 	border-radius: 50%;
 }
 
-li.to-do-item span,
-li.to-do-item-add span {
-	margin-top: 5%;
+li.to-do-item div,
+li.to-do-item-add div {
+	margin-top: 0%;
 }
 
 .bullet p {

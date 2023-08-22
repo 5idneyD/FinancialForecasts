@@ -22,6 +22,7 @@ import pandas as pd
 import openpyxl
 import sys
 import traceback
+import json
 # PythonAnywhere and windows10 reference parent directories differently
 # If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere route
 if load_dotenv("./.env") == False:
@@ -77,7 +78,7 @@ class Users(db.Model):
     email = db.Column(db.String(40))
     password = db.Column(db.String(256))
     admin = db.Column(db.String(1))
-    designTheme = db.Column(db.String(35), default="#3D5B59,#B5E5CF,#65463E")
+    designTheme = db.Column(db.String(35))
 
     # Result of printing the class
     # e.g.
@@ -152,6 +153,12 @@ class PasswordReset(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     email = db.Column(db.String(40))
     code = db.Column(db.String(6))
+
+class ToDoList(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    user = db.Column(db.String(64))
+    company = db.Column(db.String(64))
+    task = db.Column(db.String(256))
 
 
 # Create database tables if they don't already exist
@@ -621,6 +628,8 @@ def dashboard(company, email, username, session_key, theme):
         .filter(ChartOfAccounts.company == company)
         .filter(ChartOfAccounts.nominal < 60000)
     )
+    
+    tasks = ToDoList.query.filter(ToDoList.company==company, ToDoList.user==username).all()
 
     data = {}
     for i in range(1, 13):
@@ -648,6 +657,27 @@ def dashboard(company, email, username, session_key, theme):
 
         data[i] = monthly_balance
 
+
+    # The only post request is adding or removing from to do list
+    if request.method == "POST":
+        
+        # Read the json object being posted
+        action = request.json
+        
+        # If there is a plus at the start, it means add the action
+        if action[0] == "+":
+            action = action[1:]
+            newAction = ToDoList(user=username, company=company, task=action)
+            db.session.add(newAction)
+        # If theres a minus at the start, it means remove
+        else:
+            action = action[1:]
+            currentAction = ToDoList.query.filter(ToDoList.company==company, ToDoList.user==username, ToDoList.task==action).first()
+            db.session.delete(currentAction)
+            
+        db.session.commit()
+        
+
     return render_template(
         "dashboard.html",
         company=company,
@@ -656,6 +686,7 @@ def dashboard(company, email, username, session_key, theme):
         session_key=session_key,
         design=theme,
         total_values=data,
+        tasks=tasks
     )
 
 # Shows user all of their nominal accounts in a sorted order
