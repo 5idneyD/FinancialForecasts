@@ -1416,12 +1416,10 @@ def profitAndLoss(company, email, username, session_key, theme):
         Companies.company == company).first()
     current_year = company_data.accounting_year
     current_period = company_data.accounting_period
-    print(type(current_year))
 
     if request.method == "POST":
         current_year = request.form["selected_year"]
         current_period = request.form["selected_period"]
-        print(type(current_year))
 
     accounts = (
         db.session.query(ChartOfAccounts)
@@ -1446,7 +1444,7 @@ def profitAndLoss(company, email, username, session_key, theme):
             # Filtering here as using the filter in the query didnt work
             # I think becuase using <= with strings but not sure
             if int(transaction.accounting_period) <= int(current_period):
-                print(type(transaction.accounting_year), type(current_period))
+
                 if transaction.accounting_period == current_period:
                     if transaction.transaction_type == "journal" and account.nominal < 20000:
                         monthly_balance -= transaction.net_value

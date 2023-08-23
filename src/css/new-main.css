@@ -358,6 +358,13 @@ table.report tr {
 	flex-direction: row;
 }
 
+table.report,
+#balanceSheet,
+.body-node:has(#balanceSheet) {
+width: 85vw !important;
+min-width: 0px !important;
+}
+
 table.report tr :is(td, th) {
 	display: flex;
 	justify-content: center;
@@ -669,6 +676,10 @@ input[type="file"] {
 }
 input[type="file"]:hover {
 	cursor: pointer;
+}
+
+.table_row td {
+	width: 20vw;
 }
 
 div#bankRecTable,
