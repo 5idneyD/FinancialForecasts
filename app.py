@@ -674,7 +674,7 @@ def dashboard(company, email, username, session_key, theme):
             action = action[1:]
             currentAction = ToDoList.query.filter(ToDoList.company==company, ToDoList.user==username, ToDoList.task==action).first()
             db.session.delete(currentAction)
-            
+             
         db.session.commit()
         
 
@@ -1416,10 +1416,12 @@ def profitAndLoss(company, email, username, session_key, theme):
         Companies.company == company).first()
     current_year = company_data.accounting_year
     current_period = company_data.accounting_period
+    print(type(current_year))
 
     if request.method == "POST":
         current_year = request.form["selected_year"]
         current_period = request.form["selected_period"]
+        print(type(current_year))
 
     accounts = (
         db.session.query(ChartOfAccounts)
@@ -1432,48 +1434,48 @@ def profitAndLoss(company, email, username, session_key, theme):
     for account in accounts:
         monthly_balance = 0
         ytd_balance = 0
-        transactions = (
-            db.session.query(NominalTransactions)
-            .filter(NominalTransactions.company == company)
-            .filter(NominalTransactions.nominal_code == account.nominal)
-            .filter(NominalTransactions.accounting_year == current_year)
-            .filter(NominalTransactions.accounting_period <= current_period)
-            .filter(NominalTransactions.to_post not in [1, "1"])
-        )
-
-        for transaction in transactions:
-            if transaction.accounting_period == current_period:
-                if transaction.transaction_type == "journal" and account.nominal < 20000:
-                    monthly_balance -= transaction.net_value
-                else:
-                    monthly_balance += transaction.net_value
-            else:
-                pass
-
-            if transaction.transaction_type == "journal" and account.nominal < 20000:
-                print(transaction)
-                ytd_balance -= transaction.net_value
-            else:
-                ytd_balance += transaction.net_value
-
-        budget = Budgets.query.filter_by(
-            company=company, nominal_code=account.nominal, year=current_year
+        
+        transactions = NominalTransactions.query.filter(
+            NominalTransactions.company == company,
+            NominalTransactions.nominal_code == account.nominal,
+            NominalTransactions.accounting_year == current_year,
+            NominalTransactions.to_post not in [1, "1"]
         ).all()
 
-        ytd_budget = 0
-        if budget:
+        for transaction in transactions:
+            # Filtering here as using the filter in the query didnt work
+            # I think becuase using <= with strings but not sure
+            if int(transaction.accounting_period) <= int(current_period):
+                print(type(transaction.accounting_year), type(current_period))
+                if transaction.accounting_period == current_period:
+                    if transaction.transaction_type == "journal" and account.nominal < 20000:
+                        monthly_balance -= transaction.net_value
+                    else:
+                        monthly_balance += transaction.net_value
+            
+    
+                if transaction.transaction_type == "journal" and account.nominal < 20000:
+                    ytd_balance -= transaction.net_value
+                else:
+                    ytd_balance += transaction.net_value
+            budget = Budgets.query.filter_by(
+                company=company, nominal_code=account.nominal, year=current_year
+            ).all()
 
-            for val in budget:
-                if int(val.period) == int(current_period):
-                    budget_value = val.value
-                if int(val.period) <= int(current_period):
-                    ytd_budget += val.value
-        else:
-            budget_value = 0
+            ytd_budget = 0
+            if budget:
 
-        data[account.account_name] = [monthly_balance,
-                                      ytd_balance, account.nominal,
-                                      budget_value, ytd_budget]
+                for val in budget:
+                    if int(val.period) == int(current_period):
+                        budget_value = val.value
+                    if int(val.period) <= int(current_period):
+                        ytd_budget += val.value
+            else:
+                budget_value = 0
+
+            data[account.account_name] = [monthly_balance,
+                                        ytd_balance, account.nominal,
+                                        budget_value, ytd_budget]
 
     return render_template(
         "profitAndLoss.html",
