@@ -50,13 +50,13 @@ I hope for it to become a professionally used application that anyone can access
 - Add Aged Debt Page ✔️
 - Default Sales Invoice number not appearing ✔️
 
-  ## New Features Added
-  - Cash Flow Report
-  - New UI
-  - Only using Vanilla CSS, screw Bootstrap and TailwindCSS
-  - Top Customers
-  - Top Suppliers
-  - To Do List
+## New Features Added
+- Cash Flow Report
+- New UI
+- Only using Vanilla CSS, screw Bootstrap and TailwindCSS
+- Top Customers
+- Top Suppliers
+- To Do List
 
 ## Tech Stack Being Used:
 - SQLAlchemy  <strike>(SQLite3)</strike>   (MySQL) 
