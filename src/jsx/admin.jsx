@@ -7,6 +7,7 @@ import RemoveUser from "./components/RemoveUser";
 import InvoiceDetails from "./components/InvoiceDetails";
 import ClosePeriod from "./components/ClosePeriod";
 import ChartOfAccounts from "./components/ChartOfAccounts";
+import EditUser from "./components/EditUser";
 
 function App() {
 	
@@ -21,7 +22,10 @@ function App() {
 		e.addEventListener("click", function () {
             if (e.id == "addUserButton"){
              setReturned(<AddUser/>)
-            } else if (e.id == "removeUserButton"){
+            } else if (e.id == "editUserButton"){
+                setReturned(<EditUser/>)
+            } 
+            else if (e.id == "removeUserButton"){
                 setReturned(<RemoveUser/>)
             } else if (e.id == "chartOfAccountsButton"){
                 setReturned(<ChartOfAccounts/>)

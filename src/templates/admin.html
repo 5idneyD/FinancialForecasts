@@ -1,7 +1,8 @@
 {% set title="Admin" %} {% extends "blueprint.html" %} {% block meta %}
 <meta name="data" accounting_year="{{accounting_year}}" accounting_period="{{accounting_period}}" />
-{% endblock %} {% block body %} {% if admin==3 or admin=="3" %}
-
+{% endblock %} {% block body %}
+ 
+{% if admin==3 or admin=="3" %}
 <div class="body-node adminForm" id="first" style="width: 30vw">
 	<div>
 		<button
@@ -11,6 +12,17 @@
 			data-selected="1"
 			onclick="clicked(event.srcElement.id);">
 			Add User
+		</button>
+	</div>
+
+	<div>
+		<button
+			class="invoiceForm adminButton"
+			type="button"
+			id="editUserButton"
+			data-selected="0"
+			onclick="clicked(event.srcElement.id);">
+			Edit User
 		</button>
 	</div>
 

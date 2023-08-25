@@ -566,6 +566,19 @@ def admin(company, email, username, session_key, theme):
                 email=user_email, company=company).first()
             db.session.delete(user)
             db.session.commit()
+        
+        elif "editUserForm" in request.form:
+            editUserEmail = request.form['email']
+            newPermission = request.form['adminLevel']
+            editUser = Users.query.filter(Users.company==company, Users.email==editUserEmail).first()
+            
+            # Update the users admin level
+            try:
+                editUser.admin = newPermission
+                db.session.commit()
+                # If error (i.e. the user does not exist), return message
+            except AttributeError:
+                message = "This user does not exist"
 
         elif "closePeriodForm" in request.form:
 
