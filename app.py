@@ -955,7 +955,6 @@ def editSupplier(company, email, username, session_key, theme):
     )
     
 
-
 # Inline comments as very detailed
 @app.route("/<company>/<email>/<username>/<session_key>/addSalesInvoice", methods=["POST", "GET"])
 @login_required
@@ -1447,6 +1446,7 @@ def changePassword(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/trialBalance", methods=["POST", "GET"])
 @login_required
 def trialBalance(company, email, username, session_key, theme):
+
     accounts = ChartOfAccounts.query.filter_by(
         company=company).order_by(ChartOfAccounts.nominal).all()
     return render_template("trialBalance.html", company=company, accounts=accounts, design=theme)
@@ -1459,6 +1459,14 @@ def balanceSheet(company, email, username, session_key, theme):
         Companies.company == company).first()
     current_year = company_data.accounting_year
     current_period = company_data.accounting_period
+
+    print(current_period, type(current_period))
+
+    if request.method == "POST":
+        current_period = request.form['selected_period']
+        current_year = request.form['selected_year']
+        print(current_period, type(current_period))
+
 
     accounts = (
         db.session.query(ChartOfAccounts)
@@ -1475,7 +1483,8 @@ def balanceSheet(company, email, username, session_key, theme):
             db.session.query(NominalTransactions)
             .filter(NominalTransactions.company == company)
             .filter(NominalTransactions.nominal_code == account.nominal)
-            .filter(NominalTransactions.accounting_year == current_year)
+            .filter(NominalTransactions.accounting_year <= current_year)
+            .filter(NominalTransactions.accounting_period <= current_period)
         )
 
         for transaction in transactions:

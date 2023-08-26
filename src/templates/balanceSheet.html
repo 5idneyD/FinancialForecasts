@@ -12,23 +12,11 @@
 <div class="body-node" id="second">
 	<form method="POST">
 		<div class="invoice-head">
-			<div>Supplier</div>
-			<div>
-				<select class="invoice" name="supplier_code">
-					<option value="*" selected hidden></option>
-					{% for supplier in suppliers %}
-					<option value="{{supplier}}">{{supplier}}</option>
-					{% endfor %}
-				</select>
-			</div>
-
-			<div>Invoice No.</div>
-			<div><input type="invoice" class="invoice" name="invoice_number" value="" /></div>
-
+			
 			<div>Period</div>
 			<div>
 				<select name="selected_period" class="invoice">
-					<option value="*" selected hidden></option>
+					<option value="12" selected hidden></option>
 					{% for i in range(1,13) %}
 					<option value="{{i}}">{{i}}</option>
 					{% endfor %}
