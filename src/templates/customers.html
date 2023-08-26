@@ -13,11 +13,10 @@
 </div>
 
 
-<div id="second" class="body-node" style="min-width: 100px; width: 5vw; height: fit-content">
+<div id="second" class="body-node two-row" style="min-width: 100px; width: 5vw; height: fit-content">
 	<a href="{{ url_for('addCustomer', company=company, email=email, username=username, session_key=session_key) }}"
 		>Add Customer</a
 	>
-	<br>
 	<a href="{{url_for('editCustomer', company=company, email=email, username=username, session_key=session_key)}}">Edit Customers</a>
 </div>
 <div id="third" class="body-node">
@@ -49,7 +48,6 @@
 			<td>{{balances[customer.customer_code]}}</td>
 			<td>{{customer.customer_credit_limit}}</td>
 			<td>{{customer.customer_payment_terms}}</td>
-			<td></td>
 		</tr>
 		{% endfor %}
 	</table>

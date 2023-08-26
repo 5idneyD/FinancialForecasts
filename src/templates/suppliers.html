@@ -15,9 +15,13 @@
 	<input type="text" class="filterInput" id="myInputNominal" onkeyup="myFunctionNominal()" placeholder="Search Nominal Codes...">
 
 </div>
-<div id="second" class="body-node" style="min-width: 100px; width: 5vw; height: fit-content">
+<div id="second" class="body-node two-row" style="min-width: 100px; width: 5vw; height: fit-content">
 	<a href="{{ url_for('addSupplier', company=company, email=email, username=username, session_key=session_key) }}"
 		>Add Supplier</a
+	>
+	
+		<a href="{{ url_for('editSupplier', company=company, email=email, username=username, session_key=session_key) }}"
+		>Edit Suppliers</a
 	>
 </div>
 <div id="third" class="body-node">

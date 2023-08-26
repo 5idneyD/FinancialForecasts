@@ -195,11 +195,17 @@ div#nav div.nav-option:hover {
 	border-radius: 50px;
 	background: var(--primary);
 	box-shadow: var(--shadow);
-
 	height: fit-content;
 	min-width: 300px;
 	width: fit-content;
 	align-items: center;
+}
+
+.body-node.two-row {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: 50% 50%;
+	row-gap: 0%;
 }
 
 .ct-label,
@@ -747,6 +753,10 @@ div.clientTableRow {
 	grid-template-rows: auto;
 	row-gap: 6vh;
 	margin-top: 3vh;
+}
+
+div.clientTableRow.supplier{
+	grid-template-columns: 15% 15% 20% 50%;
 }
 
 input.clientTableCellInput {

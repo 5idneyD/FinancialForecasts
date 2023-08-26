@@ -811,7 +811,7 @@ def addCustomer(company, email, username, session_key, theme):
         "addCustomer.html", company=company, email=email, username=username, session_key=session_key, design=theme
     )
 
-# Page to add new customers
+# Page to edit existing customers
 # Customer must be added before an invoice can be posted for them
 # User fills in form and posts
 @app.route("/<company>/<email>/<username>/<session_key>/editCustomer", methods=["POST", "GET"])
@@ -921,6 +921,39 @@ def addSupplier(company, email, username, session_key, theme):
     return render_template(
         "addSupplier.html", company=company, email=email, username=username, session_key=session_key, design=theme
     )
+
+# Page to edit existing customers
+# Customer must be added before an invoice can be posted for them
+# User fills in form and posts
+@app.route("/<company>/<email>/<username>/<session_key>/editSupplier", methods=["POST", "GET"])
+@login_required
+def editSupplier(company, email, username, session_key, theme):
+    
+    if request.method == "POST":
+        name = request.form["name"]
+        code = request.form["code"]
+        new_email = request.form["email"]
+        address = request.form["address"]
+    
+        client = Suppliers.query.filter(Suppliers.company==company,
+                                        Suppliers.supplier_code==code).first()
+        client.supplier_name = name
+        client.supplier_address = address
+        client.supplier_email = new_email
+        db.session.commit()
+    
+    clients = Suppliers.query.filter(Suppliers.company==company).all()
+    data = {}
+    for client in clients:
+        content = [client.supplier_name, client.supplier_email, client.supplier_address]
+        data[client.supplier_code] = [str(i) if i== None else i for i in content]
+    
+            
+    
+    return render_template(
+        "editSupplier.html", company=company, email=email, username=username, session_key=session_key, design=theme, client_codes=clients, clients=data
+    )
+    
 
 
 # Inline comments as very detailed
