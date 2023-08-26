@@ -224,7 +224,7 @@ def login_required(f):
                 user = Users.query.filter(
                     Users.company == company, Users.email == email).first()
                 design = user.designTheme
-                return f(company, email, username, session_key, theme=design)
+                return f(company, email, username, session_key,theme=design)
             else:
                 return redirect(url_for("login"))
         except KeyError as exception:
@@ -765,7 +765,7 @@ def customerBalances(company, client="%%"):
 def customers(company, email, username, session_key, theme):
     customers, balances, total_sales = customerBalances(company)
 
-    # Sort and only render top 3 customers
+    # Sort and only render only top 3 customers
     total_sales = sorted(total_sales.items(),
                          key=lambda x: x[1], reverse=True)[:3]
 
@@ -811,6 +811,41 @@ def addCustomer(company, email, username, session_key, theme):
         "addCustomer.html", company=company, email=email, username=username, session_key=session_key, design=theme
     )
 
+# Page to add new customers
+# Customer must be added before an invoice can be posted for them
+# User fills in form and posts
+@app.route("/<company>/<email>/<username>/<session_key>/editCustomer", methods=["POST", "GET"])
+@login_required
+def editCustomer(company, email, username, session_key, theme):
+    
+    if request.method == "POST":
+        name = request.form["name"]
+        code = request.form["code"]
+        new_email = request.form["email"]
+        address = request.form["address"]
+        credit = request.form["credit"]
+        days = request.form["days"]
+    
+        client = Customers.query.filter(Customers.company==company,
+                                        Customers.customer_code==code).first()
+        client.customer_name = name
+        client.customer_address = address
+        client.customer_email = new_email
+        client.customer_payment_terms = days
+        client.customer_credit_limit = credit
+        db.session.commit()
+    
+    clients = Customers.query.filter(Customers.company==company).all()
+    data = {}
+    for client in clients:
+        data[client.customer_code] = [client.customer_name, client.customer_email, client.customer_address,
+                                   client.customer_credit_limit, client.customer_payment_terms]
+    
+    
+    return render_template(
+        "editCustomer.html", company=company, email=email, username=username, session_key=session_key, design=theme, client_codes=clients, clients=data
+    )
+    
 
 def supplierBalances(company, client="%%"):
     suppliers = Suppliers.query.filter(

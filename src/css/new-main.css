@@ -735,3 +735,43 @@ div#newBankRecTable {
 #bankRecButtons button#B2 {
 	border-radius: 0px 45px 45px 0px;
 }
+
+div.clientTable {
+	display: grid;
+	grid-template-columns:auto;
+}
+
+div.clientTableRow {
+	display: grid;
+	grid-template-columns: 10% 10% 20% 30% 10% 20%;
+	grid-template-rows: auto;
+	row-gap: 6vh;
+	margin-top: 3vh;
+}
+
+input.clientTableCellInput {
+	background-color: var(--primary);
+	color: var(--fontColor);
+	width: 90%;
+	border: 1px solid var(--fontColor);
+	text-align:center;
+}
+
+input.clientTableCellInput[name="code"] {
+	border: none;
+}
+
+select#clientCodeSelect {
+	width: 10vw;
+	height: 1.5rem;
+	min-width: 50px;
+	margin-bottom: 2rem;
+	color: var(--fontColor);
+	background-color: var(--primary);
+}
+
+select#clientCodeSelect option {
+	color: var(--fontColor);
+	background-color: var(--primary);
+	text-align: center;
+}

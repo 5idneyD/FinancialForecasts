@@ -1,0 +1,58 @@
+{% set title = "Edit Customer" %} {% extends "blueprint.html" %} {% block body %}
+<div class="body-node" id="first" style="width: 80vw">
+	<select name="clientCode" id="clientCodeSelect" onchange="selectClient(this)">
+		<option value="" selected disabled hidden>Select Client</option>
+		{% for client in client_codes %}
+		<option value="{{client.customer_code}}" class="clientCodeOption">{{client.customer_code}}</option>
+		{% endfor %}
+	</select>
+	<br />
+	<form method="post">
+		<div class="clientTable">
+			<div class="clientTableRow">
+				<div>Name</div>
+				<div>Code</div>
+				<div>Email</div>
+				<div>Address</div>
+				<div>Credit Limit (£)</div>
+				<div>Payments Terms (Days)</div>
+			</div>
+			<div class="clientTableRow">
+				<div class="clientTableCell"><input type="text" name="name" class="clientTableCellInput" /></div>
+				<div class="clientTableCell"><input type="text" name="code" readonly class="clientTableCellInput" /></div>
+				<div class="clientTableCell"><input type="text" name="email" class="clientTableCellInput" /></div>
+				<div class="clientTableCell"><input type="text" name="address" class="clientTableCellInput" /></div>
+				<div class="clientTableCell"><input type="text" name="credit" class="clientTableCellInput" /></div>
+				<div class="clientTableCell"><input type="text" name="days" class="clientTableCellInput" /></div>
+			</div>
+		</div>
+		<button class="invoiceForm" type="submit">Update Client</button>
+	</form>
+</div>
+
+<script>
+	// Data is provided from backend as dict
+	let data = {{clients|safe}};
+	let keys = Object.keys(data);
+
+	// select all cells with class
+	let cell = document.querySelectorAll(".clientTableCellInput")
+
+	function selectClient(e){
+		let clientCode = e.value;
+		for (let i = 0;i < keys.length; i++){
+
+			// If Selected value (code) equals client code in keys
+			if (keys[i] == e.value) {
+				let clientData = data[keys[i]];
+				cell[1].value = keys[i]
+				cell[0].value = clientData[0]
+				cell[2].value = clientData[1]
+				cell[3].value = clientData[2]
+				cell[4].value = clientData[3]
+				cell[5].value = clientData[4]
+			}
+		}
+	}
+</script>
+{% endblock %}
