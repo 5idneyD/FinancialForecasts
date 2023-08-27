@@ -17,7 +17,9 @@
 			rel="preload"
 			as="style"
 			onload="this.onload=null;this.rel='stylesheet'" />
-		<noscript><link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" /></noscript>
+		<noscript>
+			<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
+		</noscript>
 
 		<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
@@ -34,9 +36,13 @@
 			rel="preload"
 			as="style"
 			onload="this.onload=null;this.rel='stylesheet'" />
-		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora&display=swap" /></noscript>
+		<noscript>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora&display=swap" />
+		</noscript>
 
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols:wght@300&family=Nunito:wght@300&display=swap" rel="stylesheet">
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols:wght@300&family=Nunito:wght@300&display=swap"
+			rel="stylesheet" />
 
 		<!-- Media Queries - If above 600px use desktop css - Else Use Mobile CSS -->
 		<link
@@ -53,6 +59,7 @@
 
 		{% if design %} {% endif %}
 	</head>
+
 	<body>
 		<div id="heading" data-expanded="true" style="height: 17.5vh">
 			<div id="heading-top">
@@ -88,7 +95,9 @@
 			<div class="empty" id="chart"></div>
 			<div class="actions">
 				<div class="action">
-					<span class="large-text"><h1>Manage and Review Your Accounts Online</h1></span>
+					<span class="large-text">
+						<h1>Manage and Review Your Accounts Online</h1>
+					</span>
 				</div>
 				<div class="action">
 					No Variance is an online platform that provides a
@@ -98,7 +107,9 @@
 			</div>
 			<div id="aboutUs" class="actions">
 				<div class="action">
-					<span class="large-text"><h1>About Us</h1></span>
+					<span class="large-text">
+						<h1>About Us</h1>
+					</span>
 				</div>
 				<div class="action">
 					No Variance was built by accountants, for accountants, to make sure we included all fundamental
@@ -111,9 +122,9 @@
 			</div>
 			<div class="actions" id="whats-included">
 				<div class="action">
-					<span class="large-text"
-						><h1>See What's Included <br />First-Hand</h1></span
-					>
+					<span class="large-text">
+						<h1>See What's Included <br />First-Hand</h1>
+					</span>
 				</div>
 				<div class="action">
 					<form method="post" action="/login">
@@ -153,7 +164,9 @@
 			</div>
 			<div class="actions" id="abilities">
 				<div class="action">
-					<span class="large-text"><h1>What's Included?</h1></span>
+					<span class="large-text">
+						<h1>What's Included?</h1>
+					</span>
 				</div>
 				<div class="action">
 					When you sign up to No Variance, you will have access to all of our features, immediately.
@@ -235,5 +248,7 @@
 				},
 			);
 		</script>
+		<script src="{{url_for('static', filename='js/fadeIn.js')}}"></script>
+		<script>fadeIn("#chart")</script>
 	</body>
 </html>

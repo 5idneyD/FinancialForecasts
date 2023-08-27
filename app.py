@@ -1460,12 +1460,10 @@ def balanceSheet(company, email, username, session_key, theme):
     current_year = company_data.accounting_year
     current_period = company_data.accounting_period
 
-    print(current_period, type(current_period))
 
     if request.method == "POST":
         current_period = request.form['selected_period']
         current_year = request.form['selected_year']
-        print(current_period, type(current_period))
 
 
     accounts = (

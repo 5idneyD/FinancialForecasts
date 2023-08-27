@@ -1,0 +1,1 @@
+function fadeIn(o){let e=document.querySelector(o);e.style.opacity=0;const t={root:null,threshold:0,rootMargin:"-10%"};document.addEventListener("scroll",function(){new IntersectionObserver(n=>{n.forEach(r=>{const s=r.intersectionRatio;e.style.opacity=s.toFixed(2)})},t).observe(e)})}
