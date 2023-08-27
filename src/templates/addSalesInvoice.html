@@ -71,12 +71,13 @@
 					<div>
 						<input
 							type="number"
+							step="0.01"
 							name="1_net_value"
 							class="net"
 							onchange="vatValue(this); totalValue(this);" />
 					</div>
-					<div><input type="number" name="1_vat" class="vat" onchange="totalValue(this)" /></div>
-					<div><input type="number" name="1_total_value" class="tv" /></div>
+					<div><input type="number" step="0.01" name="1_vat" class="vat" onchange="totalValue(this)" /></div>
+					<div><input type="number" step="0.01" name="1_total_value" class="tv" /></div>
 				</div>
 			</div>
 		</div>

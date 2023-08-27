@@ -133,9 +133,11 @@ function Journal() {
 					<div id="bodyTable">{rows}</div>
 				</div>
 				<input name="number_of_rows" value={count} style={{ display: "none" }}></input>
-				<input name="debitTotal" value={debit} onChange={checkBalancing()} style={{ display: "none" }}></input>
+				<input name="debitTotal" type="number" step="0.01" value={debit} onChange={checkBalancing()} style={{ display: "none" }}></input>
 				<input
 					name="creditTotal"
+					type="number"
+					step="0.01"
 					value={credit}
 					onChange={checkBalancing()}
 					style={{ display: "none" }}></input>
