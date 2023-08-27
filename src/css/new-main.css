@@ -417,6 +417,7 @@ div.invoice-head div :is(input, select, select option) {
 	background-color: var(--primary);
 	text-align: center;
 	cursor: pointer;
+	width: 100%;
 }
 
 
