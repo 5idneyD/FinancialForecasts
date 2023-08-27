@@ -30,17 +30,17 @@ function addVAT() {
     }
 }
 
-function calculate(){
-let nets = document.querySelectorAll(".net");
+function calculate() {
+    let nets = document.querySelectorAll(".net");
 
-nets.forEach(net => {
-    net.addEventListener(
-        "change", function(){
-            addVAT();
-            calculateTotals();
-        }
-    )
-})
+    nets.forEach(net => {
+        net.addEventListener(
+            "change", function () {
+                addVAT();
+                calculateTotals();
+            }
+        )
+    })
 }
 
 calculate();

@@ -967,6 +967,11 @@ def addSalesInvoice(company, email, username, session_key, theme):
     accounting_period = company_data.accounting_period
     vat_number = company_data.vat_number
     invoice_email = company_data.invoice_email
+    accounts = ChartOfAccounts.query.filter(ChartOfAccounts.company==company,
+                                                    ChartOfAccounts.nominal < 20000).all()
+    revenue_accounts = []
+    for i in accounts:
+        revenue_accounts.append([i.account_name, i.nominal])
 
     if request.method == "POST":
 
@@ -1137,6 +1142,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
             customers=customers,
             design=theme,
             message="",
+            revenue_accounts=revenue_accounts
         )
     return render_template(
         "addSalesInvoice.html",
@@ -1147,6 +1153,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
         customers=customers,
         design=theme,
         message="",
+        revenue_accounts=revenue_accounts
     )
 
 

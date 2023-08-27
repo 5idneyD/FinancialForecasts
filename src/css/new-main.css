@@ -413,6 +413,13 @@ div.invoice-head div :is(input, select, select option) {
 	border: 1px solid var(--fontColor);
 }
 
+.nominal_select {
+	background-color: var(--primary);
+	text-align: center;
+	cursor: pointer;
+}
+
+
 button:hover {
 	color: var(--second) !important;
 	background-color: var(--fontColor) !important;

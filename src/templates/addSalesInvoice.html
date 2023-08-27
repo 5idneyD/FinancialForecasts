@@ -31,8 +31,10 @@
 			<div>VAT By Default</div>
 			<div>
 				<select class="invoice" id="vatSetting">
-					<option value="yes">Yes</option>
-					<option value="no">No</option>
+					<option value="0">0%</option>
+					<option value="0.2">20%</option>
+					<option value="0.05">5%</option>
+					<option value="0.5">10%</option>
 				</select>
 			</div>
 
@@ -44,8 +46,7 @@
 				</select>
 			</div>
 		</div>
-			<button type="button" onclick="addRow(); calculate()" id="addInvoiceRow">Add Row</button>
-		
+		<button type="button" onclick="addRow(); addOptions()" id="addInvoiceRow">Add Row</button>
 	</div>
 	<div class="body-node" id="second">
 		<div data-rows="1">
@@ -61,11 +62,21 @@
 				</div>
 				<div class="invoiceRow">
 					<div>1</div>
-					<div><input type="text" name="1_nominal_code" /></div>
+					<div>
+						<select name="1_nominal_code" class="nominal_select">
+							<option value="" selected hidden>Choose Nominal</option>
+						</select>
+					</div>
 					<div><input type="text" name="1_description" /></div>
-					<div><input type="text" name="1_net_value" class="net" /></div>
-					<div><input type="text" name="1_vat" class="vat" /></div>
-					<div><input type="text" name="1_total_value" class="tv" /></div>
+					<div>
+						<input
+							type="number"
+							name="1_net_value"
+							class="net"
+							onchange="vatValue(this); totalValue(this);" />
+					</div>
+					<div><input type="number" name="1_vat" class="vat" onchange="totalValue(this)" /></div>
+					<div><input type="number" name="1_total_value" class="tv" /></div>
 				</div>
 			</div>
 		</div>
@@ -76,5 +87,25 @@
 </form>
 
 <script defer src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
-<script defer src="{{url_for('static', filename='js/totalValue.js')}}"></script>
+<script defer src="{{url_for('static', filename='js/totalValueNew.js')}}"></script>
+<script>
+		let revenueAccounts = {{revenue_accounts|safe}}
+
+
+		function addOptions(){
+		let selects = document.querySelectorAll("select.nominal_select");
+
+		selects.forEach(function(select){
+		for (let i = 0; i< revenueAccounts.length; i++){
+			let element =
+						`
+							<option class="nominal_select" value="` + revenueAccounts[i][1] + `" label=" ` + revenueAccounts[i][1] + `">
+								` + revenueAccounts[i][0]+ `
+							</option>
+							`;
+			select.insertAdjacentHTML("beforeend", element);
+		}
+	})
+		}
+</script>
 {% endblock %}

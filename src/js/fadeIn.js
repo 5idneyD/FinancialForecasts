@@ -9,7 +9,7 @@ function fadeIn(object) {
     const observerOptions = {
         root: null,
         threshold: 0.0,
-        rootMargin: "-10%",
+        rootMargin: "-15%",
     };
 
     document.addEventListener("scroll", function () {
