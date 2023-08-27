@@ -1,5 +1,5 @@
 # testing webhooks
-from flask import Flask, render_template, request, redirect, url_for, session, Response, abort
+from flask import Flask, render_template, request, redirect, send_from_directory, url_for, session, Response, abort
 from flask_migrate import Migrate
 from passlib.hash import pbkdf2_sha256
 import os
@@ -253,6 +253,14 @@ def update_server():
         print("Error: Wrong event type")
         return 'Wrong event type', 400
 
+
+# This returns whichever static file the browser is trying to reach
+# They are both saved in the static directory
+# Only there for SEO reasons
+@app.route('/robots.txt')
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 # Homepage, indexed
 @app.route("/")
