@@ -103,7 +103,10 @@
 								` + revenueAccounts[i][0]+ `
 							</option>
 							`;
+			console.log(revenueAccounts)
+			if (select.children.length -1 < revenueAccounts.length){
 			select.insertAdjacentHTML("beforeend", element);
+			}
 		}
 	})
 		}

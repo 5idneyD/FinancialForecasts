@@ -29,7 +29,7 @@
 				</select>
 			</div>
 		</div>
-			<button type="button" onclick="addRow()" id="addInvoiceRow">Add Row</button>
+			<button type="button" onclick="addRow(); addOptions();" id="addInvoiceRow">Add Row</button>
 	</div>
 	<div class="body-node" id="second">
 		<div data-rows="1">
@@ -45,7 +45,11 @@
 				</div>
 				<div class="invoiceRow">
 					<div>1</div>
-					<div><input type="text" name="1_nominal_code" /></div>
+					<div>
+						<select name="1_nominal_code" class="nominal_select">
+							<option value="" selected hidden>Choose Nominal</option>
+						</select>
+					</div>
 					<div><input type="text" name="1_description" /></div>
 					<div><input type="text" name="1_net_value" class="net" /></div>
 					<div><input type="text" name="1_vat" class="vat" /></div>
@@ -60,6 +64,30 @@
 </form>
 
 <script defer src="{{ url_for('static', filename='js/addInvoiceRow.js') }}"></script>
-<script defer src="{{url_for('static', filename='js/totalValue.js')}}"></script>
+<script defer src="{{url_for('static', filename='js/totalValueNew.js')}}"></script>
+<script>
+		let costAccounts = {{cost_accounts|safe}}
 
+
+		function addOptions(){
+		let selects = document.querySelectorAll("select.nominal_select");
+
+		selects.forEach(function(select){
+		for (let i = 0; i< costAccounts.length; i++){
+			let element =
+						`
+							<option class="nominal_select" value="` + costAccounts[i][1] + `" label=" ` + costAccounts[i][1] + `">
+								` + costAccounts[i][0]+ `
+							</option>
+							`;
+				if (select.children.length-1 <costAccounts.length ){
+				select.insertAdjacentHTML("beforeend", element);
+				}
+			}
+		})
+	}
+
+		// Calling the function once at the start for the first row dropdown
+		addOptions()
+</script>
 {% endblock %}

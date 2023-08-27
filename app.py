@@ -1167,6 +1167,13 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
 
+    accounts = ChartOfAccounts.query.filter(ChartOfAccounts.company==company,
+                                                    ChartOfAccounts.nominal >= 20000).order_by(ChartOfAccounts.nominal).all()
+    cost_accounts = []
+    for i in accounts:
+        cost_accounts.append([i.account_name, i.nominal])
+
+
     if request.method == "POST":
         # Collect header table data from form
         invoice_number = request.form["invoice_number"]
@@ -1227,6 +1234,7 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
         session_key=session_key,
         suppliers=suppliers,
         design=theme,
+        cost_accounts=cost_accounts
     )
 
 
