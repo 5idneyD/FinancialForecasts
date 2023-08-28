@@ -23,6 +23,6 @@ function fadeIn(object) {
         }, observerOptions);
 
         observer.observe(obj);
-    });
+    }, { passive: true} );
 
 }
