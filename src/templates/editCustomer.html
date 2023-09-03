@@ -28,7 +28,7 @@
 				<div class="clientTableCell"><input type="text" name="days" class="clientTableCellInput" /></div>
 			</div>
 		</div>
-		<button class="invoiceForm" id="submitButton" onclick="submitForm()" type="button">Update Client</button>
+		<button class="invoiceForm" id="submitButton" onclick="submitForm('Are you Sure You Want To Update This Client?')" type="button">Update Client</button>
 	</form>
 </div>
 
@@ -58,6 +58,10 @@
 	}
 </script>
 
+
+{# Imports the sweetalert2 module and my sweetalert2 config #}
+{# Add the below to a button[type='button'] to use #}
+{# onclick="submitForm('Are you Sure You Want To Update This Client?')" #}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{url_for('static', filename='js/confirmation.js')}}"></script>
 

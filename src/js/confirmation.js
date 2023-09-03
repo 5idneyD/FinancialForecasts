@@ -1,13 +1,15 @@
-function submitForm() {
+function submitForm(message) {
     let form = document.querySelector("form");
     Swal.fire({
-        title: "Are you sure?",
+        title: message,
         // text: "You won't be able to revert this!",
-        icon: "warning",
+        // icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes",
         cancelButtonText: "No",
         reverseButtons: true,
+        allowOutsideClick: "false",
+        background: "var(--primary)",
     }).then((result) => {
         if (result.isConfirmed) {
             // Swal.fire("Deleted!", "Your file has been deleted.", "success");

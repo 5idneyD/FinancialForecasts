@@ -793,3 +793,13 @@ select#clientCodeSelect option {
 	background-color: var(--primary);
 	text-align: center;
 }
+
+#swal2-title {
+	color: var(--fontColor);
+	font-size: 1em !important;
+}
+
+.swal2-popup {
+	font-size: 1em !important;
+	width: fit-content !important;
+  }

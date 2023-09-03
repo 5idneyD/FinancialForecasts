@@ -1,1 +1,1 @@
-function submitForm(){let t=document.querySelector("form");Swal.fire({title:"Are you sure?",icon:"warning",showCancelButton:!0,confirmButtonText:"Yes",cancelButtonText:"No",reverseButtons:!0}).then(e=>{e.isConfirmed?t.submit():(e.dismiss,Swal.DismissReason.cancel)})}
+function submitForm(t){let i=document.querySelector("form");Swal.fire({title:t,showCancelButton:!0,confirmButtonText:"Yes",cancelButtonText:"No",reverseButtons:!0,allowOutsideClick:"false",background:"var(--primary)"}).then(e=>{e.isConfirmed?i.submit():(e.dismiss,Swal.DismissReason.cancel)})}
