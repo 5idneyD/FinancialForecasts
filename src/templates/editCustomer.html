@@ -19,14 +19,16 @@
 			</div>
 			<div class="clientTableRow">
 				<div class="clientTableCell"><input type="text" name="name" class="clientTableCellInput" /></div>
-				<div class="clientTableCell"><input type="text" name="code" readonly class="clientTableCellInput" /></div>
+				<div class="clientTableCell">
+					<input type="text" name="code" readonly class="clientTableCellInput" />
+				</div>
 				<div class="clientTableCell"><input type="text" name="email" class="clientTableCellInput" /></div>
 				<div class="clientTableCell"><input type="text" name="address" class="clientTableCellInput" /></div>
 				<div class="clientTableCell"><input type="text" name="credit" class="clientTableCellInput" /></div>
 				<div class="clientTableCell"><input type="text" name="days" class="clientTableCellInput" /></div>
 			</div>
 		</div>
-		<button class="invoiceForm" type="submit">Update Client</button>
+		<button class="invoiceForm" id="submitButton" onclick="submitForm()" type="button">Update Client</button>
 	</form>
 </div>
 
@@ -55,4 +57,8 @@
 		}
 	}
 </script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{url_for('static', filename='js/confirmation.js')}}"></script>
+
 {% endblock %}

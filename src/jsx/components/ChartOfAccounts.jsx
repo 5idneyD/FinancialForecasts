@@ -5,9 +5,9 @@ import { mdiInformationOutline } from "@mdi/js";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 
-export default function RemoveUser() {
+export default function ChartOfAccounts() {
 	return (
-		<form method="post">
+		<form method="post" onsubmit="javascript: return confirm('Do you really want to submit the form?');">
 			<div className="adminBody">
 				<div>
 					<input
