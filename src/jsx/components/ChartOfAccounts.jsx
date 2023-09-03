@@ -25,7 +25,7 @@ export default function ChartOfAccounts() {
 				</div>
 
 				<div>
-					<button type="submit" name="addNominalForm">
+					<button type="button" onClick={submitForm} name="addNominalForm">
 						Add Nominal Account
 					</button>
 				</div>
@@ -37,7 +37,7 @@ export default function ChartOfAccounts() {
 						<Icon
 							path={mdiInformationOutline}
 							size={1}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 						/>
 					</Tooltip>
 				</div>
@@ -51,7 +51,7 @@ export default function ChartOfAccounts() {
 							// horizontal
 							// vertical
 							// rotate={180}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 							// spin
 						/>
 					</Tooltip>
@@ -62,7 +62,7 @@ export default function ChartOfAccounts() {
 						<Icon
 							path={mdiInformationOutline}
 							size={1}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 						/>
 					</Tooltip>
 				</div>
@@ -72,7 +72,7 @@ export default function ChartOfAccounts() {
 						<Icon
 							path={mdiInformationOutline}
 							size={1}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 						/>
 					</Tooltip>
 				</div>
@@ -82,7 +82,7 @@ export default function ChartOfAccounts() {
 						<Icon
 							path={mdiInformationOutline}
 							size={1}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 						/>
 					</Tooltip>
 				</div>
@@ -92,7 +92,7 @@ export default function ChartOfAccounts() {
 						<Icon
 							path={mdiInformationOutline}
 							size={1}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 						/>
 					</Tooltip>
 				</div>
@@ -102,7 +102,7 @@ export default function ChartOfAccounts() {
 						<Icon
 							path={mdiInformationOutline}
 							size={1}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 						/>
 					</Tooltip>
 				</div>
@@ -112,7 +112,7 @@ export default function ChartOfAccounts() {
 						<Icon
 							path={mdiInformationOutline}
 							size={1}
-							color={window.getComputedStyle(document.body).getPropertyValue("--dark")}
+							color={window.getComputedStyle(document.body).getPropertyValue("--fontColor")}
 						/>
 					</Tooltip>
 				</div>

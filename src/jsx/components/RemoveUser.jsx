@@ -2,6 +2,7 @@ import React from "react";
 import { ReactDOM } from "react";
 
 export default function RemoveUser() {
+
 	return (
 		<form method="post">
 			<div className="adminBody">
@@ -14,7 +15,7 @@ export default function RemoveUser() {
 				</div>
 
 				<div>
-					<button type="submit" name="removeUserForm">
+					<button type="button" onClick={submitForm} name="removeUserForm">
 						Remove User
 					</button>
 				</div>

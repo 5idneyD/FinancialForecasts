@@ -16,7 +16,7 @@ export default function RemoveUser(props) {
 					</div>
 			
 					<div>
-						<button type="submit" name="closePeriodForm">
+						<button type="button" name="closePeriodForm" onClick={submitForm}>
 							Close Period
 						</button>
 					</div>

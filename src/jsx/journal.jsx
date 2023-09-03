@@ -116,7 +116,7 @@ function Journal() {
 					Add Row
 				</button>
 				<br />
-				<button type="submit" className="invoiceForm" id="submitButton">
+				<button type="button" onClick={submitForm} className="invoiceForm" id="submitButton">
 					Post Journal
 				</button>
 			</div>

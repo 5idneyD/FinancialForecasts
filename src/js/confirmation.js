@@ -1,5 +1,9 @@
 function submitForm(message) {
     let form = document.querySelector("form");
+    if (typeof message === 'string' || message instanceof String){
+    } else {
+        message = "Are You Sure?";
+    };
     Swal.fire({
         title: message,
         // text: "You won't be able to revert this!",

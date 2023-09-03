@@ -21,8 +21,15 @@
 			</tr>
 			{% endfor %}
 		</table>
-		<button class="invoiceForm" type="submit">Post Reversals</button>
+		<button class="invoiceForm" type="button" onclick="submitForm('Are you Sure You Want To Reverse All Batched Journals?')">Post Reversals</button>
 
 	</form>
 </div>
+
+{# Imports the sweetalert2 module and my sweetalert2 config #}
+{# Add the below to a button[type='button'] to use #}
+{# onclick="submitForm('Are you Sure You Want To Update This Client?')" #}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{url_for('static', filename='js/confirmation.js')}}"></script>
+
 {% endblock %}
