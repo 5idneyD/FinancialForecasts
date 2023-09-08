@@ -10,8 +10,8 @@
 
 #heading {
     height: 17.5vh;
-    /* position: fixed; */
     top: 0px;
+	position: sticky !important;
 }
 
 

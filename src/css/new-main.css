@@ -292,6 +292,7 @@ li.to-do-item:nth-child(-n + 3) {
 }
 #toggle-button {
 	width: 2vw;
+	min-width: 30px;
 	min-height: 2vh;
 	height: fit-content;
 	background-color: var(--primary);
