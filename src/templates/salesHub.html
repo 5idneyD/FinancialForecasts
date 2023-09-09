@@ -1,8 +1,9 @@
 {% set title="Sales Hub" %} {% extends "blueprint.html" %} {% block body %}
-<div class="body-node" style="width: 40vw; min-width: 300px">
-	Products
+<div class="body-node" style="width: 40vw; min-width: 300px;
+ padding-bottom: 8vh; height: 30vh;overflow-y: scroll; overflow-x: hidden;::-webkit-scrollbar-button: none">
+	<u>Products</u>
 	<br />
-	<table>
+	<table id="products-list" style="">
 		<tr>
 			<th>Product Id.</th>
 			<th>Product</th>

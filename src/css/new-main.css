@@ -200,6 +200,25 @@ div#nav div.nav-option:hover {
 	width: fit-content;
 	align-items: center;
 }
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+  }
 
 .body-node.two-row {
 	display: grid;
@@ -829,5 +848,28 @@ div.add-product button[type="submit"]{
 	border: 1px solid var(--fontColor);
 	border-radius: 30px;
 	margin-top: 5vh;
+}
 
+table#products-list tbody {
+	display: grid;
+	grid-auto-rows: 2rem;
+	row-gap: 2rem;
+	grid-template-columns: auto;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40vw;
+	min-width: 300px;
+}
+
+table#products-list tbody tr {
+	display: grid;
+	grid-template-columns: 11% 23% 23% 23%;
+	column-gap: 3vw;
+	width: 40vw;
+	min-width: 300px;
+}
+table#products-list tbody tr td {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
