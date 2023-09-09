@@ -804,3 +804,30 @@ select#clientCodeSelect option {
 	font-size: 1em !important;
 	width: fit-content !important;
   }
+
+
+div.add-product div#table {
+	width: 80vw;
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+	grid-auto-rows: 2rem;
+	column-gap: 5vw;
+	row-gap: 2rem;
+}
+
+div.add-product div#table input {
+	width: 99%;
+	background-color: var(--primary);
+	color: var(--fontColor);
+	text-align: center;
+}
+
+div.add-product button[type="submit"]{
+	background-color: var(--primary);
+	color: var(--fontColor);
+	padding: 1vh 3vw 1vh 3vw;
+	border: 1px solid var(--fontColor);
+	border-radius: 30px;
+	margin-top: 5vh;
+
+}
