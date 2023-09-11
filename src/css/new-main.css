@@ -200,6 +200,25 @@ div#nav div.nav-option:hover {
 	width: fit-content;
 	align-items: center;
 }
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+  }
 
 .body-node.two-row {
 	display: grid;
@@ -804,3 +823,53 @@ select#clientCodeSelect option {
 	font-size: 1em !important;
 	width: fit-content !important;
   }
+
+
+div.add-product div#table {
+	width: 80vw;
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+	grid-auto-rows: 2rem;
+	column-gap: 5vw;
+	row-gap: 2rem;
+}
+
+div.add-product div#table input {
+	width: 99%;
+	background-color: var(--primary);
+	color: var(--fontColor);
+	text-align: center;
+}
+
+div.add-product button[type="submit"]{
+	background-color: var(--primary);
+	color: var(--fontColor);
+	padding: 1vh 3vw 1vh 3vw;
+	border: 1px solid var(--fontColor);
+	border-radius: 30px;
+	margin-top: 5vh;
+}
+
+table#products-list tbody {
+	display: grid;
+	grid-auto-rows: 2rem;
+	row-gap: 2rem;
+	grid-template-columns: auto;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40vw;
+	min-width: 300px;
+}
+
+table#products-list tbody tr {
+	display: grid;
+	grid-template-columns: 11% 23% 23% 23%;
+	column-gap: 3vw;
+	width: 40vw;
+	min-width: 300px;
+}
+table#products-list tbody tr td {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
