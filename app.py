@@ -8,6 +8,7 @@ from datetime import timedelta
 import datetime as dt
 from functools import wraps
 import smtplib
+from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
@@ -304,47 +305,100 @@ def login():
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
     if request.method == "POST":
-        email = request.form["email"]
+        # form item with name 'email' is used as honey pot to block bots
+        # item with name email2 is real email input
+        fake_email = request.form["email"]
+        email = request.form["email2"]
+
+        # If the bot has filled in the email, pass and do not process anything
+        # Return 403 error (forbidden)
+        if "@" in fake_email:
+            return "You are a bot", 403
 
         # If the email address is already taken in the db, refuse
         # Else, send email to address given to verify
         # Login details are in .env
         # The verification code is saved in db
         # If the email address has already been sent a verification email, overwrite with new code in db and re-send
-        if Users.query.filter(Users.email == email).first() is None:
+        elif Users.query.filter(Users.email == email).first() is None:
             print("does not exist")
             verification_code = "".join(
                 [str(random.randint(1, 9)) for number in range(6)])
             new_code = PasswordReset(email=email, code=verification_code)
-            current = PasswordReset.query.filter(Users.email == email).first()
+            current = PasswordReset.query.filter(PasswordReset.email == email).first()
+            print(current)
             if current is None:
                 db.session.add(new_code)
+                db.session.commit()
             else:
                 current.code = verification_code
-
-            db.session.commit()
+                db.session.commit()
 
             mail_server = os.getenv("MAIL_SERVER")
             mail_port = os.getenv("MAIL_PORT")
-            mail = smtplib.SMTP_SSL(mail_server, mail_port)
             sender = os.getenv("EMAIL_SENDER")
             password = os.getenv("EMAIL_PASSWORD")
-            mail.login(sender, password)
-            recipient = email
-            subject = "No Variance Verification Code"
-            msg_text = f"""
-            Hello,\nThank you for being interested in signing up to No Variance!\n
-            You are being sent this email to verify that it was you who is signing up to No Variance and ensure nobody is using your
-            email address that you don't know about.\n
-            The code required to sign-up is : {verification_code}.\n\n
-            If you have not requested this, please discard this email.
-            \n\nKind regards,
-            \nNo Variance
-            """.strip()
-            msg = f"From: {sender}\r\nTo: {recipient}\r\nsubject: {subject}\r\n{msg_text}\r\n"
-            mail.sendmail(sender, recipient, msg)
-            mail.quit()
-
+            # mail = smtplib.SMTP_SSL(mail_server, mail_port)
+            # mail.login(sender, password)
+            # msg = f"From: {sender}\r\nTo: {recipient}\r\nsubject: {subject}\r\n{msg_text}\r\n"
+            # mail.sendmail(sender, recipient, msg)
+            # mail.quit()
+            msg = EmailMessage()
+            msg['From'] = os.getenv("EMAIL_SENDER")
+            msg['To'] = email
+            msg["Subject"] = "Verification Code"
+            msg.set_content(f"""
+            <!DOCTYPE html>
+                <html>
+                    <body style="background-color:#545454; width: 100vw;">
+                        <div style="background-color:#232323;width: 100vw;display:flex;align-items:center;justify-content: center;
+                        flex-direction: column;">
+                            <h2 style="color:white;font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;";>No Variance</h2>
+                            <h4 style="color:white;font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;">Accounting Software</h4>
+                        </div>
+                    <div>
+                        <div style="height: 700px;width:100vw">
+                            <div style="text-align:center;">
+                                <h3 style="color:white">Welcome!</h3>
+                                <p style="color:white; line-height: 1.6;">
+                                    Thanks for being interested in signing up to No Variance!
+                                </p>
+                                <p style="color:white; line-height: 1.6;">
+                                    You are being sent this email to verify that it was you who is signing up to No Variance and ensure nobody is using your
+                                    email address that you don't know about.
+                                </p>
+                                <p style="color:white; line-height: 1.6;">
+                                    The code required to sign-up is : <b><u>{verification_code}</u></b>.
+                                </p>
+                                <p style="color:#32fca7; line-height: 1.6;">
+                                    <a style="color:#32fca7;" href="https://www.novariance.com/verifyAccount?email={email}">Click here to Validate</a>
+                                </p>
+                                <p style="color:white; line-height: 1.6;">
+                                    If you have not requested this, please discard this email.
+                                </p>
+                                <p style="color:white; line-height: 1.6;">
+                                    Kind regards,
+                                </p>
+                                <p style="color:white; line-height: 1.6;">
+                                    No Variance
+                                </p>
+                                <br style="line-height: 5;"/>
+                                <p style="color:#32fca7; line-height: 1.6;">
+                                    <a style="color:#32fca7;" href="https://www.novariance.com">No Variance Accounting Software</a>
+                                </p>
+                                <p style="color:#32fca7; line-height: 1.6;">
+                                    United Kingdom
+                                </p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+            </html>
+""".strip(), subtype="html")
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(sender, password)
+                smtp.send_message(msg)
             return redirect(url_for("verifyAccount", email=email))
         else:
             print("exists")
@@ -524,20 +578,20 @@ def admin(company, email, username, session_key, theme):
             msg_text = f"""
             Hello,
             You are being sent this email as this email address has recently been added to {company}'s No Variance account.
-            
+
             To confirm your account, you will need to log in with the following details:
             email address: {recipient}
             password: {new_password}
-            
+
             Please note this password is encrypted, and nobody knows this password other than yourself.
             Once you have logged in, please go to the Change password page (found under the 'Other' tab) and re-set your password.
-            
+
             Please do not share your password. We will never ask for your password.
-            
+
             Kind regards,
-            
+
             No Variance Accounting Software
-            
+
             """
             msg = f"From: {sender}\r\nTo: {recipient}\r\nsubject: {subject}\r\n{msg_text}\r\n"
             mail.sendmail(sender, recipient, msg)
@@ -574,12 +628,12 @@ def admin(company, email, username, session_key, theme):
                 email=user_email, company=company).first()
             db.session.delete(user)
             db.session.commit()
-        
+
         elif "editUserForm" in request.form:
             editUserEmail = request.form['email']
             newPermission = request.form['adminLevel']
             editUser = Users.query.filter(Users.company==company, Users.email==editUserEmail).first()
-            
+
             # Update the users admin level
             try:
                 editUser.admin = newPermission
@@ -649,7 +703,7 @@ def dashboard(company, email, username, session_key, theme):
         .filter(ChartOfAccounts.company == company)
         .filter(ChartOfAccounts.nominal < 60000)
     )
-    
+
     tasks = ToDoList.query.filter(ToDoList.company==company, ToDoList.user==username).all()
 
     data = {}
@@ -681,10 +735,10 @@ def dashboard(company, email, username, session_key, theme):
 
     # The only post request is adding or removing from to do list
     if request.method == "POST":
-        
+
         # Read the json object being posted
         action = request.json
-        
+
         # If there is a plus at the start, it means add the action
         if action[0] == "+":
             action = action[1:]
@@ -695,9 +749,9 @@ def dashboard(company, email, username, session_key, theme):
             action = action[1:]
             currentAction = ToDoList.query.filter(ToDoList.company==company, ToDoList.user==username, ToDoList.task==action).first()
             db.session.delete(currentAction)
-             
+
         db.session.commit()
-        
+
 
     return render_template(
         "dashboard.html",
@@ -825,7 +879,7 @@ def addCustomer(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/editCustomer", methods=["POST", "GET"])
 @login_required
 def editCustomer(company, email, username, session_key, theme):
-    
+
     if request.method == "POST":
         name = request.form["name"]
         code = request.form["code"]
@@ -833,7 +887,7 @@ def editCustomer(company, email, username, session_key, theme):
         address = request.form["address"]
         credit = request.form["credit"]
         days = request.form["days"]
-    
+
         client = Customers.query.filter(Customers.company==company,
                                         Customers.customer_code==code).first()
         client.customer_name = name
@@ -842,18 +896,18 @@ def editCustomer(company, email, username, session_key, theme):
         client.customer_payment_terms = days
         client.customer_credit_limit = credit
         db.session.commit()
-    
+
     clients = Customers.query.filter(Customers.company==company).all()
     data = {}
     for client in clients:
         data[client.customer_code] = [client.customer_name, client.customer_email, client.customer_address,
                                    client.customer_credit_limit, client.customer_payment_terms]
-    
-    
+
+
     return render_template(
         "editCustomer.html", company=company, email=email, username=username, session_key=session_key, design=theme, client_codes=clients, clients=data
     )
-    
+
 
 def supplierBalances(company, client="%%"):
     suppliers = Suppliers.query.filter(
@@ -936,32 +990,32 @@ def addSupplier(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/editSupplier", methods=["POST", "GET"])
 @login_required
 def editSupplier(company, email, username, session_key, theme):
-    
+
     if request.method == "POST":
         name = request.form["name"]
         code = request.form["code"]
         new_email = request.form["email"]
         address = request.form["address"]
-    
+
         client = Suppliers.query.filter(Suppliers.company==company,
                                         Suppliers.supplier_code==code).first()
         client.supplier_name = name
         client.supplier_address = address
         client.supplier_email = new_email
         db.session.commit()
-    
+
     clients = Suppliers.query.filter(Suppliers.company==company).all()
     data = {}
     for client in clients:
         content = [client.supplier_name, client.supplier_email, client.supplier_address]
         data[client.supplier_code] = [str(i) if i== None else i for i in content]
-    
-            
-    
+
+
+
     return render_template(
         "editSupplier.html", company=company, email=email, username=username, session_key=session_key, design=theme, client_codes=clients, clients=data
     )
-    
+
 
 # Inline comments as very detailed
 @app.route("/<company>/<email>/<username>/<session_key>/addSalesInvoice", methods=["POST", "GET"])
@@ -1543,7 +1597,7 @@ def profitAndLoss(company, email, username, session_key, theme):
     for account in accounts:
         monthly_balance = 0
         ytd_balance = 0
-        
+
         transactions = NominalTransactions.query.filter(
             NominalTransactions.company == company,
             NominalTransactions.nominal_code == account.nominal,
@@ -1561,8 +1615,8 @@ def profitAndLoss(company, email, username, session_key, theme):
                         monthly_balance -= transaction.net_value
                     else:
                         monthly_balance += transaction.net_value
-            
-    
+
+
                 if transaction.transaction_type == "journal" and account.nominal < 20000:
                     ytd_balance -= transaction.net_value
                 else:
@@ -1740,7 +1794,7 @@ def bankRec(company, email, username, session_key, theme):
         NominalTransactions.is_paid == "False",
         NominalTransactions.transaction_type != "journal",
     ).all()
-    
+
     # convert data to dict
     d = {}
     row=0
@@ -1784,7 +1838,7 @@ def bankRec(company, email, username, session_key, theme):
                 ).all()
 
                 print(actual_invoice)
-                
+
                 for invoice in actual_invoice:
                     invoice.is_paid = "True"
 
@@ -1832,7 +1886,7 @@ def bankRec(company, email, username, session_key, theme):
             NominalTransactions.is_paid == "False",
             NominalTransactions.transaction_type != "journal",
         ).all()
-        
+
         # convert data to dict
         d = {}
         row=0
