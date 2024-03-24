@@ -107,7 +107,7 @@ ul li {
 
 span.bright-button button {
     height: fit-content;
-    padding: 3vh 5vw 3vh 5vw;
+    padding: 1vh 5vw 1vh 5vw;
     background-color: var(--third);
     color: var(--primary);
     border-radius: 30px;

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-		<meta http-equiv="Content-Security-Policy" content="img-src 'self'; media-src 'self'; object-src 'none'"/>
+		<meta http-equiv="Content-Security-Policy" content="img-src 'self'; media-src 'self'; object-src 'none'" />
 		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
 		<meta
 			name="keywords"
@@ -94,18 +94,6 @@
 				<img src="{{url_for('static', filename='images/pexels-photo-8296991.webp')}}" alt="Calculator" />
 			</div>
 			<div class="empty" id="chart"></div>
-			<div class="actions">
-				<div class="action">
-					<span class="large-text">
-						<h1>Manage and Review Your Accounts Online</h1>
-					</span>
-				</div>
-				<div class="action">
-					No Variance is an online platform that provides a
-					<a href="#abilities">wide range of abilities and reports</a> to help make sure your business is
-					performing at its best.
-				</div>
-			</div>
 			<div id="aboutUs" class="actions">
 				<div class="action">
 					<span class="large-text">
@@ -120,49 +108,6 @@
 					This software was built from scratch, using a wide range of modern technologies, to ensure we
 					provide an optimal performance that is secure and reliable, wherever you access it in the world.
 				</div>
-			</div>
-			<div class="actions" id="whats-included">
-				<div class="action">
-					<span class="large-text">
-						<h1>See What's Included <br />First-Hand</h1>
-					</span>
-				</div>
-				<div class="action">
-					<form method="post" action="/login">
-					    <input type="email" name="email" value="" style="display: none" />
-						<input type="email" name="email2" value="example@basicaccounting.co.uk" style="display: none" />
-						<input type="text" name="password" value="p123" style="display: none" />
-						<span class="bright-button"
-							><a href="javascript:void(0);" ontouchstart="">
-								<button type="submit">Log-In With Our <br />Practice Account</button></a
-							></span
-						>
-					</form>
-				</div>
-				<div class="action">And Experience All The Benefits You'll Get By Joining No Variance</div>
-			</div>
-
-			<div>
-				<div id="example-rows-div">
-					<div class="body-node example">
-						<div class="example-row text">Sales Invoices</div>
-						<div class="example-row"></div>
-						<div class="example-row"></div>
-						<div class="example-row"></div>
-					</div>
-					<div class="body-node example">
-						<div class="example-row text">Nominal Transactions</div>
-						<div class="example-row"></div>
-						<div class="example-row"></div>
-						<div class="example-row"></div>
-					</div>
-				</div>
-				<br />
-				<span class="bright-button">
-					<a href="/signup" style="margin-left: 15vw" class="signup-button"
-						><button>Sign Up Now</button></a
-					></span
-				>
 			</div>
 			<div class="actions" id="abilities">
 				<div class="action">
@@ -187,7 +132,72 @@
 					</ul>
 				</div>
 			</div>
+			<div class="actions" id="whats-included">
+				<div class="action">
+					<span class="large-text">
+						<h1>See What's Included <br />First-Hand</h1>
+					</span>
+				</div>
+				<div class="action">
+					<form method="post" action="/login">
+						<input type="email" name="email" value="" style="display: none" />
+						<input type="email" name="email2" value="example@basicaccounting.co.uk" style="display: none" />
+						<input type="text" name="password" value="p123" style="display: none" />
+						<span class="bright-button"
+							><a href="javascript:void(0);" ontouchstart="">
+								<button type="submit">Log-In With Our <br />Practice Account</button></a
+							></span
+						>
+					</form>
+				</div>
+				<div class="action">And Experience All The Benefits You'll Get By Joining No Variance</div>
+			</div>
+
+			<div style="margin-top: 10vh">
+				<div id="example-rows-div">
+					<div class="body-node example">
+						<div class="example-row text">Sales Invoices</div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+					</div>
+					<div class="body-node example">
+						<div class="example-row text">Nominal Transactions</div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+						<div class="example-row"></div>
+					</div>
+				</div>
+				<br />
+			</div>
+
+			<div class="actions">
+				<div class="action" style="margin-top: -25vh">
+					<span class="large-text">
+						<h1>Manage and Review Your Accounts Online</h1>
+					</span>
+				</div>
+				<div class="action">
+					No Variance is an online platform that provides a
+					<a href="#abilities">wide range of abilities and reports</a> to help make sure your business is
+					performing at its best.
+				</div>
+				
+				<div style="margin-top: 8vh;">
+					<div>
+						<span class="bright-button"
+					><a href="/signup" class="signup-button"
+						><button type="submit">Sign Up Now</button></a
+					></span
+				>
+					</div>
+					<p>For any enquiries, please email<br>admin@novariance.com</p>
+				</div>
+				
+			</div>
+				
 		</div>
+
 		<script defer>
 			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
 			//let meta = document.head.querySelector("meta[name='logo']").id;
