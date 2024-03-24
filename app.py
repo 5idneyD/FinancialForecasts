@@ -274,7 +274,11 @@ def index():
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        email = request.form["email"]
+        # Set a fake_email that only bots will fill in as display is blank
+        fake_email = request.form["email"]
+        if "@" in fake_email:
+            return "Bot Detected", 403
+        email = request.form["email2"]
         password = request.form["password"]
         users = Users.query.filter(Users.email == email).all()
 
@@ -313,7 +317,7 @@ def signup():
         # If the bot has filled in the email, pass and do not process anything
         # Return 403 error (forbidden)
         if "@" in fake_email:
-            return "You are a bot", 403
+            return "Bot Detected", 403
 
         # If the email address is already taken in the db, refuse
         # Else, send email to address given to verify
