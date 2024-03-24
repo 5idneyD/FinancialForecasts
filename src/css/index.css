@@ -111,6 +111,7 @@ span.bright-button button {
     background-color: var(--third);
     color: var(--primary);
     border-radius: 30px;
+    margin-bottom: 3vh;
 }
 
 span.bright-button button:onclick:hover {
