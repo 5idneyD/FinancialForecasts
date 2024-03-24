@@ -1,0 +1,32 @@
+{% set title="Sales Hub" %} {% extends "blueprint.html" %} {% block body %}
+<div class="body-node" style="width: 40vw; min-width: 300px;
+ padding-bottom: 8vh; height: 30vh;overflow-y: scroll; overflow-x: hidden;::-webkit-scrollbar-button: none">
+	<u>Products</u>
+	<br />
+	<table id="products-list" style="">
+		<tr>
+			<th>Product Id.</th>
+			<th>Product</th>
+			<th>Description</th>
+			<th>Total Price</th>
+		</tr>
+		{% for product in sales_products %}
+		<tr>
+			<td>{{product.id}}</td>
+			<td>{{product.product_name}}</td>
+			<td>{{product.product_description}}</td>
+			<td>{{product.product_net_price + product.product_vat_price}}</td>
+		</tr>
+        {% endfor %}
+	</table>
+</div>
+<div class="body-node" style="width: 40vw; min-width: 300px">Sales History</div>
+<div class="body-node">Unpaid Invoices</div>
+<div class="body-node two-row" style="min-width: 100px; width: 5vw; height: fit-content">
+	<a
+		href="{{url_for('salesHubAddProduct', company=company, email=email, session_key=session_key, username=username)}}"
+		>Add Product</a
+	>
+	<a href="">Edit Product</a>
+</div>
+{% endblock %}

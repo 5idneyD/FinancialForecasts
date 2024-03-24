@@ -161,6 +161,15 @@ class ToDoList(db.Model):
     company = db.Column(db.String(64))
     task = db.Column(db.String(256))
 
+class SalesHubProducts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    company = db.Column(db.String(64))
+    product_name = db.Column(db.String(128))
+    product_description = db.Column(db.String(128))
+    product_net_price = db.Column(db.Float)
+    product_vat_price = db.Column(db.Float)
+    product_image = db.Column(db.String(128))
+
 
 # Create database tables if they don't already exist
 with app.app_context():
@@ -2018,6 +2027,32 @@ def cashFlow(company, email, username, sesion_key, theme):
                            operating_activities=operating_activities, financing_activities=financing_activities, investing_activities=investing_activities,
                            accounting_year=accounting_year)
 
+@app.route("/<company>/<email>/<username>/<session_key>/salesHub")
+@login_required
+def salesHub(company, email, username, session_key, theme):
+    sales_products = SalesHubProducts.query.filter(SalesHubProducts.company==company).all()
+    
+    return render_template("salesHub.html", company=company, design=theme, sales_products=sales_products)
+
+@app.route("/<company>/<email>/<username>/<session_key>/salesHubAddProduct", methods=["POST", "GET"])
+@login_required
+def salesHubAddProduct(company, email, username, session_key, theme):
+    
+    if request.method == "POST":
+        print(request.form)
+        product_name = request.form['name']
+        product_description = request.form['description']
+        product_net_price = request.form['netPrice']
+        product_vat_price = request.form['vatPrice']
+        product_image = request.form['image']
+        
+        newProduct = SalesHubProducts(company=company, product_name=product_name,
+                                      product_description=product_description, product_net_price=product_net_price,
+                                      product_vat_price=product_vat_price, product_image=product_image)
+        db.session.add(newProduct)
+        db.session.commit()
+    
+    return render_template("salesHubaddProduct.html", company=company, design=theme)
 
 debug = os.getenv("DEBUG")
 if __name__ == "__main__":

@@ -1,0 +1,19 @@
+{% set title="Sales Hub" %} {% extends "blueprint.html" %} {% block body %}
+<div class="body-node add-product" id="first">
+	<form method="post">
+		<div id="table">
+			<div>Name</div>
+			<div>Description</div>
+			<div>Net Price</div>
+			<div>Vat</div>
+			<div>Add Image</div>
+			<div><input type="text" name="name" required /></div>
+			<div><input type="text" name="description" required /></div>
+			<div><input type="text" name="netPrice" required /></div>
+			<div><input type="text" name="vatPrice" required /></div>
+			<div><input type="file" name="image" /></div>
+		</div>
+		<button type="submit">Add Product</button>
+	</form>
+</div>
+{% endblock %}
