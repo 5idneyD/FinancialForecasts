@@ -1971,6 +1971,7 @@ def logout(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/cashFlow")
 @login_required
 def cashFlow(company, email, username, sesion_key, theme):
+    print(theme)
     # Find this company's current accounting year to use later
     company_data = Companies.query.filter(Companies.company == company).first()
     accounting_year = company_data.accounting_year

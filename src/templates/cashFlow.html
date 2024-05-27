@@ -7,7 +7,9 @@
 <script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
 <script defer type="text/javascript">
 	let bodyStyles = window.getComputedStyle(document.body)
-
+    let designs = {{design.split(',')|safe}}
+    let text = designs[3];
+    let primary = designs[0];
 	var data = [
         {
             name: "Cash Flow",
@@ -29,18 +31,18 @@
             ],
             textposition: "outside",
             text: [
-                {{openingBalance|safe}},
-                {{operating_activities|safe}},
-                {{investing_activities|safe}},
-                {{financing_activities|safe}},
-                {{closingBalance|safe}}
+            Number({{openingBalance|safe}}).toLocaleString(),
+			Number({{operating_activities|safe}}).toLocaleString(),
+			Number({{investing_activities|safe}}).toLocaleString(),
+			Number({{financing_activities|safe}}).toLocaleString(),
+            Number({{closingBalance|safe}}).toLocaleString(),
             ],          
             y: [
-			parseFloat({{openingBalance|safe}}),
-			parseFloat({{operating_activities|safe}}),
-			parseFloat({{investing_activities|safe}}),
-			parseFloat({{financing_activities|safe}}),
-            parseFloat({{closingBalance|safe}}),
+			Number({{openingBalance|safe}}).toLocaleString(),
+			Number({{operating_activities|safe}}).toLocaleString(),
+			Number({{investing_activities|safe}}).toLocaleString(),
+			Number({{financing_activities|safe}}).toLocaleString(),
+            Number({{closingBalance|safe}}).toLocaleString(),
             ],
             connector: {
               line: {
@@ -51,18 +53,22 @@
     ];
  layout = {
         title: {
-            text: "Cash Flow {{accounting_year|safe}}"
+            // text: "Cash Flow {{accounting_year|safe}}"
+            text: "Cash Flow"
+        },
+        font: {
+            color: text
         },
         xaxis: {
             type: "category",
-			title: "Cash Flow Division"
+			title: "Cash Flow Category"
         },
         yaxis: {
             type: "linear",
 			title: "£"
         },
         autosize: true,
-        showlegend: true,
+        showlegend: false,
 		plot_bgcolor: primary,
 		paper_bgcolor: primary,
         height: window.getComputedStyle(document.querySelector("#first")).getPropertyValue("height").replace("px", "")
