@@ -154,7 +154,14 @@ div.example-row {
 a.signup-button button{
     width: fit-content;
     padding: 1vh 5vw 1vh 5vw;
-    margin-top: 15vh;
+    margin-top: 5vh;
+}
+
+
+#footer div:nth-of-type(1) {
+    height: 5vh;
+    align-items:center;
+    margin-top: -20vh;;
 }
 
 footer {
@@ -163,6 +170,6 @@ footer {
     border-top: 2px solid white;
     height: fit-content;
     padding-top: 5vh;
-    line-height: 2rem;
+    line-height: 2.3rem;
+    margin-top: 25vh
 }
-
