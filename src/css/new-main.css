@@ -8,7 +8,7 @@
      */
 	--primary: #232323;
 	--second: #363636;
-	--third: #66c0f4;
+	--third: #32fca7;
 	--fontColor: #ffffff;
 	--shadow: 20px 20px 60px #232323, -20px -20px 60px #232323;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -872,4 +872,25 @@ table#products-list tbody tr td {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.price {
+    font-size: 40px;
+    color: var(--third); 
+}
+
+span.bright-button button {
+    height: fit-content;
+    padding: 1vh 5vw 1vh 5vw;
+    background-color: var(--third);
+    color: var(--primary);
+    border-radius: 30px;
+    margin-bottom: 3vh;
+}
+
+a.signup-button button{
+    min-width: fit-content;
+    padding: 1vh 5vw 1vh 5vw;
+	background-color: var(--third) !important;
+	color: var(--primary) !important;
 }

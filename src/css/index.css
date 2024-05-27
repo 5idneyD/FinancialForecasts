@@ -108,7 +108,7 @@ img[alt="Calculator"] {
 
 ul li {
     margin-top: 3vh;
-    margin-left: 4vw;
+    list-style:none;
 }
 
 span.bright-button button {
@@ -118,10 +118,6 @@ span.bright-button button {
     color: var(--primary);
     border-radius: 30px;
     margin-bottom: 3vh;
-}
-
-span.bright-button button:onclick:hover {
-    background-color: red;;
 }
 
 div:has(.body-node.example) {
@@ -166,3 +162,4 @@ footer {
     border-top: 2px solid white;
     padding-top: 2vh;
 }
+

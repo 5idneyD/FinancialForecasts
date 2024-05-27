@@ -316,6 +316,10 @@ def login():
     return render_template("login.html", message="")
 
 
+@app.route("/pricing")
+def pricing():
+    return render_template("pricing.html")
+
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
     if request.method == "POST":
