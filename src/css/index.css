@@ -2,6 +2,7 @@
 
 :root {
     --third: #32fca7;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -160,6 +161,8 @@ footer {
     text-align: center;
     width: 100vw;
     border-top: 2px solid white;
-    padding-top: 2vh;
+    height: fit-content;
+    padding-top: 5vh;
+    line-height: 2rem;
 }
 

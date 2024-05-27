@@ -14,6 +14,7 @@
     height: 17.5vh;
     /* position: fixed; */
     top: 0px;
+    position: fixed;
 }
 
 #heading-top {
@@ -29,7 +30,7 @@
 }
 
 div#nav {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(5, auto);
     z-index: 50;
 }
 
@@ -38,8 +39,9 @@ div#nav {
 }
 
 #body {
-    margin-top: -5vh;
+    margin-top: 10vh;
     min-height: 100vh;
+    height: fit-content;
     width: 100vw;
     grid-template-columns: 100vw;
 }
@@ -96,11 +98,11 @@ img[alt="Calculator"] {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: -2vh;
+    margin-top: -2vh !important;
 }
 
 .actions .action {
-    margin-top: 7vh;
+    margin-top: 4vh;
     width: 80vw;
     padding-left: 10vw;
     padding-right: 10vw;
@@ -108,9 +110,11 @@ img[alt="Calculator"] {
     text-align: center;
 }
 
+
 ul li {
     margin-top: 3vh;
     margin-left: 4vw;
+    list-style-type: circle;
 }
 
 span.bright-button button {
@@ -168,7 +172,7 @@ div.example-row {
 a.signup-button button {
     width: fit-content;
     padding: 1vh 5vw 1vh 5vw;
-    margin-top: 6vh;
+    margin-top: 4vh;
     margin-bottom: 15vh;
 }
 
@@ -194,14 +198,20 @@ a.signup-button button {
     }
 
     div#body div:nth-of-type(6) {
-        order: 7;
-    }
-
-    div#body div:nth-of-type(7) {
         order: 6;
     }
 
-    div#body div:nth-of-type(8) {
-        order: 8;
+    div#body div:nth-of-type(7) {
+        order: 7;
     }
+
+}
+
+footer {
+    text-align: center;
+    width: 100vw;
+    border-top: 2px solid white;
+    height: fit-content;
+    padding-top: 5vh;
+    line-height: 2rem;
 }
