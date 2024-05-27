@@ -275,6 +275,7 @@ def static_from_root():
 # Homepage, indexed
 @app.route("/")
 def index():
+    print(request.environ.get("HTTP_ORIGIN", "default value"))
     return render_template("home.html")
 
 
