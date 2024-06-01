@@ -65,11 +65,18 @@
 		<div id="heading" data-expanded="true" style="height: 17.5vh">
 			<div id="heading-top">
 				<div id="logo">No Variance <br />Accounting Software</div>
-				<div id="nav">
-					<div class="nav-option" data-href="/#aboutUs">About Us</div>
-					<div class="nav-option" data-href="/login">Log In</div>
-					<div class="nav-option" data-href="/signup">Sign Up</div>
-					<div class="nav-option" data-href="/pricing">Pricing</div>
+				<div class="nav-container">
+					<div id="nav-lines">
+						<div class="nav-line"></div>
+						<div class="nav-line"></div>
+						<div class="nav-line"></div>
+					</div>
+					<div id="nav">
+						<div class="nav-option" data-href="/#aboutUs">About Us</div>
+						<div class="nav-option" data-href="/login">Log In</div>
+						<div class="nav-option" data-href="/signup">Sign Up</div>
+						<div class="nav-option" data-href="/pricing">Pricing</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -183,6 +190,27 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			// This script is to toggle the navbar on mobile from the burger menu
+			// The burger menu is not displayed on desktop so not toggle-able
+
+			let burger = document.getElementById("nav-lines");
+			let navMenu = document.getElementById("nav");
+
+			// Initial display determined by whether burger menu is visible
+			// Need to define inline as css file didn't seem to work
+			if (burger.style.display != "none"){
+				navMenu.style.display = "none";
+			}
+
+			burger.addEventListener("click", () => {
+				if (navMenu.style.display == "none") {
+					navMenu.style.display = "grid";
+				} else {
+					navMenu.style.display = "none";
+				}
+			});
+		</script>
 		<script>
 			// This is to turn all the nav options in the submenu into link buttons
 			// Each option has the link ending as a data strribute called href

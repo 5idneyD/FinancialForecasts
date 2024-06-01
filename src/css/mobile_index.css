@@ -29,13 +29,47 @@
     height: 100%;
 }
 
-div#nav {
-    grid-template-columns: repeat(5, auto);
+.nav-container {
+    display: grid;
+    grid-template-rows: 100% auto;
+    grid-template-columns: 50px;
+}
+
+.nav-container div#nav-lines {
+    width: 100%;
+    height: 30px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, auto);
+    row-gap: 5px;
+}
+
+.nav-container div#nav-lines div.nav-line {
+    background: white;
+    width: 50%;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.nav-container div#nav {
+    display: none;
+    grid-template-columns: repeat(4, auto);
+    width: 100vw;
+    height: 50px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    margin-top: 17.5vh;
+    background: var(--primary);
+    border-top: 1px solid white;
     z-index: 50;
 }
 
 .nav-option {
     font-size: smaller;
+    padding: 2px;
+    text-decoration: underline;
 }
 
 #body {

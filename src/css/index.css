@@ -28,8 +28,36 @@
     height: 100%;
 }
 
-div#nav {
+.nav-container {
+    display: grid;
+    width: 100%;
+    grid-template-rows: auto;
+    grid-template-columns: 100%;
+}
+
+.nav-container div#nav-lines {
+    display: none;
+}
+
+.nav-container div#nav-lines div.nav-line {
+    background: white;
+    width: 50%;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.nav-container div#nav {
+    display: grid !important;
     grid-template-columns: repeat(5, auto);
+    column-gap: 4vw;
+    background: var(--primary);
+    z-index: 50;
+}
+
+.nav-option {
+    font-size: smaller;
+    padding: 2px;
+    text-decoration: underline;
 }
 
 #body {
