@@ -10,7 +10,7 @@
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
-		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %} 
+		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %}
 		<meta
 			name="logo"
 			id="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}" />
@@ -26,18 +26,64 @@
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 		<!-- Style for just mobile pages -->
 		<style media="screen and (max-width: 600px)">
-			* {
-				font-weight: normal;
-				font-size: clamp(1rem, 4vw, 2rem);
+						* {
+							font-weight: normal;
+							font-size: clamp(1rem, 4vw, 2rem);
+						}
+						form#form[method="post"] input {
+							width: 60%;
+						}
+						form#form[method=post] button {
+							width: 50%;
+						}
+						.userLogo {
+							width: 12.5vw;
+						}
+
+
+						{# This is to do with the burger menu #}
+
+			.nav-container {
+			    display: grid;
+			    grid-template-rows: 100% auto;
+			    grid-template-columns: 50px;
 			}
-			form#form[method="post"] input {
-				width: 60%;
+
+			.nav-container div#nav-lines {
+			    width: 100%;
+			    height: 30px;
+			    margin: auto;
+			    display: grid;
+			    grid-template-columns: auto;
+			    grid-template-rows: repeat(3, auto);
+			    row-gap: 5px;
 			}
-			form#form[method=post] button {
-				width: 50%;
+
+			.nav-container div#nav-lines div.nav-line {
+			    background: white;
+			    width: 50%;
+			    height: 4px;
+			    border-radius: 2px;
 			}
-			.userLogo {
-				width: 12.5vw;
+
+			.nav-container div#nav {
+			    display: none;
+			    grid-template-columns: repeat(4, auto);
+			    width: 100vw;
+			    height: 50px;
+			    position: absolute;
+			    left: 0px;
+			    top: 0px;
+			    margin-top: 17.5vh;
+			    background: var(--primary);
+			    border-top: 1px solid white;
+			    z-index: 50;
+			}
+
+			.nav-option {
+			    font-size: smaller;
+			    padding: 2px;
+			    text-decoration: underline;
 			}
 		</style>
 
@@ -53,35 +99,44 @@
 		<div id="heading" data-expanded="true" style="height: 17.5vh">
 			<div id="heading-top">
 				<div id="logo">No Variance <br />Accounting Software</div>
-				<div id="nav" style="grid-template-columns: repeat(5, auto)">
-					<div class="nav-option" data-href="/">Home</div>
-					<div class="nav-option" data-href="/login">Log In</div>
-					<div class="nav-option" data-href="/signup">Sign Up</div>
-					<div class="nav-option" data-href="/pricing">Pricing</div>
+				<div class="nav-container">
+					<div id="nav-lines">
+						<div class="nav-line"></div>
+						<div class="nav-line"></div>
+						<div class="nav-line"></div>
+					</div>
+					<div id="nav">
+						<div class="nav-option" data-href="/">Home</div>
+						<div class="nav-option" data-href="/login">Log In</div>
+						<div class="nav-option" data-href="/signup">Sign Up</div>
+						<div class="nav-option" data-href="/pricing">Pricing</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div id="body">{% block body %} {% endblock %}</div>
 
-		<!-- <script defer>
-			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
-			let meta = document.head.querySelector("meta[name='logo']").id;
-			let heading = document.querySelector("#heading");
+		<script>
+			// This script is to toggle the navbar on mobile from the burger menu
+			// The burger menu is not displayed on desktop so not toggle-able
 
-			function logoResize(x) {
-				if (x.matches) {
-					let src = "{{url_for('static', filename='images/nv.png')}}";
-					return src;
-				} else {
-					let src = "{{url_for('static', filename='images/no_variance.png')}}";
-					return src;
-				}
+			let burger = document.getElementById("nav-lines");
+			let navMenu = document.getElementById("nav");
+
+			// Initial display determined by whether burger menu is visible
+			// Need to define inline as css file didn't seem to work
+			if (getComputedStyle(burger).display == "grid") {
+				navMenu.style.display = "none";
 			}
-			let x = window.matchMedia("(max-width: 600px)");
-			let img = logoResize(x);
-			heading.innerHTML =
-				heading.innerHTML + "<a href=" + meta + "><img src=" + img + " alt='No Variance Logo'/></a>";
-		</script> -->
+
+			burger.addEventListener("click", () => {
+				if (navMenu.style.display == "none") {
+					navMenu.style.display = "grid";
+				} else {
+					navMenu.style.display = "none";
+				}
+			});
+		</script>
 
 		<script>
 			// This is to turn all the nav options in the submenu into link buttons
