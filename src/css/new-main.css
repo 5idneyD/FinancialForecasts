@@ -147,7 +147,6 @@
     display: grid;
     width: 100%;
     grid-template-rows: auto;
-    grid-template-columns: 100%;
 }
 
 
@@ -163,7 +162,7 @@ div#nav {
 }
 
 .nav-container div#nav {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(5, auto);
     column-gap: 4vw;
     background: var(--primary);
