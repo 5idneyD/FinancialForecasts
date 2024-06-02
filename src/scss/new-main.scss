@@ -13,11 +13,14 @@
 	--shadow: 20px 20px 60px #232323, -20px -20px 60px #232323;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 * {
 	margin: 0;
 	padding: 0;
 	color: var(--fontColor);
 	font-size: clamp(0.5rem, 2.5vw, 1.15rem);
+	font-weight: normal;
+	scroll-behavior: smooth;
 }
 
 @keyframes toggle-up {
@@ -52,7 +55,6 @@
 	height: 100%;
 	grid-template-columns: 50vw auto;
 	text-align: center;
-	padding: 10px;
 }
 
 #heading-top div {
@@ -144,35 +146,28 @@
 }
 
 .nav-container {
-    display: grid;
-    width: 100%;
-    grid-template-rows: auto;
-}
-
-
-div#nav {
 	display: grid;
-	grid-template-columns: auto auto auto auto;
+	width: 100%;
 	grid-template-rows: auto;
-	column-gap: 4vw;
+
+	div#nav-lines {
+		display: none;
+	}
+
+	div#nav {
+		display: grid;
+		grid-template-columns: repeat(5, auto);
+		column-gap: 4vw;
+		background: var(--primary);
+		z-index: 50;
+	}
 }
 
-.nav-container div#nav-lines {
-	display: none;
-}
-
-.nav-container div#nav {
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    column-gap: 4vw;
-    background: var(--primary);
-    z-index: 50;
-}
 
 div.nav-option,
 div#logo {
 	min-width: 5vw;
-	height: 100%;
+	// height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -220,23 +215,23 @@ div#nav div.nav-option:hover {
 }
 /* width */
 ::-webkit-scrollbar {
-	width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-	background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-	background: #555; 
-  }
+	width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
 
 .body-node.two-row {
 	display: grid;
@@ -255,7 +250,7 @@ div#nav div.nav-option:hover {
 }
 
 .ct-series-a .ct-area {
-    fill: var(--fontColor);
+	fill: var(--fontColor);
 }
 
 #to-do-list {
@@ -405,8 +400,8 @@ table.report tr {
 table.report,
 #balanceSheet,
 .body-node:has(#balanceSheet) {
-width: 85vw !important;
-min-width: 0px !important;
+	width: 85vw !important;
+	min-width: 0px !important;
 }
 
 table.report tr :is(td, th) {
@@ -457,7 +452,6 @@ div.invoice-head div :is(input, select, select option) {
 	cursor: pointer;
 	width: 100%;
 }
-
 
 button:hover {
 	color: var(--second) !important;
@@ -531,7 +525,7 @@ table#settings tr {
 	margin-top: 4vh;
 }
 
-div#colorSetter *:not(br){
+div#colorSetter *:not(br) {
 	margin-top: 4vh;
 }
 
@@ -606,13 +600,13 @@ button[name="signinButton"] {
 	width: 4.5vw;
 	min-width: 3.2rem;
 	border-radius: 150px 150px 0 0;
-	-moz-border-radius:150px 150px 0 0;
+	-moz-border-radius: 150px 150px 0 0;
 	-webkit-border-radius: 150px 150px 0 0;
 	background-color: var(--second);
 	margin: -1.75vh auto 0 auto;
 }
 
-.adminForm div button{
+.adminForm div button {
 	margin-top: 0;
 	margin-top: 3vh;
 }
@@ -624,11 +618,9 @@ button[name="signinButton"] {
 	grid-auto-rows: auto;
 	row-gap: 3vh;
 	height: fit-content;
-	
 }
 
-.adminBody div *{
-
+.adminBody div * {
 	border-radius: 30px;
 	background-color: var(--primary);
 	color: var(--fontColor);
@@ -638,10 +630,9 @@ button[name="signinButton"] {
 	min-width: fit-content;
 	padding-right: 5%;
 	padding-left: 5%;
-
 }
 
-.body-node:has(.helpHead){
+.body-node:has(.helpHead) {
 	width: 40vw;
 }
 
@@ -707,7 +698,7 @@ div#legend div#legend-1 {
 	background-color: var(--primary);
 	color: var(--fontColor);
 	border: 1px solid var(--fontColor);
-	font-weight: 400
+	font-weight: 400;
 }
 
 input[type="file"]::file-selector-button {
@@ -745,7 +736,7 @@ div#newBankRecTable {
 
 .bankRecRow .checkbox {
 	width: 30px;
-	height:30px;
+	height: 30px;
 	border-radius: 45px;
 	border: 1px solid var(--fontColor);
 	margin-left: auto;
@@ -790,7 +781,7 @@ div#newBankRecTable {
 
 div.clientTable {
 	display: grid;
-	grid-template-columns:auto;
+	grid-template-columns: auto;
 }
 
 div.clientTableRow {
@@ -801,7 +792,7 @@ div.clientTableRow {
 	margin-top: 3vh;
 }
 
-div.clientTableRow.supplier{
+div.clientTableRow.supplier {
 	grid-template-columns: 15% 15% 20% 50%;
 }
 
@@ -810,7 +801,7 @@ input.clientTableCellInput {
 	color: var(--fontColor);
 	width: 90%;
 	border: 1px solid var(--fontColor);
-	text-align:center;
+	text-align: center;
 }
 
 input.clientTableCellInput[name="code"] {
@@ -840,8 +831,7 @@ select#clientCodeSelect option {
 .swal2-popup {
 	font-size: 1em !important;
 	width: fit-content !important;
-  }
-
+}
 
 div.add-product div#table {
 	width: 80vw;
@@ -859,7 +849,7 @@ div.add-product div#table input {
 	text-align: center;
 }
 
-div.add-product button[type="submit"]{
+div.add-product button[type="submit"] {
 	background-color: var(--primary);
 	color: var(--fontColor);
 	padding: 1vh 3vw 1vh 3vw;
@@ -893,22 +883,22 @@ table#products-list tbody tr td {
 }
 
 .price {
-    font-size: 40px;
-    color: var(--third); 
+	font-size: 40px;
+	color: var(--third);
 }
 
 span.bright-button button {
-    height: fit-content;
-    padding: 1vh 5vw 1vh 5vw;
-    background-color: var(--third);
-    color: var(--primary);
-    border-radius: 30px;
-    margin-bottom: 3vh;
+	height: fit-content;
+	padding: 1vh 5vw 1vh 5vw;
+	background-color: var(--third);
+	color: var(--primary);
+	border-radius: 30px;
+	margin-bottom: 3vh;
 }
 
-a.signup-button button{
-    min-width: fit-content;
-    padding: 1vh 5vw 1vh 5vw;
+a.signup-button button {
+	min-width: fit-content;
+	padding: 1vh 5vw 1vh 5vw;
 	background-color: var(--third) !important;
 	color: var(--primary) !important;
 }
