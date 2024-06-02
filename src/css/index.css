@@ -1,201 +1,200 @@
 @import "./new-main.css";
-
 :root {
-    --third: #32fca7;
-    scroll-behavior: smooth;
+  --third: #32fca7;
+  scroll-behavior: smooth;
 }
 
 * {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 #heading {
-    height: 17.5vh;
-    top: 0px;
-	position: sticky !important;
+  height: 17.5vh;
+  top: 0px;
+  position: sticky !important;
 }
 
-
 #heading-top {
-    display: grid;
-    height: 100%;
-    grid-template-columns: 50vw auto;
-    text-align: center;
-    padding: 10px;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 50vw auto;
+  text-align: center;
+  padding: 10px;
 }
 
 #heading-top div {
-    height: 100%;
+  height: 100%;
 }
 
 .nav-container {
-    display: grid;
-    width: 100%;
-    grid-template-rows: auto;
-    grid-template-columns: 100%;
+  display: grid;
+  width: 100%;
+  grid-template-rows: auto;
+  grid-template-columns: 100%;
 }
 
 .nav-container div#nav-lines {
-    display: none;
+  display: none;
 }
 
 .nav-container div#nav-lines div.nav-line {
-    background: white;
-    width: 50%;
-    height: 4px;
-    border-radius: 2px;
+  background: white;
+  width: 50%;
+  height: 4px;
+  border-radius: 2px;
 }
 
 .nav-container div#nav {
-    display: grid !important;
-    grid-template-columns: repeat(5, auto);
-    column-gap: 4vw;
-    background: var(--primary);
-    z-index: 50;
+  display: grid !important;
+  grid-template-columns: repeat(5, auto);
+  column-gap: 4vw;
+  background: var(--primary);
+  z-index: 50;
 }
 
 .nav-option {
-    padding: 2px;
+  padding: 2px;
 }
 
 #body {
-    margin-top: -5vh;
-    min-height: 100vh;
-    width: 100vw;
-    column-gap: 0;
-    grid-template-columns: 50vw 50vw;
+  margin-top: -5vh;
+  min-height: 100vh;
+  width: 100vw;
+  column-gap: 0;
+  grid-template-columns: 50vw 50vw;
 }
 
 .headline {
-    height: 50vh;
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 3vh;
-    margin-left: 10vw;
+  height: 50vh;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3vh;
+  margin-left: 10vw;
 }
 
 .headline h3 {
-    width: 50vw;
-    margin-top: 3vh;
-    font-family: 'Nunito', sans-serif;
+  width: 50vw;
+  margin-top: 3vh;
+  font-family: "Nunito", sans-serif;
 }
 
 div span.xl-text h1 {
-    width: 50vw;
-    margin-top: 25vh;
-    font-size: clamp(2rem, 6vw, 3.1rem);
-    font-family: 'Nunito', sans-serif;
+  width: 50vw;
+  margin-top: 25vh;
+  font-size: clamp(2rem, 6vw, 3.1rem);
+  font-family: "Nunito", sans-serif;
 }
 
 div span.large-text h1 {
-    width: 30vw;
-    margin: 3vh auto 0 auto;
-    font-size: clamp(1.2rem, 3vw, 1.8em);
-    font-family: 'Nunito', sans-serif;
+  width: 30vw;
+  margin: 3vh auto 0 auto;
+  font-size: clamp(1.2rem, 3vw, 1.8em);
+  font-family: "Nunito", sans-serif;
 }
 
-img[alt="Calculator"] {
-    width: 40vw;
-    height: 82.5vh;
+img[alt=Calculator] {
+  width: 40vw;
+  height: 82.5vh;
 }
 
 .empty {
-    width: 48vw;
-    /* border: 2px solid green; */
-    height: 60vh;
-    margin-right: auto;
+  width: 48vw;
+  /* border: 2px solid green; */
+  height: 60vh;
+  margin-right: auto;
 }
 
 .actions .action {
-    margin-top: 4vh;
-    width: 70%;
-    text-align: center;
+  margin-top: 4vh;
+  width: 70%;
+  text-align: center;
 }
 
 .actions {
-    min-height: 60vh;
-    height: fit-content;
-    width: 48vw;
-    /* border: 2px solid red; */
-    text-align: left;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  min-height: 60vh;
+  height: fit-content;
+  width: 48vw;
+  /* border: 2px solid red; */
+  text-align: left;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .action {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 ul li {
-    margin-top: 3vh;
-    list-style:none;
+  margin-top: 3vh;
+  list-style: none;
 }
 
 span.bright-button button {
-    height: fit-content;
-    padding: 1vh 5vw 1vh 5vw;
-    background-color: var(--third);
-    color: var(--primary);
-    border-radius: 30px;
-    margin-bottom: 3vh;
+  height: fit-content;
+  padding: 1vh 5vw 1vh 5vw;
+  background-color: var(--third);
+  color: var(--primary);
+  border-radius: 30px;
+  margin-bottom: 3vh;
 }
 
 div:has(.body-node.example) {
-    margin-top: 15vh;
-    width: 48vw;
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 5vw;
+  margin-top: 15vh;
+  width: 48vw;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 5vw;
 }
 
 .body-node.example {
-    min-width: 20vw;
-    width: 20vw;
-    display: grid;
-    grid-template-columns: 70%;
-    grid-template-rows: 2rem 2rem 2rem 2rem;;
-    row-gap: 3vh;
+  min-width: 20vw;
+  width: 20vw;
+  display: grid;
+  grid-template-columns: 70%;
+  grid-template-rows: 2rem 2rem 2rem 2rem;
+  row-gap: 3vh;
 }
 
 div.example-row {
-    height: 2rem;
-    width: 100%;
-    margin-left: 3vw;
-    margin-top: 1vh;
-    border-radius: 30px;
-    background-color: rgba(201, 191, 191, 0.411);
+  height: 2rem;
+  width: 100%;
+  margin-left: 3vw;
+  margin-top: 1vh;
+  border-radius: 30px;
+  background-color: rgba(201, 191, 191, 0.411);
 }
 
 .body-node.example div.example-row.text {
-    background-color: var(--primary)
+  background-color: var(--primary);
 }
 
-a.signup-button button{
-    width: fit-content;
-    padding: 1vh 5vw 1vh 5vw;
-    margin-top: 5vh;
+a.signup-button button {
+  width: fit-content;
+  padding: 1vh 5vw 1vh 5vw;
+  margin-top: 5vh;
 }
-
 
 #footer div:nth-of-type(1) {
-    height: 5vh;
-    align-items:center;
-    margin-top: -20vh;;
+  height: 5vh;
+  align-items: center;
+  margin-top: -20vh;
 }
 
 footer {
-    text-align: center;
-    width: 100vw;
-    border-top: 2px solid white;
-    height: fit-content;
-    padding-top: 5vh;
-    line-height: 2.3rem;
-    margin-top: 25vh
+  text-align: center;
+  width: 100vw;
+  border-top: 2px solid white;
+  height: fit-content;
+  padding-top: 5vh;
+  line-height: 2.3rem;
+  margin-top: 25vh;
 }
+
+/*# sourceMappingURL=index.css.map */
