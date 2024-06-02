@@ -29,15 +29,15 @@
 </div>
 
 <div id="fourth" class="body-node">
-	<table class="report">
+	<table class="report" id="report">
 		<tr>
 			<th>Name</th>
 			<th>Code</th>
 			<th>Email</th>
 			<th>Address</th>
 			<th>Balance</th>
-			<th>Credit Limit</th>
-			<th>Payment Terms</th>
+			<th class="no-mobile">Credit Limit</th>
+			<th class="no-mobile">Payment Terms</th>
 		</tr>
 		{% for customer in customers %}
 		<tr>
@@ -46,8 +46,8 @@
 			<td>{{customer.customer_email}}</td>
 			<td>{{customer.customer_address}}</td>
 			<td>{{balances[customer.customer_code]}}</td>
-			<td>{{customer.customer_credit_limit}}</td>
-			<td>{{customer.customer_payment_terms}}</td>
+			<td class="no-mobile">{{customer.customer_credit_limit}}</td>
+			<td class="no-mobile">{{customer.customer_payment_terms}}</td>
 		</tr>
 		{% endfor %}
 	</table>

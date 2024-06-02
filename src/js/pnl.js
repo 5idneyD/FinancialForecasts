@@ -63,13 +63,13 @@ els.forEach(function (el, index) {
 				revenueTotalP +
 				"</td><td>" +
 				revenueTotalM +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueTotalP - revenueTotalM) +
 				"</td><td>" +
 				revenueBudgetTotalP +
 				"</td><td>" +
 				revenueBudgetTotalM +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueBudgetTotalP - revenueBudgetTotalM) +
 				"</td></tr>",
 		);
@@ -80,13 +80,13 @@ els.forEach(function (el, index) {
 				revenueTotalP +
 				"</td><td>" +
 				revenueTotalM +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueTotalP - revenueTotalM) +
 				"</td><td>" +
 				revenueBudgetTotalP +
 				"</td><td>" +
 				revenueBudgetTotalM +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueBudgetTotalP - revenueBudgetTotalM) +
 				"</td></tr>",
 		);
@@ -99,7 +99,7 @@ els.forEach(function (el, index) {
 				(revenueTotalP - directCostsTotalP - overheadsTotalP - ebitTotalP) +
 				"</td><td>" +
 				(revenueTotalM - directCostsTotalM - overheadsTotalM - ebitTotalM) +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueTotalP -
 					directCostsTotalP -
 					overheadsTotalP -
@@ -109,7 +109,7 @@ els.forEach(function (el, index) {
 				(revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP - ebitBudgetTotalP) +
 				"</td><td>" +
 				(revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM - ebitBudgetTotalM) +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueBudgetTotalP -
 					directCostsBudgetTotalP -
 					overheadsBudgetTotalP -
@@ -127,13 +127,13 @@ els.forEach(function (el, index) {
 				(revenueTotalP - directCostsTotalP) +
 				"</td><td>" +
 				(revenueTotalM - directCostsTotalM) +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueTotalP - directCostsTotalP - (revenueTotalM - directCostsTotalM)) +
 				"</td><td>" +
 				(revenueBudgetTotalP - directCostsBudgetTotalP) +
 				"</td><td>" +
 				(revenueBudgetTotalM - directCostsBudgetTotalM) +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueBudgetTotalP - directCostsBudgetTotalP - (revenueBudgetTotalM - directCostsBudgetTotalM)) +
 				"</td></tr>",
 		);
@@ -146,7 +146,7 @@ els.forEach(function (el, index) {
 				(revenueTotalP - directCostsTotalP - overheadsTotalP) +
 				"</td><td>" +
 				(revenueTotalM - directCostsTotalM - overheadsTotalM) +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueTotalP -
 					directCostsTotalP -
 					overheadsTotalP -
@@ -155,7 +155,7 @@ els.forEach(function (el, index) {
 				(revenueBudgetTotalP - directCostsBudgetTotalP - overheadsBudgetTotalP) +
 				"</td><td>" +
 				(revenueBudgetTotalM - directCostsBudgetTotalM - overheadsBudgetTotalM) +
-				"</td><td>" +
+				"</td><td class='no-mobile'>" +
 				(revenueBudgetTotalP -
 					directCostsBudgetTotalP -
 					overheadsBudgetTotalP -

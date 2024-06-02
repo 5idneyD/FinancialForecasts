@@ -1,7 +1,7 @@
 {% extends "blueprint.html" %} {% block body %}
 
 	<div class="body-node" id="first">
-		<table id="myTable">
+		<table id="COA">
 			<tr>
 				<th>Nominal Code</th>
 				<th>Account Name</th>
@@ -28,7 +28,7 @@
 		  var input, filter, table, tr, td, i, txtValue;
 		  input = document.getElementById("myInputNominal");
 		  filter = input.value.toUpperCase();
-		  table = document.getElementById("myTable");
+		  table = document.getElementById("COA");
 		  tr = table.getElementsByTagName("tr");
 		
 		  // Loop through all table rows, and hide those who don't match the search query
@@ -52,7 +52,7 @@
 			var input, filter, table, tr, td, i, txtValue;
 			input = document.getElementById("myInputName");
 			filter = input.value.toUpperCase();
-			table = document.getElementById("myTable");
+			table = document.getElementById("COA");
 			tr = table.getElementsByTagName("tr");
 		  
 			// Loop through all table rows, and hide those who don't match the search query

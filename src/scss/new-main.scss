@@ -423,6 +423,18 @@ table.report tr :is(td) {
 	font-size: smaller;
 }
 
+//  Chart of accounts table
+table#COA {
+	width: 80vw;
+	tbody {
+		tr {
+			margin-top: 3vh;
+			display: grid;
+			grid-template-columns: 30% 70%;
+		}
+	}
+}
+
 tr.summaryRow {
 	font-weight: bold;
 }

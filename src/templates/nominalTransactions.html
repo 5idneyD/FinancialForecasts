@@ -57,33 +57,31 @@
 		<tr>
 			<th>Nominal</th>
 			<th>Date</th>
-			<!-- <th>Type</th> -->
 			<th>Client Code</th>
 			<th>Reference</th>
-			<th>Description</th>
+			<th class="no-mobile">Description</th>
 			<th>Net Value</th>
-			<th>VAT</th>
+			<th class="no-mobile">VAT</th>
 			<th>Total Value</th>
-			<th>Year</th>
-			<th>Period</th>
-			<th>Posted By</th>
-			<th>Posted On</th>
+			<th class="no-mobile">Year</th>
+			<th class="no-mobile">Period</th>
+			<th class="no-mobile">Posted By</th>
+			<th class="no-mobile">Posted On</th>
 		</tr>
 		{% for transaction in transactions %}
 		<tr>
 			<td>{{transaction.nominal_code}}</td>
 			<td>{{transaction.date}}</td>
-			<!-- <td>{{transaction.transaction_type}}</td> -->
 			<td>{{transaction.client_code}}</td>
 			<td>{{transaction.transaction_number}}</td>
-			<td>{{transaction.description}}</td>
+			<td class="no-mobile">{{transaction.description}}</td>
 			<td>{{transaction.net_value}}</td>
-			<td>{{transaction.vat_value}}</td>
+			<td class="no-mobile">{{transaction.vat_value}}</td>
 			<td>{{transaction.total_value}}</td>
-			<td>{{transaction.accounting_year}}</td>
-			<td>{{transaction.accounting_period}}</td>
-			<td>{{transaction.posted_by}}</td>
-			<td>{{transaction.posted_on}}</td>
+			<td class="no-mobile">{{transaction.accounting_year}}</td>
+			<td class="no-mobile">{{transaction.accounting_period}}</td>
+			<td class="no-mobile">{{transaction.posted_by}}</td>
+			<td class="no-mobile">{{transaction.posted_on}}</td>
 		</tr>
 		{% endfor %}
 	</table>

@@ -88,6 +88,7 @@
   bottom: 105%;
   padding: 3vh 0 3vh 0;
   border: 1px solid var(--third);
+  z-index: 100;
 }
 .loggedIn.sub-menu.sales, .loggedIn.sub-menu.purchase, .loggedIn.sub-menu.financial, .loggedIn.sub-menu.other {
   grid-column: 1;
@@ -101,7 +102,7 @@
   padding-bottom: 20vh;
 }
 
-table.report#report tbody tr .no-mobile {
+table.report#report tbody tr .no-mobile, table.report#table tbody tr .no-mobile, table.report#nominalTransactions tbody tr .no-mobile {
   display: none !important;
 }
 
@@ -119,6 +120,10 @@ div:has(.invoice-body) {
 }
 .invoice-body .invoiceRow:nth-of-type(2) {
   margin-top: 4vh;
+}
+
+div#top-clients {
+  width: 85vw;
 }
 
 /*# sourceMappingURL=mobile_nav.css.map */
