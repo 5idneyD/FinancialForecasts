@@ -5,7 +5,9 @@
   "private": true,
   "config": {
     "jsx": "src/jsx/navigation.jsx src/jsx/help.jsx src/jsx/journal.jsx src/jsx/indexList.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx src/jsx/bankRec.jsx src/jsx/home.jsx",
-    "css": "src/css/new-main.css src/css/index.css src/css/mobile_index.css"
+    "css": "src/css/new-main.css src/css/index.css src/css/mobile_index.css",
+    "scss_in": "src/scss/",
+    "scss_out": "src/css/"
   },
   "directories.man": {
     "js": "./src/js",
@@ -18,11 +20,12 @@
     "css": "esbuild %npm_package_config_css% --bundle --outdir=dist/styles/ --out-extension:.css=.min.css --minify --tree-shaking=true",
     "css:watch": "esbuild %npm_package_config_css% --bundle --outdir=dist/styles/ --entry-names=[name].min --minify --tree-shaking=true --watch",
     "build": "npm run jsx & npm run css & node bin/es.js",
-    "dev": "npm-run-all --parallel jsx:watch css:watch js:watch serve",
+    "dev": "npm-run-all --parallel jsx:watch css:watch js:watch scss:watch serve",
     "js": "node bin/es.js",
     "js:watch": "node bin/es.js --watch",
     "jsx": "esbuild %npm_package_config_jsx% --bundle --outdir=dist/react/compiled/ --loader:.js=jsx --drop:debugger --tree-shaking=true --minify",
-    "jsx:watch": "esbuild %npm_package_config_jsx% --bundle --outdir=dist/react/compiled/ --loader:.js=jsx --drop:debugger --tree-shaking=true --minify --watch"
+    "jsx:watch": "esbuild %npm_package_config_jsx% --bundle --outdir=dist/react/compiled/ --loader:.js=jsx --drop:debugger --tree-shaking=true --minify --watch",
+    "scss:watch": "sass --watch %npm_package_config_scss_in%:%npm_package_config_scss_out%"
   },
   "keywords": [],
   "author": "5idneyD",
@@ -52,6 +55,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "resolve-glob": "^1.0.0",
+    "sass": "^1.77.4",
     "style-loader": "^3.3.2",
     "webpack": "^5.76.2"
   },
