@@ -74,6 +74,42 @@ function Journal() {
 		}
 	}
 
+	function submitForm(message) {
+		let form = document.querySelector("form");
+		if (typeof message === 'string' || message instanceof String){
+		} else {
+			message = "Are You Sure?";
+		};
+		Swal.fire({
+			title: message,
+			// text: "You won't be able to revert this!",
+			// icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Post",
+			cancelButtonText: "No",
+			reverseButtons: true,
+			allowOutsideClick: "false",
+			background: "var(--primary)",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Swal.fire("Deleted!", "Your file has been deleted.", "success");
+				form.submit();
+			} else if (
+				/* Read more about handling dismissals below */
+				result.dismiss === Swal.DismissReason.cancel
+			) {
+				// Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+			}
+		});
+	}
+
+	function submit(cre, deb){
+		console.log(cre, deb)
+		if (cre-deb == 0){
+			submitForm("Confirm Journal Posting");
+		};
+	}
+
 	return (
 		<>
 			<div className="body-node" id="first">
@@ -116,7 +152,7 @@ function Journal() {
 					Add Row
 				</button>
 				<br />
-				<button type="button" onClick={submitForm} className="invoiceForm" id="submitButton">
+				<button type="button" onClick={() => submit({credit}, {debit})} className="invoiceForm" id="submitButton">
 					Post Journal
 				</button>
 			</div>

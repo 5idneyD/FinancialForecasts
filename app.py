@@ -1408,7 +1408,7 @@ def journal(company, email, username, session_key, theme):
         company_data = Companies.query.filter_by(company=company).first()
         accounting_year = company_data.accounting_year
         accounting_period = company_data.accounting_period
-
+        
         # Calcul;ate the next jounral number by loopingthrough all journals, and adding 1 to the last
         journals = NominalTransactions.query.filter_by(
             company=company, transaction_type="journal").all()
