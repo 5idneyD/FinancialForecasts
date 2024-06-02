@@ -153,9 +153,6 @@
 
 
 div#nav {
-	@if display == "none" {
-		display: grid;
-	}
 	display: grid;
 	grid-template-columns: repeat(4, auto);
 	grid-template-rows: auto;
