@@ -20,72 +20,12 @@
 		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
 
 		<link rel="stylesheet" href="{{url_for('static', filename='styles/new-main.min.css')}}" />
-
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/mobile_nav.min.css')}}" media="only screen and (max-width: 960px)"/>
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 		<!-- Style for just mobile pages -->
-		<style media="screen and (max-width: 600px)">
-						* {
-							font-weight: normal;
-							font-size: clamp(1rem, 4vw, 2rem);
-						}
-						form#form[method="post"] input {
-							width: 60%;
-						}
-						form#form[method=post] button {
-							width: 50%;
-						}
-						.userLogo {
-							width: 12.5vw;
-						}
-
-
-						{# This is to do with the burger menu #}
-
-			.nav-container {
-			    display: grid;
-			    grid-template-rows: 100% auto;
-			}
-
-			.nav-container div#nav-lines {
-			    width: 50px;
-			    height: 30px;
-			    margin: auto;
-			    display: grid;
-			    grid-template-columns: auto;
-			    grid-template-rows: repeat(3, auto);
-			    row-gap: 5px;
-			}
-
-			.nav-container div#nav-lines div.nav-line {
-			    background: white;
-			    width: 50%;
-			    height: 4px;
-			    border-radius: 2px;
-			}
-
-			.nav-container div#nav {
-			    display: none;
-			    grid-template-columns: repeat(4, auto);
-			    width: 100vw;
-			    height: 50px;
-			    position: absolute;
-			    left: 0px;
-			    top: 0px;
-			    margin-top: 17.5vh;
-			    background: var(--primary);
-			    border-top: 1px solid white;
-			    z-index: 50;
-			}
-
-			.nav-option {
-			    font-size: smaller;
-			    padding: 2px;
-			    text-decoration: underline;
-			}
-		</style>
-
+		
 		<!-- Style for all pages -->
 		<style>
 			form#form[method="post"] input {

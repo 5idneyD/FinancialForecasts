@@ -12,35 +12,33 @@
 
 			let design = "{{design|safe}}".split(",");
 			// If this isn't the home page
-			if (design != ''){
-			let primary = design[0];
-			let second = design[1];
-			let third = design[2];
-			let text = design[3];
+			if (design != "") {
+				let primary = design[0];
+				let second = design[1];
+				let third = design[2];
+				let text = design[3];
 
-			console.log(text);
+				let root = document.querySelector(":root");
+				root.style.setProperty("--primary", primary);
+				root.style.setProperty("--second", second);
+				root.style.setProperty("--third", third);
+				root.style.setProperty("--fontColor", text);
 
-			let root = document.querySelector(":root");
-			root.style.setProperty("--primary", primary);
-			root.style.setProperty("--second", second);
-			root.style.setProperty("--third", third);
-			root.style.setProperty("--fontColor", text);
-
-			// If the theme is set to "light", add a certain shadow
-			// The the theme is set to "dark", add a another shadow
-			// Else set no shadow
-			if (primary == "#dedeea") {
-				root.style.setProperty("--shadow", "20px 20px 60px #bebebe, -20px -20px 60px #ffffff");
-			} else if (primary == "#232323") {
-				root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323");
-			} else {
-				root.style.setProperty("--shadow", "none");
+				// If the theme is set to "light", add a certain shadow
+				// The the theme is set to "dark", add a another shadow
+				// Else set no shadow
+				if (primary == "#dedeea") {
+					root.style.setProperty("--shadow", "20px 20px 60px #bebebe, -20px -20px 60px #ffffff");
+				} else if (primary == "#232323") {
+					root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323");
+				} else {
+					root.style.setProperty("--shadow", "none");
+				}
 			}
-		} 
 		</script>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, user-scalable=no" />
 		<meta
 			name="keywords"
 			content="accounting, basic accounting, accountant, simple accounting, accounting software, no variance, variance accounting" />
@@ -57,23 +55,33 @@
 		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
 
 		<link rel="stylesheet" href="{{url_for('static', filename='styles/new-main.min.css')}}" />
-
+		<link
+			rel="stylesheet"
+			href="{{url_for('static', filename='styles/mobile_nav.min.css')}}"
+			media="all and (max-width: 860px)" />
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 		{% if design %} {% endif %}
 	</head>
 	<body>
-		<div id="heading" data-expanded="true">
+		<div id="heading" class="loggedIn" data-expanded="true">
 			<div id="heading-top">
 				<div id="logo">No Variance <br />Accounting Software</div>
-				<div id="nav">
-					<div class="nav-option" data-href="/dashboard">Dashboard</div>
-					<div class="nav-option" data-href="/admin">Admin</div>
-					<div class="nav-option" data-href="/logout">Log Out</div>
+				<div class="nav-container loggedIn">
+					<div id="nav-lines">
+						<div class="nav-line"></div>
+						<div class="nav-line"></div>
+						<div class="nav-line"></div>
+					</div>
+					<div id="nav" class="loggedIn">
+						<div class="nav-option" data-href="/dashboard">Dashboard</div>
+						<div class="nav-option" data-href="/admin">Admin</div>
+						<div class="nav-option" data-href="/logout">Log Out</div>
+					</div>
 				</div>
 			</div>
-			<div id="heading-bottom">
+			<div id="heading-bottom" class="loggedIn">
 				<div id="user">
 					<b>{{username}}</b><br />
 					{{company}}
@@ -84,17 +92,17 @@
 				<div class="box purchase">Purchase</div>
 				<div class="box financial">Financial</div>
 				<div class="box other">Other</div>
-				<div class="sub-menu sales">
+				<div class="sub-menu sales loggedIn">
 					<div class="sub-menu-option" data-href="/addSalesInvoice">Add Sales Invoice</div>
 					<div class="sub-menu-option" data-href="/viewSalesInvoices">View Sales Invoices</div>
 					<div class="sub-menu-option" data-href="/Customers">View Customers</div>
 				</div>
-				<div class="sub-menu purchase">
+				<div class="sub-menu purchase loggedIn">
 					<div class="sub-menu-option" data-href="/addPurchaseInvoice">Add Purchase Invoice</div>
 					<div class="sub-menu-option" data-href="/viewPurchaseInvoices">View Purchase Invoices</div>
 					<div class="sub-menu-option" data-href="/Suppliers">View Suppliers</div>
 				</div>
-				<div class="sub-menu financial">
+				<div class="sub-menu financial loggedIn">
 					<div class="sub-menu-option" data-href="/chartOfAccounts">Chart Of Accounts</div>
 					<div class="sub-menu-option" data-href="/trialBalance">Trial Balance</div>
 					<div class="sub-menu-option" data-href="/balanceSheet">Balance Sheet</div>
@@ -107,7 +115,7 @@
 					<div class="sub-menu-option" data-href="/agedDebt">Aged Debt</div>
 					<div class="sub-menu-option" data-href="/cashFlow">Cash Flow</div>
 				</div>
-				<div class="sub-menu other">
+				<div class="sub-menu other loggedIn">
 					<div class="sub-menu-option" data-href="/admin">Admin</div>
 					<div class="sub-menu-option" data-href="/changePassword">Change Password</div>
 					<div class="sub-menu-option" data-href="/changeTheme">Change Theme</div>
@@ -122,24 +130,29 @@
 			<div id="toggle-button">&uarr;</div>
 		</div>
 		<div id="body">{% block body %} {% endblock %}</div>
-		<script defer>
-			// This is to import the logo, giving it different anchor refs depending on if its logged in or not
-			//let meta = document.head.querySelector("meta[name='logo']").id;
-			//let heading = document.querySelector("#heading");
+		<script>
+			// This script is to toggle the navbar on mobile from the burger menu
+			// The burger menu is not displayed on desktop so not toggle-able
 
-			//function logoResize(x) {
-			//	if (x.matches) {
-			//		let src = "{{url_for('static', filename='images/nv.png')}}";
-			//		return src;
-			//	} else {
-			//		let src = "{{url_for('static', filename='images/no_variance.png')}}";
-			//		return src;
-			//	}
-			//}
-			//let x = window.matchMedia("(max-width: 600px)");
-			//let img = logoResize(x);
-			//heading.innerHTML =
-			//	heading.innerHTML + "<a href=" + meta + "><img src=" + img + " alt='No Variance Logo'/></a>";
+			let burger = document.getElementById("nav-lines");
+			let navMenu = document.getElementById("nav");
+			const htmlString = navMenu.outerHTML;
+			console.log(htmlString)
+			// Initial display determined by whether burger menu is visible
+			// Need to define inline as css file didn't seem to work
+			if (getComputedStyle(burger).display == "grid") {
+				navMenu.style.display = "none";
+			}
+
+			burger.addEventListener("click", () => {
+				if (getComputedStyle(navMenu).display == "none") {
+					navMenu.style.display = "grid";
+				} else {
+					navMenu.style.display = "none";
+					navMenu.removeAttribute("style");
+				}
+				
+			});
 		</script>
 
 		<script>
@@ -147,7 +160,7 @@
 			let navOptions = document.querySelectorAll(".box");
 
 			// Design is imported at the top
-			let third = design[2]
+			let third = design[2];
 
 			navOptions.forEach(function (e) {
 				e.setAttribute("enlarged", "false");
