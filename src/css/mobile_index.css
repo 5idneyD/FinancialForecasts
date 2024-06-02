@@ -1,12 +1,10 @@
 @import "./new-main.css";
 * {
-  font-weight: normal;
   font-size: clamp(1rem, 4vw, 2rem);
 }
 
 #heading {
   height: 17.5vh;
-  /* position: fixed; */
   top: 0px;
   position: fixed;
 }
@@ -18,35 +16,15 @@
   text-align: center;
   padding: 10px;
 }
-
 #heading-top div {
   height: 100%;
 }
 
 .nav-container {
-  display: grid;
   grid-template-rows: 100% auto;
   margin-left: auto;
   margin-right: auto;
 }
-
-.nav-container div#nav-lines {
-  width: 50px;
-  height: 30px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: repeat(3, auto);
-  row-gap: 5px;
-}
-
-.nav-container div#nav-lines div.nav-line {
-  background: white;
-  width: 50%;
-  height: 4px;
-  border-radius: 2px;
-}
-
 .nav-container div#nav {
   display: none;
   grid-template-columns: repeat(4, auto);
@@ -56,22 +34,31 @@
   left: 0px;
   top: 0px;
   margin-top: 17.5vh;
-  background: var(--primary);
   border-top: 1px solid white;
-  z-index: 50;
+}
+.nav-container div#nav-lines {
+  display: grid;
+  width: 50px;
+  height: 30px;
+  margin: auto;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(3, auto);
+  row-gap: 5px;
+}
+.nav-container div#nav-lines div.nav-line {
+  background: white;
+  width: 50%;
+  height: 4px;
+  border-radius: 2px;
 }
 
 .nav-option {
-  font-size: smaller;
   padding: 2px;
   text-decoration: underline;
 }
 
 #body {
   margin-top: 10vh;
-  min-height: 100vh;
-  height: fit-content;
-  width: 100vw;
   grid-template-columns: 100vw;
 }
 
@@ -145,14 +132,6 @@ ul li {
   list-style-type: circle;
 }
 
-span.bright-button button {
-  height: fit-content;
-  padding: 1vh 5vw 1vh 5vw;
-  background-color: var(--third);
-  color: var(--primary);
-  border-radius: 30px;
-}
-
 span.bright-button a button:not([type=submit]) {
   margin-left: -85vw;
   margin-top: 15vh;
@@ -199,7 +178,6 @@ div.example-row {
 
 a.signup-button button {
   width: fit-content;
-  padding: 1vh 5vw 1vh 5vw;
   margin-top: 4vh;
   margin-bottom: 15vh;
 }
