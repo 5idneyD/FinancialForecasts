@@ -24,12 +24,14 @@
 			<div>VAT By Default</div>
 			<div>
 				<select class="invoice" id="vatSetting">
-					<option value="yes">Yes</option>
-					<option value="no">No</option>
+					<option value="0">0%</option>
+					<option value="0.2">20%</option>
+					<option value="0.05">5%</option>
+					<option value="0.5">10%</option>
 				</select>
 			</div>
 		</div>
-			<button type="button" onclick="addRow(); addOptions();" id="addInvoiceRow">Add Row</button>
+		<button type="button" onclick="addRow(); addOptions();" id="addInvoiceRow">Add Row</button>
 	</div>
 	<div class="body-node" id="second">
 		<div data-rows="1">
@@ -51,14 +53,19 @@
 						</select>
 					</div>
 					<div><input type="text" name="1_description" /></div>
-					<div><input type="number" step="0.01" name="1_net_value" class="net" /></div>
-					<div><input type="number" step="0.01" name="1_vat" class="vat" /></div>
+					<div>
+						<input
+							type="number"
+							step="0.01"
+							name="1_net_value"
+							class="net"
+							onchange="vatValue(this); totalValue(this)" />
+					</div>
+					<div><input type="number" step="0.01" name="1_vat" class="vat" onchange="totalValue(this)" /></div>
 					<div><input type="number" step="0.01" name="1_total_value" class="tv" /></div>
 				</div>
-			
 			</div>
 			<button id="submitInvoice" class="invoiceForm" type="submit">Submit</button>
-		
 		</div>
 	</div>
 </form>

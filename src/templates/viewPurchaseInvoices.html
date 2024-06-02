@@ -46,42 +46,33 @@
 </div>
 <div class="body-node" id="second" style="width: 50vw"></div>
 <div class="body-node" id="third">
-	<table class="report" id="table">
+	<table class="report" id="report">
 		<tr>
 			<th>Supplier Code</th>
 			<th>Invoice Number</th>
 			<th>Invoice Date</th>
-			<span class="wide">
-				<th>Invoice Description</th>
-			</span>
+			<th class="no-mobile">Invoice Description</th>
 			<th>Net Value</th>
-			<th>VAT Value</th>
+			<th class="no-mobile">VAT Value</th>
 			<th>Total Value</th>
-			<span class="thin">
-				<th>Year</th>
-				<th>Period</th>
-			</span>
-			<th>Posted By</th>
-			<th>Posted On</th>
-
+			<th class="no-mobile">Year</th>
+			<th class="no-mobile">Period</th>
+			<th class="no-mobile">Posted By</th>
+			<th class="no-mobile">Posted On</th>
 		</tr>
 		{% for invoice in invoices %}
 		<tr>
 			<td>{{ invoice.client_code }}</td>
 			<td>{{ invoice.transaction_number }}</td>
 			<td>{{ invoice.date }}</td>
-			<span class="wide">
-			<td>{{ invoice.description }}</td>
-		</span>
+			<td class="no-mobile">{{ invoice.description }}</td>
 			<td>{{ invoice.net_value }}</td>
-			<td>{{ invoice.vat_value }}</td>
+			<td class="no-mobile">{{ invoice.vat_value }}</td>
 			<td>{{ invoice.total_value }}</td>
-			<span class="thin">
-			<td>{{ invoice.accounting_year }}</td>
-			<td>{{ invoice.accounting_period }}</td>
-		</span>
-			<td>{{ invoice.posted_by }}</td>
-			<td>{{ invoice.posted_on }}</td>
+			<td class="no-mobile">{{ invoice.accounting_year }}</td>
+			<td class="no-mobile">{{ invoice.accounting_period }}</td>
+			<td class="no-mobile">{{ invoice.posted_by }}</td>
+			<td class="no-mobile">{{ invoice.posted_on }}</td>
 
 		</tr>
 		{% endfor %}
@@ -90,7 +81,7 @@
 
 <script>
 	function ExportToExcel(type, fn, dl) {
-		var elt = document.getElementById("table");
+		var elt = document.getElementById("report");
 		var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
 		return dl
 			? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })

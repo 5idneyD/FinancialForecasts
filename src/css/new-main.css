@@ -13,6 +13,7 @@
   --fontColor: #ffffff;
   --shadow: 20px 20px 60px #232323, -20px -20px 60px #232323;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
 }
 
 * {
@@ -82,9 +83,7 @@
   justify-content: center;
   transition: all 0.2s ease;
 }
-
-.box:hover,
-.box:active {
+.box:hover, .box:active {
   width: 100%;
   height: 80%;
   cursor: pointer;
@@ -105,7 +104,6 @@
   z-index: 2;
   display: none;
 }
-
 .sub-menu div.sub-menu-option {
   width: 11vw;
   height: 6vh;
@@ -425,6 +423,7 @@ table.report tr :is(td, th) {
 
 table.report tr :is(td) {
   margin-top: 3vh;
+  font-size: smaller;
 }
 
 tr.summaryRow {

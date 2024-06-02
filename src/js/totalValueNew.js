@@ -1,6 +1,7 @@
+
+
 function totalValue(e){
     let row = e.name[0];
-    console.log(row);
     let net = document.querySelector("input[name='" + row +"_net_value']");
     let vat = document.querySelector("input[name='" + row +"_vat']");
     let total = document.querySelector("input[name='" + row +"_total_value']");
@@ -15,6 +16,7 @@ function vatValue(t){
     let vatRate = document.querySelector("select#vatSetting").value;
     let vat = document.querySelector("input[name='" + row +"_vat']");
     let net = document.querySelector("input[name='" + row +"_net_value']");
-    let vatValue = net.valueAsNumber * vatRate;
+    let vatValue = Math.round(net.valueAsNumber * vatRate,2);
+    console.log(vatValue);
     vat.value = vatValue;
 }

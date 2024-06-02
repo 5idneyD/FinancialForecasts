@@ -56,7 +56,7 @@
   height: 10vh;
   background: var(--primary);
 }
-.loggedIn#heading-bottom :nth-child(1) {
+.loggedIn#heading-bottom #user {
   display: none;
 }
 .loggedIn .nav-container {
@@ -92,8 +92,33 @@
 .loggedIn.sub-menu.sales, .loggedIn.sub-menu.purchase, .loggedIn.sub-menu.financial, .loggedIn.sub-menu.other {
   grid-column: 1;
 }
+
 #toggle-button {
   display: none;
+}
+
+#body {
+  padding-bottom: 20vh;
+}
+
+table.report#report tbody tr .no-mobile {
+  display: none !important;
+}
+
+div:has(.invoice-body) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.invoice-body {
+  row-gap: 3vh;
+}
+.invoice-body .invoiceRow div {
+  word-wrap: break-word;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+}
+.invoice-body .invoiceRow:nth-of-type(2) {
+  margin-top: 4vh;
 }
 
 /*# sourceMappingURL=mobile_nav.css.map */

@@ -58,7 +58,7 @@
 		<link
 			rel="stylesheet"
 			href="{{url_for('static', filename='styles/mobile_nav.min.css')}}"
-			media="all and (max-width: 860px)" />
+			media="all and (max-width: 880px)" />
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
 		<title>No Variance</title>
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
@@ -137,7 +137,6 @@
 			let burger = document.getElementById("nav-lines");
 			let navMenu = document.getElementById("nav");
 			const htmlString = navMenu.outerHTML;
-			console.log(htmlString)
 			// Initial display determined by whether burger menu is visible
 			// Need to define inline as css file didn't seem to work
 			if (getComputedStyle(burger).display == "grid") {

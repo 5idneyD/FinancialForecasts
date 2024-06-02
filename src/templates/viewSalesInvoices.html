@@ -52,44 +52,30 @@
 			<th>Customer Code</th>
 			<th>Invoice No.</th>
 			<th>Invoice Date</th>
-			<span class="wide">
-				<th>Invoice Description</th>
-			</span>
+			<th class="no-mobile">Invoice Description</th>
 			<th>Net Value</th>
-			<th>VAT</th>
+			<th class="no-mobile">VAT</th>
 			<th>Total Value</th>
-			<th>Paid</th>
-
-			<span class="thin">
-				<th>Year</th>
-			</span>
-			<span class="thin">
-				<th>Period</th>
-			</span>
-			<th>Posted By</th>
-			<th>Posted On</th>
+			<th class="no-mobile">Paid</th>
+			<th class="no-mobile">Year</th>
+			<th class="no-mobile">Period</th>
+			<th class="no-mobile">Posted By</th>
+			<th class="no-mobile">Posted On</th>
 		</tr>
 		{% for invoice in invoices %}
 		<tr>
 			<td>{{ invoice.client_code }}</td>
 			<td>{{ invoice.transaction_number }}</td>
 			<td>{{ invoice.date }}</td>
-			<span class="wide">
-				<td>{{ invoice.description }}</td>
-			</span>
+			<td class="no-mobile">{{ invoice.description }}</td>
 			<td>{{ invoice.net_value }}</td>
-			<td>{{ invoice.vat_value }}</td>
+			<td class="no-mobile">{{ invoice.vat_value }}</td>
 			<td>{{ invoice.total_value }}</td>
-			<td>{{ invoice.is_paid }}</td>
-
-			<span class="thin">
-				<td>{{ invoice.accounting_year }}</td>
-			</span>
-			<span class="thin">
-				<td>{{ invoice.accounting_period }}</td>
-			</span>
-			<td>{{ invoice.posted_by }}</td>
-			<td>{{ invoice.posted_on }}</td>
+			<td class="no-mobile">{{ invoice.is_paid }}</td>
+			<td class="no-mobile">{{ invoice.accounting_year }}</td>
+			<td class="no-mobile">{{ invoice.accounting_period }}</td>
+			<td class="no-mobile">{{ invoice.posted_by }}</td>
+			<td class="no-mobile">{{ invoice.posted_on }}</td>
 		</tr>
 		{% endfor %}
 	</div>
