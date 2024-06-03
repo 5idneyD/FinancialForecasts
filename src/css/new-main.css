@@ -52,6 +52,7 @@
 
 #heading-top {
   display: grid;
+  position: sticky;
   height: 100%;
   grid-template-columns: 50vw auto;
   text-align: center;
@@ -473,8 +474,7 @@ div.invoice-head div :is(input, select, select option) {
 }
 
 button:hover {
-  color: var(--second) !important;
-  background-color: var(--fontColor) !important;
+  background-color: var(--second) !important;
   cursor: pointer;
 }
 
@@ -512,7 +512,7 @@ button.invoiceForm {
   background-color: var(--primary);
   border-radius: 30px;
   color: var(--fontColor);
-  border: 1px solid var(--fontColor);
+  border: 2px solid var(--second);
   padding-left: 5%;
   padding-right: 5%;
   width: 10vw;
@@ -643,6 +643,7 @@ button[name=signinButton] {
 
 .adminBody div * {
   border-radius: 30px;
+  border: 1px solid var(--second);
   background-color: var(--primary);
   color: var(--fontColor);
   height: 2rem;
@@ -674,7 +675,7 @@ button[name=signinButton] {
   grid-auto-rows: 5vh;
   row-gap: 3vh;
   width: fit-content;
-  min-width: 300px;
+  min-width: 40vw;
   margin-top: -10vh;
 }
 
@@ -684,6 +685,8 @@ button[name=signinButton] {
   width: fit-content;
   min-width: 200px;
   font-size: 0.8rem;
+  background-color: var(--second);
+  color: var(--fontColor);
 }
 
 div#legend {
@@ -778,7 +781,7 @@ div#newBankRecTable {
 }
 
 #bankRecButtons {
-  width: fit-content;
+  width: 70vw;
   margin-left: auto;
   margin-right: auto;
   height: fit-content !important;

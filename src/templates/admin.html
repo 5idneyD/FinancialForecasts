@@ -3,7 +3,7 @@
 {% endblock %} {% block body %}
  
 {% if admin==3 or admin=="3" %}
-<div class="body-node adminForm" id="first" style="width: 30vw">
+<div class="body-node adminForm" id="first">
 	<div>
 		<button
 			class="invoiceForm adminButton"
@@ -67,12 +67,12 @@
 		</button>
 	</div>
 </div>
-<div id="adminBody" class="body-node" style="width: 30vw"></div>
+<div id="adminBody" class="body-node"></div>
 
 
 {% elif admin==2 or admin=="2" %}
 
-<div class="body-node adminBody" id="first" style="width: 30vw">
+<div class="body-node adminBody" id="first">
 	<div>
 		<button
 			class="invoiceForm adminButton"
@@ -96,7 +96,7 @@
 	</div>
 </div>
 
-<div id="adminBody" class="body-node" style="width: 30vw"></div>
+<div id="adminBody" class="body-node"></div>
 
 {% else %}
 <h3>You do not have Admin Permissions</h3>
