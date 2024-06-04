@@ -16,7 +16,6 @@ function vatValue(t){
     let vatRate = document.querySelector("select#vatSetting").value;
     let vat = document.querySelector("input[name='" + row +"_vat']");
     let net = document.querySelector("input[name='" + row +"_net_value']");
-    let vatValue = Math.round(net.valueAsNumber * vatRate,2);
-    console.log(vatValue);
+    let vatValue = Math.round((net.valueAsNumber * vatRate)*100)/100;
     vat.value = vatValue;
 }

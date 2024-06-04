@@ -57,7 +57,6 @@
   grid-template-columns: 50vw auto;
   text-align: center;
 }
-
 #heading-top div {
   height: 100%;
   margin: auto;
@@ -105,6 +104,18 @@
   z-index: 2;
   display: none;
 }
+.sub-menu.sales {
+  grid-column: 2;
+}
+.sub-menu.purchase {
+  grid-column: 3;
+}
+.sub-menu.financial {
+  grid-column: 3;
+}
+.sub-menu.other {
+  grid-column: 4;
+}
 .sub-menu div.sub-menu-option {
   width: 11vw;
   height: 6vh;
@@ -117,27 +128,10 @@
   margin-top: 5%;
   margin-bottom: 3%;
 }
-
 .sub-menu div.sub-menu-option:hover {
   background-color: var(--primary);
   transition-duration: 0.4s;
   cursor: pointer;
-}
-
-.sub-menu.sales {
-  grid-column: 2;
-}
-
-.sub-menu.purchase {
-  grid-column: 3;
-}
-
-.sub-menu.financial {
-  grid-column: 3;
-}
-
-.sub-menu.other {
-  grid-column: 4;
 }
 
 #user {
@@ -152,21 +146,13 @@
   width: 100%;
   grid-template-rows: auto;
 }
-
-div#nav {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: auto;
-  column-gap: 4vw;
-}
-
 .nav-container div#nav-lines {
   display: none;
 }
-
 .nav-container div#nav {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: auto;
   column-gap: 4vw;
   background: var(--primary);
   z-index: 50;
@@ -278,54 +264,45 @@ div#nav div.nav-option:hover {
   grid-template-rows: auto;
   column-gap: 10%;
 }
-
-li.to-do-item .bullet,
-li.to-do-item-add .bullet {
+.to-do-item div,
+.to-do-item-add div {
+  margin-top: 0%;
+}
+.to-do-item input,
+.to-do-item-add input {
+  background-color: var(--primary);
+  border: 0.2px solid var(--fontColor);
+  width: 95%;
+  text-align: center;
+}
+.to-do-item .bullet,
+.to-do-item-add .bullet {
   width: 1.5rem;
   height: 1.5rem;
   padding-bottom: 2%;
   margin: auto;
   border-radius: 50%;
 }
-
-li.to-do-item div,
-li.to-do-item-add div {
-  margin-top: 0%;
-}
-
-.bullet p {
+.to-do-item .bullet p,
+.to-do-item-add .bullet p {
   padding-bottom: 40%;
-}
-
-li.to-do-item-add input {
-  background-color: var(--primary);
-  border: 0.2px solid var(--fontColor);
-  width: 95%;
-  text-align: center;
 }
 
 #to-do-list ul li:nth-child(1n) div.bullet {
   border: 2px solid salmon;
 }
-
 #to-do-list ul li:nth-child(1n) div.bullet:hover {
   background-color: salmon;
+  cursor: pointer;
 }
-
 #to-do-list ul li:nth-child(2n) div.bullet {
   border: 2px solid aquamarine;
 }
-
 #to-do-list ul li:nth-child(2n) div.bullet:hover {
   background-color: aquamarine;
+  cursor: pointer;
 }
 
-/* li.to-do-item {
-	display: none;
-}
-li.to-do-item:nth-child(-n + 3) {
-	display: grid;
-} Display first three */
 #toggle {
   background-color: var(--second);
   width: 100vw;
@@ -340,7 +317,6 @@ li.to-do-item:nth-child(-n + 3) {
   margin-left: 3vw;
   text-align: center;
 }
-
 #toggle-button:hover {
   cursor: pointer;
 }
@@ -360,7 +336,6 @@ form#form[method=post] {
   flex-flow: column;
   row-gap: 2vh;
 }
-
 form#form[method=post] input {
   height: 5vh;
   width: 40%;
@@ -369,7 +344,6 @@ form#form[method=post] input {
   color: var(--fontColor);
   border: 0px;
 }
-
 form#form[method=post] button {
   background-color: var(--primary);
   color: var(--fontColor);
@@ -377,54 +351,41 @@ form#form[method=post] button {
   width: 30%;
   border-radius: 30px;
 }
-
 form#form[method=post] button:hover {
   cursor: pointer;
-}
-
-table.report {
-  display: grid;
-  grid-auto-rows: auto;
-  width: 90vw;
-}
-
-span.wide {
-  flex: 3;
-  align-items: stretch;
-}
-
-span.thin {
-  flex: 0.5;
-  align-items: stretch;
-}
-
-span:is(.wide, .thin) :is(th, td) {
-  height: 100%;
-}
-
-table.report tr {
-  display: flex;
-  flex-direction: row;
 }
 
 table.report,
 #balanceSheet,
 .body-node:has(#balanceSheet) {
-  width: 85vw !important;
-  min-width: 0px !important;
+  display: grid;
+  grid-auto-rows: auto;
+  width: 85vw;
+}
+table.report tr,
+#balanceSheet tr,
+.body-node:has(#balanceSheet) tr {
+  display: flex;
+  flex-direction: row;
 }
 
+table.report tr:nth-child(even) {
+  background: var(--second);
+}
 table.report tr :is(td, th) {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex: 1;
+  padding-bottom: 1rem;
 }
 
 table.report tr :is(td) {
   margin-top: 3vh;
   font-size: smaller;
+  width: 20vw;
 }
 
 table#COA {
@@ -478,33 +439,35 @@ button:hover {
   cursor: pointer;
 }
 
+#number_of_rows {
+  display: none;
+}
+
 div.invoice-body {
   display: grid;
   grid-auto-rows: 5vh;
+  row-gap: 1.4rem;
   grid-auto-flow: row;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
   width: 80vw;
 }
-
-#number_of_rows {
-  display: none;
-}
-
-.invoiceRow {
+div.invoice-body .invoiceRow {
   display: grid;
   grid-template-rows: 5vh;
   column-gap: 2vw;
   grid-template-columns: 6vw repeat(5, 13vw);
 }
-
-.invoiceRow input {
+div.invoice-body .invoiceRow div input, div.invoice-body .invoiceRow select {
   text-align: center;
   width: 80%;
+  margin-top: auto;
+  margin-bottom: auto;
   height: 1.4rem;
   background-color: var(--primary);
   color: var(--fontColor);
+  border: 2px solid var(--second);
 }
 
 button#addInvoiceRow,
@@ -744,10 +707,6 @@ input[type=file] {
 
 input[type=file]:hover {
   cursor: pointer;
-}
-
-.table_row td {
-  width: 20vw;
 }
 
 div#bankRecTable,

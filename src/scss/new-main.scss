@@ -57,11 +57,11 @@
 	height: 100%;
 	grid-template-columns: 50vw auto;
 	text-align: center;
-}
 
-#heading-top div {
-	height: 100%;
-	margin: auto;
+	div {
+		height: 100%;
+		margin: auto;
+	}
 }
 
 #heading-bottom {
@@ -106,6 +106,20 @@
 	z-index: 2;
 	display: none;
 
+	&.sales {
+		grid-column: 2;
+	}
+
+	&.purchase {
+		grid-column: 3;
+	}
+	&.financial {
+		grid-column: 3;
+	}
+	&.other {
+		grid-column: 4;
+	}
+
 	div.sub-menu-option {
 		width: 11vw;
 		height: 6vh;
@@ -117,26 +131,13 @@
 		align-items: center;
 		margin-top: 5%;
 		margin-bottom: 3%;
+
+		&:hover {
+			background-color: var(--primary);
+			transition-duration: 0.4s;
+			cursor: pointer;
+		}
 	}
-}
-
-.sub-menu div.sub-menu-option:hover {
-	background-color: var(--primary);
-	transition-duration: 0.4s;
-	cursor: pointer;
-}
-
-.sub-menu.sales {
-	grid-column: 2;
-}
-.sub-menu.purchase {
-	grid-column: 3;
-}
-.sub-menu.financial {
-	grid-column: 3;
-}
-.sub-menu.other {
-	grid-column: 4;
 }
 
 #user {
@@ -150,25 +151,19 @@
 	display: grid;
 	width: 100%;
 	grid-template-rows: auto;
-}
 
-div#nav {
-	display: grid;
-	grid-template-columns: repeat(4, auto);
-	grid-template-rows: auto;
-	column-gap: 4vw;
-}
+	div#nav-lines {
+		display: none;
+	}
 
-.nav-container div#nav-lines {
-	display: none;
-}
-
-.nav-container div#nav {
-	display: grid;
-	grid-template-columns: repeat(5, auto);
-	column-gap: 4vw;
-	background: var(--primary);
-	z-index: 50;
+	div#nav {
+		display: grid;
+		grid-template-columns: repeat(4, auto);
+		grid-template-rows: auto;
+		column-gap: 4vw;
+		background: var(--primary);
+		z-index: 50;
+	}
 }
 
 div.nav-option,
@@ -277,53 +272,54 @@ div#nav div.nav-option:hover {
 	grid-template-columns: 20% 65%;
 	grid-template-rows: auto;
 	column-gap: 10%;
+
+	div {
+		margin-top: 0%;
+	}
+
+	input {
+		background-color: var(--primary);
+		border: 0.2px solid var(--fontColor);
+		width: 95%;
+		text-align: center;
+	}
+
+	.bullet {
+		width: 1.5rem;
+		height: 1.5rem;
+		padding-bottom: 2%;
+		margin: auto;
+		border-radius: 50%;
+
+		p {
+			padding-bottom: 40%;
+		}
+	}
 }
 
-li.to-do-item .bullet,
-li.to-do-item-add .bullet {
-	width: 1.5rem;
-	height: 1.5rem;
-	padding-bottom: 2%;
-	margin: auto;
-	border-radius: 50%;
-}
+#to-do-list ul {
+	li {
+		&:nth-child(1n) {
+			div.bullet {
+				border: 2px solid salmon;
+				&:hover {
+					background-color: salmon;
+					cursor: pointer;
+				}
+			}
+		}
 
-li.to-do-item div,
-li.to-do-item-add div {
-	margin-top: 0%;
+		&:nth-child(2n) {
+			div.bullet {
+				border: 2px solid aquamarine;
+				&:hover {
+					background-color: aquamarine;
+					cursor: pointer;
+				}
+			}
+		}
+	}
 }
-
-.bullet p {
-	padding-bottom: 40%;
-}
-
-li.to-do-item-add input {
-	background-color: var(--primary);
-	border: 0.2px solid var(--fontColor);
-	width: 95%;
-	text-align: center;
-}
-
-#to-do-list ul li:nth-child(1n) div.bullet {
-	border: 2px solid salmon;
-}
-#to-do-list ul li:nth-child(1n) div.bullet:hover {
-	background-color: salmon;
-}
-
-#to-do-list ul li:nth-child(2n) div.bullet {
-	border: 2px solid aquamarine;
-}
-#to-do-list ul li:nth-child(2n) div.bullet:hover {
-	background-color: aquamarine;
-}
-
-/* li.to-do-item {
-	display: none;
-}
-li.to-do-item:nth-child(-n + 3) {
-	display: grid;
-} Display first three */
 
 #toggle {
 	background-color: var(--second);
@@ -337,10 +333,10 @@ li.to-do-item:nth-child(-n + 3) {
 	background-color: var(--primary);
 	margin-left: 3vw;
 	text-align: center;
-}
 
-#toggle-button:hover {
-	cursor: pointer;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .toggle-up {
@@ -357,71 +353,62 @@ form#form[method="post"] {
 	justify-content: center;
 	flex-flow: column;
 	row-gap: 2vh;
-}
 
-form#form[method="post"] input {
-	height: 5vh;
-	width: 40%;
-	text-align: center;
-	border-radius: 30px;
-	color: var(--fontColor);
-	border: 0px;
-}
+	input {
+		height: 5vh;
+		width: 40%;
+		text-align: center;
+		border-radius: 30px;
+		color: var(--fontColor);
+		border: 0px;
+	}
 
-form#form[method="post"] button {
-	background-color: var(--primary);
-	color: var(--fontColor);
-	height: 6vh;
-	width: 30%;
-	border-radius: 30px;
-}
-form#form[method="post"] button:hover {
-	cursor: pointer;
-}
+	button {
+		background-color: var(--primary);
+		color: var(--fontColor);
+		height: 6vh;
+		width: 30%;
+		border-radius: 30px;
 
-table.report {
-	display: grid;
-	grid-auto-rows: auto;
-	width: 90vw;
-}
-
-span.wide {
-	flex: 3;
-	align-items: stretch;
-}
-
-span.thin {
-	flex: 0.5;
-	align-items: stretch;
-}
-
-span:is(.wide, .thin) :is(th, td) {
-	height: 100%;
-}
-
-table.report tr {
-	display: flex;
-	flex-direction: row;
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
 
 table.report,
 #balanceSheet,
 .body-node:has(#balanceSheet) {
-	width: 85vw !important;
-	min-width: 0px !important;
+	display: grid;
+	grid-auto-rows: auto;
+	width: 85vw;
+
+	tr {
+		display: flex;
+		flex-direction: row;
+	}
 }
 
-table.report tr :is(td, th) {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	flex: 1;
+table.report tr {
+	&:nth-child(even) {
+		background: var(--second);
+	}
+
+	:is(td, th) {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		flex: 1;
+		padding-bottom: 1rem;
+	}
 }
 
 table.report tr :is(td) {
 	margin-top: 3vh;
 	font-size: smaller;
+	width: 20vw;
 }
 
 //  Chart of accounts table
@@ -478,33 +465,38 @@ button:hover {
 	cursor: pointer;
 }
 
+// Number of rows in invoice (used when posting invoices)
+#number_of_rows {
+	display: none;
+}
+
 div.invoice-body {
 	display: grid;
 	grid-auto-rows: 5vh;
+	row-gap: 1.4rem;
 	grid-auto-flow: row;
 	height: fit-content;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80vw;
-}
 
-#number_of_rows {
-	display: none;
-}
+	.invoiceRow {
+		display: grid;
+		grid-template-rows: 5vh;
+		column-gap: 2vw;
+		grid-template-columns: 6vw repeat(5, 13vw);
 
-.invoiceRow {
-	display: grid;
-	grid-template-rows: 5vh;
-	column-gap: 2vw;
-	grid-template-columns: 6vw repeat(5, 13vw);
-}
-
-.invoiceRow input {
-	text-align: center;
-	width: 80%;
-	height: 1.4rem;
-	background-color: var(--primary);
-	color: var(--fontColor);
+		 div input,select {
+			text-align: center;
+			width: 80%;
+			margin-top: auto;
+			margin-bottom: auto;
+			height: 1.4rem;
+			background-color: var(--primary);
+			color: var(--fontColor);
+			border: 2px solid var(--second);
+		}
+	}
 }
 
 button#addInvoiceRow,
@@ -650,7 +642,6 @@ button[name="signinButton"] {
 	min-width: fit-content;
 	padding-right: 5%;
 	padding-left: 5%;
-
 }
 
 .body-node:has(.helpHead) {
@@ -742,10 +733,6 @@ input[type="file"] {
 }
 input[type="file"]:hover {
 	cursor: pointer;
-}
-
-.table_row td {
-	width: 20vw;
 }
 
 div#bankRecTable,
