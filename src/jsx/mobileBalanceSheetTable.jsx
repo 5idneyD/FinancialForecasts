@@ -9,7 +9,7 @@ function App(props) {
 	return (
 
             
-			<Table id="bSheetTable" className="report" variant="simple" style={{width: "40vw", minWidth: "500px"}}>
+			<Table id="bSheetTable" className="report" variant="simple">
 				<Thead>
 					<Tr>
 						<Th>Nominal Code</Th>

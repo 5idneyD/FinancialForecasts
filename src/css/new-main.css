@@ -190,11 +190,9 @@ div#nav div.nav-option:hover {
 
 .body-node {
   border-radius: 30px;
-  box-shadow: 1px 1px 1px var(--second), -1px -1px 1px rgba(255, 255, 255, 0.7), inset 2px 2px 2px rgba(255, 255, 255, 0.7), inset -3px -3px 3px rgba(174, 174, 192, 0.25);
   padding: 3%;
   color: var(--fontColor);
   text-align: center;
-  width: 20vw;
   min-height: 30vh;
   margin-top: 5vh;
   border-radius: 50px;
@@ -360,6 +358,7 @@ table.report,
 .body-node:has(#balanceSheet) {
   display: grid;
   grid-auto-rows: auto;
+  grid-auto-columns: auto;
   width: 85vw;
 }
 table.report tr,
@@ -385,7 +384,6 @@ table.report tr :is(td, th) {
 table.report tr :is(td) {
   margin-top: 3vh;
   font-size: smaller;
-  width: 20vw;
 }
 
 table#COA {
@@ -459,7 +457,8 @@ div.invoice-body .invoiceRow {
   column-gap: 2vw;
   grid-template-columns: 6vw repeat(5, 13vw);
 }
-div.invoice-body .invoiceRow div input, div.invoice-body .invoiceRow select {
+div.invoice-body .invoiceRow div input,
+div.invoice-body .invoiceRow select {
   text-align: center;
   width: 80%;
   margin-top: auto;
@@ -541,11 +540,17 @@ input.filterInput[type=text] {
   color: black;
 }
 
+.body-node:has(div.loginItem) {
+  width: 30vw;
+}
+.body-node:has(div.loginItem) div.login-item {
+  width: 80%;
+  margin-top: 1rem;
+}
+
 div.loginItem {
   width: 100%;
-  margin-top: 5%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 1rem;
   color: var(--primary);
 }
 
@@ -561,7 +566,6 @@ button[name=signinButton] {
   height: 10vh;
   margin: -6vh auto 0 auto;
 }
-
 .userLogo #userHead {
   position: sticky;
   width: 3vw;
@@ -576,7 +580,6 @@ button[name=signinButton] {
   z-index: 10;
   background-color: var(--second);
 }
-
 .userLogo #userBody {
   position: sticky;
   border: 2px solid var(--fontColor);
@@ -641,11 +644,10 @@ button[name=signinButton] {
   min-width: 40vw;
   margin-top: -10vh;
 }
-
-.addClient :is(input, button) {
+.addClient input,
+.addClient button {
   margin-left: auto;
   margin-right: auto;
-  width: fit-content;
   min-width: 200px;
   font-size: 0.8rem;
   background-color: var(--second);

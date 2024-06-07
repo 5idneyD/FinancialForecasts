@@ -133,4 +133,8 @@ div#top-clients {
   width: 85vw;
 }
 
+.body-node:has(div.loginItem) {
+  margin-top: -2rem;
+}
+
 /*# sourceMappingURL=mobile_nav.css.map */

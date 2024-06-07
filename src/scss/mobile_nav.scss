@@ -170,3 +170,8 @@ div#top-clients {
 .body-node {
 	width: 85vw;
 }
+
+//
+.body-node:has(div.loginItem) {
+	margin-top: -2rem;
+}
