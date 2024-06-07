@@ -618,7 +618,7 @@ button[name=signinButton] {
   padding-right: 5%;
   padding-left: 5%;
 }
-.adminBody div p {
+.adminBody div p, .adminBody div svg, .adminBody div b {
   border: none;
 }
 
@@ -789,7 +789,9 @@ input.clientTableCellInput {
   background-color: var(--primary);
   color: var(--fontColor);
   width: 90%;
-  border: 1px solid var(--fontColor);
+  height: 1.4rem;
+  border: 1px solid var(--second);
+  border-radius: 30px;
   text-align: center;
 }
 
@@ -798,18 +800,19 @@ input.clientTableCellInput[name=code] {
 }
 
 select#clientCodeSelect {
-  width: 10vw;
   height: 1.5rem;
-  min-width: 50px;
+  width: 10vw;
+  min-width: fit-content;
+  padding: 0 5% 0 5%;
   margin-bottom: 2rem;
+  border-radius: 30px;
   color: var(--fontColor);
   background-color: var(--primary);
 }
 
-select#clientCodeSelect option {
+select#clientCodeSelect option.clientCodeOption {
   color: var(--fontColor);
-  background-color: var(--primary);
-  text-align: center;
+  width: inherit;
 }
 
 #swal2-title {
@@ -891,6 +894,14 @@ a.signup-button button {
   padding: 1vh 5vw 1vh 5vw;
   background-color: var(--third) !important;
   color: var(--primary) !important;
+}
+
+table#aged-debt-table {
+  width: 70vw;
+}
+table#aged-debt-table tbody tr:nth-child(even) {
+  background: var(--second);
+  height: 2rem;
 }
 
 /*# sourceMappingURL=new-main.css.map */

@@ -2,7 +2,7 @@ import React from "react";
 import { ReactDOM } from "react";
 import { Alert } from "@chakra-ui/react";
 
-export default function RemoveUser(props) {
+export default function ClosePeriod(props) {
 
 	return (
 		<form method="post">

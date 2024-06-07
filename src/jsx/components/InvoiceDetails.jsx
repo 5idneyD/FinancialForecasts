@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactDOM } from "react";
 
-export default function RemoveUser() {
+export default function InvoiceDetails() {
 	return (
 		<form method="post">
 			<div className="adminBody">
