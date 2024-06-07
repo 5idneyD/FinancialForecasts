@@ -378,7 +378,7 @@ table.report,
 .body-node:has(#balanceSheet) {
 	display: grid;
 	grid-auto-rows: auto;
-	grid-auto-columns: auto;;
+	grid-auto-columns: auto;
 	width: 85vw;
 
 	tr {
@@ -638,17 +638,23 @@ button[name="signinButton"] {
 	height: fit-content;
 }
 
-.adminBody div * {
-	border-radius: 30px;
-	border: 1px solid var(--second);
-	background-color: var(--primary);
-	color: var(--fontColor);
-	height: 2rem;
-	width: 10vw;
-	text-align: center;
-	min-width: fit-content;
-	padding-right: 5%;
-	padding-left: 5%;
+.adminBody div {
+	* {
+		border-radius: 30px;
+		border: 1px solid var(--second);
+		background-color: var(--primary);
+		color: var(--fontColor);
+		height: 2rem;
+		text-align: center;
+		min-width: fit-content;
+		padding-right: 5%;
+		padding-left: 5%;
+	}
+
+	p {
+		border: none;
+
+	}
 }
 
 .body-node:has(.helpHead) {

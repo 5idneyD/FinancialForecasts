@@ -613,11 +613,13 @@ button[name=signinButton] {
   background-color: var(--primary);
   color: var(--fontColor);
   height: 2rem;
-  width: 10vw;
   text-align: center;
   min-width: fit-content;
   padding-right: 5%;
   padding-left: 5%;
+}
+.adminBody div p {
+  border: none;
 }
 
 .body-node:has(.helpHead) {
