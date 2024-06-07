@@ -3,8 +3,8 @@
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 {% endblock %} {% block body %}
 <div class="body-node" id="first">
-	<table id="table" class="report" style="padding-bottom: 3vh; min-width: 500px; width: 85vw">
-		<tr style="width: 85vw">
+	<table id="table" class="report">
+		<tr>
 			<th>Account</th>
 			<th>Current <br />Actuals</th>
 			<th>Current <br />Budget</th>
@@ -14,7 +14,7 @@
 			<th class="no-mobile">YTD <br />Variance</th>
 		</tr>
 		{% for account, value in data.items() %} {% if value[2] < 20000 %}
-		<tr id="{{value[2]}}" class="{{value[2]}} table_row" style="width: 85vw">
+		<tr id="{{value[2]}}" class="{{value[2]}} table_row">
 			<td>{{account}}</td>
 			<td>{{value[0]}}</td>
 			<td>{{value[3]}}</td>
@@ -24,7 +24,7 @@
 			<td class="no-mobile">{{value[1] - value[4]}}</td>
 		</tr>
 		{% else %}
-		<tr id="{{value[2]}}" class="{{value[2]}} table_row" style="width: 85vw">
+		<tr id="{{value[2]}}" class="{{value[2]}} table_row">
 			<td>{{account}}</td>
 			<td>{{value[0]}}</td>
 			<td>{{value[3]}}</td>
@@ -36,7 +36,7 @@
 		{% endif %} {% endfor %}
 	</table>
 </div>
-<div class="body-node" id="second" style="width: 30vw">
+<div class="body-node" id="second">
 	<form method="post">
 		<div class="invoice-head" id="pnlSettings">
 			<div>Period</div>

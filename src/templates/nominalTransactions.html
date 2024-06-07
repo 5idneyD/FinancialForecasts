@@ -8,7 +8,7 @@
 			<div>Type</div>
 			<div>
 				<select name="type" class="invoice">
-					<option value="all" selected="selected">All</option>
+					<option value="{{filters['type']}}" selected="selected">{{filters['type']}}</option>
 					<option value="sales_invoice">Sales Invoice</option>
 					<option value="purchase_invoice">Purchase Invoice</option>
 					<option value="journal">Journal</option>
@@ -17,19 +17,19 @@
 
 			<div>Client Code</div>
 			<div>
-				<input name="client_code" type="invoice" value="" placeholder="" />
+				<input name="client_code" type="invoice" value="{{filters['client_code']}}" placeholder="{{filters['client_code']}}" />
 			</div>
 
 			<div>Nominal Code</div>
 			<div>
-				<input name="nominal_code" type="invoice" value="" placeholder="" />
+				<input name="nominal_code" type="number" value="{{filters['nominal_code']}}" placeholder="{{filters['nominal_code']}}" />
 			</div>
 
 			<div>Year</div>
 			<div>
 				<select name="year" class="invoice">
-					<option value="all" selected="selected">All</option>
-					{% for i in range(2018, 2024) %}
+					<option value="{{filters['year']}}" selected="selected">{{filters['year']}}</option>
+					{% for i in range(2018, 2025) %}
 					<option value="{{i}}">{{i}}</option>
 					{% endfor %}
 				</select>
@@ -38,7 +38,7 @@
 			<div>Period</div>
 			<div>
 				<select name="period" class="invoice">
-					<option value="all" selected="selected">All</option>
+					<option value="{{filters['period']}}" selected="selected">{{filters['period']}}</option>
 					{% for i in range(1, 13) %}
 					<option value="{{i}}">{{i}}</option>
 					{% endfor %}

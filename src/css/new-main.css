@@ -420,8 +420,8 @@ div.invoice-head div :not(button) {
 }
 
 div.invoice-head div :is(input, select, select option) {
-  color: black;
-  background-color: #dedeea;
+  color: var(--fontColor);
+  background-color: var(--primary);
   border: 1px solid var(--fontColor);
 }
 

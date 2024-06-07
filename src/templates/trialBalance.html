@@ -5,18 +5,14 @@
 	<table id="table" class="report">
 		<tr class="trialBalance">
 			<th class="invoiceHeader">Nominal Code</th>
-			<span class="wide">
-				<th class="invoiceHeaderDescription">Account Name</th>
-			</span>
+			<th class="invoiceHeaderDescription">Account Name</th>
 			<th class="invoiceHeader">Debit</th>
 			<th class="invoiceHeader">Credit</th>
 		</tr>
 		{% for account in accounts %}
 		<tr class="trialBalance">
 			<td>{{ account.nominal }}</td>
-			<span class="wide">
-				<td>{{ account.account_name }}</td>
-			</span>
+			<td>{{ account.account_name }}</td>
 			{% if account.balance > 0.00 %}
 			<td>{{ account.balance }}</td>
 			<td></td>

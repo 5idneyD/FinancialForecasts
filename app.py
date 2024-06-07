@@ -1671,37 +1671,46 @@ def profitAndLoss(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/nominalTransactions", methods=["POST", "GET"])
 @login_required
 def nominalTransactions(company, email, username, session_key, theme):
-    transactions = NominalTransactions.query.filter_by(company=company)
+    transactions = NominalTransactions.query.filter(NominalTransactions.company==company).all()
+    
+    filters = {
+        "type": "All",
+        "client_code": "",
+        "nominal_code": "",
+        "year": "All",
+        "period": "All"
+    }
 
     if request.method == "POST":
-        transaction_type = request.form["type"]
-        client_code = request.form["client_code"]
-        nominal_code = request.form["nominal_code"]
-        selected_year = request.form["year"]
-        selected_period = request.form["period"]
+        filters["type"] = request.form["type"]
+        filters["client_code"] = request.form["client_code"]
+        filters["nominal_code"] = request.form["nominal_code"]
+        filters["year"] = request.form["year"]
+        filters["period"] = request.form["period"]
 
-        if transaction_type != "all":
+        if filters["type"] != "All":
             transactions = [
-                transaction for transaction in transactions if transaction.transaction_type == transaction_type
+                transaction for transaction in transactions if transaction.transaction_type == filters["type"]
             ]
-        if selected_year != "all":
+        if filters["year"] != "All":
             transactions = [
-                transaction for transaction in transactions if transaction.accounting_year == selected_year]
-        if selected_period != "all":
+                transaction for transaction in transactions if transaction.accounting_year == filters["year"]
+                ]
+        if filters["period"] != "All":
             transactions = [
-                transaction for transaction in transactions if transaction.accounting_period == selected_period
+                transaction for transaction in transactions if transaction.accounting_period == filters["period"]
             ]
-        if client_code != "":
+        if filters["client_code"] != "":
             transactions = [
-                transaction for transaction in transactions if transaction.client_code == client_code]
+                transaction for transaction in transactions if transaction.client_code == filters["client_code"]
+                ]
 
-        if nominal_code != "":
-
+        if filters["nominal_code"] != "":
             transactions = [
-                transaction for transaction in transactions if transaction.nominal_code == int(nominal_code)]
+                transaction for transaction in transactions if transaction.nominal_code == int(filters["nominal_code"])]
 
-        return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
-    return render_template("nominalTransactions.html", company=company, transactions=transactions, design=theme)
+        return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
+    return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/batchedJournals", methods=["POST", "GET"])
