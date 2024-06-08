@@ -88,7 +88,7 @@
 			width: 100vw;
 		}
 
-		& :not(:nth-child(3)){
+		& :not(:nth-child(3)) {
 			border-bottom: 2px solid var(--second);
 		}
 	}
@@ -135,6 +135,10 @@ table.report {
 			tr {
 				.no-mobile {
 					display: none !important;
+				}
+				
+				th, td {
+					font-size: small;
 				}
 			}
 		}

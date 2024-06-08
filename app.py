@@ -122,7 +122,7 @@ class NominalTransactions(db.Model):
     company = db.Column(db.String(40))
     transaction_type = db.Column(db.String(40))
     client_code = db.Column(db.String(40))
-    transaction_number = db.Column(db.Integer, nullable=False)
+    transaction_number = db.Column(db.String(40), nullable=False)
     date = db.Column(db.String(40))
     # description = db.Column(db.String(40))
     nominal_code = db.Column(db.Integer)
@@ -139,6 +139,11 @@ class NominalTransactions(db.Model):
     reference = db.Column(db.String(70))
     to_post = db.Column(db.Integer, default=0)
     is_paid = db.Column(db.String(8), default="False")
+    
+    # Be able to use [key] to return attribute
+    # E.g. transaction['client_code']
+    def __getitem__(self, key):
+        return self.__dict__[key]
 
 
 class Budgets(db.Model):
@@ -263,6 +268,27 @@ def update_server():
         print("Error: Wrong event type")
         return 'Wrong event type', 400
 
+
+# Filters the list of transactions provided
+# By using any arguments parsed
+# Loops through each transaction, then all args
+# If any args do not match the transactions atribute
+# The transaction is no longer credible
+# All credible transactions are returned in a list
+def filterTransactions(transactions, filters):
+     filteredTransactions = []
+     for t in transactions:
+        credible = True
+        for key, value in filters.items():
+            # Skip if value is empty/all
+            if value not in ["All", "*", ""]:
+                if str(t[key]) == str(value):
+                    pass
+                else:
+                    credible = False
+        if credible == True:
+            filteredTransactions.append(t)
+     return filteredTransactions
 
 # This returns whichever static file the browser is trying to reach
 # They are both saved in the static directory
@@ -1067,7 +1093,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
         if len(references) == 0:
             references.append(0)
 
-        invoice_number = references[-1] + 1
+        invoice_number = str(references[-1] + 1)
 
         # Read header form input
         # See what customer this invoice is for and gather that customer's data from db
@@ -1321,34 +1347,35 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/viewSalesInvoices", methods=["POST", "GET"])
 @login_required
 def viewSalesInvoices(company, email, username, session_key, theme):
+    
     invoices = NominalTransactions.query.filter_by(
         company=company, transaction_type="sales_invoice").all()
+    
+    filters = {
+        "client_code": "",
+        "transaction_number": "",
+        "accounting_period": "",
+        "accounting_year": ""
+    }
+    
+    # Collecting list of customers to use as <select> options in html
     customers = []
     for invoice in invoices:
         customers.append(invoice.client_code)
     customers = set(customers)
 
     if request.method == "POST":
-        customer_code = request.form["customer_code"]
-        invoice_number = request.form["invoice_number"]
-        selected_period = request.form["selected_period"]
-        selected_year = request.form["selected_year"]
-        if customer_code != "*":
-            invoices = [
-                invoice for invoice in invoices if invoice.client_code == customer_code]
-        if invoice_number != "":
-            invoices = [invoice for invoice in invoices if invoice.transaction_number == int(
-                invoice_number)]
-        if selected_period != "*":
-            invoices = [
-                invoice for invoice in invoices if invoice.accounting_period == selected_period]
-        if selected_year != "*":
-            invoices = [
-                invoice for invoice in invoices if invoice.accounting_year == selected_year]
+        filters['client_code'] = request.form["customer_code"]
+        filters['transaction_number'] = request.form["invoice_number"]
+        filters['selected_period'] = request.form["selected_period"]
+        filters['selected_year'] = request.form["selected_year"]
+
+        invoices = filterTransactions(invoices, filters)
 
         return render_template(
             "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme
         )
+
 
     return render_template(
         "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme
@@ -1358,32 +1385,29 @@ def viewSalesInvoices(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/viewPurchaseInvoices", methods=["POST", "GET"])
 @login_required
 def viewPurchaseInvoices(company, email, username, session_key, theme):
-    invoices = NominalTransactions.query.filter_by(
-        company=company, transaction_type="purchase_invoice").all()
+    invoices = NominalTransactions.query.filter(
+        NominalTransactions.company==company, NominalTransactions.transaction_type=="purchase_invoice").all()
 
+    filters = {
+        "client_code": "",
+        "transaction_number": "",
+        "accounting_period": "",
+        "accounting_year": ""
+    }
+
+    # Producing list of suppliers to use as <select> options
     suppliers = []
     for invoice in invoices:
         suppliers.append(invoice.client_code)
-
     suppliers = set(suppliers)
 
     if request.method == "POST":
-        supplier_code = request.form["supplier_code"]
-        invoice_number = request.form["invoice_number"]
-        selected_period = request.form["selected_period"]
-        selected_year = request.form["selected_year"]
-        if supplier_code != "*":
-            invoices = [
-                invoice for invoice in invoices if invoice.client_code == supplier_code]
-        if invoice_number != "":
-            invoices = [invoice for invoice in invoices if invoice.transaction_number == int(
-                invoice_number)]
-        if selected_period != "*":
-            invoices = [
-                invoice for invoice in invoices if invoice.accounting_period == selected_period]
-        if selected_year != "*":
-            invoices = [
-                invoice for invoice in invoices if invoice.accounting_year == selected_year]
+        filters['client_code'] = request.form["supplier_code"]
+        filters['transaction_number'] = request.form["invoice_number"]
+        filters['accounting_period'] = request.form["selected_period"]
+        filters['accounting_year'] = request.form["selected_year"]
+
+        invoices = filterTransactions(invoices, filters)
 
         return render_template(
             "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme
@@ -1409,7 +1433,7 @@ def journal(company, email, username, session_key, theme):
         accounting_year = company_data.accounting_year
         accounting_period = company_data.accounting_period
         
-        # Calcul;ate the next jounral number by loopingthrough all journals, and adding 1 to the last
+        # Calculate the next jounral number by loopingthrough all journals, and adding 1 to the last
         journals = NominalTransactions.query.filter_by(
             company=company, transaction_type="journal").all()
         references = []
@@ -1674,40 +1698,23 @@ def nominalTransactions(company, email, username, session_key, theme):
     transactions = NominalTransactions.query.filter(NominalTransactions.company==company).all()
     
     filters = {
-        "type": "All",
+        "transaction_type": "",
+        "transaction_number": "",
         "client_code": "",
         "nominal_code": "",
-        "year": "All",
-        "period": "All"
+        "accouting_year": "",
+        "accounting_period": ""
     }
 
     if request.method == "POST":
-        filters["type"] = request.form["type"]
+
+        filters["transaction_type"] = request.form["type"]
         filters["client_code"] = request.form["client_code"]
         filters["nominal_code"] = request.form["nominal_code"]
-        filters["year"] = request.form["year"]
-        filters["period"] = request.form["period"]
-
-        if filters["type"] != "All":
-            transactions = [
-                transaction for transaction in transactions if transaction.transaction_type == filters["type"]
-            ]
-        if filters["year"] != "All":
-            transactions = [
-                transaction for transaction in transactions if transaction.accounting_year == filters["year"]
-                ]
-        if filters["period"] != "All":
-            transactions = [
-                transaction for transaction in transactions if transaction.accounting_period == filters["period"]
-            ]
-        if filters["client_code"] != "":
-            transactions = [
-                transaction for transaction in transactions if transaction.client_code == filters["client_code"]
-                ]
-
-        if filters["nominal_code"] != "":
-            transactions = [
-                transaction for transaction in transactions if transaction.nominal_code == int(filters["nominal_code"])]
+        filters["accouting_year"] = request.form["year"]
+        filters["accouting_period"] = request.form["period"]
+        
+        transactions = filterTransactions(transactions, filters)
 
         return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
     return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)

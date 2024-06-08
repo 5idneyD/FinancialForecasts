@@ -1,5 +1,6 @@
 {% set title="View Sales Invoices" %} {% extends "blueprint.html" %} {% block meta %}
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 {% endblock %} {% block body %}
 <form method="post">
 	<div class="body-node" id="first">
@@ -7,7 +8,7 @@
 			<div>Customer</div>
 			<div>
 				<select class="invoice" name="customer_code">
-					<option value="*" selected hidden></option>
+					<option value="" selected>All</option>
 					{% for customer in customers %}
 					<option value="{{customer}}">{{customer}}</option>
 					{% endfor %}
@@ -20,7 +21,7 @@
 			<div>Period</div>
 			<div>
 				<select name="selected_period" class="invoice">
-					<option value="*" selected hidden></option>
+					<option value="" selected hidden></option>
 					{% for i in range(1,13) %}
 					<option value="{{i}}">{{i}}</option>
 					{% endfor %}
@@ -30,7 +31,7 @@
 			<div>Year</div>
 			<div>
 				<select name="selected_year" class="invoice">
-					<option value="*" selected hidden></option>
+					<option value="" selected hidden></option>
 					{% for i in range(2018,2024) %}
 					<option value="{{i}}">{{i}}</option>
 					{% endfor %}
@@ -44,7 +45,7 @@
 		</button>
 	</div>
 </form>
-<div class="body-node" id="second" style="width: 50vw"></div>
+<div class="body-node" id="second"></div>
 
 <div class="body-node" id="third">
 	<table class="report" id="report">
@@ -89,4 +90,42 @@
 			: XLSX.writeFile(wb, fn || "SalesInvoices." + (type || "xlsx"));
 	}
 </script>
+
+{# <script defer type="text/javascript">
+// This is to create the line chart (using chartist.js) in the second body-node
+// The graph will show invoice values of the filtered invoices
+
+	// let trans = {{invoices|tojson|safe}}
+	let bodyStyles = window.getComputedStyle(document.body)
+	let light = bodyStyles.getPropertyValue('--light');
+	let dark = bodyStyles.getPropertyValue('--dark');
+
+
+	let x = [];
+	let y = [];
+
+	for (let i = 1; i <= 12; i++){
+		x.push(i);
+	}
+
+	trans.forEach(e=> {
+		console.log(e);
+		}
+	)
+
+
+	new Chartist.Line("#second", {
+		labels: x,
+		series: [
+		y
+
+		]
+	},{
+		low: 0,
+		showArea: true,
+		showPoint: false,
+		fullWidth: false
+	}
+	)
+</script> #}
 {% endblock %}

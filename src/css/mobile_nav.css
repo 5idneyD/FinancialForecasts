@@ -108,6 +108,9 @@
 table.report#report tbody tr .no-mobile, table.report#table tbody tr .no-mobile, table.report#nominalTransactions tbody tr .no-mobile {
   display: none !important;
 }
+table.report#report tbody tr th, table.report#report tbody tr td, table.report#table tbody tr th, table.report#table tbody tr td, table.report#nominalTransactions tbody tr th, table.report#nominalTransactions tbody tr td {
+  font-size: small;
+}
 
 div:has(.invoice-body) {
   margin-left: auto;
