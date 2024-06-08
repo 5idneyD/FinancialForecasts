@@ -1394,7 +1394,7 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
         "client_code": "",
         "transaction_number": "",
         "accounting_period": "",
-        "accounting_year": ""
+        "accounting_year": invoices[-1].accounting_year
     }
 
     # Producing list of suppliers to use as <select> options
@@ -1411,12 +1411,16 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
 
         invoices = filterTransactions(invoices, filters)
 
+
+        if filters['accounting_year'] == "":
+            filters['accounting_year'] = invoices[-1].accounting_year
+            
         return render_template(
-            "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme
+            "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme, accounting_year=filters['accounting_year']
         )
 
     return render_template(
-        "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme
+        "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme, accounting_year=filters['accounting_year']
     )
 
 

@@ -1,5 +1,6 @@
 {% set title="View Purchase Invoices" %} {% extends "blueprint.html" %} {% block meta %}
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 {% endblock %} {% block body %}
 <form method="post">
 	<div class="body-node" id="first">
@@ -7,7 +8,7 @@
 				<div>Supplier</div>
 				<div>
 					<select class="invoice" name="supplier_code">
-						<option value="*" selected hidden></option>
+						<option value="" selected hidden></option>
 						{% for supplier in suppliers %}
 						<option value="{{supplier}}">{{supplier}}</option>
 						{% endfor %}
@@ -20,7 +21,7 @@
 				<div>Period</div>
 				<div>
 					<select name="selected_period" class="invoice">
-						<option value="*" selected hidden></option>
+						<option value="" selected hidden></option>
 						{% for i in range(1,13) %}
 						<option value="{{i}}">{{i}}</option>
 						{% endfor %}
@@ -30,7 +31,7 @@
 				<div>Year</div>
 				<div>
 					<select name="selected_year" class="invoice">
-						<option value="*" selected hidden></option>
+						<option value="" selected hidden></option>
 						{% for i in range(2018,2024) %}
 						<option value="{{i}}">{{i}}</option>
 						{% endfor %}
@@ -44,7 +45,7 @@
 
 	</form>
 </div>
-<div class="body-node" id="second" style="width: 50vw"></div>
+<div class="body-node" id="second" style="width: 40vw; height: 50vh;">Total Costs</div>
 <div class="body-node" id="third">
 	<table class="report" id="report">
 		<tr>
@@ -87,5 +88,51 @@
 			? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
 			: XLSX.writeFile(wb, fn || "PurchaseInvoices." + (type || "xlsx"));
 	}
+</script>
+
+
+<script defer type="text/javascript">
+// This is to create the line chart (using chartist.js) in the second body-node
+// The graph will show invoice values of the filtered invoices
+
+	let year = {{accounting_year}};
+
+	let dict = {
+		1: 0,
+		2: 0,
+		3: 0,
+		4: 0,
+		5: 0,
+		6: 0,
+		7: 0,
+		8: 0,
+		9: 0,
+		10: 0,
+		11: 0,
+		12: 0
+	}
+	{% for trans in invoices %}
+		if ({{trans.accounting_year}} == year){
+			dict[{{trans.accounting_period}}] += {{trans.net_value}}
+		}
+	{% endfor %}
+
+	let x = Object.keys(dict);
+	let y = Object.values(dict);
+
+
+
+	new Chartist.Line("#second", {
+		labels: x,
+		series: [y
+]
+	},{
+		low: 0,
+		showArea: true,
+		showPoint: false,
+		fullWidth: false
+	}
+	
+	)
 </script>
 {% endblock %}

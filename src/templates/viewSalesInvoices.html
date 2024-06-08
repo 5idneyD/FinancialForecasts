@@ -45,7 +45,7 @@
 		</button>
 	</div>
 </form>
-<div class="body-node" id="second" style="width: 40vw; height: 50vh;">Total Sales</div>
+<div class="body-node" id="second" style="width: 40vw; height: 50vh;">Total Net Sales</div>
 
 <div class="body-node" id="third">
 	<table class="report" id="report">
@@ -112,14 +112,10 @@
 		12: 0
 	}
 	{% for trans in invoices %}
-		console.log({{trans.accounting_year}}, year, {{trans.accounting_year}} == year)
 		if ({{trans.accounting_year}} == year){
 			dict[{{trans.accounting_period}}] += {{trans.net_value}}
 		}
 	{% endfor %}
-
-
-	let bodyStyles = window.getComputedStyle(document.body)
 
 
 	let x = Object.keys(dict);
