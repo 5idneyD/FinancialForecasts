@@ -1823,12 +1823,13 @@ def help(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/bankRec", methods=["POST", "GET"])
 @login_required
 def bankRec(company, email, username, session_key, theme):
-    data = NominalTransactions.query.filter(
+    invoices = NominalTransactions.query.filter(
         NominalTransactions.company == company,
         NominalTransactions.is_paid == "False",
         NominalTransactions.transaction_type != "journal",
     ).all()
 
+    data = invoices
     # convert data to dict
     d = {}
     row=0
@@ -1841,42 +1842,28 @@ def bankRec(company, email, username, session_key, theme):
 
     if request.method == "POST":
 
-        number_of_rows = int(request.form["rows"])
+        # number_of_rows = int(request.form["rows"])
 
         bank_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60000).first()
         cash_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
-        print(request.form)
-        for i in range(1, number_of_rows + 1):
-            print(i)
+
+        for i in request.form:
+            transactionId = request.form[i]
+            transaction = NominalTransactions.query.filter(
+                            NominalTransactions.company == company,
+                            NominalTransactions.is_paid == "False",
+                            NominalTransactions.id == transactionId,
+                        ).first()
             try:
-                print(request.form)
-                print("***")
-                transaction_type = request.form[f"row_{str(i)}_type"]
-                print("----")
-                client_code = request.form[f"row_{str(i)}_client"]
-                transaction_number = request.form[f"row_{str(i)}_invoiceNo"]
-                total_value = request.form[f"row_{str(i)}_value"]
 
-                print(transaction_type)
-                print("-")
-                print(client_code)
-                print(transaction_number)
-                print(total_value)
-                print("--")
+                transaction_type = transaction.transaction_type
+                client_code = transaction.client_code
+                transaction_number = transaction.transaction_number
+                total_value = transaction.total_value
 
-                actual_invoice = NominalTransactions.query.filter_by(
-                    company=company,
-                    client_code=client_code,
-                    transaction_type=transaction_type,
-                    transaction_number=int(transaction_number),
-                ).all()
-
-                print(actual_invoice)
-
-                for invoice in actual_invoice:
-                    invoice.is_paid = "True"
+                transaction.is_paid = "True"
 
                 new_nominal_transaction = NominalTransactions(
                     company=company,
@@ -1917,21 +1904,15 @@ def bankRec(company, email, username, session_key, theme):
                 print(e)
 
         db.session.commit()
-        data = NominalTransactions.query.filter(
+        invoices = NominalTransactions.query.filter(
             NominalTransactions.company == company,
             NominalTransactions.is_paid == "False",
             NominalTransactions.transaction_type != "journal",
         ).all()
 
-        # convert data to dict
-        d = {}
-        row=0
-        for i in data:
-            d[row] = [i.id, i.transaction_type, i.client_code, i.transaction_number, i.description, i.total_value]
-            row += 1
-        return render_template("bankRec.html", company=company, design=theme, data=d)
+        return render_template("bankRec.html", company=company, design=theme, data=d, invoices=invoices)
 
-    return render_template("bankRec.html", company=company, design=theme, data=d)
+    return render_template("bankRec.html", company=company, design=theme, data=d, invoices=invoices)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/agedDebt", methods=["POST", "GET"])

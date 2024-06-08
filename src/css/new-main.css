@@ -904,4 +904,19 @@ table#aged-debt-table tbody tr:nth-child(even) {
   height: 2rem;
 }
 
+.checkbox-circle {
+  padding: 0;
+  margin: 0;
+}
+.checkbox-circle input[type=checkbox] {
+  width: 3rem;
+  border: 60px;
+  height: 1.4rem;
+  background: transparent;
+  border: var(--fontColor);
+}
+.checkbox-circle input[type=checkbox]:hover {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=new-main.css.map */
