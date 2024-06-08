@@ -1355,7 +1355,7 @@ def viewSalesInvoices(company, email, username, session_key, theme):
         "client_code": "",
         "transaction_number": "",
         "accounting_period": "",
-        "accounting_year": ""
+        "accounting_year": invoices[-1].accounting_year
     }
     
     # Collecting list of customers to use as <select> options in html
@@ -1367,18 +1367,20 @@ def viewSalesInvoices(company, email, username, session_key, theme):
     if request.method == "POST":
         filters['client_code'] = request.form["customer_code"]
         filters['transaction_number'] = request.form["invoice_number"]
-        filters['selected_period'] = request.form["selected_period"]
-        filters['selected_year'] = request.form["selected_year"]
+        filters['accounting_period'] = request.form["selected_period"]
+        filters['accounting_year'] = request.form["selected_year"]
 
         invoices = filterTransactions(invoices, filters)
 
+        if filters['accounting_year'] == "":
+            filters['accounting_year'] = invoices[-1].accounting_year
         return render_template(
-            "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme
+            "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme, accounting_year=filters['accounting_year']
         )
 
 
     return render_template(
-        "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme
+        "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme, accounting_year=filters['accounting_year']
     )
 
 

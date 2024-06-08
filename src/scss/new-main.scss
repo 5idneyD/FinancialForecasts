@@ -247,11 +247,11 @@ div#nav div.nav-option:hover {
 .ct-series-a .ct-slice-donut {
 	stroke: var(--third);
 	color: var(--fontColor);
+	fill: var(--second);
+	font-size: small;
 }
 
-.ct-series-a .ct-area {
-	fill: var(--fontColor);
-}
+
 
 #to-do-list {
 	display: flex;

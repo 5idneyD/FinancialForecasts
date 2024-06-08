@@ -45,7 +45,7 @@
 		</button>
 	</div>
 </form>
-<div class="body-node" id="second"></div>
+<div class="body-node" id="second" style="width: 40vw; height: 50vh;">Total Sales</div>
 
 <div class="body-node" id="third">
 	<table class="report" id="report">
@@ -91,41 +91,53 @@
 	}
 </script>
 
-{# <script defer type="text/javascript">
+<script defer type="text/javascript">
 // This is to create the line chart (using chartist.js) in the second body-node
 // The graph will show invoice values of the filtered invoices
 
-	// let trans = {{invoices|tojson|safe}}
-	let bodyStyles = window.getComputedStyle(document.body)
-	let light = bodyStyles.getPropertyValue('--light');
-	let dark = bodyStyles.getPropertyValue('--dark');
+	let year = {{accounting_year}};
 
-
-	let x = [];
-	let y = [];
-
-	for (let i = 1; i <= 12; i++){
-		x.push(i);
+	let dict = {
+		1: 0,
+		2: 0,
+		3: 0,
+		4: 0,
+		5: 0,
+		6: 0,
+		7: 0,
+		8: 0,
+		9: 0,
+		10: 0,
+		11: 0,
+		12: 0
 	}
-
-	trans.forEach(e=> {
-		console.log(e);
+	{% for trans in invoices %}
+		console.log({{trans.accounting_year}}, year, {{trans.accounting_year}} == year)
+		if ({{trans.accounting_year}} == year){
+			dict[{{trans.accounting_period}}] += {{trans.net_value}}
 		}
-	)
+	{% endfor %}
+
+
+	let bodyStyles = window.getComputedStyle(document.body)
+
+
+	let x = Object.keys(dict);
+	let y = Object.values(dict);
+
 
 
 	new Chartist.Line("#second", {
 		labels: x,
-		series: [
-		y
-
-		]
+		series: [y
+]
 	},{
 		low: 0,
 		showArea: true,
 		showPoint: false,
 		fullWidth: false
 	}
+	
 	)
-</script> #}
+</script>
 {% endblock %}

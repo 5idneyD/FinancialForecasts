@@ -238,10 +238,8 @@ div#nav div.nav-option:hover {
 .ct-series-a .ct-slice-donut {
   stroke: var(--third);
   color: var(--fontColor);
-}
-
-.ct-series-a .ct-area {
-  fill: var(--fontColor);
+  fill: var(--second);
+  font-size: small;
 }
 
 #to-do-list {
