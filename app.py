@@ -1829,21 +1829,12 @@ def bankRec(company, email, username, session_key, theme):
         NominalTransactions.transaction_type != "journal",
     ).all()
 
-    data = invoices
-    # convert data to dict
-    d = {}
-    row=0
-    for i in data:
-        d[row] = [i.id, i.transaction_type, i.client_code, i.transaction_number, i.description, i.total_value]
-        row += 1
     company_data = Companies.query.filter_by(company=company).first()
     accounting_year = company_data.accounting_year
     accounting_period = company_data.accounting_period
 
     if request.method == "POST":
-
-        # number_of_rows = int(request.form["rows"])
-
+        
         bank_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60000).first()
         cash_account = ChartOfAccounts.query.filter(
@@ -1910,9 +1901,9 @@ def bankRec(company, email, username, session_key, theme):
             NominalTransactions.transaction_type != "journal",
         ).all()
 
-        return render_template("bankRec.html", company=company, design=theme, data=d, invoices=invoices)
+        return render_template("bankRec.html", company=company, design=theme, invoices=invoices)
 
-    return render_template("bankRec.html", company=company, design=theme, data=d, invoices=invoices)
+    return render_template("bankRec.html", company=company, design=theme, invoices=invoices)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/agedDebt", methods=["POST", "GET"])

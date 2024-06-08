@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "config": {
-    "jsx": "src/jsx/journal.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx src/jsx/bankRec.jsx",
+    "jsx": "src/jsx/journal.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx",
     "css": "src/css/new-main.css src/css/index.css src/css/mobile_index.css src/css/mobile_nav.css",
     "scss_in": "src/scss/",
     "scss_out": "src/css/"
