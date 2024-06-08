@@ -1698,11 +1698,11 @@ def nominalTransactions(company, email, username, session_key, theme):
     transactions = NominalTransactions.query.filter(NominalTransactions.company==company).all()
     
     filters = {
-        "transaction_type": "",
+        "transaction_type": "All",
         "transaction_number": "",
         "client_code": "",
         "nominal_code": "",
-        "accouting_year": "",
+        "accounting_year": "",
         "accounting_period": ""
     }
 
@@ -1711,8 +1711,8 @@ def nominalTransactions(company, email, username, session_key, theme):
         filters["transaction_type"] = request.form["type"]
         filters["client_code"] = request.form["client_code"]
         filters["nominal_code"] = request.form["nominal_code"]
-        filters["accouting_year"] = request.form["year"]
-        filters["accouting_period"] = request.form["period"]
+        filters["accounting_year"] = request.form["year"]
+        filters["accounting_period"] = request.form["period"]
         
         transactions = filterTransactions(transactions, filters)
 
@@ -1847,12 +1847,14 @@ def bankRec(company, email, username, session_key, theme):
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60000).first()
         cash_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
-
+        print(request.form)
         for i in range(1, number_of_rows + 1):
             print(i)
             try:
                 print(request.form)
+                print("***")
                 transaction_type = request.form[f"row_{str(i)}_type"]
+                print("----")
                 client_code = request.form[f"row_{str(i)}_client"]
                 transaction_number = request.form[f"row_{str(i)}_invoiceNo"]
                 total_value = request.form[f"row_{str(i)}_value"]
