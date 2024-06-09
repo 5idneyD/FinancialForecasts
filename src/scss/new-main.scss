@@ -494,7 +494,7 @@ div.invoice-body {
 			height: 1.4rem;
 			background-color: var(--primary);
 			color: var(--fontColor);
-			border: 2px solid var(--second);
+			border: 1px solid var(--fontColor);
 		}
 	}
 }
@@ -642,7 +642,7 @@ button[name="signinButton"] {
 .adminBody div {
 	* {
 		border-radius: 30px;
-		border: 1px solid var(--second);
+		border: 1px solid var(--fontColor);
 		background-color: var(--primary);
 		color: var(--fontColor);
 		height: 2rem;
@@ -824,7 +824,7 @@ input.clientTableCellInput {
 	color: var(--fontColor);
 	width: 90%;
 	height: 1.4rem;
-	border: 1px solid var(--second);
+	border: 1px solid var(--fontColor);
 	border-radius: 30px;;
 	text-align: center;
 }

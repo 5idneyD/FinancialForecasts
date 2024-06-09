@@ -1350,12 +1350,14 @@ def viewSalesInvoices(company, email, username, session_key, theme):
     
     invoices = NominalTransactions.query.filter_by(
         company=company, transaction_type="sales_invoice").all()
+    companyData = Companies.query.filter(Companies.company==company).first()
+    currentAccountingYear = companyData.accounting_year
     
     filters = {
         "client_code": "",
         "transaction_number": "",
         "accounting_period": "",
-        "accounting_year": invoices[-1].accounting_year
+        "accounting_year": currentAccountingYear
     }
     
     # Collecting list of customers to use as <select> options in html
@@ -1373,7 +1375,12 @@ def viewSalesInvoices(company, email, username, session_key, theme):
         invoices = filterTransactions(invoices, filters)
 
         if filters['accounting_year'] == "":
-            filters['accounting_year'] = invoices[-1].accounting_year
+            # In case there are no invoices, use the current year
+            try:
+                filters['accounting_year'] = invoices[-1].accounting_year
+            except IndexError:
+                filters['accounting_year'] = currentAccountingYear
+            
         return render_template(
             "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme, accounting_year=filters['accounting_year']
         )
@@ -1389,12 +1396,14 @@ def viewSalesInvoices(company, email, username, session_key, theme):
 def viewPurchaseInvoices(company, email, username, session_key, theme):
     invoices = NominalTransactions.query.filter(
         NominalTransactions.company==company, NominalTransactions.transaction_type=="purchase_invoice").all()
+    companyData = Companies.query.filter(Companies.company==company).first()
+    currentAccountingYear = companyData.accounting_year
 
     filters = {
         "client_code": "",
         "transaction_number": "",
         "accounting_period": "",
-        "accounting_year": invoices[-1].accounting_year
+        "accounting_year": currentAccountingYear
     }
 
     # Producing list of suppliers to use as <select> options
@@ -1413,7 +1422,11 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
 
 
         if filters['accounting_year'] == "":
-            filters['accounting_year'] = invoices[-1].accounting_year
+            # In case there are no invoices, use the current year
+            try:
+                filters['accounting_year'] = invoices[-1].accounting_year
+            except IndexError:
+                filters['accounting_year'] = currentAccountingYear
             
         return render_template(
             "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme, accounting_year=filters['accounting_year']

@@ -17,16 +17,20 @@ var textInput = document.querySelector("input[name='text']");
 
 themeSelector.addEventListener("change", function () {
     if (themeSelector.value == "light") {
-        root.style.setProperty("--primary", "#dedeea");
-        root.style.setProperty("--second", "#e8e8f3");
-        root.style.setProperty("--third", "#bf66e5");
+        root.style.setProperty("--primary", "#F2CB9E");
+        root.style.setProperty("--second", "#FEE7D2");
+        root.style.setProperty("--third", "#294757");
         root.style.setProperty("--fontColor", "#000000");
-        root.style.setProperty("--shadow", "20px 20px 60px #bebebe, -20px -20px 60px #ffffff");
-        primaryInput.value = "#dedeea";
-        secondInput.value = "#e8e8f3";
-        thirdInput.value = "#bf66e5";
+        root.style.setProperty("--shadow", "none");
+        primaryInput.value = "#F2CB9E";
+        secondInput.value = "#FEE7D2";
+        thirdInput.value = "#294757";
         textInput.value = "#000000";
-    } else if (themeSelector.value == "dark") {
+        primaryScale.value = "#F2CB9E";
+        secondScale.value = "#FEE7D2";
+        thirdScale.value = "#294757";
+        textScale.value = "#000000"
+       } else if (themeSelector.value == "dark") {
         root.style.setProperty("--primary", "#232323");
         root.style.setProperty("--second", "#363636");
         root.style.setProperty("--third", "#66c0f4");
@@ -36,6 +40,10 @@ themeSelector.addEventListener("change", function () {
         secondInput.value = "#363636";
         thirdInput.value = "#66c0f4";
         textInput.value = "#ffffff";
+        primaryScale.value = "#232323";
+        secondScale.value = "#363636";
+        thirdScale.value = "#66c0f4";
+        textScale.value = "#ffffff";
     } 
 });
 
