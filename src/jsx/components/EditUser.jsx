@@ -4,6 +4,7 @@ import { ReactDOM } from "react";
 export default function EditUser(props) {
 	return (
 		<form method="post">
+			<input type="text" style={{display: "none"}} value="editUserForm" name="formName"/>
 			<div className="adminBody">
 				<div>
 					<input type="email" name="email" placeholder="email" required="true" />

@@ -477,7 +477,7 @@ def verifyAccount():
             )
             db.session.add(new_company)
             new_admin = Users(
-                company=company_name, email=company_email, username=company_email, password=password, admin="3"
+                company=company_name, email=company_email, username=company_email, password=password, admin="3", designTheme="#232323,#363636,#66c0f4,#ffffff"
             )
             db.session.add(new_admin)
             # remove verification code from db so company account cannot be re-created
@@ -490,10 +490,16 @@ def verifyAccount():
                 account_name="Bank Account",
                 balance=0.00
             )
-            default_cash_account = ChartOfAccounts(
+            default_receivable_account = ChartOfAccounts(
                 company=company_name,
                 nominal=60010,
-                account_name="Outstanding Cash",
+                account_name="Trade Receivable",
+                balance=0.00
+            )
+            default_payable_account = ChartOfAccounts(
+                company=company_name,
+                nominal=70010,
+                account_name="Accounts Payable",
                 balance=0.00
             )
             default_vat_account = ChartOfAccounts(
@@ -505,7 +511,8 @@ def verifyAccount():
 
             db.session.add(default_bank_account)
             db.session.add(default_vat_account)
-            db.session.add(default_cash_account)
+            db.session.add(default_receivable_account)
+            db.session.add(default_payable_account)
 
             db.session.commit()
             session[company_email] = os.urandom(12).hex()
@@ -592,7 +599,7 @@ def admin(company, email, username, session_key, theme):
     message = ""
 
     if request.method == "POST" and email != "example@basicaccounting.co.uk":
-        if "addUserForm" in request.form:
+        if request.form['formName'] == "addUserForm":
             new_name = request.form["name"]
             new_email = request.form["email"]
 
@@ -646,7 +653,7 @@ def admin(company, email, username, session_key, theme):
             db.session.add(new_user)
             db.session.commit()
 
-        elif "addNominalForm" in request.form:
+        elif request.form["formName"] == "addNominalForm":
             nominal = request.form["nominal"]
             account_name = request.form["accountName"]
 
@@ -666,14 +673,14 @@ def admin(company, email, username, session_key, theme):
                 db.session.commit()
             else:
                 message = "This Nominal Account already exists, please use a different Nominal Code"
-        elif "removeUserForm" in request.form:
+        elif request.form["formName"] == "removeUserForm":
             user_email = request.form["email"]
             user = Users.query.filter_by(
                 email=user_email, company=company).first()
             db.session.delete(user)
             db.session.commit()
 
-        elif "editUserForm" in request.form:
+        elif request.form["formName"] == "editUserForm":
             editUserEmail = request.form['email']
             newPermission = request.form['adminLevel']
             editUser = Users.query.filter(Users.company==company, Users.email==editUserEmail).first()
@@ -686,7 +693,7 @@ def admin(company, email, username, session_key, theme):
             except AttributeError:
                 message = "This user does not exist"
 
-        elif "closePeriodForm" in request.form:
+        elif request.form["formName"] == "closePeriodForm":
 
             current_period = request.form["period"]
             current_year = request.form["year"]
@@ -715,7 +722,7 @@ def admin(company, email, username, session_key, theme):
                 design=theme,
             )
 
-        elif "invoiceDetailsForm" in request.form:
+        elif request.form["formName"] == "invoiceDetailsForm":
             vat_number = request.form["vat_number"]
             email_to_include = request.form["email"]
             company_data.vat_number = vat_number
@@ -741,6 +748,7 @@ def admin(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/dashboard", methods=["POST", "GET"])
 @login_required
 def dashboard(company, email, username, session_key, theme):
+
     year = Companies.query.filter_by(company=company).first().accounting_year
     accounts = (
         db.session.query(ChartOfAccounts)
@@ -845,8 +853,11 @@ def customerBalances(company, client="%%"):
     transactions = NominalTransactions.query.filter(
         NominalTransactions.company == company,
         NominalTransactions.client_code.ilike(client),
-        NominalTransactions.transaction_type != "Journal",
+        NominalTransactions.transaction_type != "journal",
         NominalTransactions.transaction_type != "payment",
+        NominalTransactions.transaction_type != "vat",
+        NominalTransactions.transaction_type != "vat_in",
+        NominalTransactions.transaction_type != "vat_out",
         NominalTransactions.client_code.in_(set(balances.keys())),
     ).all()
 
@@ -965,7 +976,7 @@ def supplierBalances(company, client="%%"):
     transactions = NominalTransactions.query.filter(
         NominalTransactions.company == company,
         NominalTransactions.client_code.ilike(client),
-        NominalTransactions.transaction_type != "Journal",
+        NominalTransactions.transaction_type != "journal",
         NominalTransactions.transaction_type != "payment",
         NominalTransactions.client_code.in_(set(balances.keys())),
     ).all()
@@ -1150,22 +1161,67 @@ def addSalesInvoice(company, email, username, session_key, theme):
             )
 
             db.session.add(new_nominal_transaction)
+        
 
             # Update the nominal accounts balance in db (for trial balance data)
+            # (Minus as it is income)
             account = ChartOfAccounts.query.filter_by(
                 company=company, nominal=nominal_code).first()
             account.balance = account.balance - float(net_value)
 
-            # Now add the vat balance to the VAT nominal code
+            # Now minus the vat balance (as income) to the VAT nominal code
             vat_account = ChartOfAccounts.query.filter_by(
                 company=company, nominal=60005).first()
             vat_account.balance = float(vat_account.balance) - float(vat)
 
-            # Now add the total balance to the outstanding cash account
+            # Now add the total balance to the trade receivable account
             cash_account = ChartOfAccounts.query.filter(
                 ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
             cash_account.balance = float(
                 cash_account.balance) + float(total_value)
+            
+            # Also add a VAT entry so we can track all transactions' VAT
+            # This is to keep a record for the VAT balance sheet account
+            # which can be measured "As At" any date
+            vat_nominal_transaction = NominalTransactions(
+                company=company,
+                transaction_type="vat_in",
+                client_code=customer_code,
+                transaction_number=invoice_number,
+                date=invoice_date,
+                nominal_code=60005,
+                description=description,
+                net_value=0,
+                vat_value=vat,
+                total_value=vat,
+                posted_on=dt.datetime.today().strftime("%Y-%m-%d"),
+                posted_by=username,
+                reference=reference,
+                accounting_year=accounting_year,
+                accounting_period=accounting_period,
+            )
+            
+            # Also adding a trade receivables entry for the same reasons as VAT
+            receivables_nominal_transaction = NominalTransactions(
+                company=company,
+                transaction_type="vat",
+                client_code=customer_code,
+                transaction_number=invoice_number,
+                date=invoice_date,
+                nominal_code=60010,
+                description=description,
+                net_value=net_value,
+                vat_value=vat,
+                total_value=total_value,
+                posted_on=dt.datetime.today().strftime("%Y-%m-%d"),
+                posted_by=username,
+                reference=reference,
+                accounting_year=accounting_year,
+                accounting_period=accounting_period,
+            )
+
+            db.session.add(vat_nominal_transaction)
+            db.session.add(receivables_nominal_transaction)
 
             # Add invoice row to pdf file
             invoiceTemplate.add_item(Item(row, description, 1, total_value))
@@ -1315,6 +1371,49 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
             )
 
             db.session.add(new_nominal_transaction)
+      
+            # Also add VAT trandaction
+            # See addSalesInvoice for reasons      
+            vat_nominal_transaction = NominalTransactions(
+                company=company,
+                transaction_type="vat_out",
+                client_code=supplier_code,
+                transaction_number=invoice_number,
+                date=invoice_date,
+                nominal_code=60005,
+                description=description,
+                net_value=0,
+                vat_value=vat,
+                total_value=vat,
+                posted_on=dt.datetime.today().strftime("%Y-%m-%d"),
+                posted_by=username,
+                reference="",
+                accounting_year=accounting_year,
+                accounting_period=accounting_period,
+            )
+            
+            # Also adding a trade payables entry for the same reasons as VAT
+            payables_nominal_transaction = NominalTransactions(
+                company=company,
+                transaction_type="vat",
+                client_code=supplier_code,
+                transaction_number=invoice_number,
+                date=invoice_date,
+                nominal_code=70010,
+                description=description,
+                net_value=net_value,
+                vat_value=vat,
+                total_value=total_value,
+                posted_on=dt.datetime.today().strftime("%Y-%m-%d"),
+                posted_by=username,
+                reference="",
+                accounting_year=accounting_year,
+                accounting_period=accounting_period,
+            )
+
+            db.session.add(payables_nominal_transaction)
+            db.session.add(vat_nominal_transaction)
+            
             account = ChartOfAccounts.query.filter_by(
                 company=company, nominal=int(nominal_code)).first()
             account.balance = float(account.balance) + float(net_value)
@@ -1324,9 +1423,9 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
                 company=company, nominal=60005).first()
             vat_account.balance = vat_account.balance + float(vat)
 
-            # Now add the total balance to the outstanding cash account
+            # Now add the total balance to the accounts payable account
             cash_account = ChartOfAccounts.query.filter(
-                ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
+                ChartOfAccounts.company == company, ChartOfAccounts.nominal == 70010).first()
             cash_account.balance = float(
                 cash_account.balance) - float(total_value)
 
@@ -1593,22 +1692,19 @@ def trialBalance(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/balanceSheet", methods=["POST", "GET"])
 @login_required
 def balanceSheet(company, email, username, session_key, theme):
-    company_data = db.session.query(Companies).filter(
-        Companies.company == company).first()
-    current_year = company_data.accounting_year
-    current_period = company_data.accounting_period
+
+    current_period = dt.datetime.today().strftime("%Y-%m-%d")
 
 
     if request.method == "POST":
-        current_period = request.form['selected_period']
-        current_year = request.form['selected_year']
+        current_period = request.form['date']
 
 
     accounts = (
         db.session.query(ChartOfAccounts)
         .filter(ChartOfAccounts.company == company)
         .filter(ChartOfAccounts.nominal >= 60000)
-    ).order_by(ChartOfAccounts.nominal).all()
+    ).all()
 
     data = {}
 
@@ -1619,19 +1715,27 @@ def balanceSheet(company, email, username, session_key, theme):
             db.session.query(NominalTransactions)
             .filter(NominalTransactions.company == company)
             .filter(NominalTransactions.nominal_code == account.nominal)
-            .filter(NominalTransactions.accounting_year <= current_year)
-            .filter(NominalTransactions.accounting_period <= current_period)
+            .filter(NominalTransactions.posted_on <= current_period)
+            .filter(NominalTransactions.to_post == 0)
         )
 
-        for transaction in transactions:
-            if transaction.accounting_period == current_period:
-                monthly_balance += transaction.net_value
-            else:
-                pass
-            ytd_balance += transaction.net_value
+        if account.nominal != 60005:
+            for transaction in transactions:
+                if transaction.transaction_type == "sales_invoice":
+                    ytd_balance -= transaction.total_value
+                else:
+                    ytd_balance += transaction.total_value
+        else:
+            for transaction in transactions:
+                if transaction.transaction_type == "vat_in":
+                    ytd_balance -= transaction.total_value
+                else:
+                    ytd_balance += transaction.total_value
 
         data[account.nominal] = [monthly_balance, ytd_balance,
                                  account.nominal, account.account_name]
+
+
     return render_template("balanceSheet.html", company=company, data=data, design=theme)
 
 
@@ -1662,6 +1766,7 @@ def profitAndLoss(company, email, username, session_key, theme):
         transactions = NominalTransactions.query.filter(
             NominalTransactions.company == company,
             NominalTransactions.nominal_code == account.nominal,
+            NominalTransactions.transaction_type != "vat*",
             NominalTransactions.accounting_year == current_year,
             NominalTransactions.to_post not in [1, "1"]
         ).all()
@@ -1714,7 +1819,11 @@ def profitAndLoss(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/nominalTransactions", methods=["POST", "GET"])
 @login_required
 def nominalTransactions(company, email, username, session_key, theme):
-    transactions = NominalTransactions.query.filter(NominalTransactions.company==company).all()
+    transactions = NominalTransactions.query.filter(NominalTransactions.company==company,
+                                                    NominalTransactions.transaction_type != "vat",
+                                                    NominalTransactions.transaction_type != "vat_in",
+                                                    NominalTransactions.transaction_type != "vat_out",
+                                                    ).all()
     
     filters = {
         "transaction_type": "All",
@@ -1772,7 +1881,7 @@ def batchedJournals(company, email, username, session_key, theme):
 @login_required
 def changeTheme(company, email, username, session_key, theme):
     user = Users.query.filter_by(company=company, email=email).first()
-    print(user.designTheme)
+
     theme = user.designTheme
 
     if request.method == "POST":
@@ -1785,7 +1894,7 @@ def changeTheme(company, email, username, session_key, theme):
         db.session.commit()
 
         theme = user.designTheme
-        print(theme)
+
         return render_template("changeTheme.html", company=company, design=combined)
 
     return render_template("changeTheme.html", company=company, design=theme)
@@ -1846,6 +1955,9 @@ def bankRec(company, email, username, session_key, theme):
         NominalTransactions.company == company,
         NominalTransactions.is_paid == "False",
         NominalTransactions.transaction_type != "journal",
+        NominalTransactions.transaction_type != "vat",
+        NominalTransactions.transaction_type != "vat_in",
+        NominalTransactions.transaction_type != "vat_out"
     ).all()
 
     company_data = Companies.query.filter_by(company=company).first()
@@ -1856,8 +1968,10 @@ def bankRec(company, email, username, session_key, theme):
         
         bank_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60000).first()
-        cash_account = ChartOfAccounts.query.filter(
+        receivables_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
+        payables_account = ChartOfAccounts.query.filter(
+            ChartOfAccounts.company == company, ChartOfAccounts.nominal == 70010).first()
 
         for i in request.form:
             transactionId = request.form[i]
@@ -1871,7 +1985,10 @@ def bankRec(company, email, username, session_key, theme):
                 transaction_type = transaction.transaction_type
                 client_code = transaction.client_code
                 transaction_number = transaction.transaction_number
-                total_value = transaction.total_value
+                if "sales" in transaction_type:
+                    total_value = transaction.total_value
+                else:
+                    total_value = transaction.total_value * -1
 
                 transaction.is_paid = "True"
 
@@ -1894,6 +2011,33 @@ def bankRec(company, email, username, session_key, theme):
                 )
 
                 db.session.add(new_nominal_transaction)
+                
+                # Post the same entry to trade_receivables or _payables
+                extra_nominal_transaction = NominalTransactions(
+                    company=company,
+                    transaction_type="payment",
+                    client_code=client_code,
+                    transaction_number=transaction_number,
+                    date=dt.datetime.today().strftime("%Y-%m-%d"),
+                    net_value=total_value,
+                    vat_value=0,
+                    total_value=total_value,
+                    posted_on=dt.datetime.today().strftime("%Y-%m-%d"),
+                    posted_by=username,
+                    reference="",
+                    accounting_year=accounting_year,
+                    accounting_period=accounting_period,
+                    is_paid="True",
+                )
+                
+                if "sales" in transaction_type:
+                    extra_nominal_transaction.nominal_code = receivables_account.nominal
+                    extra_nominal_transaction.net_value = extra_nominal_transaction.net_value * -1
+                    extra_nominal_transaction.total_value = extra_nominal_transaction.total_value * -1
+                else:
+                    extra_nominal_transaction.nominal_code = payables_account.nominal
+                
+                db.session.add(extra_nominal_transaction)
 
                 # Reduce balance of outstanding cash (The Cash GL)
                 # and increase balance of bank account
@@ -1901,12 +2045,12 @@ def bankRec(company, email, username, session_key, theme):
                 if "sales" in transaction_type:
                     bank_account.balance = bank_account.balance + \
                         float(total_value)
-                    cash_account.balance = cash_account.balance - \
+                    receivables_account.balance = receivables_account.balance - \
                         float(total_value)
                 else:
                     bank_account.balance = bank_account.balance - \
                         float(total_value)
-                    cash_account.balance = cash_account.balance + \
+                    payables_account.balance = payables_account.balance + \
                         float(total_value)
                 db.session.commit()
             # Row not included in bank rec
@@ -1918,6 +2062,7 @@ def bankRec(company, email, username, session_key, theme):
             NominalTransactions.company == company,
             NominalTransactions.is_paid == "False",
             NominalTransactions.transaction_type != "journal",
+            NominalTransactions.transaction_type != "vat"
         ).all()
 
         return render_template("bankRec.html", company=company, design=theme, invoices=invoices)

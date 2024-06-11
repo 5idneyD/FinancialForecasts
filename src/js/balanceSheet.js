@@ -1,66 +1,46 @@
-// adding binder so that script only executes after the entie page has loaded
-// This is to give the react code time to craete the table before adding more rows
-// Removed binder as no longer needed
-// was window.onload(){}
-
-	var els = document.querySelectorAll(".table_row");
-	var assetsTotal = 0;
-	var liabilitiesTotal = 0;
-
-	els.forEach(function (el) {
-		if (el.classList[0][0] == "6") {
-			assetsTotal += Number(el.children[2].innerText);
-			assetsTotal -= Number(el.children[3].innerText);
-		} else if (el.classList[0][0] == "7") {
-			liabilitiesTotal += Number(el.children[2].innerText);
-			liabilitiesTotal -= Number(el.children[3].innerText);
-		}
-	});
-
-	els.forEach(function (el, index) {
-		console.log(els[index].classList[0][0]);
-		if (els[index].classList[0][0] == "6" && els[index + 1].classList[0][0] == "7") {
-			if (assetsTotal >= 0) {
-				el.insertAdjacentHTML(
-					"afterend",
-					"<tr class='summaryRow'><td></td><td>Total Assets</td><td>" +
-					assetsTotal +
-					"</td><td></td></tr>",
-				);
-			} else {
-				el.insertAdjacentHTML(
-					"afterend",
-					"<tr class='summaryRow'><td></td><td>Total Assets</td><td></td><td>" +
-					assetsTotal * -1 +
-					"</td></tr>",
-				);
-			}
-		} else if (els[index].classList[0][0] == "7" && !els[index + 1]) {
-			if (liabilitiesTotal >= 0) {
-				el.insertAdjacentHTML(
-					"afterend",
-					"<tr class='summaryRow'><td></td><td>Total Liabilities</td><td>" +
-					liabilitiesTotal +
-					"</td><td></td></tr>",
-				);
-			} else {
-				el.insertAdjacentHTML(
-					"afterend",
-					"<tr class='summaryRow'><td></td><td>Total Liabilities</td><td></td><td>" +
-					liabilitiesTotal * -1 +
-					"</td></tr>",
-				);
-			}
-		}
-	});
+let els = document.querySelectorAll(".table_row");
+let totalAssetsDebit = document.querySelector("#totalAssetsDebit");
+let totalAssetsCredit = document.querySelector("#totalAssetsCredit");
+let totalLiabilitiesDebit = document.querySelector("#totalLiabilitiesDebit");
+let totalLiabilitiesCredit = document.querySelector("#totalLiabilitiesCredit");
+let netAssetsDebit = document.querySelector("#netAssetsDebit");
+let netAssetsCredit = document.querySelector("#netAssetsCredit");
+let assetsTotal = 0;
+let liabilitiesTotal = 0;
 
 
-	var netAssetsRow = document.querySelector("#netAssets");
-	var netAssets = Number(assetsTotal) + Number(liabilitiesTotal);
-
-	if (netAssets < 0) {
-		netAssetsRow.children[3].innerText = -netAssets;
+// Loop through all nominal accounts and append their value to the assets or
+// liabilities balance, depending on the nominal code
+els.forEach(e=>{
+	let nominal = e.children[0].innerHTML;
+	let debitBalance = parseFloat(e.children[2].innerHTML);
+	let creditBalance = parseFloat(e.children[3].innerHTML);
+	if (nominal[0] == "6"){
+		assetsTotal += debitBalance;
+		assetsTotal -= creditBalance;
 	} else {
-		netAssetsRow.children[2].innerText = netAssets;
+		liabilitiesTotal += debitBalance;
+		liabilitiesTotal -= creditBalance;
 	}
+});
+
+if (assetsTotal >=0) {
+	totalAssetsDebit.innerHTML = assetsTotal;
+} else {
+	totalAssetsCredit.innerHTML = assetsTotal * -1;
+}
+
+if (liabilitiesTotal >=0) {
+	totalLiabilitiesDebit.innerHTML = liabilitiesTotal;
+} else {
+	totalLiabilitiesCredit.innerHTML = liabilitiesTotal * -1;
+};
+
+
+let netAssets = assetsTotal + liabilitiesTotal;
+if (netAssets >=0) {
+	netAssetsDebit.innerHTML = netAssets;
+} else {
+	netAssetsCredit.innerHTML = netAssets * -1;
+};
 

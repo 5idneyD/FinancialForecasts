@@ -5,6 +5,7 @@ export default function RemoveUser() {
 
 	return (
 		<form method="post">
+			<input type="text" style={{display: "none"}} value="removeUserForm" name="formName"/>
 			<div className="adminBody">
 				<div>
 					<input type="email" name="email" placeholder="user's email" required="true" />

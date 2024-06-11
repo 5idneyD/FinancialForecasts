@@ -4,6 +4,7 @@ import { ReactDOM } from "react";
 export default function InvoiceDetails() {
 	return (
 		<form method="post">
+			<input type="text" style={{display: "none"}} value="invoiceDetailsForm" name="formName"/>
 			<div className="adminBody">
 				<div>
 					<input type="name" name="vat_number" placeholder="VAT Number" required="true" />

@@ -1,36 +1,82 @@
-{% extends "blueprint.html" %}
-{% block meta %} 
+{% set title = "Balance Sheet" %} {% extends "blueprint.html" %} {% block meta %}
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-{% endblock %}
-{% block body %}
-
+{% endblock %} {% block body %}
 
 <div id="first" class="body-node">
+	{#
 	<div id="balanceSheet" class="report"></div>
+	#}
+	<table class="report">
+		<tr>
+			<th>Nominal Code</th>
+			<th>Account Name</th>
+			<th>Debit</th>
+			<th>Credit</th>
+		</tr>
+
+		{# Loop through accounts filtering on asset accounts first #}
+		{% for account, values in data.items() %}
+			{% if values[2] < 70000 %}
+			<tr class="table_row">
+				<td>{{values[2]}}</td>
+				<td>{{values[3]}}</td>
+					{% if values[1] >= 0.00 %}
+						<td>{{values[1]}}</td>
+						<td>0</td>
+					{% else %}
+						<td>0</td>
+						<td>{{values[1]*-1}}</td>
+					{% endif %}
+			</tr>
+			{% endif%}
+		{% endfor %}
+
+		<tr>
+			<td></td>
+			<td>Total Assets</td>
+			<td id="totalAssetsDebit"></td>
+			<td id="totalAssetsCredit"></td>
+		</tr>
+
+		{# Now loop through accounts, only filtering on liability accounts #}
+		{% for account, values in data.items() %}
+			{% if values[2] >= 70000 %}
+			<tr class="table_row">
+				<td>{{values[2]}}</td>
+				<td>{{values[3]}}</td>
+					{% if values[1] >= 0.00 %}
+						<td>0</td>
+						<td>{{values[1]}}</td>
+					{% else %}
+						<td>{{values[1]*-1}}</td>
+						<td>0</td>
+					{% endif %}
+			</tr>
+			{% endif%}
+		{% endfor %}
+
+		<tr>
+			<td></td>
+			<td>Total Liabilities</td>
+			<td id="totalLiabilitiesDebit"></td>
+			<td id="totalLiabilitiesCredit"></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td>Net Assets</td>
+			<td id="netAssetsDebit"></td>
+			<td id="netAssetsCredit"></td>
+		</tr>
+	</table>
 </div>
 
 <div class="body-node" id="second">
 	<form method="POST">
 		<div class="invoice-head">
-			
-			<div>Period</div>
+			<div>As At</div>
 			<div>
-				<select name="selected_period" class="invoice">
-					<option value="12" selected hidden></option>
-					{% for i in range(1,13) %}
-					<option value="{{i}}">{{i}}</option>
-					{% endfor %}
-				</select>
-			</div>
-
-			<div>Year</div>
-			<div>
-				<select name="selected_year" class="invoice">
-					<option value="*" selected hidden></option>
-					{% for i in range(2018,2024) %}
-					<option value="{{i}}">{{i}}</option>
-					{% endfor %}
-				</select>
+				<input name="date" type="date">
 			</div>
 		</div>
 
@@ -44,7 +90,6 @@
 <script>
 	window.bsData = {{data|tojson}}
 </script>
-<script src="{{ url_for('static', filename='react/compiled/mobileBalanceSheetTable.js') }}"></script>
 <script src="{{ url_for('static', filename='js/balanceSheet.js') }}"></script>
 <script>
 	function ExportToExcel(type, fn, dl) {

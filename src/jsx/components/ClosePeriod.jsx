@@ -6,6 +6,8 @@ export default function ClosePeriod(props) {
 
 	return (
 		<form method="post">
+			<input type="text" style={{display: "none"}} value="closePeriodForm" name="formName"/>
+	
 			<div className="adminBody">
 					<div>
 						Current Year: {props.year}

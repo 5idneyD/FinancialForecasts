@@ -4,6 +4,7 @@ import { ReactDOM } from "react";
 export default function AddUser() {
 	return (
 		<form method="post">
+			<input type="text" style={{display: "none"}} value="addUserForm" name="formName"/>
 			<div className="adminBody">
 				<div>
 					<input type="text" name="name" placeholder="name" required="true" />

@@ -8,6 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 export default function ChartOfAccounts() {
 	return (
 		<form method="post" onsubmit="javascript: return confirm('Do you really want to submit the form?');">
+			<input type="text" style={{display: "none"}} value="addNominalForm" name="formName"/>
 			<div className="adminBody">
 				<div>
 					<input
