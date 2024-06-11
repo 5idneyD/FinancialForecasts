@@ -1684,10 +1684,62 @@ def changePassword(company, email, username, session_key, theme):
 @login_required
 def trialBalance(company, email, username, session_key, theme):
 
-    accounts = ChartOfAccounts.query.filter_by(
-        company=company).order_by(ChartOfAccounts.nominal).all()
-    return render_template("trialBalance.html", company=company, accounts=accounts, design=theme)
+    current_period = dt.datetime.today().strftime("%Y-%m-%d")
 
+
+    if request.method == "POST":
+        current_period = request.form['date']
+
+
+    accounts = (
+        db.session.query(ChartOfAccounts)
+        .filter(ChartOfAccounts.company == company)
+    ).all()
+
+    data = {}
+
+    for account in accounts:
+        monthly_balance = 0
+        ytd_balance = 0
+        transactions = (
+            db.session.query(NominalTransactions)
+            .filter(NominalTransactions.company == company)
+            .filter(NominalTransactions.nominal_code == account.nominal)
+            .filter(NominalTransactions.posted_on <= current_period)
+            .filter(NominalTransactions.to_post == 0)
+        )
+        global value
+        if account.nominal != 60005:
+            for transaction in transactions:
+                if "_invoice" in transaction.transaction_type:
+             
+                    value = transaction.net_value
+                else:
+                    value = transaction.total_value
+
+                if transaction.transaction_type == "sales_invoice":
+                    ytd_balance -= value
+                else:
+                    ytd_balance += value
+        else:
+            for transaction in transactions:
+                if "_invoice" in transaction.transaction_type:
+                    value = transaction.net_value
+                else:
+                    value = transaction.total_value
+
+                if transaction.transaction_type == "vat_in":
+                    ytd_balance -= value
+                else:
+                    ytd_balance += value
+
+        data[account.nominal] = [monthly_balance, ytd_balance,
+                                 account.nominal, account.account_name]
+
+        # Sort the dict in ascending order
+        data = dict(sorted(data.items()))
+
+    return render_template("trialBalance.html", company=company, data=data, design=theme)
 
 @app.route("/<company>/<email>/<username>/<session_key>/balanceSheet", methods=["POST", "GET"])
 @login_required

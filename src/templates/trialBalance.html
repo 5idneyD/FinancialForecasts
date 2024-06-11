@@ -1,44 +1,83 @@
-{% set title="Trial Balance" %} {% extends "blueprint.html" %} {% block meta %}
+{% set title = "Trial Balance" %} {% extends "blueprint.html" %} {% block meta %}
 <script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 {% endblock %} {% block body %}
+
 <div id="first" class="body-node">
-	<table id="table" class="report">
-		<tr class="trialBalance">
-			<th class="invoiceHeader">Nominal Code</th>
-			<th class="invoiceHeaderDescription">Account Name</th>
-			<th class="invoiceHeader">Debit</th>
-			<th class="invoiceHeader">Credit</th>
+	{#
+	<div id="balanceSheet" class="report"></div>
+	#}
+	<table class="report">
+		<tr>
+			<th>Nominal Code</th>
+			<th>Account Name</th>
+			<th>Debit</th>
+			<th>Credit</th>
 		</tr>
-		{% for account in accounts %}
-		<tr class="trialBalance">
-			<td>{{ account.nominal }}</td>
-			<td>{{ account.account_name }}</td>
-			{% if account.balance > 0.00 %}
-			<td>{{ account.balance }}</td>
-			<td></td>
-			{% else %}
-			<td></td>
-			<td>{{ -account.balance }}</td>
-			{% endif %}
-		</tr>
+
+		{# Loop through accounts filtering on asset accounts first #}
+		{% for account, values in data.items() %}
+			{% if values[2] < 70000 %}
+			<tr class="table_row">
+				<td>{{values[2]}}</td>
+				<td>{{values[3]}}</td>
+					{% if values[1] >= 0.00 %}
+						<td>{{values[1]}}</td>
+						<td>0</td>
+					{% else %}
+						<td>0</td>
+						<td>{{values[1]*-1}}</td>
+					{% endif %}
+			</tr>
+			{% endif%}
 		{% endfor %}
+
+
+		{# Now loop through accounts, only filtering on liability accounts #}
+		{% for account, values in data.items() %}
+			{% if values[2] >= 70000 %}
+			<tr class="table_row">
+				<td>{{values[2]}}</td>
+				<td>{{values[3]}}</td>
+					{% if values[1] >= 0.00 %}
+						<td>0</td>
+						<td>{{values[1]}}</td>
+					{% else %}
+						<td>{{values[1]*-1}}</td>
+						<td>0</td>
+					{% endif %}
+			</tr>
+			{% endif%}
+		{% endfor %}
+
 	</table>
 </div>
 
 <div class="body-node" id="second">
 	<form method="POST">
+		<div class="invoice-head">
+			<div>As At</div>
+			<div>
+				<input name="date" type="date">
+			</div>
+		</div>
+
+		<button type="submit" class="invoiceForm">Run Report</button><br />
 		<button type="button" class="invoiceForm" id="downloadexcel" onclick="ExportToExcel('xlsx')">
 			Download Report
 		</button>
 	</form>
 </div>
+
+<script>
+	window.bsData = {{data|tojson}}
+</script>
 <script>
 	function ExportToExcel(type, fn, dl) {
-		var elt = document.getElementById("table");
+		var elt = document.getElementById("balanceSheet");
 		var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
 		return dl
 			? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
-			: XLSX.writeFile(wb, fn || "TrialBalance." + (type || "xlsx"));
+			: XLSX.writeFile(wb, fn || "BalanceSheet." + (type || "xlsx"));
 	}
 </script>
 {% endblock %}
