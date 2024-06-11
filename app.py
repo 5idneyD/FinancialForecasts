@@ -598,7 +598,8 @@ def admin(company, email, username, session_key, theme):
 
     message = ""
 
-    if request.method == "POST" and email != "example@basicaccounting.co.uk":
+    # if request.method == "POST" and email == "example@basicaccounting.co.uk":
+    if request.method == "POST":
         if request.form['formName'] == "addUserForm":
             new_name = request.form["name"]
             new_email = request.form["email"]
@@ -2114,7 +2115,9 @@ def bankRec(company, email, username, session_key, theme):
             NominalTransactions.company == company,
             NominalTransactions.is_paid == "False",
             NominalTransactions.transaction_type != "journal",
-            NominalTransactions.transaction_type != "vat"
+            NominalTransactions.transaction_type != "vat",
+            NominalTransactions.transaction_type != "vat_in",
+            NominalTransactions.transaction_type != "vat_out"
         ).all()
 
         return render_template("bankRec.html", company=company, design=theme, invoices=invoices)
