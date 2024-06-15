@@ -62,7 +62,6 @@
   width: 50vw;
 }
 .nav-container .loggedIn#nav {
-  display: none;
   grid-template-columns: 100vw;
   grid-template-rows: repeat(3, 8vh);
   width: 100vw;

@@ -71,7 +71,6 @@
 	}
 
 	.nav-container &#nav {
-		display: none;
 		grid-template-columns: 100vw;
 		grid-template-rows: repeat(3, 8vh);
 		width: 100vw;
@@ -80,7 +79,6 @@
 		top: 15vh;
 		margin-top: 0;
 		height: 24vh;
-		// padding: 3vh 0 3vh 0;
 		border-top: 1px solid var(--fontColor);
 		border-bottom: 1px solid var(--fontColor);
 
