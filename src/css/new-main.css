@@ -758,6 +758,7 @@ select#clientCodeSelect {
 
 a {
   text-decoration: none;
+  border: none;
   outline: none;
 }
 
@@ -837,6 +838,10 @@ button {
   padding: 1vh 5vw 1vh 5vw;
   border-radius: 30px;
   cursor: pointer;
+}
+
+span.bright-button.first a button {
+  margin-left: -27vw;
 }
 
 .bright-button button {
