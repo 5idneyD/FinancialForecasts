@@ -855,11 +855,7 @@ def customerBalances(company, client="%%"):
     transactions = NominalTransactions.query.filter(
         NominalTransactions.company == company,
         NominalTransactions.client_code.ilike(client),
-        NominalTransactions.transaction_type != "journal",
-        NominalTransactions.transaction_type != "payment",
-        NominalTransactions.transaction_type != "vat",
-        NominalTransactions.transaction_type != "vat_in",
-        NominalTransactions.transaction_type != "vat_out",
+        ~NominalTransactions.transaction_type.in_(["payment", "journal", "vat", "vat_in", "vat_out"]),
         NominalTransactions.client_code.in_(set(balances.keys())),
     ).all()
 
@@ -1898,7 +1894,7 @@ def nominalTransactions(company, email, username, session_key, theme):
 
         return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
     
-    return render_template("nominalTransactions.html", company=company, transactions=tr, filters=filters, design=theme)
+    return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/batchedJournals", methods=["POST", "GET"])
@@ -2007,10 +2003,8 @@ def bankRec(company, email, username, session_key, theme):
     invoices = NominalTransactions.query.filter(
         NominalTransactions.company == company,
         NominalTransactions.is_paid == "False",
-        NominalTransactions.transaction_type != "journal",
-        NominalTransactions.transaction_type != "vat",
-        NominalTransactions.transaction_type != "vat_in",
-        NominalTransactions.transaction_type != "vat_out"
+        ~NominalTransactions.transaction_type.in_(["journal", "vat", "vat_in", "vat_out"])
+
     ).all()
 
     company_data = Companies.query.filter_by(company=company).first()
@@ -2116,10 +2110,7 @@ def bankRec(company, email, username, session_key, theme):
         invoices = NominalTransactions.query.filter(
             NominalTransactions.company == company,
             NominalTransactions.is_paid == "False",
-            NominalTransactions.transaction_type != "journal",
-            NominalTransactions.transaction_type != "vat",
-            NominalTransactions.transaction_type != "vat_in",
-            NominalTransactions.transaction_type != "vat_out"
+            ~NominalTransactions.transaction_type.in_(["journal", "vat", "vat_in", "vat_out"])
         ).all()
 
         return render_template("bankRec.html", company=company, design=theme, invoices=invoices)
