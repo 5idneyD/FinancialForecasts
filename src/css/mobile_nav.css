@@ -16,7 +16,7 @@
   left: 0px;
   top: 0px;
   margin-top: 17.5vh;
-  border-top: 1px solid var(--fontColor);
+  border-top: 1px solid #F9DC5C;
 }
 .nav-container div#nav-lines {
   display: grid;
@@ -28,7 +28,7 @@
   row-gap: 5px;
 }
 .nav-container div#nav-lines div.nav-line {
-  background: var(--fontColor);
+  background: #dee2e6;
   width: 50%;
   height: 4px;
   border-radius: 2px;
@@ -50,10 +50,10 @@
   position: fixed;
   margin-top: 90vh;
   width: 100vw;
-  border-top: 1px solid var(--fontColor);
+  border-top: 1px solid #dee2e6;
   left: 0;
   height: 10vh;
-  background: var(--primary);
+  background: #212529;
 }
 .loggedIn#heading-bottom #user {
   display: none;
@@ -70,14 +70,14 @@
   top: 15vh;
   margin-top: 0;
   height: 24vh;
-  border-top: 1px solid var(--fontColor);
-  border-bottom: 1px solid var(--fontColor);
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
 }
 .nav-container .loggedIn#nav .nav-option {
   width: 100vw;
 }
 .nav-container .loggedIn#nav :not(:nth-child(3)) {
-  border-bottom: 2px solid var(--second);
+  border-bottom: 2px solid #343a40;
 }
 .loggedIn.sub-menu {
   grid-template-columns: repeat(2, 45vw);
@@ -89,7 +89,7 @@
   margin: 0 auto 0 5vw;
   bottom: 105%;
   padding: 3vh 0 3vh 0;
-  border: 1px solid var(--third);
+  border: 1px solid #F9DC5C;
   z-index: 100;
 }
 .loggedIn.sub-menu.sales, .loggedIn.sub-menu.purchase, .loggedIn.sub-menu.financial, .loggedIn.sub-menu.other {

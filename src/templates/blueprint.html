@@ -83,7 +83,7 @@
 			</div>
 			<div id="heading-bottom" class="loggedIn">
 				<div id="user">
-					<b>{{username}}</b><br />
+					{{username}}<br />
 					{{company}}
 					<br />
 					{% if title is defined %} {{title}} {% else %} Dashboard {% endif %}
@@ -176,7 +176,6 @@
 
 						// Display submenu of option selected
 						subMenu.style.display = "grid";
-						e.style.border = "2px solid " + third;
 
 						// Close all other nav options
 						navOptions.forEach(function (q) {
@@ -187,7 +186,6 @@
 							} else {
 								q.setAttribute("enlarged", "false");
 								childSubMenu.style.display = "none";
-								q.style.border = "none";
 							}
 						});
 					}

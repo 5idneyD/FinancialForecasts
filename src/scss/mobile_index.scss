@@ -1,5 +1,6 @@
 @import "./new-main.css";
 @import "./mobile_nav.css";
+@import "variables";
 
 * {
 	font-size: clamp(1rem, 4vw, 2rem);
@@ -140,7 +141,7 @@ div.example-row {
 }
 
 .body-node.example div.example-row.text {
-	background-color: var(--primary);
+	background-color: $grey-100;
 }
 
 a.signup-button button {
@@ -177,19 +178,4 @@ a.signup-button button {
 	div#body div:nth-of-type(7) {
 		order: 7;
 	}
-}
-
-#footer div:nth-of-type(1) {
-	height: 5vh;
-	align-items: center;
-}
-
-footer {
-	text-align: center;
-	width: 100vw;
-	border-top: 2px solid white;
-	height: fit-content;
-	padding-top: 5vh;
-	line-height: 2.3rem;
-	margin-top: 10vh;
 }

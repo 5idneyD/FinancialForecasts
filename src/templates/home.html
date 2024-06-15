@@ -12,18 +12,6 @@
 		<meta
 			name="description"
 			content="Accounting software that can handle all day-to-day activities of business accounting" />
-
-		<link
-			href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"
-			rel="preload"
-			as="style"
-			onload="this.onload=null;this.rel='stylesheet'" />
-		<noscript>
-			<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
-		</noscript>
-
-		<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-
 		{% if company %} {% set space, company, email, username, session_key, page = request.path.split("/") %}
 		<meta
 			name="logo"
@@ -92,8 +80,8 @@
 					Anywhere In The World
 				</h3>
 				<br />
-				<span class="bright-button"
-					><a href="/signup" style="margin-right: 10vw; margin-top: -10vh" class="signup-button"
+				<span class="bright-button first"
+					><a href="/signup" class="signup-button"
 						><button type="submit">Sign Up Now</button></a
 					></span
 				>
@@ -101,63 +89,69 @@
 			<div>
 				<img src="{{url_for('static', filename='images/pexels-photo-8296991.webp')}}" alt="Calculator" />
 			</div>
-			<div class="empty" id="chart"></div>
-			<div id="aboutUs" class="actions">
-				<div class="action">
-					<span class="large-text">
-						<h1>About Us</h1>
-					</span>
+			<div id="secondary">
+				<div id="aboutUs" class="actions">
+					<div class="action">
+						<span class="large-text">
+							<h1>About Us</h1>
+						</span>
+					</div>
+					<div class="action">
+						No Variance was built by accountants, for accountants, to make sure we included all fundamental
+						services required by a business to function efficiently.
+					</div>
+					<div class="action">
+						This software was built from scratch, using a wide range of modern technologies, to ensure we
+						provide an optimal performance that is secure and reliable, wherever you access it in the world.
+					</div>
 				</div>
-				<div class="action">
-					No Variance was built by accountants, for accountants, to make sure we included all fundamental
-					services required by a business to function efficiently.
+				<div class="actions" id="abilities">
+					<div class="action">
+						<span class="large-text">
+							<h1>What's Included?</h1>
+						</span>
+					</div>
+					<div class="action">
+						When you sign up to No Variance, you will have access to all of our features immediately,
+						including:
+					</div>
+					<div class="action">
+						<ul>
+							<li>Posting Sales & Purchase Invoices</li>
+							<li>Posting Journals</li>
+							<li>An Automatic P&L</li>
+							<li>Balance Sheets and Trial Balances</li>
+							<li>Aged Debt & Cash Flow Reports</li>
+							<li>Uploading A Budget</li>
+							<li>Admin Control</li>
+							<li>And More...</li>
+						</ul>
+					</div>
 				</div>
-				<div class="action">
-					This software was built from scratch, using a wide range of modern technologies, to ensure we
-					provide an optimal performance that is secure and reliable, wherever you access it in the world.
+				<div class="actions" id="whats-included">
+					<div class="action">
+						<span class="large-text">
+							<h1>See What's Included <br />First-Hand</h1>
+						</span>
+					</div>
+					<div class="action">
+						<form method="post" action="/login">
+							<input type="email" name="email" value="" style="display: none" />
+							<input
+								type="email"
+								name="email2"
+								value="example@basicaccounting.co.uk"
+								style="display: none" />
+							<input type="text" name="password" value="p123" style="display: none" />
+							<span class="bright-button"
+								><a href="javascript:void(0);" ontouchstart="">
+									<button type="submit">Log-In With Our <br />Practice Account</button></a
+								></span
+							>
+						</form>
+					</div>
+					<div class="action">And Experience All The Benefits You'll Get By Joining No Variance</div>
 				</div>
-			</div>
-			<div class="actions" id="abilities">
-				<div class="action">
-					<span class="large-text">
-						<h1>What's Included?</h1>
-					</span>
-				</div>
-				<div class="action">
-					When you sign up to No Variance, you will have access to all of our features immediately, including:
-				</div>
-				<div class="action">
-					<ul>
-						<li>Posting Sales & Purchase Invoices</li>
-						<li>Posting Journals</li>
-						<li>An Automatic P&L</li>
-						<li>Balance Sheets and Trial Balances</li>
-						<li>Aged Debt & Cash Flow Reports</li>
-						<li>Uploading A Budget</li>
-						<li>Admin Control</li>
-						<li>And More...</li>
-					</ul>
-				</div>
-			</div>
-			<div class="actions" id="whats-included">
-				<div class="action">
-					<span class="large-text">
-						<h1>See What's Included <br />First-Hand</h1>
-					</span>
-				</div>
-				<div class="action">
-					<form method="post" action="/login">
-						<input type="email" name="email" value="" style="display: none" />
-						<input type="email" name="email2" value="example@basicaccounting.co.uk" style="display: none" />
-						<input type="text" name="password" value="p123" style="display: none" />
-						<span class="bright-button"
-							><a href="javascript:void(0);" ontouchstart="">
-								<button type="submit">Log-In With Our <br />Practice Account</button></a
-							></span
-						>
-					</form>
-				</div>
-				<div class="action">And Experience All The Benefits You'll Get By Joining No Variance</div>
 				<div class="actions">
 					<div class="action">
 						<span class="large-text">
@@ -170,26 +164,21 @@
 						performing at its best.
 					</div>
 				</div>
-			</div>
-			<div>
-				<div id="footer" class="actions">
-					<div>
-						<span class="bright-button"
-							><a href="/signup" class="signup-button"
-								><button type="submit">Sign Up Now</button></a
-							></span
-						>
+
+				<div class="actions">
+					<div class="action">
+						For any enquiries, please email:<br />admin@novariance.com <br />
+						Sponsored By <a href="https://www.nationalanthems.online">www.nationalanthems.online</a><br />
 					</div>
-					<div>
-						<footer>
-							For any enquiries, please email:<br />admin@novariance.com <br />
-							Sponsored By <a href="https://www.nationalanthems.online">www.nationalanthems.online</a
-							><br />
-						</footer>
-					</div>
+					<span class="bright-button"
+					><a href="/signup" class="signup-button"
+						><button type="submit">Sign Up Now</button></a
+					></span
+				>
 				</div>
 			</div>
 		</div>
+
 		<script>
 			// This script is to toggle the navbar on mobile from the burger menu
 			// The burger menu is not displayed on desktop so not toggle-able
@@ -199,7 +188,7 @@
 
 			// Initial display determined by whether burger menu is visible
 			// Need to define inline as css file didn't seem to work
-			if (burger.style.display != "none"){
+			if (burger.style.display != "none") {
 				navMenu.style.display = "none";
 			}
 
@@ -228,35 +217,6 @@
 					window.location.assign(newUrl);
 				});
 			});
-		</script>
-
-		<script>
-			// This script creates the demo graph on the home page
-			let bodyStyles = window.getComputedStyle(document.body);
-			let light = bodyStyles.getPropertyValue("--light");
-			let dark = bodyStyles.getPropertyValue("--dark");
-
-			let x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-			let y = [400, 560, 470, 590, 580, 630, 520, 540, 480, 575, 630, 680, 710];
-
-			new Chartist.Line(
-				"#chart",
-				{
-					labels: x,
-					series: [y],
-				},
-				{
-					low: 300,
-
-					showArea: true,
-					showPoint: false,
-					fullWidth: false,
-				},
-			);
-		</script>
-		<script src="{{url_for('static', filename='js/fadeIn.js')}}"></script>
-		<script>
-			fadeIn("#chart");
 		</script>
 	</body>
 </html>

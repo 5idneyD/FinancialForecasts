@@ -12,7 +12,7 @@
 }
 
 .nav-option {
-  padding: 2px;
+  padding: 0 2px 0 2px;
 }
 
 #body {
@@ -55,34 +55,25 @@ img[alt=Calculator] {
   height: 82.5vh;
 }
 
-.empty {
-  width: 48vw;
-  /* border: 2px solid green; */
-  height: 60vh;
-  margin-right: auto;
+#secondary {
+  display: grid;
+  grid-template-columns: 80vw;
 }
 
 .actions {
+  border-top: 1px solid #F9DC5C;
+  padding-bottom: 5vh;
   min-height: 60vh;
   height: fit-content;
-  width: 48vw;
-  /* border: 2px solid red; */
   text-align: left;
-  margin-right: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
 }
 .actions .action {
-  margin-top: 4vh;
+  margin: 4vh auto 0 auto;
   width: 70%;
   text-align: center;
-}
-
-.action {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 ul li {
@@ -105,38 +96,6 @@ div:has(.body-node.example) {
   grid-template-columns: 70%;
   grid-template-rows: 2rem 2rem 2rem 2rem;
   row-gap: 3vh;
-}
-
-div.example-row {
-  height: 2rem;
-  width: 100%;
-  margin-left: 3vw;
-  margin-top: 1vh;
-  border-radius: 30px;
-  background-color: rgba(201, 191, 191, 0.411);
-}
-div.example-row .text {
-  background-color: var(--primary);
-}
-
-a.signup-button button {
-  margin-top: 5vh;
-}
-
-#footer div:nth-of-type(1) {
-  height: 5vh;
-  align-items: center;
-  margin-top: -20vh;
-}
-
-footer {
-  text-align: center;
-  width: 100vw;
-  border-top: 2px solid white;
-  height: fit-content;
-  padding-top: 5vh;
-  line-height: 2.3rem;
-  margin-top: 25vh;
 }
 
 /*# sourceMappingURL=index.css.map */

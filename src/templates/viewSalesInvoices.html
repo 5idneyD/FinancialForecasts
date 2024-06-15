@@ -75,7 +75,7 @@
 			<td class="no-mobile">{{ invoice.is_paid }}</td>
 			<td class="no-mobile">{{ invoice.accounting_year }}</td>
 			<td class="no-mobile">{{ invoice.accounting_period }}</td>
-			<td class="no-mobile">{{ invoice.posted_by }}</td>
+			<td class="no-mobile">{{ invoice.posted_by[:5] }}</td>
 			<td class="no-mobile">{{ invoice.posted_on }}</td>
 		</tr>
 		{% endfor %}

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 :root {
   /* --primary: #030518;
   --second: #0c1027;
@@ -19,7 +18,7 @@
 * {
   margin: 0;
   padding: 0;
-  color: var(--fontColor);
+  color: #dee2e6;
   font-size: clamp(1rem, 1.4vw, 2rem);
   font-weight: normal;
   scroll-behavior: smooth;
@@ -42,7 +41,7 @@
   }
 }
 #heading {
-  background-color: var(--primary);
+  background-color: #212529;
   width: 100vw;
   height: 35vh;
   display: grid;
@@ -73,7 +72,7 @@
 }
 
 .box {
-  background-color: var(--second);
+  background-color: #343a40;
   width: 80%;
   height: 60%;
   margin: auto;
@@ -83,7 +82,9 @@
   justify-content: center;
   transition: all 0.2s ease;
 }
-.box:hover, .box:active {
+.box:hover, .box:active, .box[enlarged=true] {
+  color: #F9DC5C;
+  border: 2px solid #F9DC5C;
   width: 100%;
   height: 80%;
   cursor: pointer;
@@ -92,7 +93,7 @@
 
 .sub-menu {
   text-align: center;
-  background-color: var(--second);
+  background-color: #343a40;
   border-radius: 30px;
   margin-top: 2vh;
   width: 28vw;
@@ -129,7 +130,7 @@
   margin-bottom: 3%;
 }
 .sub-menu div.sub-menu-option:hover {
-  background-color: var(--primary);
+  background-color: #212529;
   transition-duration: 0.4s;
   cursor: pointer;
 }
@@ -154,7 +155,7 @@
   grid-template-columns: repeat(4, auto);
   grid-template-rows: auto;
   column-gap: 4vw;
-  background: var(--primary);
+  background: #212529;
   z-index: 50;
 }
 
@@ -169,7 +170,8 @@ div#logo {
 
 div#nav div.nav-option:hover {
   height: 80%;
-  background-color: var(--second);
+  background-color: #343a40;
+  color: #F9DC5C;
   cursor: pointer;
 }
 
@@ -178,7 +180,7 @@ div#nav div.nav-option:hover {
   min-height: 80vh;
   width: 100vw;
   max-width: 100vw;
-  background-color: var(--second);
+  background-color: #343a40;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -191,13 +193,12 @@ div#nav div.nav-option:hover {
 .body-node {
   border-radius: 30px;
   padding: 3%;
-  color: var(--fontColor);
+  color: #dee2e6;
   text-align: center;
   min-height: 30vh;
   margin-top: 5vh;
   border-radius: 50px;
-  background: var(--primary);
-  box-shadow: var(--shadow);
+  background: #212529;
   height: fit-content;
   min-width: 300px;
   width: fit-content;
@@ -236,10 +237,13 @@ div#nav div.nav-option:hover {
 .ct-series-a .ct-line,
 .ct-series-a .ct-point,
 .ct-series-a .ct-slice-donut {
-  stroke: var(--third);
-  color: var(--fontColor);
-  fill: var(--second);
+  stroke: #F9DC5C;
+  color: #dee2e6;
   font-size: small;
+}
+
+.ct-series-a .ct-area {
+  fill: none;
 }
 
 #to-do-list {
@@ -250,7 +254,7 @@ div#nav div.nav-option:hover {
 
 .to-do-item,
 .to-do-item-add {
-  color: var(--fontColor);
+  color: #dee2e6;
   align-items: baseline;
   margin-top: 3vh;
   list-style-type: none;
@@ -266,8 +270,8 @@ div#nav div.nav-option:hover {
 }
 .to-do-item input,
 .to-do-item-add input {
-  background-color: var(--primary);
-  border: 0.2px solid var(--fontColor);
+  background-color: #212529;
+  border: 0.2px solid #dee2e6;
   width: 95%;
   text-align: center;
 }
@@ -285,22 +289,22 @@ div#nav div.nav-option:hover {
 }
 
 #to-do-list ul li:nth-child(1n) div.bullet {
-  border: 2px solid salmon;
+  border: 2px solid #ED254E;
 }
 #to-do-list ul li:nth-child(1n) div.bullet:hover {
-  background-color: salmon;
+  background-color: #ED254E;
   cursor: pointer;
 }
 #to-do-list ul li:nth-child(2n) div.bullet {
-  border: 2px solid aquamarine;
+  border: 2px solid #F9DC5C;
 }
 #to-do-list ul li:nth-child(2n) div.bullet:hover {
-  background-color: aquamarine;
+  background-color: #F9DC5C;
   cursor: pointer;
 }
 
 #toggle {
-  background-color: var(--second);
+  background-color: #343a40;
   width: 100vw;
 }
 
@@ -309,7 +313,7 @@ div#nav div.nav-option:hover {
   min-width: 30px;
   min-height: 2vh;
   height: fit-content;
-  background-color: var(--primary);
+  background-color: #212529;
   margin-left: 3vw;
   text-align: center;
 }
@@ -337,15 +341,14 @@ form#form[method=post] input {
   width: 40%;
   text-align: center;
   border-radius: 30px;
-  color: var(--fontColor);
+  color: #dee2e6;
   border: 0px;
 }
 form#form[method=post] button {
-  background-color: var(--primary);
-  color: var(--fontColor);
+  background-color: #212529;
+  color: #dee2e6;
   height: 6vh;
   width: 30%;
-  border-radius: 30px;
 }
 form#form[method=post] button:hover {
   cursor: pointer;
@@ -355,19 +358,16 @@ table.report,
 #balanceSheet,
 .body-node:has(#balanceSheet) {
   display: grid;
-  grid-auto-rows: auto;
-  grid-auto-columns: auto;
   width: 85vw;
 }
 table.report tr,
 #balanceSheet tr,
 .body-node:has(#balanceSheet) tr {
   display: flex;
-  flex-direction: row;
 }
 
 table.report tr:nth-child(even) {
-  background: var(--second);
+  background: #343a40;
 }
 table.report tr :is(td, th) {
   height: 100%;
@@ -375,6 +375,7 @@ table.report tr :is(td, th) {
   justify-content: center;
   align-items: center;
   text-align: center;
+  text-overflow: ellipsis;
   flex: 1;
   padding-bottom: 1rem;
 }
@@ -403,7 +404,7 @@ div.invoice-head {
   grid-auto-rows: 5vh;
   grid-auto-flow: row;
   row-gap: 5vh;
-  color: var(--fontColor);
+  color: #dee2e6;
   margin: 2vh auto 3vh auto;
   width: 90%;
 }
@@ -411,28 +412,23 @@ div.invoice-head {
 div.invoice-head div :not(button) {
   width: 80%;
   height: 1.5rem;
-  color: var(--fontColor);
+  color: #dee2e6;
   border-radius: 30px;
   text-align: center;
   border: none;
 }
 
 div.invoice-head div :is(input, select, select option) {
-  color: var(--fontColor);
-  background-color: var(--primary);
-  border: 1px solid var(--fontColor);
+  color: #dee2e6;
+  background-color: #212529;
+  border: 1px solid #dee2e6;
 }
 
 .nominal_select {
-  background-color: var(--primary);
+  background-color: #212529;
   text-align: center;
   cursor: pointer;
   width: 100%;
-}
-
-button:hover {
-  background-color: var(--second) !important;
-  cursor: pointer;
 }
 
 #number_of_rows {
@@ -462,22 +458,20 @@ div.invoice-body .invoiceRow select {
   margin-top: auto;
   margin-bottom: auto;
   height: 1.4rem;
-  background-color: var(--primary);
-  color: var(--fontColor);
-  border: 1px solid var(--fontColor);
+  background-color: #212529;
+  color: #dee2e6;
+  border: 1px solid #dee2e6;
 }
 
 button#addInvoiceRow,
 button.invoiceForm {
-  background-color: var(--primary);
-  border-radius: 30px;
-  color: var(--fontColor);
-  border: 2px solid var(--second);
+  background-color: #212529;
+  color: #dee2e6;
+  border: 2px solid #343a40;
   padding-left: 5%;
   padding-right: 5%;
   width: 10vw;
   height: 2rem;
-  min-width: fit-content;
   text-align: center;
 }
 
@@ -514,9 +508,9 @@ div#colorSetter *:not(br) {
   width: 12vw;
   height: 2rem;
   min-width: 40px;
-  background-color: var(--second);
-  border: 1px solid var(--fontColor);
-  color: var(--fontColor);
+  background-color: #343a40;
+  border: 1px solid #dee2e6;
+  color: #dee2e6;
   border-radius: 30px;
   text-align: center;
 }
@@ -528,7 +522,7 @@ button[type=submit].settings-button {
 }
 
 ::-webkit-calendar-picker-indicator {
-  color: var(--fontColor);
+  color: #dee2e6;
 }
 
 input.filterInput[type=text] {
@@ -549,7 +543,7 @@ input.filterInput[type=text] {
 div.loginItem {
   width: 100%;
   margin-top: 1rem;
-  color: var(--primary);
+  color: #212529;
 }
 
 button[name=signinButton] {
@@ -569,25 +563,25 @@ button[name=signinButton] {
   width: 3vw;
   min-width: 3.2rem;
   height: 5vh;
-  border: 2px solid var(--fontColor);
+  border: 2px solid #dee2e6;
   padding: 0px;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   margin: 1vh auto 0 auto;
   z-index: 10;
-  background-color: var(--second);
+  background-color: #343a40;
 }
 .userLogo #userBody {
   position: sticky;
-  border: 2px solid var(--fontColor);
+  border: 2px solid #dee2e6;
   height: 5.7vh;
   width: 4.5vw;
   min-width: 3.2rem;
   border-radius: 150px 150px 0 0;
   -moz-border-radius: 150px 150px 0 0;
   -webkit-border-radius: 150px 150px 0 0;
-  background-color: var(--second);
+  background-color: #343a40;
   margin: -1.75vh auto 0 auto;
 }
 
@@ -607,9 +601,9 @@ button[name=signinButton] {
 
 .adminBody div * {
   border-radius: 30px;
-  border: 1px solid var(--fontColor);
-  background-color: var(--primary);
-  color: var(--fontColor);
+  border: 1px solid #dee2e6;
+  background-color: #212529;
+  color: #dee2e6;
   height: 2rem;
   text-align: center;
   min-width: fit-content;
@@ -650,8 +644,8 @@ button[name=signinButton] {
   margin-right: auto;
   min-width: 200px;
   font-size: 0.8rem;
-  background-color: var(--second);
-  color: var(--fontColor);
+  background-color: #343a40;
+  color: #dee2e6;
 }
 
 div#legend {
@@ -668,7 +662,7 @@ div#legend div {
 }
 
 div#legend div#legend-0 {
-  background-color: var(--third);
+  background-color: #6c757d;
 }
 
 div#legend div#legend-1 {
@@ -684,9 +678,9 @@ div#legend div#legend-1 {
 }
 
 .budgetRow input {
-  background-color: var(--primary);
-  color: var(--fontColor);
-  border: 1px solid var(--fontColor);
+  background-color: #212529;
+  color: #dee2e6;
+  border: 1px solid #dee2e6;
   font-weight: 400;
 }
 
@@ -695,10 +689,10 @@ input[type=file]::file-selector-button {
 }
 
 input[type=file] {
-  background-color: var(--primary);
+  background-color: #212529;
   border-radius: 30px;
-  color: var(--fontColor);
-  border: 1px solid var(--fontColor);
+  color: #dee2e6;
+  border: 1px solid #dee2e6;
   padding-left: 5%;
   padding-right: 5%;
   min-width: 10vw;
@@ -720,52 +714,6 @@ div#newBankRecTable {
   grid-auto-rows: 6vh;
 }
 
-.bankRecRow .checkbox {
-  width: 30px;
-  height: 30px;
-  border-radius: 45px;
-  border: 1px solid var(--fontColor);
-  margin-left: auto;
-  margin-right: auto;
-  content: "";
-}
-
-.bankRecRow .checkbox:hover {
-  cursor: pointer;
-  background-color: var(--fontColor);
-  opacity: 0.5;
-}
-
-.bankRecRow .checkbox:hover:after {
-  content: "✓";
-  color: red;
-}
-
-#bankRecButtons {
-  width: 70vw;
-  margin-left: auto;
-  margin-right: auto;
-  height: fit-content !important;
-  align-items: center;
-  padding-top: 0;
-}
-
-#bankRecButtons button {
-  margin-top: auto;
-  margin-bottom: auto;
-  border: none;
-}
-
-#bankRecButtons button#B1 {
-  border-radius: 45px 0 0 45px;
-  background-color: var(--fontColor);
-  color: var(--primary);
-}
-
-#bankRecButtons button#B2 {
-  border-radius: 0px 45px 45px 0px;
-}
-
 div.clientTable {
   display: grid;
   grid-template-columns: auto;
@@ -784,11 +732,11 @@ div.clientTableRow.supplier {
 }
 
 input.clientTableCellInput {
-  background-color: var(--primary);
-  color: var(--fontColor);
+  background-color: #212529;
+  color: #dee2e6;
   width: 90%;
   height: 1.4rem;
-  border: 1px solid var(--fontColor);
+  border: 1px solid #dee2e6;
   border-radius: 30px;
   text-align: center;
 }
@@ -804,17 +752,22 @@ select#clientCodeSelect {
   padding: 0 5% 0 5%;
   margin-bottom: 2rem;
   border-radius: 30px;
-  color: var(--fontColor);
-  background-color: var(--primary);
+  color: #dee2e6;
+  background-color: #212529;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
 }
 
 select#clientCodeSelect option.clientCodeOption {
-  color: var(--fontColor);
+  color: #dee2e6;
   width: inherit;
 }
 
 #swal2-title {
-  color: var(--fontColor);
+  color: #dee2e6;
   font-size: 1em !important;
 }
 
@@ -834,16 +787,16 @@ div.add-product div#table {
 
 div.add-product div#table input {
   width: 99%;
-  background-color: var(--primary);
-  color: var(--fontColor);
+  background-color: #212529;
+  color: #dee2e6;
   text-align: center;
 }
 
 div.add-product button[type=submit] {
-  background-color: var(--primary);
-  color: var(--fontColor);
+  background-color: #212529;
+  color: #dee2e6;
   padding: 1vh 3vw 1vh 3vw;
-  border: 1px solid var(--fontColor);
+  border: 1px solid #dee2e6;
   border-radius: 30px;
   margin-top: 5vh;
 }
@@ -875,30 +828,37 @@ table#products-list tbody tr td {
 
 .price {
   font-size: 40px;
-  color: var(--third);
+  color: #6c757d;
 }
 
-span.bright-button button {
+button {
   height: fit-content;
-  padding: 1vh 5vw 1vh 5vw;
-  background-color: var(--third);
-  color: var(--primary);
-  border-radius: 30px;
-  margin-bottom: 3vh;
-}
-
-a.signup-button button {
   min-width: fit-content;
   padding: 1vh 5vw 1vh 5vw;
-  background-color: var(--third) !important;
-  color: var(--primary) !important;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.bright-button button {
+  background-color: #F9DC5C;
+  margin: 2vh auto 2vh auto;
+  display: flex;
+  color: #212529;
+}
+.bright-button button:hover {
+  background-color: #343a40;
+  color: #F9DC5C;
+}
+
+.bright-button.first {
+  margin-left: -32vw;
 }
 
 table#aged-debt-table {
   width: 70vw;
 }
 table#aged-debt-table tbody tr:nth-child(even) {
-  background: var(--second);
+  background: #343a40;
   height: 2rem;
 }
 
@@ -911,7 +871,7 @@ table#aged-debt-table tbody tr:nth-child(even) {
   border: 60px;
   height: 1.4rem;
   background: transparent;
-  border: var(--fontColor);
+  border: #dee2e6;
 }
 .checkbox-circle input[type=checkbox]:hover {
   cursor: pointer;
