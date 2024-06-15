@@ -80,11 +80,16 @@
 					Anywhere In The World
 				</h3>
 				<br />
-				<span class="bright-button first"
-					><a href="/signup" class="signup-button"
-						><button type="submit">Sign Up Now</button></a
-					></span
-				>
+				<form method="post" action="/login">
+					<input type="email" name="email" value="" style="display: none" />
+					<input type="email" name="email2" value="example@basicaccounting.co.uk" style="display: none" />
+					<input type="text" name="password" value="p123" style="display: none" />
+					<span class="bright-button first"
+						><a href="javascript:void(0);" ontouchstart="">
+							<button type="submit"  style="margin-left: -26vw">Log-In With Our <br />Practice Account</button></a
+						></span
+					>
+				</form>
 			</div>
 			<div>
 				<img src="{{url_for('static', filename='images/pexels-photo-8296991.webp')}}" alt="Calculator" />
@@ -171,10 +176,8 @@
 						Sponsored By <a href="https://www.nationalanthems.online">www.nationalanthems.online</a><br />
 					</div>
 					<span class="bright-button"
-					><a href="/signup" class="signup-button"
-						><button type="submit">Sign Up Now</button></a
-					></span
-				>
+						><a href="/signup" class="signup-button"><button type="submit">Sign Up Now</button></a></span
+					>
 				</div>
 			</div>
 		</div>
