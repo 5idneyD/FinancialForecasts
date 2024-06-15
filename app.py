@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from passlib.hash import pbkdf2_sha256
 import os
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import select
 from datetime import timedelta
 import datetime as dt
 from functools import wraps
@@ -1873,9 +1874,7 @@ def profitAndLoss(company, email, username, session_key, theme):
 @login_required
 def nominalTransactions(company, email, username, session_key, theme):
     transactions = NominalTransactions.query.filter(NominalTransactions.company==company,
-                                                    NominalTransactions.transaction_type != "vat",
-                                                    NominalTransactions.transaction_type != "vat_in",
-                                                    NominalTransactions.transaction_type != "vat_out",
+                                                    ~NominalTransactions.transaction_type.in_(["vat", "vat_in", "vat_out"])
                                                     ).all()
     
     filters = {
@@ -1898,7 +1897,8 @@ def nominalTransactions(company, email, username, session_key, theme):
         transactions = filterTransactions(transactions, filters)
 
         return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
-    return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
+    
+    return render_template("nominalTransactions.html", company=company, transactions=tr, filters=filters, design=theme)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/batchedJournals", methods=["POST", "GET"])
@@ -2050,7 +2050,7 @@ def bankRec(company, email, username, session_key, theme):
                     transaction_type="payment",
                     client_code=client_code,
                     transaction_number=transaction_number,
-                    description=transaction_number,
+                    description="payment",
                     date=dt.datetime.today().strftime("%Y-%m-%d"),
                     nominal_code=60000,
                     net_value=total_value,
@@ -2072,7 +2072,7 @@ def bankRec(company, email, username, session_key, theme):
                     transaction_type="payment",
                     client_code=client_code,
                     transaction_number=transaction_number,
-                    description=transaction_number,
+                    description="payment",
                     date=dt.datetime.today().strftime("%Y-%m-%d"),
                     net_value=total_value,
                     vat_value=0,
