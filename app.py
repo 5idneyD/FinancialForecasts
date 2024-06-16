@@ -21,10 +21,7 @@ from pyinvoice.models import Item
 from flask_cors import CORS
 import git
 import pandas as pd
-import openpyxl
-import sys
-import traceback
-import json
+
 # PythonAnywhere and windows10 reference parent directories differently
 # If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere route
 if load_dotenv("./.env") == False:
@@ -1682,11 +1679,13 @@ def changePassword(company, email, username, session_key, theme):
 @login_required
 def trialBalance(company, email, username, session_key, theme):
 
-    current_period = dt.datetime.today().strftime("%Y-%m-%d")
-
+    company_data = Companies.query.filter(Companies.company==company).first()
+    period = company_data.accounting_period
+    year = company_data.accounting_year
 
     if request.method == "POST":
-        current_period = request.form['date']
+        period = request.form['period']
+        year = request.form['year']
 
 
     accounts = (
@@ -1700,12 +1699,14 @@ def trialBalance(company, email, username, session_key, theme):
         monthly_balance = 0
         ytd_balance = 0
         transactions = (
-            db.session.query(NominalTransactions)
-            .filter(NominalTransactions.company == company)
-            .filter(NominalTransactions.nominal_code == account.nominal)
-            .filter(NominalTransactions.posted_on <= current_period)
-            .filter(NominalTransactions.to_post == 0)
-        )
+                        db.session.query(NominalTransactions).filter(
+                            NominalTransactions.company == company,
+                            NominalTransactions.nominal_code == account.nominal,
+                            NominalTransactions.accounting_period <= period,
+                            NominalTransactions.accounting_year <= year,
+                            NominalTransactions.to_post == 0
+                                )
+                        )
         global value
         if account.nominal != 60005:
             for transaction in transactions:
@@ -1737,18 +1738,20 @@ def trialBalance(company, email, username, session_key, theme):
         # Sort the dict in ascending order
         data = dict(sorted(data.items()))
 
-    return render_template("trialBalance.html", company=company, data=data, design=theme)
+    return render_template("trialBalance.html", company=company, data=data, design=theme, year=year, period=period)
 
 @app.route("/<company>/<email>/<username>/<session_key>/balanceSheet", methods=["POST", "GET"])
 @login_required
 def balanceSheet(company, email, username, session_key, theme):
 
-    current_period = dt.datetime.today().strftime("%Y-%m-%d")
+    company_data = Companies.query.filter(Companies.company==company).first()
+    period = company_data.accounting_period
+    year = company_data.accounting_year
 
 
     if request.method == "POST":
-        current_period = request.form['date']
-
+        period = request.form['period']
+        year = request.form['year']
 
     accounts = (
         db.session.query(ChartOfAccounts)
@@ -1762,12 +1765,14 @@ def balanceSheet(company, email, username, session_key, theme):
         monthly_balance = 0
         ytd_balance = 0
         transactions = (
-            db.session.query(NominalTransactions)
-            .filter(NominalTransactions.company == company)
-            .filter(NominalTransactions.nominal_code == account.nominal)
-            .filter(NominalTransactions.posted_on <= current_period)
-            .filter(NominalTransactions.to_post == 0)
-        )
+                        db.session.query(NominalTransactions).filter(
+                            NominalTransactions.company == company,
+                            NominalTransactions.nominal_code == account.nominal,
+                            NominalTransactions.accounting_period <= period,
+                            NominalTransactions.accounting_year <= year,
+                            NominalTransactions.to_post == 0
+                                )
+                        )
 
         if account.nominal != 60005:
             for transaction in transactions:
@@ -1786,7 +1791,7 @@ def balanceSheet(company, email, username, session_key, theme):
                                  account.nominal, account.account_name]
 
 
-    return render_template("balanceSheet.html", company=company, data=data, design=theme)
+    return render_template("balanceSheet.html", company=company, data=data, design=theme, period=period, year=year)
 
 
 @app.route("/<company>/<email>/<username>/<session_key>/profitAndLoss", methods=["POST", "GET"])

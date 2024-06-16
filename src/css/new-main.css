@@ -279,7 +279,6 @@ div#nav div.nav-option:hover {
 .to-do-item-add .bullet {
   width: 1.5rem;
   height: 1.5rem;
-  padding-bottom: 2%;
   margin: auto;
   border-radius: 50%;
 }
@@ -557,18 +556,22 @@ button[name=signinButton] {
   width: 7vw;
   height: 10vh;
   margin: -6vh auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .userLogo #userHead {
   position: sticky;
-  width: 3vw;
-  min-width: 3.2rem;
+  width: 2.5vw;
+  min-width: 3rem;
   height: 5vh;
   border: 2px solid #dee2e6;
   padding: 0px;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  margin: 1vh auto 0 auto;
+  margin-top: 1vh;
   z-index: 10;
   background-color: #343a40;
 }
@@ -577,12 +580,12 @@ button[name=signinButton] {
   border: 2px solid #dee2e6;
   height: 5.7vh;
   width: 4.5vw;
-  min-width: 3.2rem;
+  min-width: 3rem;
   border-radius: 150px 150px 0 0;
   -moz-border-radius: 150px 150px 0 0;
   -webkit-border-radius: 150px 150px 0 0;
   background-color: #343a40;
-  margin: -1.75vh auto 0 auto;
+  margin-top: -1.75vh;
 }
 
 .adminForm div button {
@@ -876,6 +879,10 @@ table#aged-debt-table tbody tr:nth-child(even) {
 }
 .checkbox-circle input[type=checkbox]:hover {
   cursor: pointer;
+}
+
+.sponsor {
+  color: #F9DC5C;
 }
 
 /*# sourceMappingURL=new-main.css.map */

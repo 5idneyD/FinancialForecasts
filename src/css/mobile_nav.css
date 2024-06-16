@@ -38,6 +38,10 @@
   padding: 2px;
 }
 
+#heading-top {
+  grid-template-columns: 60vw auto;
+}
+
 .loggedIn#heading {
   grid-template-rows: 15vh;
   height: 15vh;
@@ -104,6 +108,9 @@
   padding-bottom: 20vh;
 }
 
+table.report#report tbody tr, table.report#table tbody tr, table.report#nominalTransactions tbody tr {
+  padding: 2vw;
+}
 table.report#report tbody tr .no-mobile, table.report#table tbody tr .no-mobile, table.report#nominalTransactions tbody tr .no-mobile {
   display: none !important;
 }

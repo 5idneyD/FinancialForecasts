@@ -13,7 +13,7 @@
 #heading-top {
   display: grid;
   height: 100%;
-  grid-template-columns: 50vw auto;
+  grid-template-columns: 60vw auto;
   text-align: center;
   padding: 10px;
 }

@@ -43,6 +43,10 @@
 	padding: 2px;
 }
 
+#heading-top {
+	grid-template-columns: 60vw auto;
+}
+
 // Apply the following styles only to logged in Mobile
 .loggedIn {
 	&#heading {
@@ -133,6 +137,7 @@ table.report {
 	&#nominalTransactions {
 		tbody {
 			tr {
+				padding: 2vw;
 				.no-mobile {
 					display: none !important;
 				}
