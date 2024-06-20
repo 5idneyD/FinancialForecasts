@@ -842,7 +842,9 @@ span.bright-button.first a button {
 	background-color: $color-80;
 	margin: 2vh auto 2vh auto;
 	display: flex;
+	align-items: center;
 	color: $grey-100;
+	height: 3rem;
 	&:hover {
 		background-color: $grey-80;
 		color: $color-80

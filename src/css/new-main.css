@@ -773,7 +773,9 @@ span.bright-button.first a button {
   background-color: #F9DC5C;
   margin: 2vh auto 2vh auto;
   display: flex;
+  align-items: center;
   color: #212529;
+  height: 3rem;
 }
 .bright-button button:hover {
   background-color: #343a40;
