@@ -343,15 +343,6 @@ form#form[method=post] input {
   color: #dee2e6;
   border: 0px;
 }
-form#form[method=post] button {
-  background-color: #212529;
-  color: #dee2e6;
-  height: 6vh;
-  width: 30%;
-}
-form#form[method=post] button:hover {
-  cursor: pointer;
-}
 
 table.report,
 #balanceSheet,
@@ -419,8 +410,9 @@ div.invoice-head div :not(button) {
 
 div.invoice-head div :is(input, select, select option) {
   color: #dee2e6;
+  height: 2rem;
   background-color: #212529;
-  border: 1px solid #dee2e6;
+  border: 1px solid #6c757d;
 }
 
 .nominal_select {
@@ -462,37 +454,22 @@ div.invoice-body .invoiceRow select {
   border: 1px solid #dee2e6;
 }
 
-button#addInvoiceRow,
-button.invoiceForm {
+button {
   background-color: #212529;
   color: #dee2e6;
   border: 2px solid #343a40;
-  padding-left: 5%;
-  padding-right: 5%;
-  width: 10vw;
   height: 2rem;
   min-height: fit-content;
+  min-width: fit-content;
   text-align: center;
+  margin: 5vh auto 2vh auto;
+  cursor: pointer;
+  padding: 1vh 5vw 1vh 5vw;
+  border-radius: 30px;
 }
-
-button.invoiceForm {
-  margin-top: 5vh;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-button.invoiceForm:hover,
-button.invoiceForm[data-selected="1"] {
+button:hover, button[data-selected="1"] {
   border: 2px solid #F9DC5C;
-}
-
-button.invoiceForm:hover {
   color: #F9DC5C;
-}
-
-button#addInvoiceRow {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 table#settings {
@@ -650,8 +627,7 @@ button[name=signinButton] {
   min-width: 40vw;
   margin-top: -10vh;
 }
-.addClient input,
-.addClient button {
+.addClient input {
   margin-left: auto;
   margin-right: auto;
   min-width: 200px;
@@ -787,69 +763,6 @@ select#clientCodeSelect option.clientCodeOption {
 .swal2-popup {
   font-size: 1em !important;
   width: fit-content !important;
-}
-
-div.add-product div#table {
-  width: 80vw;
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-auto-rows: 2rem;
-  column-gap: 5vw;
-  row-gap: 2rem;
-}
-
-div.add-product div#table input {
-  width: 99%;
-  background-color: #212529;
-  color: #dee2e6;
-  text-align: center;
-}
-
-div.add-product button[type=submit] {
-  background-color: #212529;
-  color: #dee2e6;
-  padding: 1vh 3vw 1vh 3vw;
-  border: 1px solid #dee2e6;
-  border-radius: 30px;
-  margin-top: 5vh;
-}
-
-table#products-list tbody {
-  display: grid;
-  grid-auto-rows: 2rem;
-  row-gap: 2rem;
-  grid-template-columns: auto;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40vw;
-  min-width: 300px;
-}
-
-table#products-list tbody tr {
-  display: grid;
-  grid-template-columns: 11% 23% 23% 23%;
-  column-gap: 3vw;
-  width: 40vw;
-  min-width: 300px;
-}
-
-table#products-list tbody tr td {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.price {
-  font-size: 40px;
-  color: #6c757d;
-}
-
-button {
-  min-height: fit-content;
-  min-width: fit-content;
-  padding: 1vh 5vw 1vh 5vw;
-  border-radius: 30px;
-  cursor: pointer;
 }
 
 span.bright-button.first a button {

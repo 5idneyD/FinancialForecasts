@@ -367,17 +367,6 @@ form#form[method="post"] {
 		color: $grey-20;
 		border: 0px;
 	}
-
-	button {
-		background-color: $grey-100;
-		color: $grey-20;
-		height: 6vh;
-		width: 30%;
-
-		&:hover {
-			cursor: pointer;
-		}
-	}
 }
 
 table.report,
@@ -452,8 +441,9 @@ div.invoice-head div :not(button) {
 
 div.invoice-head div :is(input, select, select option) {
 	color: $grey-20;
+	height: 2rem;
 	background-color: $grey-100;
-	border: 1px solid $grey-20;
+	border: 1px solid $grey-60;
 }
 
 .nominal_select {
@@ -499,38 +489,51 @@ div.invoice-body {
 	}
 }
 
-button#addInvoiceRow,
-button.invoiceForm {
+// button#addInvoiceRow,
+// button.invoiceForm {
+// 	background-color: $grey-100;
+// 	color: $grey-20;
+// 	border: 2px solid $grey-80;
+// 	padding-left: 5%;
+// 	padding-right: 5%;
+// 	width: 10vw;
+// 	height: 2rem;
+// 	min-height:fit-content;
+// 	text-align: center;
+// }
+
+// button.invoiceForm {
+// 	margin-top: 5vh;
+// 	margin-left: auto;
+// 	margin-right: auto;
+// }
+
+
+
+// button#addInvoiceRow {
+// 	margin-left: auto;
+// 	margin-right: auto;
+// }
+
+button {
 	background-color: $grey-100;
 	color: $grey-20;
 	border: 2px solid $grey-80;
-	padding-left: 5%;
-	padding-right: 5%;
-	width: 10vw;
+	// width: 10vw;
 	height: 2rem;
-	min-height:fit-content;
+	min-height: fit-content;
+	min-width: fit-content;
 	text-align: center;
-}
+	margin: 5vh auto 2vh auto;
+	cursor: pointer;
+	padding: 1vh 5vw 1vh 5vw;
+	border-radius: 30px;
 
-button.invoiceForm {
-	margin-top: 5vh;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-button.invoiceForm:hover,
-button.invoiceForm[data-selected="1"]
- {
-	border: 2px solid $color-80;
-}
-
-button.invoiceForm:hover {
-	color: $color-80;
-}
-
-button#addInvoiceRow {
-	margin-left: auto;
-	margin-right: auto;
+	&:hover,
+	&[data-selected="1"] {
+		border: 2px solid $color-80;
+		color: $color-80;
+	}
 }
 
 table#settings {
@@ -693,8 +696,7 @@ button[name="signinButton"] {
 	min-width: 40vw;
 	margin-top: -10vh;
 
-	input,
-	button {
+	input {
 		margin-left: auto;
 		margin-right: auto;
 		min-width: 200px;
@@ -829,68 +831,6 @@ select#clientCodeSelect option.clientCodeOption {
 .swal2-popup {
 	font-size: 1em !important;
 	width: fit-content !important;
-}
-
-div.add-product div#table {
-	width: 80vw;
-	display: grid;
-	grid-template-columns: repeat(5, auto);
-	grid-auto-rows: 2rem;
-	column-gap: 5vw;
-	row-gap: 2rem;
-}
-
-div.add-product div#table input {
-	width: 99%;
-	background-color: $grey-100;
-	color: $grey-20;
-	text-align: center;
-}
-
-div.add-product button[type="submit"] {
-	background-color: $grey-100;
-	color: $grey-20;
-	padding: 1vh 3vw 1vh 3vw;
-	border: 1px solid $grey-20;
-	border-radius: 30px;
-	margin-top: 5vh;
-}
-
-table#products-list tbody {
-	display: grid;
-	grid-auto-rows: 2rem;
-	row-gap: 2rem;
-	grid-template-columns: auto;
-	margin-left: auto;
-	margin-right: auto;
-	width: 40vw;
-	min-width: 300px;
-}
-
-table#products-list tbody tr {
-	display: grid;
-	grid-template-columns: 11% 23% 23% 23%;
-	column-gap: 3vw;
-	width: 40vw;
-	min-width: 300px;
-}
-table#products-list tbody tr td {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.price {
-	font-size: 40px;
-	color: $grey-60;
-}
-
-button {
-	min-height: fit-content;
-	min-width: fit-content;
-	padding: 1vh 5vw 1vh 5vw;
-	border-radius: 30px;
-	cursor: pointer;
 }
 
 
