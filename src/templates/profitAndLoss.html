@@ -16,22 +16,22 @@
 		{% for account, value in data.items() %} {% if value[2] < 20000 %}
 		<tr id="{{value[2]}}" class="{{value[2]}} table_row">
 			<td>{{account}}</td>
-			<td>{{value[0]}}</td>
-			<td>{{value[3]}}</td>
-			<td class="no-mobile">{{value[0] - value[3]}}</td>
-			<td>{{value[1]}}</td>
-			<td>{{value[4]}}</td>
-			<td class="no-mobile">{{value[1] - value[4]}}</td>
+			<td>{{value[0] | round(2)}}</td>
+			<td>{{value[3] | round(2)}}</td>
+			<td class="no-mobile">{{(value[0] - value[3]) | round(2)}}</td>
+			<td>{{value[1] | round(2)}}</td>
+			<td>{{value[4] | round(2)}}</td>
+			<td class="no-mobile">{{(value[1] - value[4]) | round(2)}}</td>
 		</tr>
 		{% else %}
 		<tr id="{{value[2]}}" class="{{value[2]}} table_row">
 			<td>{{account}}</td>
-			<td>{{value[0]}}</td>
-			<td>{{value[3]}}</td>
-			<td class="no-mobile">{{value[3] - value[0]}}</td>
-			<td>{{value[1]}}</td>
-			<td>{{value[4]}}</td>
-			<td class="no-mobile">{{value[4] - value[1]}}</td>
+			<td>{{value[0] | round(2)}}</td>
+			<td>{{value[3] | round(2)}}</td>
+			<td class="no-mobile">{{(value[3] - value[0]) | round(2)}}</td>
+			<td>{{value[1] | round(2)}}</td>
+			<td>{{value[4] | round(2)}}</td>
+			<td class="no-mobile">{{(value[4] - value[1]) | round(2)}}</td>
 		</tr>
 		{% endif %} {% endfor %}
 	</table>
