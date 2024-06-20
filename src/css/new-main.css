@@ -535,6 +535,7 @@ button[name=signinButton] {
   padding-left: 5%;
   padding-right: 5%;
   width: 50%;
+  margin: 2vh 0 0 0;
   font-size: 0.8rem;
 }
 
@@ -775,7 +776,7 @@ span.bright-button.first a button {
   display: flex;
   align-items: center;
   color: #212529;
-  height: 3rem;
+  height: fit-content;
 }
 .bright-button button:hover {
   background-color: #343a40;
@@ -807,6 +808,12 @@ table#aged-debt-table tbody tr:nth-child(even) {
 
 .sponsor {
   color: #F9DC5C;
+}
+
+.price {
+  color: #F9DC5C;
+  font-size: xx-large;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=new-main.css.map */
