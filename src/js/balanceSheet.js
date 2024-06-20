@@ -25,22 +25,22 @@ els.forEach(e=>{
 });
 
 if (assetsTotal >=0) {
-	totalAssetsDebit.innerHTML = assetsTotal;
+	totalAssetsDebit.innerHTML = Math.round(assetsTotal*100)/100;
 } else {
-	totalAssetsCredit.innerHTML = assetsTotal * -1;
+	totalAssetsCredit.innerHTML = Math.round(assetsTotal*100)/100 * -1;
 }
 
 if (liabilitiesTotal >=0) {
-	totalLiabilitiesDebit.innerHTML = liabilitiesTotal;
+	totalLiabilitiesDebit.innerHTML = Math.round(liabilitiesTotal*100)/100;
 } else {
-	totalLiabilitiesCredit.innerHTML = liabilitiesTotal * -1;
+	totalLiabilitiesCredit.innerHTML = Math.round(liabilitiesTotal*100)/100 * -1;
 };
 
 
 let netAssets = assetsTotal + liabilitiesTotal;
 if (netAssets >=0) {
-	netAssetsDebit.innerHTML = netAssets;
+	netAssetsDebit.innerHTML = Math.round(netAssets*100)/100;
 } else {
-	netAssetsCredit.innerHTML = netAssets * -1;
+	netAssetsCredit.innerHTML = Math.round(netAssets*100)/100 * -1;
 };
 

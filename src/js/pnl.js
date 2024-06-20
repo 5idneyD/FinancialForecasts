@@ -168,12 +168,11 @@ els.forEach(function (el, index) {
 // Add a thousand seperator to all numbers in the table
 var els = document.getElementById("table").getElementsByTagName("td");
 
-for (var i = 1; i < els.length; i++) {
+for (let i = 1; i < els.length; i++) {
 	// Test if the formatting will cause error,
 	// If so, pass
 	// else, format
-	if (Number(els[i].innerText).toLocaleString("en") == "NaN") {
-	} else {
-		els[i].innerText = Number(els[i].innerText).toLocaleString("en");
-	}
+
+	els[i].innerText = Math.round(els[i].innerText * 100)/100;
+	
 }
