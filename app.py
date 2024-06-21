@@ -1711,8 +1711,12 @@ def trialBalance(company, email, username, session_key, theme):
         if account.nominal != 60005:
             for transaction in transactions:
                 if "_invoice" in transaction.transaction_type:
-             
                     value = transaction.net_value
+                elif "journal" in transaction.transaction_type:
+                    if account.nominal > 60000:
+                        value = transaction.credit - transaction.debit
+                    else:
+                        value = transaction.total_value
                 else:
                     value = transaction.total_value
 
@@ -1724,6 +1728,11 @@ def trialBalance(company, email, username, session_key, theme):
             for transaction in transactions:
                 if "_invoice" in transaction.transaction_type:
                     value = transaction.net_value
+                elif "journal" in transaction.transaction_type:
+                    if account.nominal > 60000:
+                        value = transaction.credit - transaction.debit
+                    else:
+                        value = transaction.total_value
                 else:
                     value = transaction.total_value
 
@@ -1732,6 +1741,7 @@ def trialBalance(company, email, username, session_key, theme):
                 else:
                     ytd_balance += value
 
+        ytd_balance = round(ytd_balance,2)
         data[account.nominal] = [monthly_balance, ytd_balance,
                                  account.nominal, account.account_name]
 
@@ -1773,11 +1783,13 @@ def balanceSheet(company, email, username, session_key, theme):
                             NominalTransactions.to_post == 0
                                 )
                         )
-
         if account.nominal != 60005:
             for transaction in transactions:
                 if transaction.transaction_type == "sales_invoice":
                     ytd_balance -= transaction.total_value
+                elif transaction.transaction_type == "journal":
+                    ytd_balance += transaction.credit
+                    ytd_balance -= transaction.debit
                 else:
                     ytd_balance += transaction.total_value
         else:
@@ -1786,6 +1798,8 @@ def balanceSheet(company, email, username, session_key, theme):
                     ytd_balance -= transaction.total_value
                 else:
                     ytd_balance += transaction.total_value
+                    
+        ytd_balance = round(ytd_balance,2)
 
         data[account.nominal] = [monthly_balance, ytd_balance,
                                  account.nominal, account.account_name]
