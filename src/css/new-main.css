@@ -600,7 +600,9 @@ button[name=signinButton] {
   padding-right: 5%;
   padding-left: 5%;
 }
-.adminBody div p, .adminBody div svg, .adminBody div b {
+.adminBody div p,
+.adminBody div svg,
+.adminBody div b {
   border: none;
 }
 

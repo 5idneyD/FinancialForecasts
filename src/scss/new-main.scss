@@ -260,7 +260,6 @@ div#nav div.nav-option:hover {
 	fill: none;
 }
 
-
 #to-do-list {
 	display: flex;
 	justify-content: center;
@@ -453,7 +452,6 @@ div.invoice-head div :is(input, select, select option) {
 	width: 100%;
 }
 
-
 // Number of rows in invoice (used when posting invoices)
 #number_of_rows {
 	display: none;
@@ -507,8 +505,6 @@ div.invoice-body {
 // 	margin-left: auto;
 // 	margin-right: auto;
 // }
-
-
 
 // button#addInvoiceRow {
 // 	margin-left: auto;
@@ -668,7 +664,9 @@ button[name="signinButton"] {
 		padding-left: 5%;
 	}
 
-	p, svg, b {
+	p,
+	svg,
+	b {
 		border: none;
 	}
 }
@@ -795,7 +793,7 @@ input.clientTableCellInput {
 	width: 90%;
 	height: 1.4rem;
 	border: 1px solid $grey-20;
-	border-radius: 30px;;
+	border-radius: 30px;
 	text-align: center;
 }
 
@@ -814,9 +812,9 @@ select#clientCodeSelect {
 	background-color: $grey-100;
 }
 a {
-    text-decoration: none;
+	text-decoration: none;
 	border: none;
-    outline: none;
+	outline: none;
 }
 select#clientCodeSelect option.clientCodeOption {
 	color: $grey-20;
@@ -834,9 +832,8 @@ select#clientCodeSelect option.clientCodeOption {
 	width: fit-content !important;
 }
 
-
 span.bright-button.first a button {
-	margin-left: -27vw
+	margin-left: -27vw;
 }
 
 .bright-button button {
@@ -848,25 +845,25 @@ span.bright-button.first a button {
 	height: fit-content;
 	&:hover {
 		background-color: $grey-80;
-		color: $color-80
+		color: $color-80;
 	}
 }
 
 table#aged-debt-table {
 	width: 70vw;
-	 tbody tr {
+	tbody tr {
 		&:nth-child(even) {
 			background: $grey-80;
 			height: 2rem;
 		}
-	 }
+	}
 }
 
 .checkbox-circle {
 	padding: 0;
 	margin: 0;
 
-	input[type="checkbox"]{
+	input[type="checkbox"] {
 		width: 3rem;
 		border: 60px;
 		height: 1.4rem;
@@ -879,7 +876,6 @@ table#aged-debt-table {
 	}
 }
 
-
 .sponsor {
 	color: $color-80;
 }
@@ -889,3 +885,4 @@ table#aged-debt-table {
 	font-size: xx-large;
 	font-weight: 600;
 }
+

@@ -647,7 +647,7 @@ def admin(company, email, username, session_key, theme):
             mail.sendmail(sender, recipient, msg)
             mail.quit()
             new_user = Users(
-                company=company, username=new_name, email=new_email, password=password, admin=admin_permission
+                company=company, username=new_name, email=new_email, password=password, admin=admin_permission,designTheme="dark"
             )
             db.session.add(new_user)
             db.session.commit()
