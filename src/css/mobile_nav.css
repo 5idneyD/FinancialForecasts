@@ -1,3 +1,15 @@
+:root {
+  --grey-100: #212529;
+  --grey-80: #343a40;
+  --grey-60: #6c757d;
+  --grey-40: #adb5bd;
+  --grey-20: #dee2e6;
+  --color-100: #ED254E;
+  --color-80: #48e5eb;
+  --color-60: #F4FFFD;
+  --dark-text: #dee2e6;
+}
+
 * {
   font-size: clamp(1rem, 1.1vw, 2rem);
 }
@@ -16,7 +28,7 @@
   left: 0px;
   top: 0px;
   margin-top: 17.5vh;
-  border-top: 1px solid #F9DC5C;
+  border-top: 1px solid var(--color-80);
 }
 .nav-container div#nav-lines {
   display: grid;
@@ -28,7 +40,7 @@
   row-gap: 5px;
 }
 .nav-container div#nav-lines div.nav-line {
-  background: #dee2e6;
+  background: var(--grey-20);
   width: 50%;
   height: 4px;
   border-radius: 2px;
@@ -54,10 +66,10 @@
   position: fixed;
   margin-top: 90vh;
   width: 100vw;
-  border-top: 1px solid #dee2e6;
+  border: 1px solid var(--grey-20);
   left: 0;
   height: 10vh;
-  background: #212529;
+  background: var(--grey-100);
 }
 .loggedIn#heading-bottom #user {
   display: none;
@@ -74,14 +86,14 @@
   top: 15vh;
   margin-top: 0;
   height: 24vh;
-  border-top: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid var(--grey-20);
+  border-bottom: 1px solid var(--grey-20);
 }
 .nav-container .loggedIn#nav .nav-option {
   width: 100vw;
 }
 .nav-container .loggedIn#nav :not(:nth-child(3)) {
-  border-bottom: 2px solid #343a40;
+  border-bottom: 2px solid var(--grey-80);
 }
 .loggedIn.sub-menu {
   grid-template-columns: repeat(2, 45vw);
@@ -93,7 +105,7 @@
   margin: 0 auto 0 5vw;
   bottom: 105%;
   padding: 3vh 0 3vh 0;
-  border: 1px solid #F9DC5C;
+  border: 1px solid var(--color-80);
   z-index: 100;
 }
 .loggedIn.sub-menu.sales, .loggedIn.sub-menu.purchase, .loggedIn.sub-menu.financial, .loggedIn.sub-menu.other {

@@ -475,7 +475,7 @@ def verifyAccount():
             )
             db.session.add(new_company)
             new_admin = Users(
-                company=company_name, email=company_email, username=company_email, password=password, admin="3", designTheme="#232323,#363636,#66c0f4,#ffffff"
+                company=company_name, email=company_email, username=company_email, password=password, admin="3", designTheme="dark"
             )
             db.session.add(new_admin)
             # remove verification code from db so company account cannot be re-created
@@ -1953,17 +1953,13 @@ def changeTheme(company, email, username, session_key, theme):
     theme = user.designTheme
 
     if request.method == "POST":
-        primary = request.form["primary"]
-        second = request.form["second"]
-        third = request.form["third"]
-        text = request.form["text"]
-        combined = ",".join([primary, second, third, text])
-        user.designTheme = combined
+        theme_selected = request.form["color_choice"]
+        user.designTheme = theme_selected
         db.session.commit()
 
         theme = user.designTheme
 
-        return render_template("changeTheme.html", company=company, design=combined)
+        return render_template("changeTheme.html", company=company, design=theme)
 
     return render_template("changeTheme.html", company=company, design=theme)
 

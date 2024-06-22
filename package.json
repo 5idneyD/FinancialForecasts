@@ -5,7 +5,7 @@
   "private": true,
   "config": {
     "jsx": "src/jsx/journal.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx",
-    "css": "src/css/new-main.css src/css/index.css src/css/mobile_index.css src/css/mobile_nav.css",
+    "css": "src/css/new-main.css src/css/index.css src/css/mobile_index.css src/css/mobile_nav.css src/css/light-variables.css src/css/dark-variables.css",
     "scss_in": "src/scss/",
     "scss_out": "src/css/"
   },

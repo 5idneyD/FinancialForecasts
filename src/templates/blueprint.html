@@ -1,41 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<script>
-			// This script is to set the colours of the page
-			// We import the default colours at the top from css
-			// However, this script will read the users settings from the db
-			// and change the root colour variables
-			// The data is parsed through via jinja2 from the backend
-			// Placing this cript at the top as there is an unpleasent flash
-			// Between the deafult and these settings otherwise
-
-			let design = "{{design|safe}}".split(",");
-			// If this isn't the home page
-			if (design != "") {
-				let primary = design[0];
-				let second = design[1];
-				let third = design[2];
-				let text = design[3];
-
-				let root = document.querySelector(":root");
-				root.style.setProperty("--primary", primary);
-				root.style.setProperty("--second", second);
-				root.style.setProperty("--third", third);
-				root.style.setProperty("--fontColor", text);
-
-				// If the theme is set to "light", add a certain shadow
-				// The the theme is set to "dark", add a another shadow
-				// Else set no shadow
-				if (primary == "#dedeea") {
-					root.style.setProperty("--shadow", "20px 20px 60px #bebebe, -20px -20px 60px #ffffff");
-				} else if (primary == "#232323") {
-					root.style.setProperty("--shadow", "20px 20px 60px #232323, -20px -20px 60px #232323");
-				} else {
-					root.style.setProperty("--shadow", "none");
-				}
-			}
-		</script>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, user-scalable=no" />
@@ -51,7 +16,9 @@
 			id="{{url_for('dashboard', company=company, email=email, username=username, session_key=session_key )}}" />
 		{% else %}
 		<meta name="logo" id="{{url_for('index')}}" />
-		{% endif %} {% block meta %} {% endblock %}
+		{% endif %}
+		{% block meta %} {% endblock %}
+
 		<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
 
 		<link rel="stylesheet" href="{{url_for('static', filename='styles/new-main.min.css')}}" />
@@ -60,9 +27,15 @@
 			href="{{url_for('static', filename='styles/mobile_nav.min.css')}}"
 			media="all and (max-width: 880px)" />
 		<link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon" />
+
+		{% if design=="dark" %}
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/dark-variables.min.css')}}" />
+		{% elif design=="light" %}
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/light-variables.min.css')}}" />
+		{% endif %}
+
 		<title>No Variance</title>
 		<script defer type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-		{% if design %} {% endif %}
 	</head>
 	<body>
 		<div id="heading" class="loggedIn" data-expanded="true">
@@ -121,7 +94,9 @@
 					<div class="sub-menu-option" data-href="/changeTheme">Change Theme</div>
 					<div class="sub-menu-option" data-href="/dashboard">Dashboard</div>
 					<div class="sub-menu-option" data-href="/help">Help</div>
-					{# <div class="sub-menu-option" data-href="/salesHub">Sales Hub</div> #}
+					{#
+					<div class="sub-menu-option" data-href="/salesHub">Sales Hub</div>
+					#}
 					<div class="sub-menu-option" data-href="/logout">Log Out</div>
 				</div>
 			</div>
@@ -150,16 +125,12 @@
 					navMenu.style.display = "none";
 					navMenu.removeAttribute("style");
 				}
-				
 			});
 		</script>
 
 		<script>
 			// This is for nav settings
 			let navOptions = document.querySelectorAll(".box");
-
-			// Design is imported at the top
-			let third = design[2];
 
 			navOptions.forEach(function (e) {
 				e.setAttribute("enlarged", "false");

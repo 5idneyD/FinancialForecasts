@@ -1,16 +1,16 @@
 :root {
-  /* --primary: #030518;
-  --second: #0c1027;
-     --third: purple;
-     --fontColor: white;
-     --shadow: 20px 20px 60px #252e48,
-     -20px -20px 60px #252e48;
-      */
-  --primary: #232323;
-  --second: #363636;
-  --third: #32fca7;
-  --fontColor: #ffffff;
-  --shadow: 20px 20px 60px #232323, -20px -20px 60px #232323;
+  --grey-100: #212529;
+  --grey-80: #343a40;
+  --grey-60: #6c757d;
+  --grey-40: #adb5bd;
+  --grey-20: #dee2e6;
+  --color-100: #ED254E;
+  --color-80: #48e5eb;
+  --color-60: #F4FFFD;
+  --dark-text: #dee2e6;
+}
+
+:root {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
 }
@@ -18,7 +18,7 @@
 * {
   margin: 0;
   padding: 0;
-  color: #dee2e6;
+  color: var(--grey-20);
   font-size: clamp(1rem, 1.4vw, 2rem);
   font-weight: normal;
   scroll-behavior: smooth;
@@ -41,7 +41,7 @@
   }
 }
 #heading {
-  background-color: #212529;
+  background-color: var(--grey-100);
   width: 100vw;
   height: 35vh;
   display: grid;
@@ -72,7 +72,8 @@
 }
 
 .box {
-  background-color: #343a40;
+  background-color: var(--grey-80);
+  color: var(--dark-text);
   width: 80%;
   height: 60%;
   margin: auto;
@@ -83,8 +84,8 @@
   transition: all 0.2s ease;
 }
 .box:hover, .box:active, .box[enlarged=true] {
-  color: #F9DC5C;
-  border: 2px solid #F9DC5C;
+  color: var(--color-80);
+  border: 2px solid var(--color-80);
   width: 100%;
   height: 80%;
   cursor: pointer;
@@ -93,7 +94,7 @@
 
 .sub-menu {
   text-align: center;
-  background-color: #343a40;
+  background-color: var(--grey-80);
   border-radius: 30px;
   margin-top: 2vh;
   width: 28vw;
@@ -118,6 +119,7 @@
   grid-column: 4;
 }
 .sub-menu div.sub-menu-option {
+  color: var(--dark-text);
   width: 11vw;
   height: 6vh;
   margin-left: auto;
@@ -130,7 +132,7 @@
   margin-bottom: 3%;
 }
 .sub-menu div.sub-menu-option:hover {
-  background-color: #212529;
+  background-color: var(--grey-100);
   transition-duration: 0.4s;
   cursor: pointer;
 }
@@ -155,7 +157,7 @@
   grid-template-columns: repeat(4, auto);
   grid-template-rows: auto;
   column-gap: 4vw;
-  background: #212529;
+  background: var(--grey-100);
   z-index: 50;
 }
 
@@ -170,8 +172,8 @@ div#logo {
 
 div#nav div.nav-option:hover {
   height: 80%;
-  background-color: #343a40;
-  color: #F9DC5C;
+  background-color: var(--grey-80);
+  color: var(--color-80);
   cursor: pointer;
 }
 
@@ -180,7 +182,7 @@ div#nav div.nav-option:hover {
   min-height: 80vh;
   width: 100vw;
   max-width: 100vw;
-  background-color: #343a40;
+  background-color: var(--grey-80);
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -193,12 +195,12 @@ div#nav div.nav-option:hover {
 .body-node {
   border-radius: 30px;
   padding: 3%;
-  color: #dee2e6;
+  color: var(--grey-20);
   text-align: center;
   min-height: 30vh;
   margin-top: 5vh;
   border-radius: 50px;
-  background: #212529;
+  background: var(--grey-100);
   height: fit-content;
   min-width: 300px;
   width: fit-content;
@@ -237,8 +239,8 @@ div#nav div.nav-option:hover {
 .ct-series-a .ct-line,
 .ct-series-a .ct-point,
 .ct-series-a .ct-slice-donut {
-  stroke: #F9DC5C;
-  color: #dee2e6;
+  stroke: var(--color-80);
+  color: var(--grey-20);
   font-size: small;
 }
 
@@ -254,7 +256,7 @@ div#nav div.nav-option:hover {
 
 .to-do-item,
 .to-do-item-add {
-  color: #dee2e6;
+  color: var(--grey-20);
   align-items: baseline;
   margin-top: 3vh;
   list-style-type: none;
@@ -270,8 +272,8 @@ div#nav div.nav-option:hover {
 }
 .to-do-item input,
 .to-do-item-add input {
-  background-color: #212529;
-  border: 0.2px solid #dee2e6;
+  background-color: var(--grey-100);
+  border: 0.2px solid var(--grey-20);
   width: 95%;
   text-align: center;
 }
@@ -288,22 +290,22 @@ div#nav div.nav-option:hover {
 }
 
 #to-do-list ul li:nth-child(1n) div.bullet {
-  border: 2px solid #ED254E;
+  border: 2px solid var(--color-100);
 }
 #to-do-list ul li:nth-child(1n) div.bullet:hover {
-  background-color: #ED254E;
+  background-color: var(--color-100);
   cursor: pointer;
 }
 #to-do-list ul li:nth-child(2n) div.bullet {
-  border: 2px solid #F9DC5C;
+  border: 2px solid var(--color-80);
 }
 #to-do-list ul li:nth-child(2n) div.bullet:hover {
-  background-color: #F9DC5C;
+  background-color: var(--color-80);
   cursor: pointer;
 }
 
 #toggle {
-  background-color: #343a40;
+  background-color: var(--grey-80);
   width: 100vw;
 }
 
@@ -312,7 +314,7 @@ div#nav div.nav-option:hover {
   min-width: 30px;
   min-height: 2vh;
   height: fit-content;
-  background-color: #212529;
+  background-color: var(--grey-100);
   margin-left: 3vw;
   text-align: center;
 }
@@ -340,7 +342,7 @@ form#form[method=post] input {
   width: 40%;
   text-align: center;
   border-radius: 30px;
-  color: #dee2e6;
+  color: var(--grey-20);
   border: 0px;
 }
 
@@ -357,7 +359,7 @@ table.report tr,
 }
 
 table.report tr:nth-child(even) {
-  background: #343a40;
+  background: var(--grey-80);
 }
 table.report tr :is(td, th) {
   height: 100%;
@@ -394,7 +396,7 @@ div.invoice-head {
   grid-auto-rows: 5vh;
   grid-auto-flow: row;
   row-gap: 5vh;
-  color: #dee2e6;
+  color: var(--grey-20);
   margin: 2vh auto 3vh auto;
   width: 90%;
 }
@@ -402,24 +404,28 @@ div.invoice-head {
 div.invoice-head div :not(button) {
   width: 80%;
   height: 1.5rem;
-  color: #dee2e6;
+  color: var(--grey-20);
   border-radius: 30px;
   text-align: center;
   border: none;
 }
 
 div.invoice-head div :is(input, select, select option) {
-  color: #dee2e6;
+  color: var(--grey-20);
   height: 2rem;
-  background-color: #212529;
-  border: 1px solid #6c757d;
+  background-color: var(--grey-100);
+  border: 1px solid var(--grey-60);
 }
 
 .nominal_select {
-  background-color: #212529;
+  background-color: var(--grey-100);
   text-align: center;
   cursor: pointer;
   width: 100%;
+}
+.nominal_select[title="Colour Option"] {
+  width: 75%;
+  height: 1.5rem;
 }
 
 #number_of_rows {
@@ -449,15 +455,15 @@ div.invoice-body .invoiceRow select {
   margin-top: auto;
   margin-bottom: auto;
   height: 1.4rem;
-  background-color: #212529;
-  color: #dee2e6;
-  border: 1px solid #dee2e6;
+  background-color: var(--grey-100);
+  color: var(--grey-20);
+  border: 1px solid var(--grey-20);
 }
 
 button {
-  background-color: #212529;
-  color: #dee2e6;
-  border: 2px solid #343a40;
+  background-color: var(--grey-100);
+  color: var(--grey-20);
+  border: 2px solid var(--grey-80);
   height: 2rem;
   min-height: fit-content;
   min-width: fit-content;
@@ -468,8 +474,8 @@ button {
   border-radius: 30px;
 }
 button:hover, button[data-selected="1"] {
-  border: 2px solid #F9DC5C;
-  color: #F9DC5C;
+  border: 2px solid var(--color-80);
+  color: var(--color-80);
 }
 
 table#settings {
@@ -493,9 +499,9 @@ div#colorSetter *:not(br) {
   width: 12vw;
   height: 2rem;
   min-width: 40px;
-  background-color: #343a40;
-  border: 1px solid #dee2e6;
-  color: #dee2e6;
+  background-color: var(--grey-80);
+  border: 1px solid var(--grey-20);
+  color: var(--grey-20);
   border-radius: 30px;
   text-align: center;
 }
@@ -507,7 +513,7 @@ button[type=submit].settings-button {
 }
 
 ::-webkit-calendar-picker-indicator {
-  color: #dee2e6;
+  color: var(--grey-20);
 }
 
 input.filterInput[type=text] {
@@ -528,7 +534,7 @@ input.filterInput[type=text] {
 div.loginItem {
   width: 100%;
   margin-top: 1rem;
-  color: #212529;
+  color: var(--grey-100);
 }
 
 button[name=signinButton] {
@@ -553,25 +559,25 @@ button[name=signinButton] {
   width: 2.5vw;
   min-width: 3rem;
   height: 5vh;
-  border: 2px solid #dee2e6;
+  border: 2px solid var(--grey-20);
   padding: 0px;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   margin-top: 1vh;
   z-index: 10;
-  background-color: #343a40;
+  background-color: var(--grey-80);
 }
 .userLogo #userBody {
   position: sticky;
-  border: 2px solid #dee2e6;
+  border: 2px solid var(--grey-20);
   height: 5.7vh;
   width: 4.5vw;
   min-width: 3rem;
   border-radius: 150px 150px 0 0;
   -moz-border-radius: 150px 150px 0 0;
   -webkit-border-radius: 150px 150px 0 0;
-  background-color: #343a40;
+  background-color: var(--grey-80);
   margin-top: -1.75vh;
 }
 
@@ -591,9 +597,9 @@ button[name=signinButton] {
 
 .adminBody div * {
   border-radius: 30px;
-  border: 1px solid #dee2e6;
-  background-color: #212529;
-  color: #dee2e6;
+  border: 1px solid var(--grey-20);
+  background-color: var(--grey-100);
+  color: var(--grey-20);
   height: 2rem;
   text-align: center;
   min-width: fit-content;
@@ -635,8 +641,8 @@ button[name=signinButton] {
   margin-right: auto;
   min-width: 200px;
   font-size: 0.8rem;
-  background-color: #343a40;
-  color: #dee2e6;
+  background-color: var(--grey-80);
+  color: var(--grey-20);
 }
 
 div#legend {
@@ -653,7 +659,7 @@ div#legend div {
 }
 
 div#legend div#legend-0 {
-  background-color: #6c757d;
+  background-color: var(--grey-60);
 }
 
 div#legend div#legend-1 {
@@ -669,9 +675,9 @@ div#legend div#legend-1 {
 }
 
 .budgetRow input {
-  background-color: #212529;
-  color: #dee2e6;
-  border: 1px solid #dee2e6;
+  background-color: var(--grey-100);
+  color: var(--grey-20);
+  border: 1px solid var(--grey-20);
   font-weight: 400;
 }
 
@@ -680,10 +686,10 @@ input[type=file]::file-selector-button {
 }
 
 input[type=file] {
-  background-color: #212529;
+  background-color: var(--grey-100);
   border-radius: 30px;
-  color: #dee2e6;
-  border: 1px solid #dee2e6;
+  color: var(--grey-20);
+  border: 1px solid var(--grey-20);
   padding-left: 5%;
   padding-right: 5%;
   min-width: 10vw;
@@ -723,11 +729,11 @@ div.clientTableRow.supplier {
 }
 
 input.clientTableCellInput {
-  background-color: #212529;
-  color: #dee2e6;
+  background-color: var(--grey-100);
+  color: var(--grey-20);
   width: 90%;
   height: 1.4rem;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--grey-20);
   border-radius: 30px;
   text-align: center;
 }
@@ -743,8 +749,8 @@ select#clientCodeSelect {
   padding: 0 5% 0 5%;
   margin-bottom: 2rem;
   border-radius: 30px;
-  color: #dee2e6;
-  background-color: #212529;
+  color: var(--grey-20);
+  background-color: var(--grey-100);
 }
 
 a {
@@ -754,12 +760,12 @@ a {
 }
 
 select#clientCodeSelect option.clientCodeOption {
-  color: #dee2e6;
+  color: var(--grey-20);
   width: inherit;
 }
 
 #swal2-title {
-  color: #dee2e6;
+  color: var(--grey-20);
   font-size: 1em !important;
 }
 
@@ -773,23 +779,23 @@ span.bright-button.first a button {
 }
 
 .bright-button button {
-  background-color: #F9DC5C;
+  background-color: var(--color-80);
   margin: 2vh auto 2vh auto;
   display: flex;
   align-items: center;
-  color: #212529;
+  color: var(--grey-100);
   height: fit-content;
 }
 .bright-button button:hover {
-  background-color: #343a40;
-  color: #F9DC5C;
+  background-color: var(--grey-80);
+  color: var(--color-80);
 }
 
 table#aged-debt-table {
   width: 70vw;
 }
 table#aged-debt-table tbody tr:nth-child(even) {
-  background: #343a40;
+  background: var(--grey-80);
   height: 2rem;
 }
 
@@ -802,18 +808,18 @@ table#aged-debt-table tbody tr:nth-child(even) {
   border: 60px;
   height: 1.4rem;
   background: transparent;
-  border: #dee2e6;
+  border: var(--grey-20);
 }
 .checkbox-circle input[type=checkbox]:hover {
   cursor: pointer;
 }
 
 .sponsor {
-  color: #F9DC5C;
+  color: var(--color-80);
 }
 
 .price {
-  color: #F9DC5C;
+  color: var(--color-80);
   font-size: xx-large;
   font-weight: 600;
 }
