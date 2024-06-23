@@ -249,24 +249,6 @@ def login_required(f):
     return wrap
 
 
-# Tghis is a route that listens to github webhooks, and refreshed the pythonanywhere files
-# by pulling the master everytime the github repo is updated (i.e. has a new commit)
-@app.route("/update_server", methods=["GET", "POST"])
-def update_server():
-    if request.method == 'POST':
-        try:
-            repo = git.Repo("/home/SLD/BasicAccounting")
-            repo.remotes.origin.pull()
-            print("Have pulled git origin")
-            return "Git origin pulled", 200
-        except Exception as e:
-            print(f"Error in process of updating: {e}")
-            return "Error in process of updating"
-    else:
-        print("Error: Wrong event type")
-        return 'Wrong event type', 400
-
-
 # Filters the list of transactions provided
 # By using any arguments parsed
 # Loops through each transaction, then all args
@@ -299,7 +281,6 @@ def static_from_root():
 # Homepage, indexed
 @app.route("/")
 def index():
-    print(request.environ.get("HTTP_ORIGIN", "default value"))
     return render_template("home.html")
 
 
