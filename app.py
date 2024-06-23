@@ -1871,6 +1871,8 @@ def profitAndLoss(company, email, username, session_key, theme):
             else:
                 budget_value = 0
 
+            monthly_balance = round(monthly_balance,2)
+            ytd_balance = round(ytd_balance,2)
             data[account.account_name] = [monthly_balance,
                                         ytd_balance, account.nominal,
                                         budget_value, ytd_budget]
