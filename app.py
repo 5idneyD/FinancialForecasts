@@ -48,7 +48,7 @@ app.config["SQLALCHEMY_POOL_SIZE"] = 20
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 app.config["SESSION_PERMANENT"] = False
 app.config["SECRET_KEY"] = os.urandom(12).hex()
-app.config["UPLOAD_FOLDER"] = "./API/"
+app.config["UPLOAD_FOLDER"] = "API/"
 app.secret_key = os.urandom(12).hex()
 
 
@@ -140,7 +140,7 @@ class NominalTransactions(db.Model):
     reference = db.Column(db.String(70))
     to_post = db.Column(db.Integer, default=0)
     is_paid = db.Column(db.String(8), default="False")
-    
+
     # Be able to use [key] to return attribute
     # E.g. transaction['client_code']
     def __getitem__(self, key):
@@ -1140,7 +1140,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
             )
 
             db.session.add(new_nominal_transaction)
-        
+
 
             # Update the nominal accounts balance in db (for trial balance data)
             # (Minus as it is income)
@@ -1158,7 +1158,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
                 ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60010).first()
             cash_account.balance = float(
                 cash_account.balance) + float(total_value)
-            
+
             # Also add a VAT entry so we can track all transactions' VAT
             # This is to keep a record for the VAT balance sheet account
             # which can be measured "As At" any date
@@ -1179,7 +1179,7 @@ def addSalesInvoice(company, email, username, session_key, theme):
                 accounting_year=accounting_year,
                 accounting_period=accounting_period,
             )
-            
+
             # Also adding a trade receivables entry for the same reasons as VAT
             receivables_nominal_transaction = NominalTransactions(
                 company=company,
@@ -1350,9 +1350,9 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
             )
 
             db.session.add(new_nominal_transaction)
-      
+
             # Also add VAT trandaction
-            # See addSalesInvoice for reasons      
+            # See addSalesInvoice for reasons
             vat_nominal_transaction = NominalTransactions(
                 company=company,
                 transaction_type="vat_out",
@@ -1370,7 +1370,7 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
                 accounting_year=accounting_year,
                 accounting_period=accounting_period,
             )
-            
+
             # Also adding a trade payables entry for the same reasons as VAT
             payables_nominal_transaction = NominalTransactions(
                 company=company,
@@ -1392,7 +1392,7 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
 
             db.session.add(payables_nominal_transaction)
             db.session.add(vat_nominal_transaction)
-            
+
             account = ChartOfAccounts.query.filter_by(
                 company=company, nominal=int(nominal_code)).first()
             account.balance = float(account.balance) + float(net_value)
@@ -1425,19 +1425,19 @@ def addPurchaseInvoice(company, email, username, session_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/viewSalesInvoices", methods=["POST", "GET"])
 @login_required
 def viewSalesInvoices(company, email, username, session_key, theme):
-    
+
     invoices = NominalTransactions.query.filter_by(
         company=company, transaction_type="sales_invoice").all()
     companyData = Companies.query.filter(Companies.company==company).first()
     currentAccountingYear = companyData.accounting_year
-    
+
     filters = {
         "client_code": "",
         "transaction_number": "",
         "accounting_period": "",
         "accounting_year": currentAccountingYear
     }
-    
+
     # Collecting list of customers to use as <select> options in html
     customers = []
     for invoice in invoices:
@@ -1458,7 +1458,7 @@ def viewSalesInvoices(company, email, username, session_key, theme):
                 filters['accounting_year'] = invoices[-1].accounting_year
             except IndexError:
                 filters['accounting_year'] = currentAccountingYear
-            
+
         return render_template(
             "viewSalesInvoices.html", company=company, invoices=invoices, customers=customers, design=theme, accounting_year=filters['accounting_year']
         )
@@ -1505,7 +1505,7 @@ def viewPurchaseInvoices(company, email, username, session_key, theme):
                 filters['accounting_year'] = invoices[-1].accounting_year
             except IndexError:
                 filters['accounting_year'] = currentAccountingYear
-            
+
         return render_template(
             "viewPurchaseInvoices.html", company=company, invoices=invoices, suppliers=suppliers, design=theme, accounting_year=filters['accounting_year']
         )
@@ -1529,7 +1529,7 @@ def journal(company, email, username, session_key, theme):
         company_data = Companies.query.filter_by(company=company).first()
         accounting_year = company_data.accounting_year
         accounting_period = company_data.accounting_period
-        
+
         # Calculate the next jounral number by loopingthrough all journals, and adding 1 to the last
         journals = NominalTransactions.query.filter_by(
             company=company, transaction_type="journal").all()
@@ -1782,7 +1782,7 @@ def balanceSheet(company, email, username, session_key, theme):
                     ytd_balance -= transaction.total_value
                 else:
                     ytd_balance += transaction.total_value
-                    
+
         ytd_balance = round(ytd_balance,2)
 
         data[account.nominal] = [monthly_balance, ytd_balance,
@@ -1877,7 +1877,7 @@ def nominalTransactions(company, email, username, session_key, theme):
     transactions = NominalTransactions.query.filter(NominalTransactions.company==company,
                                                     ~NominalTransactions.transaction_type.in_(["vat", "vat_in", "vat_out"])
                                                     ).all()
-    
+
     filters = {
         "transaction_type": "All",
         "transaction_number": "",
@@ -1894,11 +1894,11 @@ def nominalTransactions(company, email, username, session_key, theme):
         filters["nominal_code"] = request.form["nominal_code"]
         filters["accounting_year"] = request.form["year"]
         filters["accounting_period"] = request.form["period"]
-        
+
         transactions = filterTransactions(transactions, filters)
 
         return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
-    
+
     return render_template("nominalTransactions.html", company=company, transactions=transactions, filters=filters, design=theme)
 
 
@@ -2013,7 +2013,7 @@ def bankRec(company, email, username, session_key, theme):
     accounting_period = company_data.accounting_period
 
     if request.method == "POST":
-        
+
         bank_account = ChartOfAccounts.query.filter(
             ChartOfAccounts.company == company, ChartOfAccounts.nominal == 60000).first()
         receivables_account = ChartOfAccounts.query.filter(
@@ -2060,7 +2060,7 @@ def bankRec(company, email, username, session_key, theme):
                 )
 
                 db.session.add(new_nominal_transaction)
-                
+
                 # Post the same entry to trade_receivables or _payables
                 extra_nominal_transaction = NominalTransactions(
                     company=company,
@@ -2079,14 +2079,14 @@ def bankRec(company, email, username, session_key, theme):
                     accounting_period=accounting_period,
                     is_paid="True",
                 )
-                
+
                 if "sales" in transaction_type:
                     extra_nominal_transaction.nominal_code = receivables_account.nominal
                     extra_nominal_transaction.net_value = extra_nominal_transaction.net_value * -1
                     extra_nominal_transaction.total_value = extra_nominal_transaction.total_value * -1
                 else:
                     extra_nominal_transaction.nominal_code = payables_account.nominal
-                
+
                 db.session.add(extra_nominal_transaction)
 
                 # Reduce balance of outstanding cash (The Cash GL)
@@ -2241,28 +2241,34 @@ def cashFlow(company, email, username, sesion_key, theme):
 @app.route("/<company>/<email>/<username>/<session_key>/apiDownload", methods=['POST', 'GET'])
 @login_required
 def apiDownload(company, email, username, sesion_key, theme):
+    print("-------------------------------")
     company_data = Companies.query.filter(Companies.company == company).first()
     company_security_key = company_data.security_key
+    config_path = os.path.join(os.path.dirname(__file__), "API/config.json")
+
     if request.method == "POST":
+        print(app.config['UPLOAD_FOLDER'] + "config.json")
         if "configFile" in request.form:
             try:
-                with open("./API/config.json", "w") as f:
+                with open(config_path, "w") as f:
                     json_data = {}
                     json_data['company'] = company
                     json_data['username'] = username
                     json_data['security_key'] = company_security_key
+                    print(json_data)
                     f.write(json.dumps(json_data))
             except:
-                with open(app.config['UPLOAD_FOLDER'] + "/config.json", "w") as f:
+                with open(app.config['UPLOAD_FOLDER'] + "config.json", "w") as f:
                     json_data = {}
                     json_data['company'] = company
                     json_data['username'] = username
                     json_data['security_key'] = company_security_key
                     f.write(json.dumps(json_data))
-            return send_from_directory(app.config['UPLOAD_FOLDER'], "config.json", as_attachment=True)
+            print("here now.......")
+            return send_from_directory(os.path.join(os.path.dirname(__file__), "API"), "config.json", as_attachment=True)
         else:
             return send_from_directory(app.config['UPLOAD_FOLDER'], "NoVariance.odc", as_attachment=True)
-        
+
     return render_template("apiDownload.html",company=company, design=theme)
 
 @app.route("/<company>/<email>/<username>/<session_key>/api", methods=['POST', 'GET'])
@@ -2281,7 +2287,7 @@ def api(company, email, username, session_key):
                 if k != "_sa_instance_state":
                     b[k] = v
             result[b['id']] = b
-            
+
         json_output = json.dumps(result)
         return json_output, 200
 
