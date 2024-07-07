@@ -2245,12 +2245,20 @@ def apiDownload(company, email, username, sesion_key, theme):
     company_security_key = company_data.security_key
     if request.method == "POST":
         if "configFile" in request.form:
-            with open("./API/config.json", "w") as f:
-                json_data = {}
-                json_data['company'] = company
-                json_data['username'] = username
-                json_data['security_key'] = company_security_key
-                f.write(json.dumps(json_data))
+            try:
+                with open("./API/config.json", "w") as f:
+                    json_data = {}
+                    json_data['company'] = company
+                    json_data['username'] = username
+                    json_data['security_key'] = company_security_key
+                    f.write(json.dumps(json_data))
+            except:
+                with open(app.config['UPLOAD_FOLDER'] + "/config.json", "w") as f:
+                    json_data = {}
+                    json_data['company'] = company
+                    json_data['username'] = username
+                    json_data['security_key'] = company_security_key
+                    f.write(json.dumps(json_data))
             return send_from_directory(app.config['UPLOAD_FOLDER'], "config.json", as_attachment=True)
         else:
             return send_from_directory(app.config['UPLOAD_FOLDER'], "NoVariance.odc", as_attachment=True)
