@@ -1,0 +1,21 @@
+{% extends "blueprint.html" %} {% block meta %} {% endblock %} {% block body %}
+<div class="body-node adminForm">
+	<form method="post">
+        <input type="hidden" name="dataFile" value="dataSource">
+		<button type="submit">Download Data Source File</button>
+	</form>
+	<form method="post">
+    <input type="hidden" name="configFile" value="config">
+		<button type="submit">Download Config File</button>
+	</form>
+</div>
+
+<div class="body-node">
+	<div id="first" class="helpHead">How to Set Up The Connection</div>
+	<div id="firsta" class="helpBody">
+		Download Both Files By Clicking on the 2 Buttons. <br> Move the Data Source File (NoVariance.odc) from
+		Downloads to the C:\Documents\My Data Sources directory. <br> Move the Config File from Downloads to the
+		C:\ProgramData\Novariance\ directory. You may need to create this directory.
+	</div>
+</div>
+{% endblock %}

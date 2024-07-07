@@ -1,5 +1,5 @@
 # testing webhooks
-from flask import Flask, render_template, request, redirect, send_from_directory, url_for, session, Response, abort
+from flask import Flask, render_template, request, redirect, send_from_directory, url_for, session, Response, abort, jsonify, send_from_directory
 from flask_migrate import Migrate
 from passlib.hash import pbkdf2_sha256
 import os
@@ -21,6 +21,7 @@ from pyinvoice.models import Item
 from flask_cors import CORS
 import git
 import pandas as pd
+import json
 
 # PythonAnywhere and windows10 reference parent directories differently
 # If trying to load the windows 10 way doesn't find a .env file (i.e. returns False), use the PythonAnywhere route
@@ -47,6 +48,7 @@ app.config["SQLALCHEMY_POOL_SIZE"] = 20
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 app.config["SESSION_PERMANENT"] = False
 app.config["SECRET_KEY"] = os.urandom(12).hex()
+app.config["UPLOAD_FOLDER"] = "./API/"
 app.secret_key = os.urandom(12).hex()
 
 
@@ -68,6 +70,7 @@ class Companies(db.Model):
     accounting_period = db.Column(db.String(4))
     vat_number = db.Column(db.String(40), default="")
     invoice_email = db.Column(db.String(40), default="")
+    security_key = db.Column(db.String(32), default="")
 
 
 class Users(db.Model):
@@ -283,7 +286,6 @@ def static_from_root():
 def index():
     return render_template("home.html")
 
-
 # Login Page
 # Uses hashed password then adds user to session
 @app.route("/login", methods=["POST", "GET"])
@@ -453,6 +455,7 @@ def verifyAccount():
                 admin_password=password,
                 accounting_year=accounting_year,
                 accounting_period=accounting_period,
+                security_key=os.urandom(32).hex()
             )
             db.session.add(new_company)
             new_admin = Users(
@@ -2233,32 +2236,47 @@ def cashFlow(company, email, username, sesion_key, theme):
                            operating_activities=operating_activities, financing_activities=financing_activities, investing_activities=investing_activities,
                            accounting_year=accounting_year)
 
-@app.route("/<company>/<email>/<username>/<session_key>/salesHub")
-@login_required
-def salesHub(company, email, username, session_key, theme):
-    sales_products = SalesHubProducts.query.filter(SalesHubProducts.company==company).all()
-    
-    return render_template("salesHub.html", company=company, design=theme, sales_products=sales_products)
 
-@app.route("/<company>/<email>/<username>/<session_key>/salesHubAddProduct", methods=["POST", "GET"])
+# Cash flow statement
+@app.route("/<company>/<email>/<username>/<session_key>/apiDownload", methods=['POST', 'GET'])
 @login_required
-def salesHubAddProduct(company, email, username, session_key, theme):
-    
+def apiDownload(company, email, username, sesion_key, theme):
+    company_data = Companies.query.filter(Companies.company == company).first()
+    company_security_key = company_data.security_key
     if request.method == "POST":
-        print(request.form)
-        product_name = request.form['name']
-        product_description = request.form['description']
-        product_net_price = request.form['netPrice']
-        product_vat_price = request.form['vatPrice']
-        product_image = request.form['image']
+        if "configFile" in request.form:
+            with open("./API/config.json", "w") as f:
+                json_data = {}
+                json_data['company'] = company
+                json_data['username'] = username
+                json_data['security_key'] = company_security_key
+                f.write(json.dumps(json_data))
+            return send_from_directory(app.config['UPLOAD_FOLDER'], "config.json", as_attachment=True)
+        else:
+            return send_from_directory(app.config['UPLOAD_FOLDER'], "NoVariance.odc", as_attachment=True)
         
-        newProduct = SalesHubProducts(company=company, product_name=product_name,
-                                      product_description=product_description, product_net_price=product_net_price,
-                                      product_vat_price=product_vat_price, product_image=product_image)
-        db.session.add(newProduct)
-        db.session.commit()
-    
-    return render_template("salesHubaddProduct.html", company=company, design=theme)
+    return render_template("apiDownload.html",company=company, design=theme)
+
+@app.route("/<company>/<email>/<username>/<session_key>/api", methods=['POST', 'GET'])
+def api(company, email, username, session_key):
+    company_data = Companies.query.filter(Companies.company==company).first()
+    if company_data.security_key != session_key:
+        return 500
+    else:
+        data = NominalTransactions.query.filter(NominalTransactions.company==company,
+                                                ).all()
+        result = dict()
+        for i in data:
+            b = dict()
+            a = i.__dict__
+            for k, v in a.items():
+                if k != "_sa_instance_state":
+                    b[k] = v
+            result[b['id']] = b
+            
+        json_output = json.dumps(result)
+        return json_output, 200
+
 
 debug = os.getenv("DEBUG")
 if __name__ == "__main__":
