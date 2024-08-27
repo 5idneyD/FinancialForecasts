@@ -1,100 +1,17 @@
-{% extends "blueprint.html" %} {% block meta %}
-<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
-<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-{% endblock %} {% block body %}
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="first" class="body-node" style="width: 50vw; height: 30vh">Net Profit</div>
-<div id="second" class="body-node">
-	My To Do List
-	<div id="to-do-list">
-		<ul>
-				{% for task in tasks %}
-				<li class="to-do-item">
-					<div class="bullet" onclick="removeFromList(this)"><p>-</p></div>
-					<div>{{task.task}}</div>
-				</li>
-				{% endfor %}
-				<li class="to-do-item-add">
-					<div class="bullet add" onclick="sendData()"><p>+</p></div>
-					<div><input type="text" id="newAction" placeholder="Add To List" /></div>
-				</li>
-		</ul>
-	</div>
-</div>
-<script defer type="text/javascript">
-	let figures = {{total_values|tojson|safe}}
-	let bodyStyles = window.getComputedStyle(document.body)
-	let light = bodyStyles.getPropertyValue('--light');
-	let dark = bodyStyles.getPropertyValue('--dark');
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/styles.min.css')}}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap" rel="stylesheet" />
+</head>
 
-
-	let x = [];
-	let y = [];
-
-	for (let i = 1; i <= 12; i++){
-		x.push(i);
-		y.push(figures[i])
-	}
-
-	new Chartist.Line("#first", {
-		labels: x,
-		series: [
-		y
-
-		]
-	},{
-		low: 0,
-		showArea: true,
-		showPoint: false,
-		fullWidth: false
-	}
-	)
-</script>
-<script>
-	// This script is for the do list
-	// It will add any new tasks to the list without re-loading
-	// But also send a post request to add the list to the database
-
-	let list = document.querySelector("ul");
-	let addButton = document.querySelector(".bullet.add");
-	let newAction = document.querySelector("#newAction");
-	let form = document.querySelector("form");
-
-	function addToList() {
-		let action = newAction.value;
-		let element =
-			`<li class="to-do-item">
-					<div class="bullet" onclick="removeFromList(this)"><p>-</p></div>
-					<div>` +
-			action +
-			`</div>
-				</li>`;
-		list.insertAdjacentHTML("afterbegin", element);
-		newAction.value = "";
-	}
-
-	function removeFromList(e) {
-		// Remove the parent element of the button clicked
-		// This is the li element in which the button sits (with the value)
-
-		let parent = e.parentElement;
-		let action = parent.childNodes[3].innerHTML;
-		let data = "-" + action;
-		let xhr = new XMLHttpRequest();
-		xhr.open("POST", document.URL);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.send(JSON.stringify(data));
-		parent.remove();
-	}
-
-	function sendData() {
-		const form = document.querySelector("#newAction");
-		let data = "+" + form.value;
-		let xhr = new XMLHttpRequest();
-		xhr.open("POST", document.URL);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.send(JSON.stringify(data));
-		addToList();
-	}
-</script>
-{% endblock %}
+<body class="body">
+    
+</body>
+<script type="text/javascript" src="{{url_for('static', filename='react/compiled/dashboard.js')}}"></script>
+</html>

@@ -1,11 +1,11 @@
 {
-  "name": "basic-accounting",
+  "name": "financial-forecasts",
   "version": "1.0.0",
-  "description": "",
+  "description": "A blog for forecasting earnings results",
   "private": true,
   "config": {
-    "jsx": "src/jsx/journal.jsx src/jsx/mobileBalanceSheetTable.jsx src/jsx/admin.jsx",
-    "css": "src/css/new-main.css src/css/index.css src/css/mobile_index.css src/css/mobile_nav.css src/css/light-variables.css src/css/dark-variables.css",
+    "jsx": "src/jsx/dashboard.jsx src/jsx/components/Explore.jsx src/jsx/components/Users.jsx src/jsx/components/Terms.jsx src/jsx/components/Posts.jsx",
+    "css": "src/css/styles.css",
     "scss_in": "src/scss/",
     "scss_out": "src/css/"
   },
@@ -29,7 +29,7 @@
   },
   "keywords": [],
   "author": "5idneyD",
-  "license": "",
+  "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.21.3",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -43,6 +43,8 @@
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
     "@mui/icons-material": "^5.11.16",
+    "@tanstack/react-query": "^5.52.1",
+    "axios": "^1.7.5",
     "babel-loader": "^9.1.2",
     "chartist-plugin-legend": "^0.6.2",
     "chokidar": "^3.5.3",
@@ -54,6 +56,7 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "resolve-glob": "^1.0.0",
     "sass": "^1.77.4",
     "style-loader": "^3.3.2",
@@ -61,5 +64,9 @@
   },
   "devDependencies": {
     "esbuild-plugin-import-glob": "^0.1.1"
+  },
+  "main": "index.js",
+  "bin": {
+    "financial-forecasts": "bin/es.js"
   }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="{{url_for('static', filename='styles/styles.min.css')}}" />
+	</head>
+	<body>
+		<div class="heading">
+			<div class="company-logo">Financial Forecasts</div>
+			<a href="{{url_for('addSubmission')}}"><div>Add</div></a>
+			<div>Other</div>
+			<div>Log Out</div>
+		</div>
+		<form method="post">
+			<div class="submission-form">
+				<h3>New Submission</h3>
+				<input type="text" name="ticker" placeholder="Ticker" />
+				<input type="date" name="date" placeholder="Earnings Date" />
+				<select name="b-s-h" placeholder="Buy/Sell/Hold">
+					<option value="Buy">Buy</option>
+					<option value="Sell">Sell</option>
+					<option value="Hold">Hold</option>
+				</select>
+				<input type="text" name="confidence" placeholder="Confidence" />
+				<input type="text" name="comments" placeholder="Comments" />
+                <button type="submit">Submit</button>
+			</div>
+		</form>
+	</body>
+</html>
