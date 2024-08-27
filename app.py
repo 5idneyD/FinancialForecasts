@@ -55,6 +55,15 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
     username = db.Column(db.String(64))
     password = db.Column(db.String(128))
+    
+class Posts(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    username = db.Column(db.String(64))
+    ticker = db.Column(db.String(8))
+    company = db.Column(db.String(128))
+    action = db.Column(db.String(8))
+    confidence = db.Column(db.String(4))
+    comments = db.Column(db.String(512))
 
 # Create database tables if they don't already exist
 with app.app_context():
@@ -101,6 +110,19 @@ def index():
 @app.route("/dashboard")
 def addSubmission():
     return render_template("dashboard.html")
+
+@app.route("/getPosts")
+def getPosts():
+    posts = Posts.query.filter().all()
+    data = jsonify(posts)
+    print(data)
+    return data
+
+@app.route("/createPost", methods=["POST", "GET"])
+def createPost():
+    if request.method == "Post":
+        print("Commentary posted")
+    return render_template("createPost.html")
 
 debug = os.getenv("DEBUG")
 if __name__ == "__main__":
